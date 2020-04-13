@@ -1,0 +1,246 @@
+package File_Processing_Component;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sound.sampled.Line;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Point;
+
+public class LineSegmentTest {
+	Point p1,p2,p3,p4,p5;
+	LineSegment l1,l2,l3,l4,l5;
+	List<LineSegment> lineSegments;
+
+
+	@Before
+	public void setUp() {
+		p1 = new Point (0,0);
+		p2 = new Point (1,0);
+		p3 = new Point(1,1);
+		p4 = new Point(0,1);
+		l1 = new LineSegment(p1, p2);
+		l2 = new LineSegment(p2, p3);
+		l3 = new LineSegment(p3,p4);
+		l4 = new LineSegment(p4,p1);
+		l5 = new LineSegment(p1, p3);
+		lineSegments = new ArrayList<LineSegment>();
+		lineSegments.add(l1);lineSegments.add(l2); lineSegments.add(l3); lineSegments.add(l4);
+	}
+
+
+
+	@Test
+	public void testGetP1() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		Point px = linesegment.getP1();
+		
+		//Assert
+		assertSame(p1, px);
+		
+	}
+
+	@Test
+	public void testGetP2() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		Point px = linesegment.getP2();
+		
+		//Assert
+		assertSame(p2, px);
+	}
+
+	@Test
+	public void testIsHorizontal() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		LineSegment l2 = new LineSegment(null, p2);
+		
+		//Act
+		boolean isHorizontal = linesegment.isHorizontal();
+		try {
+			l2.isHorizontal();
+			fail();
+		} catch (NullPointerException ex) {
+		}
+		
+		
+		//Assert
+		assertTrue(!isHorizontal);
+		
+	}
+	
+	
+
+	@Test
+	public void testIsVertical() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		boolean isVertical = linesegment.isVertical();
+		
+		//Assert
+		assertTrue(!isVertical);
+	}
+
+	@Test
+	public void testOverlapsXrange() {
+		// Act
+		boolean test1 = l1.overlapsXrange(0, 1);
+		boolean test2 = l1.overlapsXrange(0.2, 2);
+		boolean test3 = l1.overlapsXrange(-1, -0.001);
+		boolean test4 = l1.overlapsXrange(-1, -0.000);
+		boolean test5 = l1.overlapsXrange(1, 2);
+		boolean test6 = l1.overlapsXrange(1.0001, 2);
+		boolean test7 = l2.overlapsXrange(1.0, 1.0);
+		
+		//Act, Assert
+		try {
+			l3.overlapsXrange(3, 2);
+			fail();
+		} catch (IllegalArgumentException ex) {
+			
+		}
+		
+		//Assert
+		assertTrue(test1);
+		assertTrue(test2);
+		assertTrue(!test3);
+		assertTrue(test4);
+		assertTrue(test5);
+		assertTrue(!test6);
+		assertTrue(test7);
+		
+	}
+
+	@Test
+	public void testOverlapsYrange() {
+		// Act
+		boolean test1 = l2.overlapsYrange(0, 1);
+		boolean test2 = l2.overlapsYrange(0.2, 0.4);
+		boolean test3 = l2.overlapsYrange(-1, -0.001);
+		boolean test4 = l2.overlapsYrange(-1, -0.000);
+		boolean test5 = l2.overlapsYrange(1, 2);
+		boolean test6 = l2.overlapsYrange(1.0001, 2);
+		boolean test7 = l1.overlapsXrange(0.0, 0.0);
+		
+		
+		//Act, Assert
+		try {
+			l3.overlapsXrange(3, 2);
+			fail();
+		} catch (IllegalArgumentException ex) {
+			
+		}
+		
+		//Assert
+		assertTrue(test1);
+		assertTrue(test2);
+		assertTrue(!test3);
+		assertTrue(test4);
+		assertTrue(test5);
+		assertTrue(!test6);
+		assertTrue(test7);
+	}
+
+	@Test
+	public void testPerpendicularPointPoint() {
+		//Act 
+		boolean test1 = l1.perpendicular(p2, p3);
+		boolean test2 = l1.perpendicular(p1, p2);
+		boolean test3 = l1.perpendicular(p1,p3);
+		
+		//Assert
+		assertTrue(test1);
+		assertTrue(!test2);
+		assertTrue(!test3);
+		
+	}
+
+	@Test
+	public void testPerpendicularLineSegment() {
+		//Arrange 
+		LineSegment ls1 = new LineSegment(p1, p3);
+		
+		//Act 
+		boolean test1 = l1.perpendicular(l2);
+		boolean test2 = l2.perpendicular(l4);
+		boolean test3 = l1.perpendicular(ls1);
+		
+		//Assert
+		assertTrue(test1);
+		assertTrue(!test2);
+		assertTrue(!test3);
+		
+	}
+
+	@Test
+	public void testLineSegmentDoesNotIntersectLineSegments() {
+		//Arrange
+		Point pt1 = new Point(2*p2.getX(), p2.getY());
+		Point pt2 = new Point (0.2, 0.2);
+		Point pt3 = new Point (0.4,0.2);
+		Point center = new Point (0.5, 0.5);
+		Point pt5 = new Point(-0.5, 0.5);
+		Point pt6 = new Point(1.5, 0.5);
+		Point pt7 = new Point(0.5,1.5);
+		Point pt8 = new Point(0.5, -0.5);
+		
+		LineSegment ls1 = new LineSegment(p2, pt1);
+		LineSegment ls2 = new LineSegment( pt1, p2);
+		LineSegment ls3 = new LineSegment(p1, p2);
+		LineSegment ls4 = new LineSegment(center, pt5);
+		LineSegment ls5 = new LineSegment(center, pt6);
+		LineSegment ls6 = new LineSegement(center, pt7);
+		LineSegment ls7 = new LineSegment(center, pt8);
+		
+		// Act
+		boolean test1 = ls1.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		boolean test2 = ls2.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		boolean test3 = ls3.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		boolean test4 = ls4.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		boolean test5 = ls5.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		boolean test6 = ls6.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		boolean test7 = ls7.lineSegmentDoesNotIntersectLineSegments(lineSegments);
+		
+		
+		// Assert
+		assertTrue(!test1);
+		assertTrue(!test2);
+		assertTrue(!test3);
+		assertTrue(!test1);
+		assertTrue(!test2);
+		assertTrue(!test3);
+		assertTrue(!test1);
+		assertTrue(!test2);
+
+	}
+
+	@Test
+	public void testIntersectionWithLinesegment() {
+		fail("Not yet implemented");
+	}
+
+}

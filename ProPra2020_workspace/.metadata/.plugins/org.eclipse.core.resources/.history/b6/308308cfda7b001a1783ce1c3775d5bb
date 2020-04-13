@@ -1,0 +1,9 @@
+package fernuni.propra.file_processing;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public interface IPersistence {
+	IRoom readInput(String xmlFile);
+	void writeOutput(String xmlFile, IRoom room);
+
+}

@@ -1,0 +1,12 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.List;
+
+public abstract class WallContainerAbstract {
+	protected List<Wall> walls;
+	
+	WallContainerAbstract() {
+		
+	}
+
+}

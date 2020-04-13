@@ -1,0 +1,92 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.List;
+
+public class Wall extends LineSegment{
+	private final Point p1;
+	private final Point p2;
+	
+	public Wall(Point p1, Point p2) {
+		this.p1 = p1;
+		this.p2 = p2;
+	}
+	
+	public Point getP1() {
+		return p1;
+	}
+	
+	public Point getP2() {
+		return p2;
+	}
+	
+	public boolean isNorthWall() {
+		return p1.getX() > p2.getX() && (p1.getY() == p2.getY());
+	}
+	
+	public boolean isWestWall() {
+		return p1.getY() < p2.getY() && (p1.getX() == p2.getX());
+	}
+	
+	public boolean isSouthWall() {
+		return p1.getX() < p2.getX() && (p1.getY() == p2.getY());
+	}
+	
+	public boolean isEastWall() {
+		return p1.getY() < p2.getY() && (p1.getX() == p2.getX());
+	}
+
+	public boolean overlapsXrange(double xLow, double xHigh) {
+		return (Math.min(p1.getX(), p2.getX()) < xHigh) || 
+				(Math.max(p1.getX(), p2.getX())>xLow);
+	}
+	
+	public boolean overlapsYrange(double yLow, double yHigh) {
+		return (Math.min(p1.getY(), p2.getY()) < yHigh) || 
+				(Math.max(p1.getY(), p2.getY())>yLow);
+	}
+	
+	public Point intersectionWithWall(Wall wall) throws LineSegmentException {
+		if (isPerpendicularToLineDefinedByPoints(wall.getP1(), wall.getP2())) {
+			double x,y;
+			if (this.isEastWall() || this.isWestWall()) {
+				x = this.getP1().getX();
+				y = wall.getP1().getY();
+			} else {
+				x = wall.getP1().getX();
+				y = this.getP1().getY();
+			}
+			return new Point(x, y);
+		} else {
+			throw new LineSegmentException();
+		}
+				
+	}
+	
+	private boolean isPerpendicularToLineDefinedByPoints(Point p1, Point p2) {
+		return Math.abs((this.p2.getX()-this.p2.getX()) * (p1.getX()-p2.getY()) +
+				(this.p2.getY()-this.p2.getY()) * (p1.getY()-p2.getY())) < 0.01 ;
+	}
+	
+	public boolean perpendicular(Wall other) {
+		return isPerpendicularToLineDefinedByPoints(other.getP1(), other.getP2());
+	}
+	
+	public boolean wallDoesNotIntersectWalls(List<Wall> walls) {
+		if (walls.isEmpty()) return true;
+		boolean doesNotIntersect = true;
+		for (int j = 0; j < walls.size(); j++) {
+			try {
+				Point intersectionPoint = this.intersectionWithWall(walls.get(j));
+				if (!intersectionPoint.isEqual(this.getP1()) 
+						&& !intersectionPoint.isEqual(this.getP2()) ) {
+					doesNotIntersect = false;
+					break;
+				}
+			} catch (LineSegmentException e) {
+				
+			}
+		}
+		return doesNotIntersect;
+	}
+	
+}

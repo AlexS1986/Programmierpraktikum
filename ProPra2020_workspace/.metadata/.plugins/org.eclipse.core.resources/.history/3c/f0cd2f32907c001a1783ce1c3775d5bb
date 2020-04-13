@@ -1,0 +1,25 @@
+package fernuni.propra.internal_data_model;
+
+
+public class Lamp extends Point{
+	
+	public Lamp(double x, double y) {
+		super(x, y);
+	}
+
+	private boolean on;
+	
+	void turnOn() {
+		on = true;
+	}
+	
+	void turnOff() {
+		on = false;
+	}
+	
+	boolean getOn() {
+		return on;
+	}
+	
+	
+}

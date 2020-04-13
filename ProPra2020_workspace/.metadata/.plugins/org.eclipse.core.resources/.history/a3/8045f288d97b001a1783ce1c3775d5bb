@@ -1,0 +1,8 @@
+package fernuni.propra.file_processing;
+
+public class UserReadInputWriteOutputAAS {
+	public IRoom readInput(String xmlFile) {
+		
+	}
+
+}

@@ -1,0 +1,108 @@
+package File_Processing_Component;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Point;
+
+public class LineSegmentTest {
+	
+	@Before
+	
+
+	@Test
+	public void testLineSegment() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetP1() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		Point px = linesegment.getP1();
+		
+		//Assert
+		assertSame(p1, px);
+		
+	}
+
+	@Test
+	public void testGetP2() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		Point px = linesegment.getP2();
+		
+		//Assert
+		assertSame(p2, px);
+	}
+
+	@Test
+	public void testIsHorizontal() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		boolean isHorizontal = linesegment.isHorizontal();
+		
+		//Assert
+		assertTrue(isHorizontal);
+	}
+
+	@Test
+	public void testIsVertical() {
+		//Arrange 
+		Point p1 = new Point (0,0);
+		Point p2 = new Point (0,1);
+		LineSegment linesegment = new LineSegment(p1, p2);
+		
+		//Act
+		boolean isVertical = linesegment.isVertical();
+		
+		//Assert
+		assertTrue(!isVertical);
+	}
+
+	@Test
+	public void testOverlapsXrange() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testOverlapsYrange() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testPerpendicularPointPoint() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testPerpendicularLineSegment() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testLineSegmentDoesNotIntersectLineSegments() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIntersectionWithLinesegment() {
+		fail("Not yet implemented");
+	}
+
+}

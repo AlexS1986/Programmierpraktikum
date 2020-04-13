@@ -1,0 +1,9 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.List;
+
+public interface IRoom {
+	List<Lamp> getLamps();
+	List<Point> getPoints();
+	void addLamp(Lamp lamp);
+}

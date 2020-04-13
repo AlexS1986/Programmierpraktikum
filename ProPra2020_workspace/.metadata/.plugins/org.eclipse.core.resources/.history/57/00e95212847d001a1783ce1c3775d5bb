@@ -1,0 +1,75 @@
+package File_Processing_Component;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Point;
+
+public class PointTest {
+	Point p1,p2,p3,p4,p5;
+	LineSegment l1,l2,l3,l4,l5;
+	List<LineSegment> lineSegments;
+
+
+	@Before
+	public void setUp() {
+		p1 = new Point (0,0);
+		p2 = new Point (1,0);
+		p3 = new Point(1,1);
+		p4 = new Point(0,1);
+		l1 = new LineSegment(p1, p2);
+		l2 = new LineSegment(p2, p3);
+		l3 = new LineSegment(p3,p4);
+		l4 = new LineSegment(p4,p1);
+		l5 = new LineSegment(p1, p3);
+		lineSegments = new ArrayList<LineSegment>();
+		lineSegments.add(l1);lineSegments.add(l2); lineSegments.add(l3); lineSegments.add(l4);
+	}
+	
+
+	@Test
+	public void testIsEqual() {
+		//Arrange
+		Point pt1 = new Point(0,0.01);
+		Point pt2 = new Point(0.001,0.0);
+		
+		//Act
+		boolean test1 = p1.isEqual(pt1);
+		boolean test2 = p1.isEqual(pt2);
+		
+		//Assert 
+		assertTrue(!test1);
+	}
+
+	@Test
+	public void testIsOnLineSegmentPointPoint() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsOnLineSegmentLineSegment() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsInsidePolygon() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsInXRange() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsInYRange() {
+		fail("Not yet implemented");
+	}
+
+}

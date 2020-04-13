@@ -1,0 +1,66 @@
+package Algorithm_Component;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import fernuni.propra.algorithm.candidateSearcher.Wall;
+import fernuni.propra.internal_data_model.Point;
+
+public class WallTest {
+
+	@Test
+	public void testWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetP1() {
+		//Arrange
+		Point p1 = new Point(1, 2);
+		Point p2 = null;
+		Wall wall = new Wall(p1,p2);
+		
+		//Act
+		Point p3 = wall.getP1();
+		
+		//Assert
+		assertEquals(p1, p3);
+	}
+
+	@Test
+	public void testGetP2() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsNorthWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsWestWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsSouthWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsEastWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testOverlapsXrange() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testOverlapsYrange() {
+		fail("Not yet implemented");
+	}
+
+}

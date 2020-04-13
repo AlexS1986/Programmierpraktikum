@@ -1,0 +1,11 @@
+package fernuni.propra.internal_data_model;
+
+import java.awt.Point;
+
+public class Lamp extends Point{
+	private boolean on;
+	
+	public void turnOn() {
+		on = true;
+	}
+}

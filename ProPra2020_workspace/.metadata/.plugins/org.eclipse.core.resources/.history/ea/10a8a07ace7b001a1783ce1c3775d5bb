@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm.candidateSearcher;
+
+import java.util.List;
+
+public abstract class WallContainerAbstract {
+	
+	List<Wall> walls;
+
+}

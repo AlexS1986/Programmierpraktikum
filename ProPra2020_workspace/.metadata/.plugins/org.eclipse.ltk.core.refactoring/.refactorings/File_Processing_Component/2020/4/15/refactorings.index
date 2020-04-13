@@ -1,0 +1,16 @@
+1586597565987	Delete element
+1586599029479	Delete element
+1586599265226	Rename field 'xmlFile'
+1586599281009	Rename local variable 'xmlFile'
+1586599430811	Rename field 'outputData'
+1586599441204	Rename local variable 'outputData'
+1586600933738	Rename local variable 'xmlFile'
+1586616175039	Move compilation unit
+1586616316293	Move compilation unit
+1586687649382	Move compilation unit
+1586687753474	Delete elements
+1586689467935	Rename local variable 'previousPoint'
+1586692079650	Rename method 'perpendiculat'
+1586698807863	Extract method 'checkFileAvailability'
+1586698941404	Extract method 'insertDTDForValidation'
+1586699147308	Extract method 'getLamps'

@@ -1,0 +1,25 @@
+
+public class IntegerElement implements Element{
+	private int value;
+	
+	
+	
+	public IntegerElement(int value) {
+		this.value = value;
+	}
+
+	@Override
+	public boolean isEqual(Element e) {
+		return value == ((IntegerElement) e).value;
+	}
+
+	@Override
+	public boolean isLess(Element e) {
+		return value < ((IntegerElement) e).value;
+	}
+	
+	public String toString() {
+		return String.valueOf(value);
+	}
+
+}

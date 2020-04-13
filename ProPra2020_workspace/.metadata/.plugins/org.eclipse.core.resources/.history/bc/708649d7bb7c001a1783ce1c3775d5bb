@@ -1,0 +1,42 @@
+package fernuni.propra.internal_data_model;
+
+public class Point {
+	private final double x;
+	private final double y;
+	private final static double TOL = 0.001;
+	
+	public Point(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public boolean isEqual(Point other) {
+		return Math.abs(Math.pow(getX()-other.getX(),2)  + Math.pow(getX()-other.getX(),2 ))  < TOL;
+	}
+	
+	public boolean isOnLine(Point p1, Point p2) {
+		boolean xAgrees = Math.abs(getX()-p1.getX())<TOL || Math.abs(getX()-p2.getX())<TOL;
+		
+		return false;
+	}
+	
+	private boolean xCoordinatesAgree(Point other) {
+		return Math.abs(getX()-other.getX())<TOL;
+	}
+	
+	private boolean isInRange(double y1, double y2) {
+		return yIsInRange = Math.abs(Math.min(p1.getY(), p2.getY()) - getY())< TOL 
+				&& Math.abs(Math.max(p1.getY(), p2.getY())-getY()) < TOL;
+	}
+	
+
+
+}

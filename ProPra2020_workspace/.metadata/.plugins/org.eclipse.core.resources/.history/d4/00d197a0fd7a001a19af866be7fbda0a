@@ -1,0 +1,16 @@
+package fernuni.propra.internal_data_model;
+
+
+public class Lamp extends Point{
+	private boolean on;
+	
+	void turnOn() {
+		on = true;
+	}
+	
+	boolean getOn() {
+		return on;
+	}
+	
+	
+}

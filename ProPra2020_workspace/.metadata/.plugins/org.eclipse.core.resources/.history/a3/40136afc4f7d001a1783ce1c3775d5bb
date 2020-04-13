@@ -1,0 +1,40 @@
+package fernuni.propra.internal_data_model;
+
+public class LineSegment {
+	private final Point p1;
+	private final Point p2;
+	
+	public LineSegment(Point p1, Point p2) {
+		this.p1 = p1;
+		this.p2 = p2;
+	}
+	
+	public Point getP1() {
+		return p1;
+	}
+	
+	public Point getP2() {
+		return p2;
+	}
+
+	public boolean overlapsXrange(double xLow, double xHigh) {
+		return (Math.min(p1.getX(), p2.getX()) < xHigh) || 
+				(Math.max(p1.getX(), p2.getX())>xLow);
+	}
+	
+	public boolean overlapsYrange(double yLow, double yHigh) {
+		return (Math.min(p1.getY(), p2.getY()) < yHigh) || 
+				(Math.max(p1.getY(), p2.getY())>yLow);
+	}
+	
+	private boolean isPerpendicularToLineDefinedByPoints(Point p1, Point p2) {
+		return Math.abs((this.p2.getX()-this.p2.getX()) * (p1.getX()-p2.getY()) +
+				(this.p2.getY()-this.p2.getY()) * (p1.getY()-p2.getY())) < 0.01 ;
+	}
+	
+	public boolean perpendicular(Wall other) {
+		return isPerpendicularToLineDefinedByPoints(other.getP1(), other.getP2());
+	}
+	
+	
+}

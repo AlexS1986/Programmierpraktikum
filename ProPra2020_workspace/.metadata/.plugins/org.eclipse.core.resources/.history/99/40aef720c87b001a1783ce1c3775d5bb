@@ -1,0 +1,25 @@
+package util;
+
+import java.util.Comparator;
+
+public class TestTree {
+
+	public static void main(String[] args) {
+		Tree<IntegerElement> tree = new Tree<IntegerElement>(new Comparator<IntegerElement>() {
+		});
+		IntegerElement i1 = new IntegerElement(15);
+		IntegerElement i2 = new IntegerElement(115);
+		IntegerElement i3 = new IntegerElement(1);
+		IntegerElement i4 = new IntegerElement(1);
+		IntegerElement i5 = new IntegerElement(-15);
+		
+		tree.insert(i1);
+		tree.insert(i2);
+		tree.insert(i3);
+		tree.insert(i4);
+		tree.insert(i5);
+		tree.printInOrder();
+
+	}
+
+}

@@ -1,0 +1,23 @@
+package fernuni.propra.file_processing;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public class UserReadInputWriteOutputAAS {
+	private final String location;
+	private PersistenceAbstract persistence;
+	
+	
+	
+	public UserReadInputWriteOutputAAS(String location) {
+		this.location = location;
+	}
+	
+	public IRoom readInput() {
+		persistence.readInput(location);
+	}
+	
+	public void writeOutput(IRoom room) {
+		
+	}
+
+}

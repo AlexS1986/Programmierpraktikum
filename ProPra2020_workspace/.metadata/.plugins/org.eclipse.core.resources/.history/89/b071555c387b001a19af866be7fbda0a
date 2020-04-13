@@ -1,0 +1,11 @@
+package fernuni.propra.internal_data_model;
+
+public abstract class RoomAbstract {
+	
+	public RoomAbstract() {
+		
+	}
+	
+	protected abstract void setUp();
+
+}

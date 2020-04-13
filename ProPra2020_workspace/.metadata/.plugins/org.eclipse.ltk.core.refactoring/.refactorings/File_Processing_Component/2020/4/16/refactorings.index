@@ -1,0 +1,12 @@
+1586759661089	Rename method 'intersectionWithWall'
+1586759930068	Rename local variable 'wall'
+1586760597907	Rename local variable 'walls'
+1586761166188	Rename type 'WallException'
+1586762020051	Rename local variable 'wall'
+1586762072538	Rename local variable 'testWall'
+1586762194006	Rename method 'pointIsInsidePolygon'
+1586763192876	Move compilation unit
+1586778017782	Rename method 'isOnline'
+1586778027992	Rename method 'isOnLine'
+1586778478880	Rename method 'lineSegmentDoesNotIntersectLineSegments'
+1586781288122	Move compilation unit

@@ -1,0 +1,38 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.Iterator;
+import java.util.List;
+
+public class Room implements IRoom {
+	private List<Lamp> lamps;
+	private final List<Point> corners;
+	private final boolean counterClockwise;
+	
+	public Room(List<Lamp> lamps, List<Point> corners, boolean counterClockwise) {
+		this.lamps = lamps;
+		this.corners = corners;
+		this.counterClockwise = counterClockwise;
+	}
+
+	@Override
+	public Iterator<Lamp> getLamps() {
+		if (counterClockwise) {
+			return lamps.iterator();
+		} else {
+			
+		}
+		
+	}
+
+	@Override
+	public Iterator<Point> getCorners() {
+		return corners.iterator();
+	}
+
+	@Override
+	public void addLamp(Lamp lamp) {
+		lamps.add(lamp);
+
+	}
+
+}

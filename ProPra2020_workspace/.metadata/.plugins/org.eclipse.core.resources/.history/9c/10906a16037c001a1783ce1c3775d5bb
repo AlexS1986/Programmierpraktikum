@@ -1,0 +1,20 @@
+package File_Processing_Component;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FilePersistenceTest {
+
+	@Test
+	public void testReadInput() {
+		
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testWriteOutput() {
+		fail("Not yet implemented");
+	}
+
+}

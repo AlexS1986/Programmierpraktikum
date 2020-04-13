@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class BinaryNode<T extends Element> {
+	private T key;
+	private BinaryNode<T> left,right;
+	
+	public BinaryNode(BinaryNode<T> left, BinaryNode<T> right, T key) {
+		this.left = left;
+		this.right = right;
+		this.key = key;
+	}
+	
+	protected boolean contains(T key) {
+		if (this.key.isEqual(key)) {
+			return true;
+		} 
+		boolean leftContains = false;
+		boolean rightContains = false;
+		
+		if (left != null) {
+			leftContains = left.contains(key);
+		}
+		
+		if (right != null) {
+			rightContains = right.contains(key);
+		}
+		
+		return leftContains || rightContains;
+	}
+	
+	protected void insert(T key) {
+		if (this.key == null || this.key.isEqual(key)) {
+			this.key = key;
+			return;
+		}
+		if (key.isLess(this.key)) {
+			if (left == null) {
+				BinaryNode<T> newNode = new BinaryNode<T>(null, null, key);
+				left = newNode;
+			} else {
+				left.insert(key);
+			}
+		} else {
+			if (right == null) {
+				BinaryNode<T> newNode = new BinaryNode<T>(null, null, key);
+				right = newNode;
+			} else {
+				right.insert(key);
+			}
+		}
+	}
+	
+	protected LinkedList<T> inorderNode() {
+		LinkedList<T> listAtNode = new LinkedList<T>();
+		if (left != null ) {
+			listAtNode.addAll(left.inorderNode());
+		}
+		if (this.key != null) {
+			listAtNode.add(key);
+		}
+		if (right != null) {
+			listAtNode.addAll(right.inorderNode());
+		}
+		return listAtNode;
+	}
+	
+	
+	
+
+}

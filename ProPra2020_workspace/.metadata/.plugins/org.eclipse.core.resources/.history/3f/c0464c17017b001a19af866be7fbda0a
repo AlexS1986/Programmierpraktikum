@@ -1,0 +1,6 @@
+package fernuni.propra.internal_data_model;
+
+public abstract class WallContainerAbstract {
+	
+
+}

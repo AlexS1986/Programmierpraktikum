@@ -1,0 +1,22 @@
+package fernuni.propra.file_processing;
+
+import fernuni.propra.internal_data_model.IRoom;
+import org.jdom2.Document;
+import org.jdom2.input.SAXBuilder;;
+
+public class FilePersistence extends PersistenceAbstract {
+
+	@Override
+	IRoom readInput(String xmlFile) {
+		SAXBuilder builder = new SAXBuilder();
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	void writeOutput(IRoom room, String xmlFile) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

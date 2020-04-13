@@ -1,0 +1,6 @@
+package fernuni.propra.file_processing;
+
+public interface IPersistence {
+	public IRoom readInput(String xmlFile);
+
+}

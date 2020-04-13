@@ -1,0 +1,27 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.Iterator;
+import java.util.List;
+
+public abstract class RoomAbstract {
+	private final List<Point> corners;
+	private List<Lamp> lamps;
+	
+	public RoomAbstract(List<Point> corners, List<Lamp> lamps) {
+		this.corners = corners;
+		this.lamps = lamps;
+	}
+	
+	public Iterator<Point> getCorners() {
+		return corners.iterator();
+	}
+	public Iterator<Lamp> getLamps() {
+		return lamps.iterator();
+	}
+
+	
+	protected abstract void setUp();
+	protected abstract int solve(ICandidateSearcher candidateSearcher, IPositionOptimizer positionOptimizer);
+	protected abstract boolean validate();
+
+}

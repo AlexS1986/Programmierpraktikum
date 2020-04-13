@@ -1,0 +1,39 @@
+package fernuni.propra.internal_data_model;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PointTest {
+
+	@Test
+	public void testIsEqual() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsOnLineSegmentPointPoint() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsOnLineSegmentLineSegment() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsInsidePolygon() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsInXRange() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsInYRange() {
+		fail("Not yet implemented");
+	}
+
+}

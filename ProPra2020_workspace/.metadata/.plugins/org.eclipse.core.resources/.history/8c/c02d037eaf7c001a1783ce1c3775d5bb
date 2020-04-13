@@ -1,0 +1,24 @@
+package fernuni.propra.internal_data_model;
+
+public class Point {
+	private final double x;
+	private final double y;
+	
+	public Point(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public boolean isEqual(Point other) {
+		return Math.pow(Math.abs(getX()-other.getX()),2)  + Math.abs(getX()-other.getX())  2 < 0.01;
+	}
+
+}

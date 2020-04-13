@@ -1,0 +1,21 @@
+package fernuni.propra.internal_data_model;
+
+
+public class Lamp extends Point{
+	public Lamp(int x, int y) {
+		super(x, y);
+		// TODO Auto-generated constructor stub
+	}
+
+	private boolean on;
+	
+	void turnOn() {
+		on = true;
+	}
+	
+	boolean getOn() {
+		return on;
+	}
+	
+	
+}

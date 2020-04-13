@@ -1,0 +1,20 @@
+package fernuni.propra.algorithm.candidateSearcher;
+
+public class WallException extends Exception {
+
+	public WallException() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public WallException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+	public WallException(Throwable cause) {
+		super(cause);
+		// TODO Auto-generated constructor stub
+	}
+
+}

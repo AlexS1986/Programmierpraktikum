@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LineSegmentTestParameterized" project="Test_Component" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="File_Processing_Component.LineSegmentTestParameterized" time="5.721">
+    <testsuite name="[0]" time="4.146">
+      <testcase name="testIsHorizontalParametrized[0]" classname="File_Processing_Component.LineSegmentTestParameterized" time="4.146"/>
+    </testsuite>
+    <testsuite name="[1]" time="0.575">
+      <testcase name="testIsHorizontalParametrized[1]" classname="File_Processing_Component.LineSegmentTestParameterized" time="0.575"/>
+    </testsuite>
+    <testsuite name="[2]" time="0.518">
+      <testcase name="testIsHorizontalParametrized[2]" classname="File_Processing_Component.LineSegmentTestParameterized" time="0.518"/>
+    </testsuite>
+    <testsuite name="[3]" time="0.482">
+      <testcase name="testIsHorizontalParametrized[3]" classname="File_Processing_Component.LineSegmentTestParameterized" time="0.482"/>
+    </testsuite>
+  </testsuite>
+</testrun>

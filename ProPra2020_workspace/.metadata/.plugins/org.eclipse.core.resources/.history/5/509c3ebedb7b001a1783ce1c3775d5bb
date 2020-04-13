@@ -1,0 +1,23 @@
+package fernuni.propra.file_processing;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public class UserReadInputWriteOutputAAS {
+	private final String outputData;
+	private PersistenceAbstract persistence;
+	
+	
+	
+	public UserReadInputWriteOutputAAS(String outputData) {
+		this.outputData = outputData;
+	}
+	
+	public IRoom readInput(String xmlFile) {
+		return null;
+	}
+	
+	public void writeOutput(String xmlFile, IRoom room) {
+		
+	}
+
+}

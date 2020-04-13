@@ -1,0 +1,31 @@
+package File_Processing_Component;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import fernuni.propra.file_processing.FilePersistence;
+import fernuni.propra.file_processing.PersistenceException;
+
+public class FilePersistenceTest {
+
+	@Test
+	public void testReadInput() {
+		String xmlFile = "instances/validationInstances/Selbsttest_clockwise.xml";
+		//String xmlFile = "instances/validationInstances/test";
+		FilePersistence persistence = new FilePersistence();
+		
+		try {
+			persistence.readInput(xmlFile);
+		} catch (PersistenceException e) {
+			fail();
+		}
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testWriteOutput() {
+		fail("Not yet implemented");
+	}
+
+}

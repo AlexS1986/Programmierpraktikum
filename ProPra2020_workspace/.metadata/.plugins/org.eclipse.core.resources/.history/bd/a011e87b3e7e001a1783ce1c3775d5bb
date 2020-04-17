@@ -1,0 +1,14 @@
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+public class RoomFrame extends JFrame{
+	RoomPanel roomPanel;
+	
+	public RoomFrame(RoomPanel roomPanel) {
+		this.roomPanel = roomPanel;
+		add(roomPanel, BorderLayout.NORTH);
+	}
+	
+
+}

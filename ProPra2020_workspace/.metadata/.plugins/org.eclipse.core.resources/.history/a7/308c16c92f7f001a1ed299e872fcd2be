@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+public abstract class ValidateKAbstract {
+	
+	boolean validate(IRoom room, IRuntimeIlluminationTester runtime) {
+		
+	}
+
+}

@@ -1,0 +1,30 @@
+package fernuni.propra.algorithm.util;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.Point;
+
+public class RectangleWithTagTest {
+	private Point p1,p2,p3,p4;
+	private RectangleWithTag rec1;
+
+	@Before
+	public void setUp() throws Exception {
+		p1 = new Point(0,0);
+		RectangleWithTag rec1 = new 
+	}
+
+	@Test
+	public void testContainsTag() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddTag() {
+		fail("Not yet implemented");
+	}
+
+}

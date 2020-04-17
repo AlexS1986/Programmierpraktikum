@@ -1,0 +1,19 @@
+package fernuni.propra.user_interface;
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JPanel;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public abstract class RoomPanelAbstract extends JPanel{
+	private IRoom room;
+	private double scale;
+	public RoomPanelAbstract(IRoom room) {
+		this.room = room;
+		setBackground(Color.WHITE);
+		setPreferredSize(new Dimension(1024, 768));
+	}
+		
+}

@@ -1,0 +1,22 @@
+package fernuni.propra.user_interface;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+public class RoomFrame extends JFrame{
+	RoomPanel roomPanel;
+	
+	public RoomFrame(RoomPanel roomPanel) {
+		this.roomPanel = roomPanel;
+		add(roomPanel, BorderLayout.NORTH);
+		//setSize(new Dimension(1024,768));
+		pack();
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
+	}
+	
+
+}

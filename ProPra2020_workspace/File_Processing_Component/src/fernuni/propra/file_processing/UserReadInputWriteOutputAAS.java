@@ -8,6 +8,7 @@ public class UserReadInputWriteOutputAAS {
 	
 	public UserReadInputWriteOutputAAS(String location) {
 		this.location = location;
+		this.persistence = new FilePersistence();
 	}
 	
 	public IRoom readInput() throws UserReadInputWriteOutputException {

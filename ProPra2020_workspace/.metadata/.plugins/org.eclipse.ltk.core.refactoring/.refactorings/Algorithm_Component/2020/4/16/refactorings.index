@@ -1,0 +1,33 @@
+1586798355631	Delete element
+1586798367248	Delete element
+1586944807239	Rename package 'util'
+1586955815233	Rename package 'fernuni.propra.util'
+1586956006331	Move compilation unit
+1586962463041	Rename type 'SolveK'
+1586965501187	Rename local variable 'runtime'
+1587019320387	Move compilation units
+1587019327131	Delete element
+1587039078933	Move compilation unit
+1587039162816	Move compilation unit
+1587045543822	Move compilation unit
+1587045553126	Move compilation unit
+1587047484048	Rename local variable 'xLow'
+1587047506223	Rename local variable 'yLow'
+1587048322749	Rename method 'validWall'
+1587106277650	Extract method 'sortWallsToContainers'
+1587107973008	Rename local variable 'y'
+1587109911234	Rename local variable 'eastWall'
+1587110154028	Rename local variable 'westWall'
+1587112704006	Move compilation unit
+1587118867611	Rename method 'getIteratorOriginalRectangles'
+1587119416162	Rename method 'isEqual'
+1587124883054	Delete element
+1587125373478	Copy compilation unit
+1587125380513	Move compilation unit
+1587126940799	Extract method 'addOriginalPartialRectangle'
+1587134215588	Rename local variable 'tags'
+1587135533066	Rename local variable 'overlapFoundForI'
+1587137315234	Rename local variable 'originalRectanglesAlreadyConsideredInOverLap'
+1587140476495	Rename local variable 'newRectangleWithTag'
+1587142259049	Rename local variable 'lastIterationReducedRectangles'
+1587142274240	Rename local variable 'reducedRectangles'

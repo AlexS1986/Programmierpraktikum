@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+public class UserSolveAAS {
+	
+	public int solve(IRoom room) {
+		
+	}
+
+}

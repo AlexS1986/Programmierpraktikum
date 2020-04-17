@@ -1,0 +1,7 @@
+package fernuni.propra.user_interface;
+
+import javax.swing.JPanel;
+
+public abstract class RoomPanelAbstract extends JPanel{
+
+}

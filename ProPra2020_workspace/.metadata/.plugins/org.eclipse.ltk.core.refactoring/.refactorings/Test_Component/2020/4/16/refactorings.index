@@ -2,3 +2,37 @@
 1586758493074	Move compilation unit
 1586762709162	Delete element
 1586766090324	Copy compilation unit
+1586798145980	Move compilation unit
+1586798153532	Delete element
+1586798637216	Rename package 'File_Processing_Component'
+1586847197699	Rename local variable 'corners1'
+1586847210799	Rename local variable 'corners2'
+1586853650851	Rename local variable 'xmlFile'
+1586855609289	Rename type 'AllTests'
+1586862313649	Rename local variable 'room'
+1586862373118	Rename local variable 'panel'
+1586862384204	Rename local variable 'frame'
+1586864447332	Move compilation units
+1586864454200	Move compilation unit
+1586864534290	Delete element
+1586943593006	Rename local variable 'roomPanel'
+1586943601579	Rename local variable 'roomFrame'
+1586943614207	Rename local variable 'room2'
+1586943620257	Rename local variable 'tmpRoomPanel'
+1586943630904	Rename local variable 'tmpRoomFrame'
+1587039000762	Delete element
+1587039117462	Delete elements
+1587041636839	Copy compilation unit
+1587041722349	Rename local variable 'wallContainerEast'
+1587046140000	Copy compilation unit
+1587046249193	Rename local variable 'wallContainerEast'
+1587046987887	Copy compilation unit
+1587047002797	Rename local variable 'wallContainerWest'
+1587047047248	Rename local variable 'wallContainerWest'
+1587103829029	Rename field 'lineSegments'
+1587103942581	Rename field 'l5'
+1587113655880	Rename field 'room'
+1587114637066	Rename local variable 'candidateSeracher'
+1587116539630	Rename field 'corners2'
+1587116700689	Rename local variable 'wallIterator2'
+1587125358605	Delete element

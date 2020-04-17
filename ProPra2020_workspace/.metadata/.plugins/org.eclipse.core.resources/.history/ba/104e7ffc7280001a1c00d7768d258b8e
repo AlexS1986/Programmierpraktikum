@@ -1,0 +1,38 @@
+package fernuni.propra.algorithm;
+
+import java.util.Iterator;
+import java.util.List;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Wall;
+
+public class CandidateSearcher  implements ICandidateSearcher{
+	private WallContainerEast wallContainerEast  = new WallContainerEast();
+	private WallContainerNorth wallContainerNorth = new WallContainerNorth();
+	private WallContainerWest wallContainerWest = new WallContainerWest();
+	private WallContainerSouth wallContainerSouth = new WallContainerSouth();
+	
+	
+
+	@Override
+	public List<Point> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) {
+		Iterator<Wall> wallIterator = room.getWalls();
+		while(wallIterator.hasNext()) {
+			Wall nextWall = wallIterator.next();
+			if (nextWall.isEastWall()) {
+				
+			} else if (nextWall.isNorthWall()) {
+				
+			} else if (nextWall.isWestWall()) {
+			
+			} else if (nextWall.isSouthWall()) {
+				
+			}
+		}
+		
+		return null;
+	}
+
+}

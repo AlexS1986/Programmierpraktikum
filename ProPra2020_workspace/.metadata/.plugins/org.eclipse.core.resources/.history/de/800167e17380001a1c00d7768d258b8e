@@ -1,0 +1,14 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public class UserSolveAAS {
+	private SolveKAbstract solveControl;
+	
+	public void solve(IRoom room) {
+		IRuntimeInformation runtimeInformation = new RuntimeInformation();
+		solveControl = new SolveK();
+		solveControl.solve(runtimeInformation, room);
+	}
+
+}

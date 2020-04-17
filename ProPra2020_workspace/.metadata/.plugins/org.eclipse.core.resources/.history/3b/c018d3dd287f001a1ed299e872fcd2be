@@ -1,0 +1,22 @@
+package fernuni.propra.algorithm;
+
+import java.util.List;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Point;
+
+public abstract class SolveK {
+	
+	public void solve(IRuntimeInformation runTimeInformation, IRoom room) {
+		List<Point> candidates = generateCandidateSearcher().searchCandidates(room);
+		
+		generatePositionOptimizer().optimizePositions();
+	}
+	
+	protected IPositionOptimizer generatePositionOptimizer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected abstract ICandidateSearcher generateCandidateSearcher();
+}

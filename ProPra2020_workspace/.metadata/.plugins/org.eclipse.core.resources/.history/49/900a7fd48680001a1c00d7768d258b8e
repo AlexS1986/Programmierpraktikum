@@ -1,0 +1,26 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CandidateSearcherTest {
+	
+	
+
+	@Test
+	public void testSearchCandidates() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSortWallsToContainers() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testConstructOriginalPartialRectangles() {
+		fail("Not yet implemented");
+	}
+
+}

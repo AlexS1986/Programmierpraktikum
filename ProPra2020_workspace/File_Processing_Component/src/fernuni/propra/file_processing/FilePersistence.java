@@ -32,7 +32,7 @@ import org.jdom2.input.sax.XMLReaders;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-public class FilePersistence extends PersistenceAbstract {
+class FilePersistence extends PersistenceAbstract {
     private static final String DTD = System.getProperty("user.dir")+"/../File_Processing_Component/Model/DataModel.dtd";    
     
 	@Override
@@ -47,15 +47,17 @@ public class FilePersistence extends PersistenceAbstract {
 			isr = new FileReader(xmlFile);
 			StringBuilder sb = insertDTDForValidation(isr);
 			
+			//handle xml
 			SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
 			document = builder.build(new StringReader(sb.toString()));
 			Element raumNode = document.getRootElement();
 			
+			String ID = raumNode.getChildText("ID");
+			
 			Element cornersNode = raumNode.getChild("ecken");	
 			List<Element> cornerNodes = cornersNode.getChildren("Ecke");
 			LinkedList<Point> corners = new LinkedList<Point>();
-			List<LineSegment> walls = new ArrayList<LineSegment>();
-			Point bottomMostRightMostPoint = null; 
+			List<LineSegment> walls = new ArrayList<LineSegment>(); 
 			
 			for(Element cornerNode : cornerNodes) {
 				Point tmpPoint = new Point(Double.parseDouble(cornerNode.getChildText("x")), Double.parseDouble(cornerNode.getChildText("y")));
@@ -67,54 +69,16 @@ public class FilePersistence extends PersistenceAbstract {
 				
 				// add corner
 				corners.add(tmpPoint);
-				if (bottomMostRightMostPoint != null ) {
-					if (tmpPoint.getY()<= bottomMostRightMostPoint.getY()) {
-						if (tmpPoint.getX()>bottomMostRightMostPoint.getX()) {
-							bottomMostRightMostPoint = tmpPoint;
-						}
-					}
-				} else {
-					bottomMostRightMostPoint = tmpPoint;
-				}
 			}
 			// add last wall
 			LineSegment newWall = new Wall(corners.getLast(), corners.getFirst());
 			testAndAddWallToWalls(newWall, walls);
 			
-			
-			
-			//test polygon orientation
-			boolean counterClockWise = isCounterClockWise(corners, bottomMostRightMostPoint); 
-	
-			// add lamps
+
+			//add lamps
 			List<Lamp> lamps = getLamps(raumNode, walls);
 			
-			outRoom = new Room(lamps, corners, counterClockWise);
-			
-			//System.out.println("TEST");
-			//System.out.println(sb.toString());
-			
-			
-			//document = builder.build(new StringReader(sb.toString()));
-			//document = (Document) builder.build(xmlFile);
-			//String folder = System.getProperty("user.dir")+"/../File_Processing_Component/Model/";
-			//System.out.println(readDTDFile());
-			//if (document.getDocType() == null) {
-				//System.out.println("kein doctype vorhanden");
-				
-				//DocType dt = new DocType("Raum", folder+"DataModel.dtd");
-				
-				//document.setDocType(dt);
-				
-		        //XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-		        //output xml to console for debugging
-		        //xmlOutputter.output(doc, System.out);
-		        //File outfile = new File("~/Desktop/test");
-		        //xmlOutputter.output(document, new FileOutputStream("/Users/alex/Desktop/test"));
-			//}
-			
-			//Element rootNode = document.getRootElement();
-			//System.out.println(rootNode.toString());
+			outRoom = new Room(ID,lamps, corners);
 			
 		} catch (JDOMException e) {
 			throw new PersistenceException(e);
@@ -138,22 +102,49 @@ public class FilePersistence extends PersistenceAbstract {
 	@Override
 	public void writeOutput(IRoom room, String xmlFile) {
 		// TODO Auto-generated method stub
+		
+		//System.out.println("TEST");
+		//System.out.println(sb.toString());
+		
+		
+		//document = builder.build(new StringReader(sb.toString()));
+		//document = (Document) builder.build(xmlFile);
+		//String folder = System.getProperty("user.dir")+"/../File_Processing_Component/Model/";
+		//System.out.println(readDTDFile());
+		//if (document.getDocType() == null) {
+			//System.out.println("kein doctype vorhanden");
+			
+			//DocType dt = new DocType("Raum", folder+"DataModel.dtd");
+			
+			//document.setDocType(dt);
+			
+	        //XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+	        //output xml to console for debugging
+	        //xmlOutputter.output(doc, System.out);
+	        //File outfile = new File("~/Desktop/test");
+	        //xmlOutputter.output(document, new FileOutputStream("/Users/alex/Desktop/test"));
+		//}
+		
+		//Element rootNode = document.getRootElement();
+		//System.out.println(rootNode.toString());
+		
 
 	}
 	
 	
 	private List<Lamp> getLamps(Element raumNode, List<LineSegment> walls) throws IOException {
 		Element lampsNode = raumNode.getChild("lampen");
-		List<Element> lampNodes = lampsNode.getChildren("Lampe");
 		List<Lamp> lamps = new LinkedList<Lamp>();
-		for (Element lampNode: lampNodes) {
-			Lamp tmpLamp = new Lamp(Double.parseDouble(lampNode.getChildText("x")), Double.parseDouble(lampNode.getChildText("y")));
-			if (tmpLamp.isInsidePolygon(walls)) {
-				lamps.add(tmpLamp);
-			} else {
-				throw new IOException("Not all lamps are actually inside the room. Please provide a valid room layout");
+		if(lampsNode != null) { // contains lamps
+			List<Element> lampNodes = lampsNode.getChildren("Lampe");	
+			for (Element lampNode: lampNodes) {
+				Lamp tmpLamp = new Lamp(Double.parseDouble(lampNode.getChildText("x")), Double.parseDouble(lampNode.getChildText("y")));
+				if (tmpLamp.isInsidePolygon(walls)) {
+					lamps.add(tmpLamp);
+				} else {
+					throw new IOException("Not all lamps are actually inside the room. Please provide a valid room layout");
+				}	
 			}
-			
 		}
 		return lamps;
 	}
@@ -179,28 +170,29 @@ public class FilePersistence extends PersistenceAbstract {
 	}
 	
 	
-	private void checkFileAvailability(File xmlFile) throws FileNotFoundException, IOException {
+	private static void checkFileAvailability(File xmlFile) throws FileNotFoundException {
 		if (!xmlFile.exists()) {
 			throw new FileNotFoundException("File not found. Enter a valid file path.");
 		}
 		if(!xmlFile.isFile()) {
-			throw new IOException("Path does not point to a file. Enter a valid file path.");
+			throw new FileNotFoundException("Path does not point to a file. Enter a valid file path.");
 		}
 	}
 	
-	private void testAndAddWallToWalls(LineSegment newWall, List<LineSegment> walls) throws IOException {
+	static void testAndAddWallToWalls(LineSegment newWall, List<LineSegment> walls) throws PersistenceException {
+		//checks intersections and perpendicularity
 		if (walls.isEmpty()) {
 			walls.add(newWall);
 			return;
 		}
-		if (newWall.doesNotIntersectLineSegments(walls)) {
+		if (!newWall.penetratesLineSegments(walls)) {
 			if (newWall.perpendicular(walls.get(walls.size()-1))) {
 				walls.add(newWall);
 			} else {
-				throw new IOException("Sucessive walls are not perpendicular. Please provide a valid room layout!");
+				throw new PersistenceException("Sucessive walls are not perpendicular. Please provide a valid room layout!");
 			}	
 		} else {
-			throw new IOException("Walls intersect. Please provide a valid room layout!");
+			throw new PersistenceException("Walls intersect. Please provide a valid room layout!");
 		}
 	}
 	
@@ -251,11 +243,11 @@ public class FilePersistence extends PersistenceAbstract {
 		return sb.toString();
 	}
 
-	private boolean isValidCorners(List<Point> corners, Point bottomMostRightMostPoint) {
+	/*private boolean isValidCorners(List<Point> corners, Point bottomMostRightMostPoint) {
 		return corners.size()>3;
-	}
+	}*/
 	
-	public static boolean isCounterClockWise(List<Point> corners, Point bottomMostRightMostPoint) {
+	/*public static boolean isCounterClockWise(List<Point> corners, Point bottomMostRightMostPoint) {
 		// https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#1180256
 		int indexOfBMRMP = corners.indexOf(bottomMostRightMostPoint);
 		Point previous;
@@ -279,7 +271,10 @@ public class FilePersistence extends PersistenceAbstract {
 		
 		double crossProduct = dx1*dy2 - dx2*dy1;
 		return crossProduct > 0;
-	}
+	} */
+
+
+
 	
 	
 	

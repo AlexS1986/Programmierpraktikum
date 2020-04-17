@@ -1,0 +1,11 @@
+package fernuni.propra.file_processing;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+@RunWith(Suite.class)
+@SuiteClasses({ FilePersistenceTest.class, LineSegmentTest.class, LineSegmentTestParameterized.class, PointTest.class })
+public class FileProcessingTests {
+
+}

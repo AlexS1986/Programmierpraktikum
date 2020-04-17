@@ -1,0 +1,23 @@
+package fernuni.propra.algorithm;
+
+import java.util.Comparator;
+import java.util.TreeMap;
+
+public class WallContainerTree {
+	private TreeMap<LinkedListForWallsWithKey, LinkedListForWallsWithKey> walls;
+	private static final double TOL = 0.001;
+	
+	public WallContainerTree() {		
+		walls = new TreeMap<LinkedListForWallsWithKey, LinkedListForWallsWithKey>( 
+				new Comparator<LinkedListForWallsWithKey>() {
+			@Override
+			public int compare(LinkedListForWallsWithKey o1, LinkedListForWallsWithKey o2) {
+				if (Math.abs(o1.getKey() - o2.getKey()) < 0.0001)
+				// TODO Auto-generated method stub
+				return 0;
+			}
+		});
+	}
+	
+
+}

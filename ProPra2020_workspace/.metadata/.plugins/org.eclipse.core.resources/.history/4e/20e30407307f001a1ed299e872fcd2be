@@ -1,0 +1,13 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public abstract class ValidateKAbstract {
+	
+	boolean validate(IRoom room, IRuntimeIlluminationTester runtime) {
+		
+	}
+	
+	protected abstract IIlluminationTester generateIlluminationTester();
+
+}

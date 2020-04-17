@@ -1,0 +1,20 @@
+package fernuni.propra.algorithm;
+
+import java.util.List;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Point;
+
+public class CandidateSearcher  implements ICandidateSearcher{
+	private WallContainerEast wallContainerEast  = new WallContainerEast();
+	private WallContainerNorth wallContainerNorth = new WallContainerNorth();
+	
+	
+
+	@Override
+	public List<Point> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,12 @@
+package fernuni.propra.algorithm.util;
+
+import fernuni.propra.internal_data_model.Point;
+
+public class RectangleWithTag extends Rectangle{
+
+	public RectangleWithTag(Point p1, Point p2, Tag tag) {
+		super(p1,p2);
+		// TODO Auto-generated constructor stub
+	}
+
+}

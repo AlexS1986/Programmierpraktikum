@@ -1,0 +1,32 @@
+package fernuni.propra.algorithm;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import fernuni.propra.internal_data_model.Wall;
+
+public abstract class WallContainerAbstract {
+	
+	List<Wall> walls;
+	
+	public WallContainerAbstract() {
+		walls = new LinkedList<Wall>();
+	}
+	
+	
+	public Wall getNearestWall(double low, double high, double limit) throws WallContainerException{
+		if (low>= high) throw new WallContainerException();
+		Iterator<Wall> iterator = walls.iterator();
+		Wall nextWall;
+		while(iterator.hasNext()) {
+			nextWall = iterator.next();
+			if (nextWall.overlapsXrange(low, high) &&  nextWall.getP1().getY()>=limit) {
+				return nextWall;
+			}
+		}
+		return null;
+	}
+
+	protected abstract boolean 
+}

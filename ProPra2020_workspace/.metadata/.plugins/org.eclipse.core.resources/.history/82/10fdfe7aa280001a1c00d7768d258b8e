@@ -1,0 +1,10 @@
+package fernuni.propra.algorithm.util;
+
+public class RectangleWithTag extends Rectangle{
+
+	public RectangleWithTag(Point p1, Point p2) {
+		
+		// TODO Auto-generated constructor stub
+	}
+
+}

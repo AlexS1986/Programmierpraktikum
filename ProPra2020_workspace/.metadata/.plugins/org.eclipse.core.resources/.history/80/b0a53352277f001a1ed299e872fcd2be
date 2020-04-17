@@ -1,0 +1,11 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public class UserSolveAAS {
+	
+	public int solve(IRoom room) {
+		
+	}
+
+}

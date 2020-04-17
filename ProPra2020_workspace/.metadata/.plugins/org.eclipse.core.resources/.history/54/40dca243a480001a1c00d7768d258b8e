@@ -1,0 +1,7 @@
+package fernuni.propra.algorithm.util;
+
+public class Snippet {
+	boolean test10 = rec2_3.equals(ref);
+	boolean test11 = rec2_4.equals(ref);
+}
+

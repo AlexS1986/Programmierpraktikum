@@ -1,0 +1,10 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.Iterator;
+
+public interface IRoom {
+	Iterator<Lamp> getLamps();
+	int getNumberOfLamps();
+	Iterator<Point> getCorners();
+	void addLamp(Lamp lamp);
+}

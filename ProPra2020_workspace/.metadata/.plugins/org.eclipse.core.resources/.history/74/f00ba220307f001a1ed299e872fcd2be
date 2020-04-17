@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public interface IIlluminationTester {
+
+	void testIfRoomIsIlluminated(IRoom room, IRuntimeIlluminationTester runtimeInfo);
+
+}

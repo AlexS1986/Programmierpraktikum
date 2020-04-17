@@ -1,0 +1,46 @@
+package fernuni.propra.algorithm.util;
+
+import java.util.HashSet;
+import java.util.List;
+
+import fernuni.propra.internal_data_model.Point;
+
+public class RectangleWithTag extends Rectangle{
+
+	HashSet<Integer> tags = new HashSet<Integer>();
+	
+	public RectangleWithTag(Point p1, Point p2, List<Integer> initialTags) {
+		super(p1,p2);
+		for (Integer tag : initialTags) {
+			tags.add(tag);
+		}
+	}
+	
+	public RectangleWithTag(Rectangle rectangle, List<Integer> initialTags) {
+		super(rectangle.getP1(),rectangle.getP3());
+		for (Integer tag : initialTags) {
+			tags.add(tag);
+		}
+	}
+	
+	boolean containsTag(Integer tag) {
+		return tags.contains(tag);
+	}
+
+	void addTag(Integer tag) {
+		tags.add(tag);
+	}
+	
+	public boolean equals(Object other) {
+		if (other == null) {
+			return false;
+		} else {
+			if (other instanceof Rectangle) {
+				
+			}
+			otherRectangle = (Rectangle) other;
+		}
+		return getP1().isEqual(other.getP1()) && getP2().isEqual(other.getP2()) 
+				&& getP3().isEqual(other.getP3()) && getP4().isEqual(other.getP4());
+	}
+}

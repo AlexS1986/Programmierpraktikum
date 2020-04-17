@@ -1,0 +1,136 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Room;
+import fernuni.propra.internal_data_model.Wall;
+
+public class CandidateSearcherTest {
+	private IRoom mockRoom;
+	private Point p1, p2, p3,p4;
+	private Wall w1, w2,w3,w4;
+	
+	@Before
+	public void setup() {
+		p1 = new Point(0,0);
+		p2 = new Point(0,1);
+		p3 = new Point ( 1,1);
+		p4 = new Point(0,1);
+		
+		w1 = new Wall(p1,p2);
+		w2 = new Wall(p2,p3);
+		w3 = new Wall(p3,p4);
+		w4 = new Wall(p4,p1);
+		
+		List<Wall> walls = new LinkedList<Wall>();
+		walls.add(w1); walls.add(w2); walls.add(w3); walls.add(w4);
+		
+		mockRoom = new IRoom() {
+			
+			@Override
+			public Iterator<Wall> getWalls() {
+				// TODO Auto-generated method stub
+				return walls.iterator();
+			}
+			
+			@Override
+			public int getNumberOfLamps() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public double getMinY() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public double getMinX() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public double getMaxY() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public double getMaxX() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public Iterator<Lamp> getLamps() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public String getID() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Iterator<Point> getCorners() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void addLamp(Lamp lamp) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		
+	}
+	
+
+	@Test
+	public void testSearchCandidates() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSortWallsToContainers() {
+		//Arrange
+		CandidateSearcher candidateSearcher = new CandidateSearcher();
+		
+		//Act
+		boolean test1 = false;
+		try {
+			candidateSearcher.sortWallsToContainers(mockRoom);
+		} catch (WallContainerException | CandidateSearcherException e) {
+			fail(e.getMessage());
+		}
+		Iterator<Wall> east = candidateSearcher.eastIterator();
+		Iterator<Wall> north = candidateSearcher.northIterator();
+		Iterator<Wall> west = candidateSearcher.westIterator();
+		Iterator<Wall> south = 
+		
+		
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testConstructOriginalPartialRectangles() {
+		fail("Not yet implemented");
+	}
+
+}

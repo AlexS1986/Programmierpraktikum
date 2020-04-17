@@ -1,0 +1,24 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.Wall;
+
+public class WallContainerEastTest {
+	private Wall w1,w2,w3,w4;
+	
+	
+
+	@Test
+	public void testAdd() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetNearestEastWall() {
+		fail("Not yet implemented");
+	}
+
+}

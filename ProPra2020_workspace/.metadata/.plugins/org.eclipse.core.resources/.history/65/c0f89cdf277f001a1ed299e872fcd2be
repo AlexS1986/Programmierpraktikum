@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+public abstract class SolveK {
+	ICandidateSearcher candidateSearcher;
+	
+	public int solve (IRuntimeInformation runTimeInformation, IRoom room) {
+		List<Point> candidates = 
+	}
+}

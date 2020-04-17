@@ -1,0 +1,11 @@
+package fernuni.propra.algorithm;
+
+public class UserValidateAAS {
+	private ValidateKAbstract validateK;
+	
+	public boolean validate(IRoom room) {
+		validateK = new ValidateKAbstract(IRoom room) {
+		};
+	}
+
+}

@@ -8,15 +8,15 @@ public class Lamp extends Point{
 		super(x, y);
 	}
 
-	void turnOn() {
+	public void turnOn() {
 		on = true;
 	}
 	
-	void turnOff() {
+	public void turnOff() {
 		on = false;
 	}
 	
-	boolean getOn() {
+	public boolean getOn() {
 		return on;
 	}
 	

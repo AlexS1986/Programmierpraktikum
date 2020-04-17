@@ -1,0 +1,8 @@
+package fernuni.propra.algorithm;
+
+import java.util.LinkedList;
+
+public class LinkedListForWallsWithKey {
+	private LinkedList<Wall> walls = new LinkedList<E>();
+
+}

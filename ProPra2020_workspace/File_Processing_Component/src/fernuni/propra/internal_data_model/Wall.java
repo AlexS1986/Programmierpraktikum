@@ -7,9 +7,12 @@ public class Wall extends LineSegment{
 		super(p1, p2);
 	}
 	
+	public Wall(LineSegment lineSegment) {
+		super(lineSegment.getP1(), lineSegment.getP2());
+	}
 	
 	public boolean isNorthWall() {
-		return isHorizontal() && getP2().largerX(getP1());
+		return isHorizontal() && getP1().largerX(getP2());
 	}
 	
 	public boolean isWestWall() {
@@ -17,7 +20,7 @@ public class Wall extends LineSegment{
 	}
 	
 	public boolean isSouthWall() {
-		return isHorizontal() && getP1().largerX(getP2());
+		return isHorizontal() && getP2().largerX(getP1());
 	}
 	
 	public boolean isEastWall() {

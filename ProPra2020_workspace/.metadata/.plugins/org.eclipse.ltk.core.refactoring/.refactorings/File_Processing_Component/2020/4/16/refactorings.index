@@ -10,3 +10,16 @@
 1586778027992	Rename method 'isOnLine'
 1586778478880	Rename method 'lineSegmentDoesNotIntersectLineSegments'
 1586781288122	Move compilation unit
+1586850642602	Rename method 'doesNotIntersectLineSegments'
+1586851131209	Rename local variable 'doesNotIntersect'
+1586851285299	Rename method 'doesNotPenetrateLineSegments'
+1586851297716	Rename local variable 'doesNotPenetrate'
+1586864388658	Move compilation unit
+1586864570282	Move compilation unit
+1586871300983	Rename local variable 'previousPoint'
+1586871308095	Rename local variable 'firstPoint'
+1586871813364	Rename method 'getWalls'
+1586932507351	Rename method 'getWallIterator'
+1587019639636	Move compilation unit
+1587021404486	Rename local variable 'bottomMostRightMostPoint'
+1587022603330	Rename method 'computeDimension'

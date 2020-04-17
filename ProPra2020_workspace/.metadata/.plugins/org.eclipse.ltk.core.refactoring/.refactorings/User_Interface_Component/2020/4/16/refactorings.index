@@ -1,0 +1,13 @@
+1586857591861	Delete element
+1586861917837	Rename package 'fernuni.propra.user_interface_component'
+1586861922810	Copy compilation units
+1586861929772	Delete elements
+1586862141681	Move compilation unit
+1586932688422	Rename local variable 'newLamp'
+1586936964448	Extract method 'transformToRoomCoordinates'
+1586937016926	Extract method 'drawRoom'
+1586937058675	Extract method 'scaleBackToScreenCoordinates'
+1586937087817	Extract method 'drawLamps'
+1586942669759	Rename method 'getRoomName'
+1586943904251	Rename field 'LAMPDIAMETER'
+1586944335695	Rename local variable 'r'

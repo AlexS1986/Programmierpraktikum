@@ -1,0 +1,5 @@
+package File_Processing_Component;
+
+public class test {
+	int x = 15;
+}

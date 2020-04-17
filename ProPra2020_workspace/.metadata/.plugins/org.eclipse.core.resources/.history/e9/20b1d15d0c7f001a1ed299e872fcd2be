@@ -1,0 +1,5 @@
+package fernuni.propra.user_interface;
+
+public abstract class RoomPanelAbstract {
+
+}

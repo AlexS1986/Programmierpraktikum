@@ -5,8 +5,9 @@ import java.util.List;
 public class Point {
 	private final double x;
 	private final double y;
-	private final static double TOL = 0.00001;
-	private final static double INF = 100000000;
+	private final static double TOL = 0.0001;
+	private final static int PRECISION = 1000;
+	public final static double INF = 100000000;
 	
 	public Point(double x, double y) {
 		this.x = x;
@@ -22,7 +23,10 @@ public class Point {
 	}
 	
 	public boolean isEqual(Point other) {
-		return (Math.abs(getX()-other.getX())  + Math.abs(getY()-other.getY()))  < TOL;
+		if (other == null) return false;
+			return (Math.round(getX() * PRECISION) == Math.round(other.getX() * PRECISION)) 
+					&& (Math.round(getY() * PRECISION) == Math.round(other.getY() * PRECISION));
+		//return (Math.abs(getX()-other.getX())  + Math.abs(getY()-other.getY()))  < TOL;
 	}
 	
 	public boolean isOnLineSegment(Point p1, Point p2) {
@@ -81,10 +85,12 @@ public class Point {
 	}
 	
 	public boolean isInXRange(double xLow, double xHigh) {
+		if (xLow>xHigh) throw new IllegalArgumentException("xLow > xHigh");
 		return isInRange(getX(), xLow, xHigh);
 	}
 	
 	public boolean isInYRange(double yLow, double yHigh) {
+		if(yLow > yHigh) throw new IllegalArgumentException("yLow > yHigh");
 		return isInRange(getY(), yLow, yHigh);
 	}
 	
@@ -99,6 +105,28 @@ public class Point {
 	private static  boolean isInRange(double x, double x1, double x2) {
 		return (Math.min(x1, x2) < x + TOL) && (Math.max(x1, x2) > x - TOL);				
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) return true;
+		if(!(o instanceof Point)) {
+			return false;
+		}
+		
+		Point point = (Point) o;
+		
+		return isEqual(point);
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + (int) Math.round(x * PRECISION);
+		result = 31 * result + (int) Math.round(y * PRECISION);
+		return result;
+	}
+	
+	
 	
 
 

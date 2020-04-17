@@ -1,0 +1,11 @@
+package fernuni.propra.algorithm;
+
+import java.util.List;
+
+import fernuni.propra.internal_data_model.Point;
+
+public interface ICandidateSearcher {
+
+	List<Point> searchCandidates();
+
+}

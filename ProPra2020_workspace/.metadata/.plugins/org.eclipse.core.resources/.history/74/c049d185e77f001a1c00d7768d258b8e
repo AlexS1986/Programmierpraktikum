@@ -1,0 +1,14 @@
+package fernuni.propra.algorithm;
+
+import java.util.Comparator;
+import java.util.TreeMap;
+
+public class WallContainerTree {
+	private TreeMap<LinkedListForWallsWithKey, LinkedListForWallsWithKey> walls;
+	
+	public WallContainerTree() {		
+		walls = new TreeMap<LinkedListForWallsWithKey, LinkedListForWallsWithKey>(comparator);
+	}
+	
+
+}

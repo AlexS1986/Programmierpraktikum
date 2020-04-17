@@ -73,26 +73,26 @@ public class LineSegment {
 		return perpendicular(other.getP1(), other.getP2());
 	}
 	
-	public boolean doesNotIntersectLineSegments(List<LineSegment> lineSegments) {
-		if (lineSegments.isEmpty()) return true;
-		boolean doesNotIntersect = true;
+	public boolean penetratesLineSegments(List<LineSegment> lineSegments) {
+		if (lineSegments.isEmpty()) return false;
+		boolean penetrates = false;
 		for (int j = 0; j < lineSegments.size(); j++) {
 			LineSegment tmpLineSegment = lineSegments.get(j);
-			if (getP1().isOnLineSegment(tmpLineSegment) || getP2().isOnLineSegment(tmpLineSegment)) {
-				return false;
-			}
+			//if (getP1().isOnLineSegment(tmpLineSegment) || getP2().isOnLineSegment(tmpLineSegment)) {
+			//	return false;
+			//}
 			try {
 				Point intersectionPoint = this.intersectionWithLinesegment(tmpLineSegment);
-				if (!intersectionPoint.isEqual(this.getP1()) 
-						&& !intersectionPoint.isEqual(this.getP2()) ) {
-					doesNotIntersect = false;
+				if (!intersectionPoint.isEqual(this.getP1()) && 
+						!intersectionPoint.isEqual(this.getP2())) {
+					penetrates = true;
 					break;
 				}
 			} catch (LineSegmentException e) {
 				
 			}
 		}
-		return doesNotIntersect;
+		return penetrates;
 	}
 	
 	public Point intersectionWithLinesegment(LineSegment other) throws LineSegmentException {
@@ -116,6 +116,10 @@ public class LineSegment {
 			throw new LineSegmentException("Lines are not perpendicular cannot return (unique) intersection point!");
 		}
 				
+	}
+	
+	public boolean isEqual(LineSegment other) {
+		return getP1().isEqual(other.getP1()) && getP2().isEqual(other.getP2());
 	}
 		
 }

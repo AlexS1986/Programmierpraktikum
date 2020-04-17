@@ -1,0 +1,44 @@
+package fernuni.propra.algorithm;
+
+import java.util.Iterator;
+import java.util.List;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Wall;
+
+public class CandidateSearcher  implements ICandidateSearcher{
+	private WallContainerEast wallContainerEast  = new WallContainerEast();
+	private WallContainerNorth wallContainerNorth = new WallContainerNorth();
+	private WallContainerWest wallContainerWest = new WallContainerWest();
+	private WallContainerSouth wallContainerSouth = new WallContainerSouth();
+	
+	
+
+	@Override
+	public List<Point> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws CandidateSearcherException {
+		Iterator<Wall> wallIterator = room.getWalls();
+		while(wallIterator.hasNext()) {
+			Wall nextWall = wallIterator.next();
+			try {
+				if (nextWall.isEastWall()) {
+					wallContainerEast.add(nextWall);
+				} else if (nextWall.isNorthWall()) {
+					wallContainerNorth.add(nextWall);
+				} else if (nextWall.isWestWall()) {
+					wallContainerWest.add(nextWall);
+				} else if (nextWall.isSouthWall()) {
+					wallContainerSouth.add(nextWall);
+				} else {
+					throw new CandidateSearcherException("Wall orientation cannot be determined!");
+				}
+			} catch(WallContainerException wce) {
+				throw new CandidateSearcherException(wce.getMessage());
+			}
+
+		}	
+		return null;
+	}
+
+}

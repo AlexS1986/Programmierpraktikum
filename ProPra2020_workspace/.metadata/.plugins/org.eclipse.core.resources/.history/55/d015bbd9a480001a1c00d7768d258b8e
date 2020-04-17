@@ -1,0 +1,22 @@
+package fernuni.propra.algorithm.util;
+
+import java.util.HashSet;
+
+import fernuni.propra.internal_data_model.Point;
+
+public class RectangleWithTag extends Rectangle{
+
+	HashSet<String> tags = new HashSet<String>();
+	
+	public RectangleWithTag(Point p1, Point p2, String initialTag) {
+		super(p1,p2);
+	}
+	
+	boolean containsTag(Integer tag) {
+		return tags.contains(tag);
+	}
+
+	void addTag(String tag) {
+		tags.add(tag);
+	}
+}

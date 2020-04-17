@@ -1,0 +1,44 @@
+package fernuni.propra.internal_data_model;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class WallTest {
+	
+	@Before
+	public void setUp() {
+		Point p1 = new Point(0,0);
+		Point p2 = new Point(1,0);
+		Point p3 = new Point(1,1);
+		Point p4 = new Point(0,1);
+		Wall w1 = new Wall(p1,p2);
+		Wall w2 = new Wall(p2,p3);
+		Wall w3 = new Wall(p3,p4);
+		Wall w4 = new Wall(p4,p1);
+		
+		Wall w5 = new Wall()
+	}
+
+	@Test
+	public void testIsNorthWall() {
+		// Arrange 
+	}
+
+	@Test
+	public void testIsWestWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsSouthWall() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsEastWall() {
+		fail("Not yet implemented");
+	}
+
+}

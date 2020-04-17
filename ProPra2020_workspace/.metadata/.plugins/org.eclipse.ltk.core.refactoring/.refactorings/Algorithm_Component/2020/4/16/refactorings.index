@@ -31,3 +31,4 @@
 1587140476495	Rename local variable 'newRectangleWithTag'
 1587142259049	Rename local variable 'lastIterationReducedRectangles'
 1587142274240	Rename local variable 'reducedRectangles'
+1587143935608	Rename local variable 'originalTagsAlreadyConsideredInOverLap'

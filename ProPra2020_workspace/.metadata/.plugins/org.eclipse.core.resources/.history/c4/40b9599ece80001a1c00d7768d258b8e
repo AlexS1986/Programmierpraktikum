@@ -113,7 +113,7 @@ public class CandidateSearcher  implements ICandidateSearcher{
 			combinationsOccured = false;
 			HashSet<RectangleWithTag> currentIterationRectangles = new HashSet<RectangleWithTag>();
 			
-			HashSet<Integer> originalTagsAlreadyCoveredInIteration = new HashSet<Integer>();
+			//HashSet<Integer> originalTagsAlreadyConsideredInOverLap = new HashSet<Integer>();
 			
 			
 			for (int i = 0; i< lastIterationRectangles.size(); i++) {
@@ -138,10 +138,9 @@ public class CandidateSearcher  implements ICandidateSearcher{
 						
 						RectangleWithTag overlappingRectangleWithTag = new RectangleWithTag(overlappingRectangle, tagsOfOverlap);
 						
-						//add to next iteration rectangles if rectangle does not already exist
+						
 						if (!currentIterationRectangles.contains(overlappingRectangleWithTag)) { 
 							currentIterationRectangles.add(overlappingRectangleWithTag);
-							originalTagsAlreadyCoveredInIteration.addAll(overlappingRectangleWithTag.getCopyOfTags()); // all original rectangles are now covered
 							combinationsOccured = true;
 							validOverlapFoundForI = true;
 						}
@@ -149,9 +148,8 @@ public class CandidateSearcher  implements ICandidateSearcher{
 					}
 				}
 				
-				if (!validOverlapFoundForI && !originalTagsAlreadyCoveredInIteration.containsAll(rectangleWithTagI.getCopyOfTags())) { // TODO test for contains necessary? 
+				if (!validOverlapFoundForI) { // TODO test for contains necessary? 
 					currentIterationRectangles.add(rectangleWithTagI);
-					originalTagsAlreadyCoveredInIteration.addAll(rectangleWithTagI.getCopyOfTags());
 				}
 			}
 			

@@ -1,23 +1,23 @@
 package fernuni.propra.algorithm;
 
-public class SolveK extends SolveKAbstract {
+import java.util.List;
 
-	@Override
-	protected IPositionOptimizer generatePositionOptimizer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
 
-	@Override
-	protected ICandidateSearcher generateCandidateSearcher() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected void abort() {
-		// TODO Auto-generated method stub
+public class SolveK {
+	
+	public void solve(IRuntimeInformation runTimeInformation, IRoom room) throws CandidateSearcherException {
+		List<Lamp> candidates = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher().searchCandidates(room, 
+				runTimeInformation);
+		
+		AlgorithmFactory.getAlgorithmFactory().createPositionOptimizer().optimizePositions(room, 
+				candidates, runTimeInformation); 
+		}
+	
+	
+	void abort() {
 		
 	}
-
 }

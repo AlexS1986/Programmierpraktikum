@@ -94,6 +94,10 @@ public class Point {
 		return isInRange(getY(), yLow, yHigh);
 	}
 	
+	public boolean isInsideRectangle(Point p1, Point p3) {
+		return isInXRange(p1.getX(), p3.getX()) && isInYRange(p1.getY(), p3.getY());
+	}
+	
 	private static boolean agrees(double x, double x1) {
 		return Math.abs(x-x1)<TOL;
 	}

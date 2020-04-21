@@ -4,7 +4,7 @@ import fernuni.propra.internal_data_model.IRoom;
 
 public class UserReadInputWriteOutputAAS {
 	private final String location;
-	private PersistenceAbstract persistence;
+	private IPersistence persistence;
 	
 	public UserReadInputWriteOutputAAS(String location) {
 		this.location = location;

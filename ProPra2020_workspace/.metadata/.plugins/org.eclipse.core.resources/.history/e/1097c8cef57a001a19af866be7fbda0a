@@ -1,7 +1,0 @@
-package fernuni.propra.internal_data_model;
-
-public interface IRoom {
-	int getID();
-	
-
-}

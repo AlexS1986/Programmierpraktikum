@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;taggedCanditates2&apos; in &apos;fernuni.propra.algorithm.PositionOptimizerTest.testOptimizePositions()&apos; to &apos;taggedCandidates2&apos;&#x0A;- Original project: &apos;Test_Component&apos;&#x0A;- Original element: &apos;fernuni.propra.algorithm.PositionOptimizerTest.testOptimizePositions().taggedCanditates2&apos;&#x0A;- Renamed element: &apos;taggedCanditates2&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;taggedCanditates2&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;fernuni.propra.algorithm{PositionOptimizerTest.java[PositionOptimizerTest~testOptimizePositions@taggedCanditates2!4603!4656!4614!4630!QList\&lt;QLamp;&gt;;!0!false" name="taggedCandidates2" references="true" stamp="1587386326937" version="1.0"/>
+</session>

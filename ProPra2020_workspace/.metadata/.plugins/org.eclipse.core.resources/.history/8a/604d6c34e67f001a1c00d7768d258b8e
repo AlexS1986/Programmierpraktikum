@@ -1,9 +1,0 @@
-package fernuni.propra.algorithm;
-
-import java.util.TreeMap;
-
-public class WallContainerTree {
-	TreeMap<K, V> walls = 
-	
-
-}

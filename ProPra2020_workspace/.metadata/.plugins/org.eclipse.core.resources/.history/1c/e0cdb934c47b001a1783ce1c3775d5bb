@@ -1,6 +1,0 @@
-
-public interface Element {
-	boolean isEqual(Element e);
-	boolean isLess(Element e);
-	String toString();
-}

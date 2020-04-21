@@ -1,0 +1,28 @@
+package fernuni.propra.algorithm;
+
+public class AbstractAlgorithmFactory implements IAbstractAlgorithmFactory {
+	private AbstractAlgorithmFactory singleton;
+	
+	private AbstractAlgorithmFactory() {}
+	
+
+
+	@Override
+	public ICandidateSearcher createCandidateSearcher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IPositionOptimizer createPositionOptimizer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IIlluminationTester createIlluminiationTester() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -32,3 +32,16 @@
 1587142259049	Rename local variable 'lastIterationReducedRectangles'
 1587142274240	Rename local variable 'reducedRectangles'
 1587143935608	Rename local variable 'originalTagsAlreadyConsideredInOverLap'
+1587206851601	Move compilation unit
+1587207621599	Rename method 'originalPartialRectangles'
+1587280954802	Rename local variable 'tagsOfAllIlluminatedPartialRectangles'
+1587281531171	Delete element
+1587291506939	Delete element
+1587294542448	Delete element
+1587295023804	Delete element
+1587295255177	Delete element
+1587295326024	Rename type 'AbstractAlgorithmFactory'
+1587295465103	Delete element
+1587295476922	Rename type 'SolveKAbstract'
+1587295654667	Delete element
+1587295667648	Rename type 'ValidateKAbstract'

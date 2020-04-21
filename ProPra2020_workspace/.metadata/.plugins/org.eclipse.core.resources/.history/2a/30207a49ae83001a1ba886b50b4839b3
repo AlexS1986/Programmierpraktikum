@@ -1,0 +1,8 @@
+package fernuni.propra.algorithm;
+
+public interface IRuntimePositionOptimizer extends IRuntimeIlluminationTester {
+	void startOriginalPartialRectanglesFind();
+	void stopTimeOriginalPartialRectanglesFind();
+	long getElapsedTimeOriginalPartialRectanglesFind();
+	void resetTimeOriginalPartialRectanglesFind();
+}

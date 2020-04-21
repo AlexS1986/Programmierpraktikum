@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+public class IlluminationTesterException {
+
+	public IlluminationTesterException() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="WallTest (1)" project="Test_Component" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="fernuni.propra.internal_data_model.WallTest" time="0.0">
-    <testcase name="testIsWestWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
-    <testcase name="testIsSouthWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
-    <testcase name="testIsNorthWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
-    <testcase name="testIsEastWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
-  </testsuite>
-</testrun>

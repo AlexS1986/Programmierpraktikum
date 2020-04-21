@@ -3,6 +3,7 @@ package fernuni.propra.file_processing;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,11 +14,14 @@ import fernuni.propra.file_processing.PersistenceException;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.LineSegment;
 import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Room;
 
 public class FilePersistenceTest {
 	Point p1,p2,p3,p4,p5;
 	LineSegment l1,l2,l3,l4,l5;
 	List<LineSegment> lineSegments;
+	IRoom room;
+	LinkedList<Point> corners;
 
 
 	@Before
@@ -33,6 +37,11 @@ public class FilePersistenceTest {
 		l5 = new LineSegment(p1, p3);
 		lineSegments = new ArrayList<LineSegment>();
 		lineSegments.add(l1);lineSegments.add(l2); lineSegments.add(l3); lineSegments.add(l4);
+		
+		corners= new LinkedList<Point>();
+		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
+		
+		room = new Room("test", null, corners);
 	}
 	
 	
@@ -165,7 +174,15 @@ public class FilePersistenceTest {
 
 	@Test
 	public void testWriteOutput() {
-		fail("Not yet implemented");
+		//Arrange
+		IPersistence persistence = new FilePersistence();
+		
+		//Act
+		try {
+			persistence.writeOutput(room,"/Users/alex/Desktop/test");
+		} catch (PersistenceException e) {
+			fail(e.getMessage());
+		}
 	}
 	
 	/*@Test

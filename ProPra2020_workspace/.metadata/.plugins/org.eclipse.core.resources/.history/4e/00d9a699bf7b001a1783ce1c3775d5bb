@@ -1,7 +1,0 @@
-package fernuni.propra.algorithm.candidateSearcher;
-
-public abstract class WallContainerAbstract {
-	
-	List<Wall> walls;
-
-}

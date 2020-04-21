@@ -1,6 +1,0 @@
-package fernuni.propra.file_processing;
-
-public abstract class PersistenceAbstract {
-	
-
-}

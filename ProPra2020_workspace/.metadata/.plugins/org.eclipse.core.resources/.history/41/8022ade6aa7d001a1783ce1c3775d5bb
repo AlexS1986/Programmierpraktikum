@@ -1,6 +1,0 @@
-package File_Processing_Component;
-
-public class test {
-	int x = 15;
-	int y = 20;
-}

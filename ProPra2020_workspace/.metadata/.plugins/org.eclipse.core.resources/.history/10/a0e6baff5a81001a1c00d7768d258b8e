@@ -1,0 +1,7 @@
+package fernuni.propra.algorithm;
+
+public interface IOriginalPartialRectanglesFinder {
+	
+	List<RectangleWithTag> originalPartialRectangles(IRoom room, IRuntimeOriginalPartialRectanglesFinder rt);
+
+}

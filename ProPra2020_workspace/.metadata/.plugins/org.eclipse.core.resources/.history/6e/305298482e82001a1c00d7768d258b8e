@@ -1,0 +1,28 @@
+package fernuni.propra.algorithm;
+
+public class AbstractAlgorithmFactory {
+	private AbstractAlgorithmFactory singleton; // konkrete abstrakte Fabrik ist singleton
+	
+	private AbstractAlgorithmFactory() {}
+	
+	public IAbstractAlgorithmFactory getAlgorithmFactory() {
+		if (singleton == null) {
+			singleton = new AbstractAlgorithmFactory();
+		}
+		
+		return singleton;
+	}
+
+	public ICandidateSearcher createCandidateSearcher() {
+		return new CandidateSearcher();
+	}
+
+	public IPositionOptimizer createPositionOptimizer() {
+		return null;
+	}
+
+	public IIlluminationTester createIlluminiationTester() {
+		return new IlluminationTester();
+	}
+
+}

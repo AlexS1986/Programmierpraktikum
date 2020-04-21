@@ -1,18 +1,16 @@
 package fernuni.propra.algorithm;
 
-public class ValidateK extends ValidateKAbstract {
+import fernuni.propra.internal_data_model.IRoom;
 
-	@Override
-	protected IIlluminationTester generateIlluminationTester() {
-		// TODO Auto-generated method stub
-		return null;
+public  class ValidateK {
+	
+	boolean validate(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws IlluminationTesterException {
+		return AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester().testIfRoomIsIlluminated(room, runtimeInfo);
 	}
-
-	@Override
-	protected void abort() {
-		// TODO Auto-generated method stub
+	
+	
+	void abort() {
 		
 	}
-
 
 }

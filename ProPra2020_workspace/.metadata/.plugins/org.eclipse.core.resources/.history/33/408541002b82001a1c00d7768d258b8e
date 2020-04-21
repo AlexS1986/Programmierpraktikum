@@ -1,0 +1,24 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public class SolveK extends SolveKAbstract {
+
+	@Override
+	protected IPositionOptimizer generatePositionOptimizer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ICandidateSearcher generateCandidateSearcher(IRoom room) {
+		return new CandidateSearcher(room);
+	}
+
+	@Override
+	protected void abort() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

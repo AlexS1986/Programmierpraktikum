@@ -1,0 +1,12 @@
+package fernuni.propra.algorithm;
+
+public interface IAbstractAlgorithmFactory {
+	static IAbstractAlgorithmFactory getAlgorithmFactory() {
+		
+	}
+	IAbstractAlgorithmFactory getAlgorithmFactory();
+	ICandidateSearcher createCandidateSearcher();
+	IPositionOptimizer createPositionOptimizer();
+	IIlluminationTester createIlluminiationTester();
+
+}

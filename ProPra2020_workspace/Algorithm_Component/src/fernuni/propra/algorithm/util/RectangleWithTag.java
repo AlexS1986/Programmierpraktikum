@@ -18,7 +18,13 @@ public class RectangleWithTag extends Rectangle{
 				tags.add(tag);
 			}
 		}
-
+	}
+	
+	public RectangleWithTag(Point p1, Point p2, Integer initialTag) {
+		super(p1,p2);
+		if (initialTag != null) {
+			tags.add(initialTag);
+		}
 	}
 	
 	public RectangleWithTag(Rectangle rectangle, List<Integer> initialTags) {
@@ -35,6 +41,13 @@ public class RectangleWithTag extends Rectangle{
 		super(rectangle.getP1(),rectangle.getP3());
 		if (initialTags != null) {
 			tags = initialTags;
+		}
+	}
+	
+	public RectangleWithTag(Rectangle rectangle, Integer initialTag) {
+		super(rectangle.getP1(),rectangle.getP3());
+		if (initialTag != null) {
+			tags.add(initialTag);
 		}
 	}
 	
@@ -68,15 +81,15 @@ public class RectangleWithTag extends Rectangle{
 		return subset;
 	} 
 	
-	public HashSet<Integer> getCopyOfTags() {
-		HashSet<Integer> outHashSet = new HashSet<Integer>();
-		
-		for(Integer tag : tags) {
-			outHashSet.add(tag);
+	
+	public HashSet<Integer> getCopyOfTags() { 
+		HashSet<Integer> outTags = new HashSet<Integer>();
+		for (Integer tag : tags) {
+			outTags.add(tag);
 		}
-		
-		return outHashSet;
+		return outTags;
 	}
+	
 	
 	private int getSumOfTags() {
 		int result = 0;

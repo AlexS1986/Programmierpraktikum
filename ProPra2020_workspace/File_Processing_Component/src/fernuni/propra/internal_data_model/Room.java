@@ -7,7 +7,7 @@ import java.util.List;
 import org.jdom2.Element;
 
 public class Room implements IRoom {
-	private List<Lamp> lamps;
+	private List<Lamp> lamps = new LinkedList<Lamp>();
 	private final LinkedList<Point> corners;
 	private boolean counterClockWise;
 	private double minX, maxX, minY, maxY;
@@ -31,7 +31,9 @@ public class Room implements IRoom {
 	}
 
 	public Room(String ID, List<Lamp> lamps, LinkedList<Point> corners) {
-		this.lamps = lamps;
+		if (lamps != null) {
+			this.lamps = lamps;
+		}
 		this.corners = corners;
 		this.ID = ID;
 		computeDimensionAndOrientation();

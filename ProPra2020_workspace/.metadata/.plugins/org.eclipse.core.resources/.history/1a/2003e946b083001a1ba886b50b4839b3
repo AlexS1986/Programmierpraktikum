@@ -1,0 +1,6 @@
+package fernuni.propra.algorithm;
+
+public interface IRuntimeReader {
+	long getElapsedTimeCandidateSearch();
+	long getElapsedTimeOptimizePositions();
+}

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import fernuni.propra.algorithm.util.Rectangle;
 import fernuni.propra.algorithm.util.RectangleWithTag;
+import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 import fernuni.propra.internal_data_model.Point;
@@ -18,8 +19,10 @@ import fernuni.propra.internal_data_model.Room;
 import fernuni.propra.internal_data_model.Wall;
 
 public class CandidateSearcherTest {
-	private IRoom mockRoom, room, room2;
+	private IRoom mockRoom, room, room2, roomStar, roomHufeisen;
 	private Point p1, p2, p3,p4, p5, p6, p7, p8;
+	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
+	private Point p31, p32, p33, p34, p35, p36, p37, p38;
 	private Wall w1, w2,w3,w4;
 	private LinkedList<Point> corners, corners2;
 	
@@ -117,128 +120,146 @@ public class CandidateSearcherTest {
 		};
 		
 		
+	
+		pc1 = new Point(1,-1);
+		pc2 = new Point(2,-1);
+		pc3 = new Point(2,1);
+		pc4 = new Point(1,1);
+		pc5 = new Point(1,2);
+		pc6 = new Point(-1,2);
+		pc7 = new Point(-1,1);
+		pc8 = new Point(-2,1);
+		pc9 = new Point(-2,-1);
+		pc10 = new Point(-1,-1);
+		pc11 = new Point(-1,-2);
+		pc12 = new Point(1,-2);
+		LinkedList<Point> cornersStar = new LinkedList<Point>();
+		cornersStar.add(pc1);cornersStar.add(pc2);cornersStar.add(pc3);cornersStar.add(pc4);cornersStar.add(pc5);
+		cornersStar.add(pc6);cornersStar.add(pc7);cornersStar.add(pc8);cornersStar.add(pc9);cornersStar.add(pc10);
+		cornersStar.add(pc11);cornersStar.add(pc12);
+		
+		roomStar = new Room("star", null, cornersStar);
+		
+		
+		p31 = new Point(-2,0);
+		p32 = new Point(2,0);
+		p33 = new Point(2,2);
+		p34 = new Point(1,2);
+		p35 = new Point(1,1);
+		p36 = new Point(-1,1);
+		p37 = new Point(-1,2);
+		p38 = new Point(-2,2);
+		LinkedList<Point> cornersHufeisen = new LinkedList<Point>();
+		cornersHufeisen.add(p31);cornersHufeisen.add(p32);cornersHufeisen.add(p33);cornersHufeisen.add(p34);cornersHufeisen.add(p35);
+		cornersHufeisen.add(p36);cornersHufeisen.add(p37);cornersHufeisen.add(p38);
+		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);
+		
 	}
 	
 
 	@Test
 	public void testSearchCandidates() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSortWallsToContainers() {
-		//Arrange
-		CandidateSearcher candidateSearcher = new CandidateSearcher();
+		//Arrange 
+		ICandidateSearcher candidateSearcher1 = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		ICandidateSearcher candidateSearcher2 = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		
 		//Act
+		List<Lamp> candidates = null;
+		List<Lamp> candidates2 = null;
 		try {
-			candidateSearcher.sortWallsToContainers(room);
-		} catch (WallContainerException | CandidateSearcherException e) {
-			fail(e.getMessage());
+			candidates = candidateSearcher1.searchCandidates(room,null);
+			candidates2 = candidateSearcher2.searchCandidates(roomHufeisen,null);
+		} catch (CandidateSearcherException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		//Assert
-		Iterator<Wall> east = candidateSearcher.eastIterator();
-		Iterator<Wall> north = candidateSearcher.northIterator();
-		Iterator<Wall> west = candidateSearcher.westIterator();
-		Iterator<Wall> south = candidateSearcher.southIterator();
+		assertTrue(candidates != null && candidates.size() == 1 && candidates.get(0).isEqual(new Point(0.5,0.5)));
 		
-		//east
-		boolean test11 = east.hasNext();
-		Wall wallEast = east.next();
-		boolean test12 = !east.hasNext();
-		boolean test13 = wallEast.getP1().isEqual(w2.getP1()) && wallEast.getP2().isEqual(w2.getP2());
-		boolean eastBool = test11 && test12 && test13;
-		
-		//north
-		boolean test21 = north.hasNext();
-		Wall wallNorth = north.next(); 
-		boolean test22 = !north.hasNext();
-		boolean test23 = wallNorth.getP1().isEqual(w3.getP1()) && wallNorth.getP2().isEqual(w3.getP2());
-		boolean northBool = test21 && test22 && test23;
-		
-		//west
-		boolean test31 = west.hasNext();
-		Wall wallWest = west.next(); 
-		boolean test32 = !west.hasNext();
-		boolean test33 = wallWest.getP1().isEqual(w4.getP1()) && wallWest.getP2().isEqual(w4.getP2());
-		boolean westBool = test31 && test32 && test33;
-		
-		//west
-		boolean test41 = south.hasNext();
-		Wall wallSouth = south.next(); 
-		boolean test42 = !south.hasNext();
-		boolean test43 = wallSouth.getP1().isEqual(w1.getP1()) && wallSouth.getP2().isEqual(w1.getP2());
-		boolean southBool = test41 && test42 && test43;
-		
-		assertTrue(eastBool && northBool && westBool && southBool);
-		
+		assertTrue(candidates2 != null && candidates2.size() == 2);
+		assertTrue(candidates2.get(0).isEqual(new Point(-1.5,0.5)));
+		assertTrue(candidates2.get(1).isEqual(new Point(1.5,0.5)));
 	}
 
+
 	@Test
-	public void testConstructOriginalPartialRectangles() {
+	public void testReduceRectangles() {
 		// Arrange
-		CandidateSearcher candidateSearcher = new CandidateSearcher();
-		CandidateSearcher candidateSearcher2 = new CandidateSearcher();
+		CandidateSearcher candidateSearcher = (CandidateSearcher) AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		RectangleWithTag refRectangle = new RectangleWithTag(new Point(0,0), new Point(1,1),0);
+		refRectangle.addTag(1); refRectangle.addTag(2); refRectangle.addTag(3);
+		RectangleWithTag refRectangle2 = new RectangleWithTag(new Point(0.5,0), new Point(1,0.5),0);
+		refRectangle2.addTag(1); refRectangle2.addTag(2); refRectangle2.addTag(3); refRectangle2.addTag(4); refRectangle2.addTag(5);
 		
-		//Act
-		try {
-			candidateSearcher.sortWallsToContainers(room);
-			candidateSearcher.constructOriginalPartialRectangles();
-		} catch (WallContainerException e) {
-			fail(e.getMessage());
-		} catch (CandidateSearcherException e) {
-			fail(e.getMessage());
-		}
+		RectangleWithTag refRectangle3 = new RectangleWithTag(pc10, pc4, 0);
+		refRectangle3.addTag(1); refRectangle3.addTag(2); refRectangle3.addTag(3); refRectangle3.addTag(4); refRectangle3.addTag(5);
+		refRectangle3.addTag(6); refRectangle3.addTag(7); refRectangle3.addTag(8); refRectangle3.addTag(9); refRectangle3.addTag(10);
+		refRectangle3.addTag(11);
 		
-		//2nd room
-		try {
-			candidateSearcher2.sortWallsToContainers(room2);
-			candidateSearcher2.constructOriginalPartialRectangles();
-		} catch (WallContainerException e) {
-			fail(e.getMessage());
-		} catch (CandidateSearcherException e) {
-			fail(e.getMessage());
-		}
+		RectangleWithTag refRectangle4 = new RectangleWithTag(p31, p36, 0);
+		refRectangle4.addTag(2); refRectangle4.addTag(3); refRectangle4.addTag(6); refRectangle4.addTag(7); 
 		
-		
-		//Assert
-		Iterator<RectangleWithTag> rectIterator = candidateSearcher.iteratorOriginalRectangles();
-		Rectangle rec1 = rectIterator.next();
-		Rectangle rec2 = rectIterator.next();
-		Rectangle rec3 = rectIterator.next();
-		Rectangle rec4 = rectIterator.next();
-		Rectangle ref = new Rectangle(p1, p3);
-		
-		boolean test1 = !rectIterator.hasNext();
-		boolean test2 = rec1.equals(ref);
-		boolean test3 = rec2.equals(ref);
-		boolean test4 = rec3.equals(ref);
-		boolean test5 = rec4.equals(ref);
-		boolean test6 = !rectIterator.hasNext();
-		
-		assertTrue(test1 && test2 && test3 && test4 && test5 && test6);
-		
-		
-		Iterator<RectangleWithTag> rectIterator2 = candidateSearcher2.iteratorOriginalRectangles();
-		Rectangle rec2_1 = rectIterator2.next();
-		Rectangle rec2_2 = rectIterator2.next();
-		Rectangle rec2_3 = rectIterator2.next();
-		Rectangle rec2_4 = rectIterator2.next();
-		Rectangle rec2_5 = rectIterator2.next();
-		Rectangle rec2_6 = rectIterator2.next();
-		Rectangle ref2 = new Rectangle(p1, new Point(1,0.5));
-		Rectangle ref3 = new Rectangle(new Point(0.5,0), p3);
-		
-		boolean test7 = !rectIterator2.hasNext();
-		boolean test8 = rec2_1.equals(ref2);
-		boolean test9 = rec2_2.equals(ref3);
-		boolean test10 = rec2_3.equals(ref3);
-		boolean test11 = rec2_4.equals(ref3);
-		boolean test12 = rec2_5.equals(ref2);
-		boolean test13 = rec2_6.equals(ref2);
-		
-		
-		assertTrue(test7 && test8 && test9 && test10 && test11 && test12 && test13);
-	}
+		RectangleWithTag refRectangle5 = new RectangleWithTag(new Point(1,0), new Point(2,1), 0);
+		refRectangle5.addTag(1); refRectangle5.addTag(4); refRectangle5.addTag(5); refRectangle5.addTag(7);
 
+		//Act
+		//1st room
+		List<RectangleWithTag> reducedRectangles = null;
+		try {
+			reducedRectangles = candidateSearcher.reduceRectangles(
+					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(room, null));
+
+		} catch (OriginalPartialRectanglesFinderException e) {
+			// TODO Auto-generated catch block
+			fail(e.getMessage());
+		}
+				
+		//2nd room
+		List<RectangleWithTag> reducedRectangles2 = null;
+		try {
+			reducedRectangles2  = candidateSearcher.reduceRectangles(
+					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(room2, null));
+		} catch (OriginalPartialRectanglesFinderException e) {
+			// TODO Auto-generated catch block
+			fail(e.getMessage());
+		}
+		
+		
+		//3rd room
+		List<RectangleWithTag> reducedRectangles3 = null;
+		try {
+			reducedRectangles3 = candidateSearcher.reduceRectangles(
+					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(roomStar, null));
+		} catch (OriginalPartialRectanglesFinderException e) {
+			// TODO Auto-generated catch block
+			fail(e.getMessage());
+		}
+		
+		
+		//4th room
+		List<RectangleWithTag> reducedRectangles4 = null;
+		try {
+			reducedRectangles4  = candidateSearcher.reduceRectangles(
+					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(roomHufeisen, null));
+		} catch (OriginalPartialRectanglesFinderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		//Assert
+		boolean test1 = reducedRectangles != null && reducedRectangles.size()==1;
+		boolean test2 = reducedRectangles.get(0).equals(refRectangle);
+		boolean test3 = reducedRectangles != null && reducedRectangles.size()==1;
+		boolean test4 = reducedRectangles2.get(0).equals(refRectangle2);
+		boolean test5 = reducedRectangles3 != null && reducedRectangles3.size()==1;
+		boolean test6 = reducedRectangles3.get(0).equals(refRectangle3);
+		boolean test7 = reducedRectangles4.get(0).equals(refRectangle4);
+		boolean test8 = reducedRectangles4.get(1).equals(refRectangle5);
+		
+		
+		assertTrue(test1 && test2 && test3 && test4 && test5 && test6 && test7 && test8);
+		
+	}
+	
 }

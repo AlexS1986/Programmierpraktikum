@@ -1,5 +1,0 @@
-package fernuni.propra.internal_data_model;
-
-public class WallContainerEast extends WallContainerAbstract {
-
-}

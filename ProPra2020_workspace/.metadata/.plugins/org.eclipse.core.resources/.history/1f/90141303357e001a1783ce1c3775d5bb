@@ -1,8 +1,0 @@
-import fernuni.propra.internal_data_model.IRoom;
-
-public class UserDisplayAAS {
-	public void display(IRoom room) {
-		RoomPanel roomPanel = new RoomPanel();
-	}
-
-}

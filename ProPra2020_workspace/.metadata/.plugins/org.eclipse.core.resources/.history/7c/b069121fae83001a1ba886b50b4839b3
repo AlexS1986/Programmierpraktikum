@@ -1,8 +1,0 @@
-package fernuni.propra.algorithm;
-
-public class RuntimeInformation implements IRuntimeInformation {
-	void startOriginalPartialRectanglesFind();
-	void stopTimeOriginalPartialRectanglesFind();
-	long getElapsedTimeOriginalPartialRectanglesFind();
-	void resetTimeOriginalPartialRectanglesFind();
-}

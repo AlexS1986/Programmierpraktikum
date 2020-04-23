@@ -1,11 +1,16 @@
 package fernuni.propra.algorithm;
 
+import java.util.concurrent.TimeUnit;
+
 public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 	private long startTime = -1;
 	private long stopTime = -1;
 	
 	private long candidateSearchStartTime = -1;
 	private long candidateSearchStopTime = -1;
+	
+	private long originalPartialRectanglesFindStartTime = -1;
+	private long originalPartialRectanglesFindStopTime = -1;
 	
 	private long optimizePositionsStartTime = -1;
 	private long optimizePositionsStopTime = -1;
@@ -17,7 +22,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 	@Override
 	public void startTimeCandidateSearch() throws LampsRuntimeException {
 		if (candidateSearchStartTime != -1 && candidateSearchStopTime != -1) {
-			throw new LampsRuntimeException("Reset candidate search timer first");
+			throw new LampsRuntimeException();
 		}
 		candidateSearchStartTime = System.nanoTime();
 		
@@ -26,118 +31,169 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 	@Override
 	public void stopTimeCandidateSearch() throws LampsRuntimeException {
 		if (candidateSearchStartTime == -1 || candidateSearchStopTime != -1) {
-			throw new LampsRuntimeException("Reset candidate search timer first or start candidate search timer before stopping");
+			throw new LampsRuntimeException();
 		}
 		candidateSearchStopTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public long getElapsedTimeCandidateSearch() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getElapsedTimeCandidateSearch() throws LampsRuntimeException {
+		if (candidateSearchStartTime == -1 && candidateSearchStopTime == -1) {
+			throw new LampsRuntimeException();
+		}
+		return candidateSearchStopTime-candidateSearchStartTime;
 	}
 
 	@Override
 	public void resetTimeCandidateSearch() {
-		// TODO Auto-generated method stub
+		candidateSearchStartTime = -1;
+		candidateSearchStopTime = -1;
 		
 	}
 
 	@Override
-	public void startTimeOriginalPartialRectanglesFind() {
-		// TODO Auto-generated method stub
+	public void startTimeOriginalPartialRectanglesFind() throws LampsRuntimeException {
+		if (originalPartialRectanglesFindStartTime != -1 && originalPartialRectanglesFindStopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		originalPartialRectanglesFindStartTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public void stopTimeOriginalPartialRectanglesFind() {
-		// TODO Auto-generated method stub
+	public void stopTimeOriginalPartialRectanglesFind() throws LampsRuntimeException {
+		if (originalPartialRectanglesFindStartTime == -1 || originalPartialRectanglesFindStopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		candidateSearchStopTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public long getElapsedTimeOriginalPartialRectanglesFind() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getElapsedTimeOriginalPartialRectanglesFind() throws LampsRuntimeException {
+		if (originalPartialRectanglesFindStartTime == -1 && originalPartialRectanglesFindStopTime == -1) {
+			throw new LampsRuntimeException();
+		}
+		return originalPartialRectanglesFindStopTime-originalPartialRectanglesFindStartTime;
 	}
 
 	@Override
 	public void resetTimeOriginalPartialRectanglesFind() {
-		// TODO Auto-generated method stub
+		originalPartialRectanglesFindStartTime = -1;
+		originalPartialRectanglesFindStopTime = -1;	
+	}
+
+	@Override
+	public void startTimeOptimizePositions() throws LampsRuntimeException {
+		if (optimizePositionsStartTime != -1 && optimizePositionsStopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		optimizePositionsStartTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public void startTimeOptimizePositions() {
-		// TODO Auto-generated method stub
+	public void stopTimeOptimizePositions() throws LampsRuntimeException {
+		if (optimizePositionsStartTime == -1 || optimizePositionsStopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		optimizePositionsStopTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public void stopTimeOptimizePositions() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public long getElapsedTimeOptimizePositions() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getElapsedTimeOptimizePositions() throws LampsRuntimeException {
+		if (optimizePositionsStartTime == -1 && optimizePositionsStopTime == -1) {
+			throw new LampsRuntimeException();
+		}
+		return optimizePositionsStopTime-optimizePositionsStartTime;
 	}
 
 	@Override
 	public void resetTimeOptimizePositions() {
-		// TODO Auto-generated method stub
+		optimizePositionsStartTime = -1;
+		optimizePositionsStopTime = -1;
 		
 	}
 
 	@Override
-	public void startTimeIlluminationTest() {
-		// TODO Auto-generated method stub
+	public void startTimeIlluminationTest() throws LampsRuntimeException {
+		if (illuminationTestStartTime != -1 && illuminationTestStopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		illuminationTestStartTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public void stopTimeIlluminationTest() {
-		// TODO Auto-generated method stub
+	public void stopTimeIlluminationTest() throws LampsRuntimeException {
+		if (illuminationTestStartTime == -1 || illuminationTestStopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		illuminationTestStopTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public long getElapsedTimeIlluminationTest() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getElapsedTimeIlluminationTest() throws LampsRuntimeException {
+		if (illuminationTestStartTime == -1 && illuminationTestStopTime == -1) {
+			throw new LampsRuntimeException();
+		}
+		return illuminationTestStopTime-illuminationTestStopTime;
 	}
 
 	@Override
 	public void resetTimeIlluminationTest() {
-		// TODO Auto-generated method stub
+		illuminationTestStartTime = -1;
+		illuminationTestStopTime = -1;
 		
 	}
 
 	@Override
-	public void startTime() {
-		// TODO Auto-generated method stub
+	public void startTime() throws LampsRuntimeException {
+		if (startTime != -1 && stopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		startTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public void stopTime() {
-		// TODO Auto-generated method stub
+	public void stopTime() throws LampsRuntimeException {
+		if (startTime == -1 || stopTime != -1) {
+			throw new LampsRuntimeException();
+		}
+		stopTime = System.nanoTime();
 		
 	}
 
 	@Override
-	public long getElapsedTime() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getElapsedTime() throws LampsRuntimeException {
+		if (startTime == -1 && stopTime == -1) {
+			throw new LampsRuntimeException();
+		}
+		return stopTime-startTime;
 	}
 
 	@Override
 	public void resetTime() {
-		// TODO Auto-generated method stub
+		startTime = -1;
+		stopTime = -1;
 		
+	}
+	
+	@Override
+	public String toString() {
+		long elapsedTimeSeconds = -1;
+		try {
+			elapsedTimeSeconds = TimeUnit.NANOSECONDS.toSeconds(getElapsedTime());
+		} catch (LampsRuntimeException e) {
+			return "No time intervall recorded!";
+		}
+		String outString = "Elapsed time in seconds: ";
+		outString = outString + String.valueOf(elapsedTimeSeconds);
+		return outString;
 	}
 
 

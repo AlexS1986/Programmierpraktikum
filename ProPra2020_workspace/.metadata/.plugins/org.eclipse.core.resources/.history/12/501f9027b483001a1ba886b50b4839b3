@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+public interface IRuntimeReader {
+	long getElapsedTimeCandidateSearch() throws LampsRuntimeException;
+	long getElapsedTimeOptimizePositions();
+	long getElapsedTimeOriginalPartialRectanglesFind();
+	long getElapsedTime();
+	long getElapsedTimeIlluminationTest();
+}

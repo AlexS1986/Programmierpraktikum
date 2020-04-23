@@ -1,7 +1,7 @@
 package fernuni.propra.algorithm;
 
 public interface IRuntimeIlluminationTester extends IRuntimeOriginalPartialRectanglesFinder{
-	void startTimeIlluminationTest();
-	void stopTimeIlluminationTest();
+	void startTimeIlluminationTest() throws LampsRuntimeException;
+	void stopTimeIlluminationTest() throws LampsRuntimeException;
 	void resetTimeIlluminationTest();
 }

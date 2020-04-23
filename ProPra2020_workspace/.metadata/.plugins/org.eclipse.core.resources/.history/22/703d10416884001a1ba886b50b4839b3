@@ -1,0 +1,24 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+public  class ValidateK {
+	
+	boolean validate(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws ValidateKException {
+		try {
+			boolean isIlluminated = AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester().testIfRoomIsIlluminated(room, runtimeInfo);
+		} catch (IlluminationTesterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester().testIfRoomIsIlluminated(room, runtimeInfo);
+	}
+	
+	
+	void abort() {
+		
+	}
+
+}

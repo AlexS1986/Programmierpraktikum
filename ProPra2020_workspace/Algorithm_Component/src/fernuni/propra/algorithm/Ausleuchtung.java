@@ -1,5 +1,9 @@
 package fernuni.propra.algorithm;
 
+import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
+import fernuni.propra.file_processing.UserReadInputWriteOutputException;
+import fernuni.propra.internal_data_model.IRoom;
+
 /**
  * Diese Klasse wird als API (Application Programming INteraface) verwendet. Das
  * bedeutet, dass diese Klasse als Bibliothek für andere Applikationen verwendet
@@ -19,8 +23,23 @@ public class Ausleuchtung implements IAusleuchtung {
 	 */
 	@Override
 	public boolean validateSolution(String xmlFile) {
-		// TODO Logik implementieren
-		return false;
+		UserReadInputWriteOutputAAS userReadWriteAAS = new UserReadInputWriteOutputAAS(xmlFile);
+		
+		try {
+			IRoom room = userReadWriteAAS.readInput();
+			UserValidateAAS userValidateAAS = new UserValidateAAS();
+			boolean isIlluminated = userValidateAAS.validate(room);
+			return isIlluminated;
+		} catch (UserReadInputWriteOutputException e) {
+			// TODO Fehlermeldung auf Konsole ausgeben?
+			//e.printStackTrace();
+			return false;
+		} catch (UserValidateAASException e) {
+			// TODO Fehlermeldung auf Konsole ausgeben?
+			//e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	/**
@@ -31,8 +50,23 @@ public class Ausleuchtung implements IAusleuchtung {
 	 */
 	@Override
 	public int solve(String xmlFile, int timeLimit) {
-		// TODO Logik implementieren
-		return 0;
+		UserReadInputWriteOutputAAS userReadWriteAAS = new UserReadInputWriteOutputAAS(xmlFile);
+		
+		try {
+			IRoom room = userReadWriteAAS.readInput();
+			UserSolveAAS userSolveAAS  = new UserSolveAAS();
+			int numberOfLampsBestSolution = userSolveAAS.solve(room, timeLimit);
+			return numberOfLampsBestSolution;
+		} catch (UserReadInputWriteOutputException e) {
+			// TODO Fehlermeldung auf Konsole ausgeben?
+			//e.printStackTrace();
+			return 0;
+		} catch (UserSolveAASException e) {
+			// TODO Fehlermeldung auf Konsole ausgeben?
+			//e.printStackTrace();
+			return 0;
+		} 
+		
 	}
 
 }

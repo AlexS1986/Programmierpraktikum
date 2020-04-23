@@ -115,6 +115,12 @@ public class PositionOptimizerTest {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public void replaceLamps(List<Lamp> lamps) {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		
 		

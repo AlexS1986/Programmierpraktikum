@@ -161,5 +161,12 @@ public class Room implements IRoom {
 		double crossProduct = dx1*dy2 - dx2*dy1;
 		return crossProduct > 0;
 	}
+
+	@Override
+	public void replaceLamps(List<Lamp> lamps) {
+		if (lamps != null) {
+			this.lamps = lamps;
+		}	
+	}
 			
 }

@@ -7,9 +7,9 @@ public class UserValidateAAS {
 	
 	public boolean validate(IRoom room) throws UserValidateAASException{
 		IRuntimeIlluminationTester runtimeInfo = new RuntimeInformation();
-		try {
+		try {			
 			return validateK.validate(room, runtimeInfo);
-		} catch (IlluminationTesterException e) {
+		} catch (ValidateKException e) {
 			throw new UserValidateAASException(e);
 		}
 	}

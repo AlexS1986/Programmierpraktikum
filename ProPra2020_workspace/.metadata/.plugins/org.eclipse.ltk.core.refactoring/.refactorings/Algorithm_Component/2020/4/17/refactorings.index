@@ -2,3 +2,7 @@
 1587378042179	Rename local variable 'candidates'
 1587381073400	Rename field 'currentSolution'
 1587384270844	Move compilation unit
+1587471940322	Move compilation unit
+1587474415553	Rename method 'testComputationFinished'
+1587541010017	Rename local variable 'numberOfLamps'
+1587541333503	Move compilation unit

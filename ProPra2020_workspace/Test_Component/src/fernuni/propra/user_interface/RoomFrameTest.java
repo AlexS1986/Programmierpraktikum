@@ -131,6 +131,12 @@ public class RoomFrameTest {
 			public String getID() {
 				return "MockRoom";
 			}
+
+			@Override
+			public void replaceLamps(List<Lamp> lamps) {
+				// TODO Auto-generated method stub
+				
+			}
 			
 		};
 		

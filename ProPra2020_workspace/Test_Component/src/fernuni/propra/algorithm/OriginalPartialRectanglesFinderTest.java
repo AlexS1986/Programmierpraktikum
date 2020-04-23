@@ -117,6 +117,12 @@ public class OriginalPartialRectanglesFinderTest {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public void replaceLamps(List<Lamp> lamps) {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		
 		pc1 = new Point(1,-1);

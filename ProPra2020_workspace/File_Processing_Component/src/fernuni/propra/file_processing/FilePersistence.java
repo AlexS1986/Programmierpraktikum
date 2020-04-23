@@ -36,6 +36,7 @@ import org.jdom2.output.XMLOutputter;
 class FilePersistence implements IPersistence {
     private static final String DTD = System.getProperty("user.dir")+"/../File_Processing_Component/Model/DataModel.dtd";    
     
+    //all lamps are turned on initially
 	@Override
 	public IRoom readInput(String xmlFilePath) throws PersistenceException {	
 		Document document = null;
@@ -102,81 +103,71 @@ class FilePersistence implements IPersistence {
 	
 	@Override
 	public void writeOutput(IRoom room, String xmlFile) throws PersistenceException {
-		Document outDocument = new Document();
-		
-		Element raumNode = new Element("Raum");
-		outDocument.addContent(raumNode);
-		
-		Element ID = new Element("ID");
-		ID.addContent(room.getID());
-		raumNode.addContent(ID);
-		
-		Element cornersNode = new Element("ecken");
-		Iterator<Point> cornersOfRoomIterator = room.getCorners();
-		while(cornersOfRoomIterator.hasNext()) {
-			Point corner = cornersOfRoomIterator.next();
-			Element cornerNode = new Element("Ecke");
-			Element xNode = new Element("x");
-			Element yNode = new Element("y");
-			xNode.addContent(String.valueOf(corner.getX()));
-			yNode.addContent(String.valueOf(corner.getY()));
-			cornerNode.addContent(xNode);
-			cornerNode.addContent(yNode);
-			cornersNode.addContent(cornerNode);
-		}
-		raumNode.addContent(cornersNode);
-		
-		Iterator<Lamp> lampIterator = room.getLamps();
-		if (lampIterator.hasNext()) {
-			Element lampsNode = new Element("lampen");
-			while(lampIterator.hasNext()) {
-				Lamp lamp = lampIterator.next();
-				Element lampNode = new Element("Lampe");
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(xmlFile);
+			
+			Document outDocument = new Document();
+			
+			Element raumNode = new Element("Raum");
+			outDocument.addContent(raumNode);
+			
+			Element ID = new Element("ID");
+			ID.addContent(room.getID());
+			raumNode.addContent(ID);
+			
+			Element cornersNode = new Element("ecken");
+			Iterator<Point> cornersOfRoomIterator = room.getCorners();
+			while(cornersOfRoomIterator.hasNext()) {
+				Point corner = cornersOfRoomIterator.next();
+				Element cornerNode = new Element("Ecke");
 				Element xNode = new Element("x");
 				Element yNode = new Element("y");
-				xNode.addContent(String.valueOf(lamp.getX()));
-				yNode.addContent(String.valueOf(lamp.getY()));
-				lampNode.addContent(xNode);
-				lampNode.addContent(yNode);
-				lampsNode.addContent(lampNode);
+				xNode.addContent(String.valueOf(corner.getX()));
+				yNode.addContent(String.valueOf(corner.getY()));
+				cornerNode.addContent(xNode);
+				cornerNode.addContent(yNode);
+				cornersNode.addContent(cornerNode);
 			}
-			raumNode.addContent(lampsNode);
+			raumNode.addContent(cornersNode);
+			
+			Iterator<Lamp> lampIterator = room.getLamps();
+			if (lampIterator.hasNext()) {
+				Element lampsNode = new Element("lampen");
+				while(lampIterator.hasNext()) {
+					Lamp lamp = lampIterator.next();
+					Element lampNode = new Element("Lampe");
+					Element xNode = new Element("x");
+					Element yNode = new Element("y");
+					xNode.addContent(String.valueOf(lamp.getX()));
+					yNode.addContent(String.valueOf(lamp.getY()));
+					lampNode.addContent(xNode);
+					lampNode.addContent(yNode);
+					lampsNode.addContent(lampNode);
+				}
+				raumNode.addContent(lampsNode);
+			}
+			
+			XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+			try {
+				xmlOutputter.output(outDocument, fos);
+			} catch (IOException e) {
+				throw new PersistenceException(e);
+			}
+			
+			
+		} catch(IOException ioe) {
+			throw new PersistenceException(ioe);
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch(IOException e) {
+					throw new PersistenceException(e);
+				}
+			}
 		}
 		
-		XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-		try {
-			xmlOutputter.output(outDocument, new FileOutputStream(xmlFile));
-		} catch (IOException e) {
-			throw new PersistenceException(e);
-		}
-		// TODO Auto-generated method stub
-		
-		//System.out.println("TEST");
-		//System.out.println(sb.toString());
-		
-		
-		//document = builder.build(new StringReader(sb.toString()));
-		//document = (Document) builder.build(xmlFile);
-		//String folder = System.getProperty("user.dir")+"/../File_Processing_Component/Model/";
-		//System.out.println(readDTDFile());
-		//if (document.getDocType() == null) {
-			//System.out.println("kein doctype vorhanden");
-			
-			//DocType dt = new DocType("Raum", folder+"DataModel.dtd");
-			
-			//document.setDocType(dt);
-			
-	        //XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-	        //output xml to console for debugging
-	        //xmlOutputter.output(doc, System.out);
-	        //File outfile = new File("~/Desktop/test");
-	        //xmlOutputter.output(document, new FileOutputStream("/Users/alex/Desktop/test"));
-		//}
-		
-		//Element rootNode = document.getRootElement();
-		//System.out.println(rootNode.toString());
-		
-
 	}
 	
 	
@@ -188,6 +179,7 @@ class FilePersistence implements IPersistence {
 			for (Element lampNode: lampNodes) {
 				Lamp tmpLamp = new Lamp(Double.parseDouble(lampNode.getChildText("x")), Double.parseDouble(lampNode.getChildText("y")));
 				if (tmpLamp.isInsidePolygon(walls)) {
+					//tmpLamp.turnOn();
 					lamps.add(tmpLamp);
 				} else {
 					throw new IOException("Not all lamps are actually inside the room. Please provide a valid room layout");

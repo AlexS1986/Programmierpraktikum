@@ -1,0 +1,25 @@
+package fernuni.propra.main;
+
+import java.util.HashSet;
+
+public class ParameterSet {
+	private String runParameter;
+	private String inputFile;
+	private int timeLimit;
+	private static String[] validRunParameters = {"s","sd","v","vd", "d"};
+	
+	
+	public ParameterSet() {
+		
+	}
+	
+	void setRunParameter() {
+		
+	}
+	
+	private boolean isValidRunParameter(String runParameter) {
+		boolean isValid = false;
+		
+	}
+
+}

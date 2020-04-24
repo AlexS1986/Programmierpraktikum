@@ -1,0 +1,101 @@
+package fernuni.propra.main;
+
+import java.util.StringTokenizer;
+
+/**
+ * Haupteinstiegspunkt der Anwendung.
+ *
+ * In der Main-Komponente m&uumlssen unter anderem die Eingabeparameter verarbeitet werden.</br>
+ * 
+ * f&uumlr den Ablaufparameter "r" wird folgende Festlegung getroffen:
+ * <ul>
+ * <li>"s" (solve): f&uumlr die durch die XML-Datei beschriebene Probleminstanz wird eine L&oumlsung ermittelt. Die Positionen der Lampen werden in der angegebenen XML-Datei gespeichert. Wenn in der XML-Datei bereits eine L&oumlsung enthalten ist, so ist diese zu &uumlberschreiben.</li>
+ * <li>"sd" (solve & display): wie "s", nur dass der Raum sowie die ermittelten Positionen der Lampen zus&aumltzlich in der grafischen Oberfl&aumlche gezeigt werden.</li>
+ * <li>"v" (validate): durch diese Option wird gepr&uumlft, ob der in der angegebenen XML-Datei enthaltene Raum durch die ebenso dort angegebenen Lampen vollst&aumlndig ausgeleuchtet ist. Das Ergebnis der Pr&uumlfung sowie die Anzahl und Positionen der Lampen werden ausgegeben. Falls die angegebene XML-Datei keinen zul&aumlssigen Raum enth&aumllt, wird eine Fehlermeldung ausgegeben. Die Ausgabe erfolgt in der Kommandozeile.</li>
+ * <li>"vd" (validate & display): wie "v", nur dass der Raum und die Lampen nach der Validierung zus&aumltzlich in der grafischen Oberfl&aumlche angezeigt werden.</li>
+ * <li>"d" (display): der in der XML-Datei enthaltene Raum und die Lampen werden in der grafischen Oberfl&aumlche angezeigt. Falls die angegebene XML-Datei keinen zul&aumlssigen Raum enth&aumllt, wird eine Fehlermeldung auf der Kommandozeile ausgegeben.</li>
+ * </ul>
+ * Der Eingabedateiparameter "if" ist ein String, der den Pfad der Eingabedatei beinhaltet.</br>
+ * 
+ * Der Parameter f&uumlr ein Zeitlimit "l" ist eine positive nat&uumlrliche Zahl, welche die maximale Rechenzeit in Sekunden angibt.
+ */
+public class Main {
+
+	/**
+	 * Haupteinstiegsfunktion
+	 */
+	private static final String generalHelpMessage = "Java -jar ProPra.jar r=runParameter if=\"pathToFile\" l=timeLimit \n \n "
+			+ "The runParameter specified by r =runParameter is mandatory and must be one of s,sd,v,vd or d .\n "
+			+ "The input file parameter is also mandatory. pathToFile specifies the full path to a valid input file. The \" before and after pathToFile are mandatory\n"
+			+ "The time limit parameter is optional. For runParameter = s or runParameter = sd. This parameter specifies how long the solution algorithm searches for an optimal lamp layout. Time limit must be a positive integer number.";
+	
+	
+	
+	public static void main(String[] args) {
+		ParameterSet parameterSet = new ParameterSet();
+		try {
+			for (String paramString : args) {
+				StringTokenizer st = new StringTokenizer(paramString, "=");
+				if(st.countTokens()==2) {
+					String parameterKey = st.nextToken().trim();
+					String paramterValue = st.nextToken().trim();
+					switch(parameterKey) {	
+					case "r":
+						parameterSet.setRunParameter(paramterValue);
+						break;
+					case "if":
+						parameterSet.setInputFile(paramterValue);
+						break;
+					case "l":
+						parameterSet.setTimeLimit(Integer.parseInt(paramterValue));
+						break;
+					default:
+						throw new GeneralException();
+						
+					}
+					
+				} else {
+					throw new GeneralException();
+				}
+			}
+			
+			if (parameterSet.isValidParameterSet() ) {
+				switch(parameterSet.getRunParameter()) {
+				case "s":
+					break;
+				case "sd":
+					break;
+				case "v":
+					break;
+				case "vd":
+				case "d":
+				default:
+					
+				}
+				
+				
+			} else {
+				throw new GeneralException();
+			}
+			
+			
+			
+			
+		}catch (ParameterSetException e) {
+			printMessageToConsole(e.getMessage());
+			System.exit(0);
+		} catch(NumberFormatException nfe) {
+			printMessageToConsole("The timeLimit parameter specified by l=timeLimit is not an integer number");
+		} catch(GeneralException ge) {
+			printMessageToConsole(generalHelpMessage);
+			System.exit(0); 
+		}
+		
+
+		
+	}
+	
+	private static void printMessageToConsole(String message) {
+		System.out.println(message);
+	}
+}

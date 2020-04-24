@@ -1,0 +1,11 @@
+package fernuni.propra.main;
+
+public class ParameterSet {
+	private String runParameter;
+	private String inputFile;
+	
+	public ParameterSet() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

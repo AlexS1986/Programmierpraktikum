@@ -1,0 +1,9 @@
+package fernuni.propra.main;
+
+public class ParameterSet {
+
+	public ParameterSet() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

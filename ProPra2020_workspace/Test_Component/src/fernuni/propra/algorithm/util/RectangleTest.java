@@ -36,18 +36,21 @@ public class RectangleTest {
 		Rectangle rec5 = new Rectangle(p3, p7);
 		Rectangle rec8 = new Rectangle(p10, p9);
 		Rectangle rec9 = new Rectangle(p1, new Point(0.5, 1.0));
+		Rectangle rec11 = new Rectangle(p2, new Point(2*p2.getX(), 1.0));
 		
 		//Act
 		Rectangle rec4 = rec.overlap(rec2);
 		Rectangle rec6 = rec.overlap(rec5);
 		Rectangle rec7 = rec.overlap(rec);
 		Rectangle rec10 = rec.overlap(rec8);
+		Rectangle rec12 = rec.overlap(rec11);
 		
 		
 		assertTrue(rec3.equals(rec4));
 		assertTrue(rec6 == null);
 		assertTrue(rec7.equals(rec));
 		assertTrue(rec9.equals(rec10));
+		assertTrue(rec12 == null);
 		
 	}
 

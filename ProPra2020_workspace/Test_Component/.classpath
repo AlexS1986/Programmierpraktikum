@@ -10,5 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/File_Processing_Component"/>
 	<classpathentry kind="src" path="/Algorithm_Component"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/User_Interface_Component"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Main_Component"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

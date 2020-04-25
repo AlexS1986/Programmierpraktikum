@@ -177,7 +177,7 @@ class FilePersistence implements IPersistence {
 		if(lampsNode != null) { // contains lamps
 			List<Element> lampNodes = lampsNode.getChildren("Lampe");	
 			for (Element lampNode: lampNodes) {
-				Lamp tmpLamp = new Lamp(Double.parseDouble(lampNode.getChildText("x")), Double.parseDouble(lampNode.getChildText("y")));
+				Lamp tmpLamp = new Lamp(Double.parseDouble(lampNode.getChildText("x")), Double.parseDouble(lampNode.getChildText("y")));				
 				if (tmpLamp.isInsidePolygon(walls)) {
 					//tmpLamp.turnOn();
 					lamps.add(tmpLamp);
@@ -212,7 +212,7 @@ class FilePersistence implements IPersistence {
 	
 	private static void checkFileAvailability(File xmlFile) throws FileNotFoundException {
 		if (!xmlFile.exists()) {
-			throw new FileNotFoundException("File not found. Enter a valid file path.");
+			throw new FileNotFoundException("File not found at \"" +  xmlFile + "\". Enter a valid file path.");
 		}
 		if(!xmlFile.isFile()) {
 			throw new FileNotFoundException("Path does not point to a file. Enter a valid file path.");

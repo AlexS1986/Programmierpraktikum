@@ -1,5 +1,6 @@
 package fernuni.propra.internal_data_model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Point {
@@ -62,25 +63,50 @@ public class Point {
 	}
 	
 	public boolean isInsidePolygon(List<LineSegment> lineSegments) {
-		// pre lineSegment must be a valid polygonial
-		LineSegment testLineSeg = new LineSegment(this, new Point(INF, getY()));
+		ArrayList<LineSegment> arrayLinesSegments = new ArrayList<LineSegment>(lineSegments);
 		
-		int intersectionCount = 0;
+		// pre lineSegment must be a valid polygonial
+		LineSegment testLineSegX = new LineSegment(this, new Point(INF, getY()));
+		LineSegment testLineSegY = new LineSegment(this, new Point(INF, getY()));
+		
+		int intersectionCountX = 0;
+		int intersectionCountY = 0;
 		for (LineSegment lineSegment : lineSegments) {
 			try {
-				testLineSeg.intersectionWithLinesegment(lineSegment);
+				testLineSegX.intersectionWithLinesegment(lineSegment);
 				if (isOnLineSegment(lineSegment.getP1(), lineSegment.getP2())) {
 					return true; // if point is on wall -> point is in polygonial
 				} else {
-					intersectionCount++;
+					intersectionCountX++;
 				}
+				/*if (lineSegment.getP1().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2()) ||
+					lineSegment.getP2().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2())) {
+					intersectedLineSegmentHasEndPointOnTestLineSegCount ++;
+				} */
 			} catch (LineSegmentException e) {
 			}
+			
+			try {
+				testLineSegY.intersectionWithLinesegment(lineSegment);
+				if (isOnLineSegment(lineSegment.getP1(), lineSegment.getP2())) {
+					return true; // if point is on wall -> point is in polygonial
+				} else {
+					intersectionCountY++;
+				}
+				/*if (lineSegment.getP1().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2()) ||
+					lineSegment.getP2().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2())) {
+					intersectedLineSegmentHasEndPointOnTestLineSegCount ++;
+				} */
+			} catch (LineSegmentException e) {
+			}
+			
+			
 		}
-		if ((intersectionCount % 2) == 0) { // if number of intersections is odd -> point is in polygonial
-			return false;
-		} else {
+
+		if ((intersectionCountX % 2) != 0 || (intersectionCountY % 2) != 0) { // if number of intersections is odd -> point is in polygonial
 			return true;
+		} else {
+			return false;
 		}	
 	}
 	

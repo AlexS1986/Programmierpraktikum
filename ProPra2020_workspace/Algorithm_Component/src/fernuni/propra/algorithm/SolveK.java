@@ -8,11 +8,12 @@ import fernuni.propra.internal_data_model.Lamp;
 // computes best solution in given time limit and replaces lamps with found best solution in room
 public class SolveK extends Thread{
 	private IRuntimeInformation runTimeInformation;
-	private volatile IRoom room;
+	private IRoom room;
 	private ICandidateSearcher candidateSearcher;
 	private IPositionOptimizer positionOptimizer;
 	private boolean computationFinished;
-	List<Lamp> bestSolution;
+	volatile List<Lamp> bestSolution;
+	private volatile int numberLampsOnBestSolution;
 	private volatile SolveKException exception = null; // to be communicated to main thread
 	
 	public SolveK(IRoom room, IRuntimeInformation runTimeInformation) {
@@ -51,6 +52,7 @@ public class SolveK extends Thread{
 		
 		
 		bestSolution = positionOptimizer.getCurrentBestSolution();
+		numberLampsOnBestSolution = positionOptimizer.getNumberOfOnLampsBestSolution();
 		if(bestSolution != null) { // null if interrupted or exception at candidate searcher -> no solution available
 			room.replaceLamps(bestSolution);
 		} else {
@@ -61,10 +63,6 @@ public class SolveK extends Thread{
 		
 	}
 	
-	//public synchronized boolean getComputationFinished() {
-		
-	//	return computationFinished;
-	//}
 	
 	private synchronized void setComputationFinished(boolean computationFinished) {
 		this.computationFinished = computationFinished;
@@ -76,6 +74,10 @@ public class SolveK extends Thread{
 			wait();
 		}
 		return exception;
+	}
+	
+	public synchronized int getNumberOfOnLampsBestSolution() {
+		return numberLampsOnBestSolution;
 	}
 	
 	

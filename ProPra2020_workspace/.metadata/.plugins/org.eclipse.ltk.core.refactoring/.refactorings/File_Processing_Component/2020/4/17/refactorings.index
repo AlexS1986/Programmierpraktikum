@@ -1,1 +1,7 @@
 1587374440213	Rename field 'tags'
+1587815628224	Rename method 'getNumberOfLamps'
+1587815675634	Rename method 'getNumberOfOnLamps'
+1587819754901	Rename local variable 'intersectedLineSegmentHasEndPointOnTestLineSeq'
+1587821342419	Rename local variable 'intersectionCount'
+1587821373646	Rename local variable 'intersectionCountXP'
+1587822228887	Rename local variable 'testLineSeg'

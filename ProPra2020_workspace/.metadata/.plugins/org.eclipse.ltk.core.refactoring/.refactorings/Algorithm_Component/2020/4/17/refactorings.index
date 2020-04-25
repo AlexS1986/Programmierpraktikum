@@ -6,3 +6,4 @@
 1587474415553	Rename method 'testComputationFinished'
 1587541010017	Rename local variable 'numberOfLamps'
 1587541333503	Move compilation unit
+1587810073367	Rename field 'oppositeWallTOL'

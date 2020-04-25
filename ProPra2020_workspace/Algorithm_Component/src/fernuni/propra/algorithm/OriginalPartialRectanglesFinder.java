@@ -11,6 +11,7 @@ import fernuni.propra.internal_data_model.Wall;
 
 public class OriginalPartialRectanglesFinder implements IOriginalPartialRectanglesFinder{
 	
+	private static double findWallTOL = 0.001;
 	private HashSet<Integer> allTags = new HashSet<Integer>();
 	private WallContainerEast wallContainerEast  = new WallContainerEast();
 	private WallContainerNorth wallContainerNorth = new WallContainerNorth();
@@ -74,15 +75,15 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 			double westXLimit = northWall.getP2().getX();
 			double eastXLimit = northWall.getP1().getX();
 			
-			Wall nextWestWall = wallContainerWest.getNearestWall(yNorth, 
-					yNorth, westXLimit);
+			Wall nextWestWall = wallContainerWest.getNearestWall(yNorth - findWallTOL, 
+					yNorth - findWallTOL, westXLimit);
 			
-			Wall nextEastWall = wallContainerEast.getNearestWall(yNorth, yNorth, eastXLimit);
+			Wall nextEastWall = wallContainerEast.getNearestWall(yNorth - findWallTOL, yNorth - findWallTOL, eastXLimit);
 			
 			double xWest = nextWestWall.getP1().getX();
 			double xEast = nextEastWall.getP1().getX();
 			
-			Wall nextSouthWall = wallContainerSouth.getNearestWall(xWest, xEast, yNorth);
+			Wall nextSouthWall = wallContainerSouth.getNearestWall(xWest+findWallTOL, xEast-findWallTOL, yNorth);
 			double ySouth = nextSouthWall.getP1().getY();
 			
 			
@@ -94,13 +95,13 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 			double southYLimit = eastWall.getP1().getY();
 			double northYLimit = eastWall.getP2().getY();
 			
-			Wall nextSouthWall = wallContainerSouth.getNearestWall(xEast, xEast, southYLimit);
-			Wall nextNorthWall = wallContainerNorth.getNearestWall(xEast, xEast, northYLimit);
+			Wall nextSouthWall = wallContainerSouth.getNearestWall(xEast- findWallTOL, xEast - findWallTOL, southYLimit);
+			Wall nextNorthWall = wallContainerNorth.getNearestWall(xEast- findWallTOL, xEast - findWallTOL, northYLimit);
 			
 			double ySouth = nextSouthWall.getP1().getY();
 			double yNorth = nextNorthWall.getP1().getY();
 			
-			Wall nextWestWall = wallContainerWest.getNearestWall(ySouth, yNorth, xEast);
+			Wall nextWestWall = wallContainerWest.getNearestWall(ySouth+findWallTOL, yNorth-findWallTOL, xEast);
 			double xWest = nextWestWall.getP1().getX();
 			
 			rectangleNo = addOriginalPartialRectangle(rectangleNo, yNorth, xWest, xEast, ySouth);
@@ -112,13 +113,13 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 			double southYLimit = westWall.getP2().getY();
 			double northYLimit = westWall.getP1().getY();
 			
-			Wall nextSouthWall = wallContainerSouth.getNearestWall(xWest, xWest, southYLimit);
-			Wall nextNorthWall = wallContainerNorth.getNearestWall(xWest, xWest, northYLimit);
+			Wall nextSouthWall = wallContainerSouth.getNearestWall(xWest + findWallTOL, xWest + findWallTOL, southYLimit);
+			Wall nextNorthWall = wallContainerNorth.getNearestWall(xWest + findWallTOL, xWest + findWallTOL, northYLimit);
 			
 			double ySouth = nextSouthWall.getP1().getY();
 			double yNorth = nextNorthWall.getP1().getY();
 			
-			Wall nextEastWall = wallContainerEast.getNearestWall(ySouth, yNorth, xWest);
+			Wall nextEastWall = wallContainerEast.getNearestWall(ySouth+findWallTOL, yNorth-findWallTOL, xWest);
 			double xEast = nextEastWall.getP1().getX();
 			
 			rectangleNo = addOriginalPartialRectangle(rectangleNo, yNorth, xWest, xEast, ySouth);
@@ -129,13 +130,13 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 			double eastXLimit = southWall.getP2().getX();
 			double westXLimit = southWall.getP1().getX();
 			
-			Wall nextEastWall = wallContainerEast.getNearestWall(ySouth, ySouth, eastXLimit);
-			Wall nextWestWall = wallContainerWest.getNearestWall(ySouth, ySouth, westXLimit);
+			Wall nextEastWall = wallContainerEast.getNearestWall(ySouth + findWallTOL, ySouth + findWallTOL, eastXLimit);
+			Wall nextWestWall = wallContainerWest.getNearestWall(ySouth + findWallTOL, ySouth + findWallTOL, westXLimit);
 			
 			double xEast = nextEastWall.getP1().getX();
 			double xWest = nextWestWall.getP1().getX();
 			
-			Wall nextNorthWall = wallContainerNorth.getNearestWall(xWest, xEast, ySouth);
+			Wall nextNorthWall = wallContainerNorth.getNearestWall(xWest+findWallTOL, xEast-findWallTOL, ySouth);
 			double yNorth = nextNorthWall.getP1().getY();
 			
 			rectangleNo = addOriginalPartialRectangle(rectangleNo, yNorth, xWest, xEast, ySouth);

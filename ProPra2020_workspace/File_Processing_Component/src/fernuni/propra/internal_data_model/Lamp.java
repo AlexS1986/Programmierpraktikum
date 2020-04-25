@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Lamp extends Point{
-	private boolean on;
+	private volatile boolean on;
 	HashSet<Integer> tagsOfCoveredRectangles = new HashSet<Integer>();
 	
 	public Lamp(double x, double y) {

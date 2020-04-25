@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="RectangleTest" project="Test_Component" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.algorithm.util.RectangleTest" time="8.175">
+    <testcase name="testOverlap" classname="fernuni.propra.algorithm.util.RectangleTest" time="8.173"/>
+    <testcase name="testGetCenter" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+    <testcase name="testIsEqual" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.001"/>
+    <testcase name="testIsCounterClockWise" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.001"/>
+  </testsuite>
+</testrun>

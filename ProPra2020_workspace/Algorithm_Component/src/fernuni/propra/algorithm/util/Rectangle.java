@@ -6,6 +6,9 @@ public class Rectangle {
 	private Point p1,p2,p3,p4;
 	
 	public Rectangle(Point p1, Point p3) {
+		if(!isValidRectangle(p1, p3)) {
+			throw new IllegalArgumentException("Rectangle not initialized correctly");
+		}
 		this.p1 = p1;
 		this.p2 = new Point(p3.getX(),p1.getY());
 		this.p3 = p3;
@@ -34,12 +37,18 @@ public class Rectangle {
 				Math.max(this.p1.getY(), other.p1.getY()));
 		Point p3 = new Point(Math.min(this.p3.getX(), other.p3.getX()), 
 				Math.min(this.p3.getY(), other.p3.getY()));
-		Rectangle outRectangle = new Rectangle(p1, p3);
-		if(outRectangle.isCounterClockWise()) {
-			return outRectangle;
+		if(isValidRectangle(p1, p3)) {
+			Rectangle outRectangle = new Rectangle(p1, p3);
+			if(outRectangle.isCounterClockWise()) {
+				return outRectangle;
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		}
+		
+
 		
 		/*
 		boolean rectanglesOverlap = (other.p1.isInXRange(p1.getX(), p2.getX()) || 
@@ -88,6 +97,11 @@ public class Rectangle {
 		result = 31 * result + p1.hashCode();
 		result = 31 * result + p3.hashCode();
 		return result;
+	}
+	
+	private static boolean isValidRectangle(Point p1, Point p3) {
+		boolean isValidRectangle = p1.getX()< p3.getX() && p3.getY()> p1.getY();
+		return isValidRectangle;
 	}
 	
 }

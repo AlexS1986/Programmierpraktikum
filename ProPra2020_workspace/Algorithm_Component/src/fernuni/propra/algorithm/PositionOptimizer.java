@@ -50,8 +50,8 @@ public class PositionOptimizer implements IPositionOptimizer{
 	private void searchSolution(ArrayList<Lamp> lamps, int idx, 
 			HashSet<Integer> allTags, int numberLampsOn, IRuntimePositionOptimizer runTimeInformation) {
 		if(illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, runTimeInformation)) { // valid solution found
-			if (numberLampsOn<numberIlluminatedLampsBestSolution) {
-				currentBestSolution = lamps;
+			if (numberLampsOn<=numberIlluminatedLampsBestSolution) {
+				currentBestSolution = deepCopyLamps(lamps);
 				numberIlluminatedLampsBestSolution = numberLampsOn;
 			}
 		} else { // not a valid solution
@@ -102,6 +102,12 @@ public class PositionOptimizer implements IPositionOptimizer{
 		return outLamps;
 		
 	}
+
+	@Override
+	public int getNumberOfOnLampsBestSolution() {
+		return numberIlluminatedLampsBestSolution;
+	}
+	
 	
 	
 

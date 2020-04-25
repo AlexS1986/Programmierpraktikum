@@ -8,7 +8,7 @@ public class ParameterSet {
 	private Integer timeLimit;
 	private static String[] validRunParameters = {"s","sd","v","vd", "d"};
 	private static final String formInputFileParameter = " if=\"pathToFile\"";
-	private static final String formTimeLimitParameter = "l=timeLimit";
+	private static final String formTimeLimitParameter = "l=timeLimit , where timeLimit is a positive Integer number";
 	private static final String formRunParameter = "r=parameter";
 	
 	
@@ -35,10 +35,10 @@ public class ParameterSet {
 		if (this.inputFile != null) {
 			throw new ParameterSetException("Path to input file is already set. Please provide only one input file specification.");
 		} else if (!inputFile.startsWith("\"") || !inputFile.endsWith("\"")) {
-			throw new ParameterSetException("The input file parameter needs to start and end with \'\"\'. "
+			throw new ParameterSetException("The input file parameter needs to start and end with  \" . "
 					+ "Please supply the path to the input file in the form: if=\"pathToFile\"");
 		} else {
-			this.inputFile = inputFile;
+			this.inputFile = inputFile.replace("\"", "");
 			
 		}
 	}
@@ -52,6 +52,14 @@ public class ParameterSet {
 	}
 	
 	boolean isValidParameterSet() throws ParameterSetException {
+		if(runParameter == null) {
+			String message = "No run parameter provided. Please provide a valid run parameter in the form " + formRunParameter+ ", where parameter is one of: ";
+			for (String validParameter : validRunParameters) {
+				message = message + validParameter;
+				message = message + " ";	
+			}
+			throw new ParameterSetException(message);
+		}
 		if (runParameter.equals("v") || runParameter.equals("vd") || runParameter.equals("d")) {
 			if (inputFile != null) {
 				return true;

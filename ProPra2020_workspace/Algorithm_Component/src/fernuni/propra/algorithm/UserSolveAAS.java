@@ -39,7 +39,8 @@ public class UserSolveAAS {
 			throw new UserSolveAASException(solveException);
 		}
 		
-		return room.getNumberOfLamps();
+		int numberOfOnLampsBestSolution = solveControl.getNumberOfOnLampsBestSolution();
+		return numberOfOnLampsBestSolution;
 		
 
 	}

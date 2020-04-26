@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="MainTest" project="Test_Component" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="fernuni.propra.main.MainTest" time="15.18">
-    <testcase name="testMain" classname="fernuni.propra.main.MainTest" time="15.18"/>
-  </testsuite>
-</testrun>

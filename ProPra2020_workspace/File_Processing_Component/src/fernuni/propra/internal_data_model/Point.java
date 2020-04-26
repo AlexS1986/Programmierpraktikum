@@ -66,18 +66,18 @@ public class Point {
 		ArrayList<LineSegment> arrayLinesSegments = new ArrayList<LineSegment>(lineSegments);
 		
 		// pre lineSegment must be a valid polygonial
-		LineSegment testLineSegX = new LineSegment(this, new Point(INF, getY()));
-		LineSegment testLineSegY = new LineSegment(this, new Point(INF, getY()));
+		LineSegment testLineSegXP = new LineSegment(this, new Point(INF, getY()));
+		LineSegment testLineSegYP = new LineSegment(this, new Point(getX(), INF));
 		
-		int intersectionCountX = 0;
-		int intersectionCountY = 0;
+		int intersectionCountXP = 0;
+		int intersectionCountYP = 0;
 		for (LineSegment lineSegment : lineSegments) {
 			try {
-				testLineSegX.intersectionWithLinesegment(lineSegment);
+				testLineSegXP.intersectionWithLinesegment(lineSegment);
 				if (isOnLineSegment(lineSegment.getP1(), lineSegment.getP2())) {
 					return true; // if point is on wall -> point is in polygonial
 				} else {
-					intersectionCountX++;
+					intersectionCountXP++;
 				}
 				/*if (lineSegment.getP1().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2()) ||
 					lineSegment.getP2().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2())) {
@@ -87,11 +87,11 @@ public class Point {
 			}
 			
 			try {
-				testLineSegY.intersectionWithLinesegment(lineSegment);
+				testLineSegYP.intersectionWithLinesegment(lineSegment);
 				if (isOnLineSegment(lineSegment.getP1(), lineSegment.getP2())) {
 					return true; // if point is on wall -> point is in polygonial
 				} else {
-					intersectionCountY++;
+					intersectionCountYP++;
 				}
 				/*if (lineSegment.getP1().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2()) ||
 					lineSegment.getP2().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2())) {
@@ -103,7 +103,7 @@ public class Point {
 			
 		}
 
-		if ((intersectionCountX % 2) != 0 || (intersectionCountY % 2) != 0) { // if number of intersections is odd -> point is in polygonial
+		if ((intersectionCountXP % 2) != 0 || (intersectionCountYP % 2) != 0) { // if number of intersections is odd -> point is in polygonial
 			return true;
 		} else {
 			return false;

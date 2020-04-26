@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+public class CandidateSearcher2 {
+
+	public CandidateSearcher2() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

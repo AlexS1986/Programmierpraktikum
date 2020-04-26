@@ -7,3 +7,10 @@
 1587541010017	Rename local variable 'numberOfLamps'
 1587541333503	Move compilation unit
 1587810073367	Rename field 'oppositeWallTOL'
+1587884553171	Rename local variable 'outRectangles'
+1587884894700	Rename local variable 'rectangleI'
+1587884912833	Rename local variable 'combinedRectangle'
+1587885118284	Rename local variable 'combinedRectangles'
+1587885634401	Rename local variable 'combinedRectanglesWithTag'
+1587885743195	Rename local variable 'combinedRectanglesWithTagLastIteration'
+1587885842932	Rename local variable 'combinedRectanglesWithTag'

@@ -5,3 +5,7 @@
 1587821342419	Rename local variable 'intersectionCount'
 1587821373646	Rename local variable 'intersectionCountXP'
 1587822228887	Rename local variable 'testLineSeg'
+1587828309810	Rename local variable 'intersectionCountX'
+1587828317901	Rename local variable 'intersectionCountY'
+1587828327957	Rename local variable 'testLineSegX'
+1587828337592	Rename local variable 'testLineSegY'

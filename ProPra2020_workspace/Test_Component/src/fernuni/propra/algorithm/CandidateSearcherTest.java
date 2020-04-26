@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fernuni.propra.algorithm.util.Rectangle;
@@ -29,10 +30,10 @@ public class CandidateSearcherTest {
 	private Point p31, p32, p33, p34, p35, p36, p37, p38;
 	private Wall w1, w2,w3,w4;
 	private LinkedList<Point> corners, corners2;
-	List<IRoom> rooms;
+	private static List<IRoom> rooms;
 	
 	@BeforeClass
-	public void setupBC() {
+	public static void setupBC() {
 
 		String[] xmlPathesOK = {"instances/validationInstances/Selbsttest_clockwise.xml", //0
 				"instances/validationInstances/Selbsttest_counterClockwise.xml", //1
@@ -201,7 +202,6 @@ public class CandidateSearcherTest {
 		
 	}
 	
-
 	@Test
 	public void testSearchCandidates() {
 		//Arrange 

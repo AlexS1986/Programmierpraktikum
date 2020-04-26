@@ -409,20 +409,48 @@
       <y>225.0</y>
     </Lampe>
     <Lampe>
+      <x>485.0</x>
+      <y>225.0</y>
+    </Lampe>
+    <Lampe>
+      <x>365.0</x>
+      <y>185.0</y>
+    </Lampe>
+    <Lampe>
+      <x>175.0</x>
+      <y>365.0</y>
+    </Lampe>
+    <Lampe>
       <x>395.0</x>
       <y>365.0</y>
+    </Lampe>
+    <Lampe>
+      <x>390.0</x>
+      <y>300.0</y>
     </Lampe>
     <Lampe>
       <x>325.0</x>
       <y>45.0</y>
     </Lampe>
     <Lampe>
+      <x>215.0</x>
+      <y>300.0</y>
+    </Lampe>
+    <Lampe>
       <x>325.0</x>
       <y>95.0</y>
     </Lampe>
     <Lampe>
-      <x>365.0</x>
-      <y>165.0</y>
+      <x>15.0</x>
+      <y>365.0</y>
+    </Lampe>
+    <Lampe>
+      <x>95.0</x>
+      <y>365.0</y>
+    </Lampe>
+    <Lampe>
+      <x>315.0</x>
+      <y>445.0</y>
     </Lampe>
     <Lampe>
       <x>175.0</x>
@@ -433,11 +461,7 @@
       <y>165.0</y>
     </Lampe>
     <Lampe>
-      <x>15.0</x>
-      <y>365.0</y>
-    </Lampe>
-    <Lampe>
-      <x>365.0</x>
+      <x>215.0</x>
       <y>185.0</y>
     </Lampe>
     <Lampe>
@@ -445,16 +469,8 @@
       <y>445.0</y>
     </Lampe>
     <Lampe>
-      <x>95.0</x>
-      <y>365.0</y>
-    </Lampe>
-    <Lampe>
       <x>135.0</x>
       <y>495.0</y>
-    </Lampe>
-    <Lampe>
-      <x>390.0</x>
-      <y>300.0</y>
     </Lampe>
     <Lampe>
       <x>135.0</x>
@@ -465,20 +481,8 @@
       <y>45.0</y>
     </Lampe>
     <Lampe>
-      <x>485.0</x>
-      <y>225.0</y>
-    </Lampe>
-    <Lampe>
       <x>360.0</x>
       <y>410.0</y>
-    </Lampe>
-    <Lampe>
-      <x>175.0</x>
-      <y>365.0</y>
-    </Lampe>
-    <Lampe>
-      <x>315.0</x>
-      <y>445.0</y>
     </Lampe>
   </lampen>
 </Raum>

@@ -42,10 +42,11 @@ public class CandidateSearcher  implements ICandidateSearcher{
 			
 		} catch (OriginalPartialRectanglesFinderException  e) {
 			throw new CandidateSearcherException(e);
+		} catch (Exception e) { // TODO
+			throw new CandidateSearcherException(e);
 		}
 		
-		return centersOfReducedRectangles;	
-		
+		return centersOfReducedRectangles;		
 	}
 
 	
@@ -53,17 +54,14 @@ public class CandidateSearcher  implements ICandidateSearcher{
 		return new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(room, runtimeCandidateSearcher);
 	}
 
+	
 	List<RectangleWithTag> reduceRectangles(ArrayList<RectangleWithTag> originalRectangles) {
 		
 		// TODO die die im letzten schritt keinen overlap hatten müssen auch nicht mehr angeschaut werden
 		
-		
 		ArrayList<RectangleWithTag> lastIterationRectangles = originalRectangles;
-		
-		
 		boolean combinationsOccured; // to determine to stop further iterations
 		do {
-			
 			combinationsOccured = false;
 			HashSet<RectangleWithTag> currentIterationRectangles = new HashSet<RectangleWithTag>();
 			HashSet<Integer> originalTagsAlreadyCoveredInIteration = new HashSet<Integer>();
@@ -99,17 +97,13 @@ public class CandidateSearcher  implements ICandidateSearcher{
 						}							
 					}
 				}
-				
 				if (!validOverlapFoundForI && !originalTagsAlreadyCoveredInIteration.containsAll(rectangleWithTagI.getCopyOfTags())) { // TODO test for contains necessary? 
 					currentIterationRectangles.add(rectangleWithTagI);
 					originalTagsAlreadyCoveredInIteration.addAll(rectangleWithTagI.getCopyOfTags());
 				}
-			}
-			
+			}		
 			lastIterationRectangles = new ArrayList<RectangleWithTag>(currentIterationRectangles);
-			
 		} while(combinationsOccured);
-		
 		return lastIterationRectangles;
 	}
 		

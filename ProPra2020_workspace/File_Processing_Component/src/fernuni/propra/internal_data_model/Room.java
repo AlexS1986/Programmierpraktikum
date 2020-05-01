@@ -168,5 +168,34 @@ public class Room implements IRoom {
 			this.lamps = lamps;
 		}	
 	}
+
+	@Override
+	public String printLampPositions() {
+		int n = 1;
+		String lineSeparator =  System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder();
+		sb.append("The room contains ");
+		sb.append(String.valueOf(this.lamps.size()));
+		String singPl = lamps.size() == 1 ? " lamp." : " lamps.";
+		sb.append(singPl);
+		sb.append(lineSeparator);
+		sb.append("The lamps are located at:");
+		sb.append(lineSeparator);
+		for (Lamp lamp : lamps) {
+			sb.append("Lamp ");
+			sb.append(String.valueOf(n));
+			sb.append(" located at x=");
+			sb.append(String.valueOf(lamp.getX()));
+			sb.append("  y=");
+			sb.append(String.valueOf(lamp.getY()));
+			sb.append(". The lamp is ");
+			String onOff = lamp.getOn() ? "turned on." : "turned off.";
+			sb.append(onOff);
+			sb.append(lineSeparator);
+			n++;
+		}
+		String outString = sb.toString();
+		return outString;
+	}
 			
 }

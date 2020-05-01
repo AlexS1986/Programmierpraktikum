@@ -1,0 +1,200 @@
+package fernuni.propra.algorithm;
+
+import java.util.concurrent.TimeUnit;
+
+public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
+	private volatile long startTime = -1;
+	private volatile long stopTime = -1;
+	
+	private volatile long candidateSearchStartTime = -1;
+	private volatile long candidateSearchStopTime = -1;
+	
+	private volatile long originalPartialRectanglesFindStartTime = -1;
+	private volatile long originalPartialRectanglesFindStopTime = -1;
+	
+	private volatile long optimizePositionsStartTime = -1;
+	private volatile long optimizePositionsStopTime = -1;
+	
+	private volatile long illuminationTestStartTime = -1;
+	private volatile long illuminationTestStopTime = -1;
+	
+	
+	@Override
+	public void startTimeCandidateSearch() throws RuntimeException {
+		if (candidateSearchStartTime != -1 && candidateSearchStopTime != -1) {
+			throw new RuntimeException();
+		}
+		candidateSearchStartTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public void stopTimeCandidateSearch() throws RuntimeException {
+		if (candidateSearchStartTime == -1 || candidateSearchStopTime != -1) {
+			throw new RuntimeException();
+		}
+		candidateSearchStopTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public long getElapsedTimeCandidateSearch() throws RuntimeException {
+		if (candidateSearchStartTime == -1 && candidateSearchStopTime == -1) {
+			throw new RuntimeException();
+		}
+		return candidateSearchStopTime-candidateSearchStartTime;
+	}
+
+	@Override
+	public void resetTimeCandidateSearch() {
+		candidateSearchStartTime = -1;
+		candidateSearchStopTime = -1;
+		
+	}
+
+	@Override
+	public void startTimeOriginalPartialRectanglesFind() throws RuntimeException {
+		if (originalPartialRectanglesFindStartTime != -1 && originalPartialRectanglesFindStopTime != -1) {
+			throw new RuntimeException();
+		}
+		originalPartialRectanglesFindStartTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public void stopTimeOriginalPartialRectanglesFind() throws RuntimeException {
+		if (originalPartialRectanglesFindStartTime == -1 || originalPartialRectanglesFindStopTime != -1) {
+			throw new RuntimeException();
+		}
+		candidateSearchStopTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public long getElapsedTimeOriginalPartialRectanglesFind() throws RuntimeException {
+		if (originalPartialRectanglesFindStartTime == -1 && originalPartialRectanglesFindStopTime == -1) {
+			throw new RuntimeException();
+		}
+		return originalPartialRectanglesFindStopTime-originalPartialRectanglesFindStartTime;
+	}
+
+	@Override
+	public void resetTimeOriginalPartialRectanglesFind() {
+		originalPartialRectanglesFindStartTime = -1;
+		originalPartialRectanglesFindStopTime = -1;	
+	}
+
+	@Override
+	public void startTimeOptimizePositions() throws RuntimeException {
+		if (optimizePositionsStartTime != -1 && optimizePositionsStopTime != -1) {
+			throw new RuntimeException();
+		}
+		optimizePositionsStartTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public void stopTimeOptimizePositions() throws RuntimeException {
+		if (optimizePositionsStartTime == -1 || optimizePositionsStopTime != -1) {
+			throw new RuntimeException();
+		}
+		optimizePositionsStopTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public long getElapsedTimeOptimizePositions() throws RuntimeException {
+		if (optimizePositionsStartTime == -1 && optimizePositionsStopTime == -1) {
+			throw new RuntimeException();
+		}
+		return optimizePositionsStopTime-optimizePositionsStartTime;
+	}
+
+	@Override
+	public void resetTimeOptimizePositions() {
+		optimizePositionsStartTime = -1;
+		optimizePositionsStopTime = -1;
+		
+	}
+
+	@Override
+	public void startTimeIlluminationTest() throws RuntimeException {
+		if (illuminationTestStartTime != -1 && illuminationTestStopTime != -1) {
+			throw new RuntimeException();
+		}
+		illuminationTestStartTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public void stopTimeIlluminationTest() throws RuntimeException {
+		if (illuminationTestStartTime == -1 || illuminationTestStopTime != -1) {
+			throw new RuntimeException();
+		}
+		illuminationTestStopTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public long getElapsedTimeIlluminationTest() throws RuntimeException {
+		if (illuminationTestStartTime == -1 && illuminationTestStopTime == -1) {
+			throw new RuntimeException();
+		}
+		return illuminationTestStopTime-illuminationTestStopTime;
+	}
+
+	@Override
+	public void resetTimeIlluminationTest() {
+		illuminationTestStartTime = -1;
+		illuminationTestStopTime = -1;
+		
+	}
+
+	@Override
+	public void startTime() throws RuntimeException {
+		if (startTime != -1 && stopTime != -1) {
+			throw new RuntimeException();
+		}
+		startTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public void stopTime() throws RuntimeException {
+		if (startTime == -1 || stopTime != -1) {
+			throw new RuntimeException();
+		}
+		stopTime = System.nanoTime();
+		
+	}
+
+	@Override
+	public long getElapsedTime() throws RuntimeException {
+		if (startTime == -1 && stopTime == -1) {
+			throw new RuntimeException();
+		}
+		return stopTime-startTime;
+	}
+
+	@Override
+	public void resetTime() {
+		startTime = -1;
+		stopTime = -1;
+		
+	}
+	
+	@Override
+	public String toString() {
+		long elapsedTimeSeconds = -1;
+		try {
+			elapsedTimeSeconds = TimeUnit.NANOSECONDS.toSeconds(getElapsedTime());
+		} catch (RuntimeException e) {
+			return "No time intervall recorded!";
+		}
+		String outString = "Elapsed time in seconds: ";
+		outString = outString + String.valueOf(elapsedTimeSeconds);
+		return outString;
+	}
+
+
+}

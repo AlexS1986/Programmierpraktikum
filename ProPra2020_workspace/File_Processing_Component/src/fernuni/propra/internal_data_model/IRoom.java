@@ -15,6 +15,7 @@ public interface IRoom{
 	double getMaxY();
 	String getID();
 	void replaceLamps(List<Lamp> lamps);
+	String printLampPositions();
 	
 }
 

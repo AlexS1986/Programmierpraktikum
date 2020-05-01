@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.IIlluminationTester"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.IRuntimeIlluminationTester"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.IRuntimePositionOptimizer"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.PositionOptimizer"/>
     <fullyQualifiedTypeName name="org.jdom2.Document"/>
@@ -16,7 +14,6 @@
     <fullyQualifiedTypeName name="java.util.Timer"/>
     <fullyQualifiedTypeName name="javax.swing.Timer"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcherException"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.IPositionOptimizer"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.IRuntimeInformation"/>
     <fullyQualifiedTypeName name="java.util.List"/>
@@ -49,15 +46,18 @@
     <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.ICandidateSearcher"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.AlgorithmFactory"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.RectangleWithTag"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcher"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.Rectangle"/>
-    <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
-    <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.Lamp"/>
     <fullyQualifiedTypeName name="java.awt.Point"/>
     <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.Point"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcher"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcherException"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.Rectangle"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.RectangleWithTag"/>
+    <fullyQualifiedTypeName name="org.junit.Ignore"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
 </qualifiedTypeNameHistroy>

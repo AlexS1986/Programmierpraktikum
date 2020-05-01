@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MainTest.testUseCase_V" project="Test_Component" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testcase name="testUseCase_V" classname="fernuni.propra.main.MainTest" time="0.707"/>
+</testrun>

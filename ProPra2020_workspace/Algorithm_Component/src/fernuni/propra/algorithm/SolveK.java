@@ -2,6 +2,8 @@ package fernuni.propra.algorithm;
 
 import java.util.List;
 
+import fernuni.propra.algorithm.runtime_information.IRuntimeInformation;
+import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 
@@ -27,15 +29,22 @@ public class SolveK extends Thread{
 	public void solve(IRuntimeInformation runTimeInformation, IRoom room) throws SolveKException{
 		List<Lamp> candidates;
 		try {
+			runTimeInformation.startTimeCandidateSearch();
 			candidates = candidateSearcher.searchCandidates(room, 
 					runTimeInformation);
+			runTimeInformation.stopTimeCandidateSearch();
+			
+			runTimeInformation.startTimeOptimizePositions();
+			positionOptimizer.optimizePositions(room, 
+					candidates, runTimeInformation); 
+			runTimeInformation.stopTimeOptimizePositions();
+			
 		} catch (CandidateSearcherException e) {
 			throw new SolveKException(e);
+		} catch (RuntimeExceptionLamps rte) {
+			throw new SolveKException(rte);
 		}
-		
-		positionOptimizer.optimizePositions(room, 
-				candidates, runTimeInformation); 
-		}
+	}
 
 	@Override
 	public void run() {
@@ -46,7 +55,7 @@ public class SolveK extends Thread{
 				solve(runTimeInformation, room);
 				isSolved = true;
 			} catch (SolveKException e) {
-				this.exception = e;
+				this.exception = e; // TODO break?
 			}
 		} while(!isInterrupted() && !isSolved);
 		

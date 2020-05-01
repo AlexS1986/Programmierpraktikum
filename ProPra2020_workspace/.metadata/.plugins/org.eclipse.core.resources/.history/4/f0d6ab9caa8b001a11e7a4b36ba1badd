@@ -1,0 +1,10 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.algorithm.RuntimeExceptionLamps;
+
+public interface IRuntimePositionOptimizer extends IRuntimeIlluminationTester {
+	void startTimeOptimizePositions() throws RuntimeExceptionLamps;
+	void stopTimeOptimizePositions() throws RuntimeExceptionLamps;
+	void resetTimeOptimizePositions();
+
+}

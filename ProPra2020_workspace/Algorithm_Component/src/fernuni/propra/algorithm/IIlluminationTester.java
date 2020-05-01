@@ -3,6 +3,7 @@ package fernuni.propra.algorithm;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 

@@ -3,6 +3,7 @@ package fernuni.propra.algorithm;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import fernuni.propra.algorithm.runtime_information.IRuntimeOriginalPartialRectanglesFinder;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
 

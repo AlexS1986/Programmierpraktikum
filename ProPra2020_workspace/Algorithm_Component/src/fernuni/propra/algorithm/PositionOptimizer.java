@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import fernuni.propra.algorithm.runtime_information.IRuntimePositionOptimizer;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 

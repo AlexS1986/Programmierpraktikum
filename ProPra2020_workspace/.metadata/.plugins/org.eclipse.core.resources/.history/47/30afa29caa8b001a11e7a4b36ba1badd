@@ -1,0 +1,9 @@
+package fernuni.propra.algorithm;
+
+import fernuni.propra.algorithm.RuntimeExceptionLamps;
+
+public interface IRuntimeOriginalPartialRectanglesFinder {
+	void startTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps;
+	void stopTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps;
+	void resetTimeOriginalPartialRectanglesFind();
+}

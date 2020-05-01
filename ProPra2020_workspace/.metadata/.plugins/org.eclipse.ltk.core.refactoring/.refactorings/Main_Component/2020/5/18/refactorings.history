@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;result&apos; in &apos;fernuni.propra.main.Main.main(...)&apos; to &apos;resultString&apos;&#x0A;- Original project: &apos;Main_Component&apos;&#x0A;- Original element: &apos;fernuni.propra.main.Main.main(String[]).result&apos;&#x0A;- Renamed element: &apos;result&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;result&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;fernuni.propra.main{Main.java[Main~main~\[QString;@result!4256!4269!4263!4268!QString;!0!false" name="resultString" references="true" stamp="1588339362930" version="1.0"/>
+</session>

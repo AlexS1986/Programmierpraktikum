@@ -159,6 +159,12 @@ public class CandidateSearcherTest {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public String printLampPositions() {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 		
 		

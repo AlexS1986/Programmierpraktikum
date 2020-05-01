@@ -14,7 +14,7 @@ public class AlgorithmFactory {
 	}
 
 	public ICandidateSearcher createCandidateSearcher() {
-		return new CandidateSearcher2();
+		return new CandidateSearcher();
 	}
 
 	public IPositionOptimizer createPositionOptimizer() {

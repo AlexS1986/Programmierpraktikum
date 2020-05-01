@@ -161,6 +161,12 @@ public class OriginalPartialRectanglesFinderTest {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public String printLampPositions() {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 		
 		pc1 = new Point(1,-1);

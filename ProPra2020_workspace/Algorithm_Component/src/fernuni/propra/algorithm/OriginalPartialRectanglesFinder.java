@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import fernuni.propra.algorithm.runtime_information.IRuntimeOriginalPartialRectanglesFinder;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Point;

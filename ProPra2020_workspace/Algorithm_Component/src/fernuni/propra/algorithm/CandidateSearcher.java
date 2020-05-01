@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import fernuni.propra.algorithm.runtime_information.IRuntimeCandidateSearcher;
+import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
 import fernuni.propra.algorithm.util.Rectangle;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
@@ -24,7 +26,6 @@ public class CandidateSearcher  implements ICandidateSearcher{
 		
 		List<Lamp> centersOfReducedRectangles = null;
 		try {
-			
 			ArrayList<RectangleWithTag> originalRectangles = constructOriginalPartialRectangles(room, runtimeCandidateSearcher);
 			
 			List<RectangleWithTag> reducedRectangles = reduceRectangles(originalRectangles);
@@ -42,9 +43,7 @@ public class CandidateSearcher  implements ICandidateSearcher{
 			
 		} catch (OriginalPartialRectanglesFinderException  e) {
 			throw new CandidateSearcherException(e);
-		} catch (Exception e) { // TODO
-			throw new CandidateSearcherException(e);
-		}
+		} 
 		
 		return centersOfReducedRectangles;		
 	}

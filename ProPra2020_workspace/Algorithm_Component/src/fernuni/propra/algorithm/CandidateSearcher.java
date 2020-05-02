@@ -26,7 +26,9 @@ public class CandidateSearcher  implements ICandidateSearcher{
 		
 		List<Lamp> centersOfReducedRectangles = null;
 		try {
+			runtimeCandidateSearcher.startTimeOriginalPartialRectanglesFind();
 			ArrayList<RectangleWithTag> originalRectangles = constructOriginalPartialRectangles(room, runtimeCandidateSearcher);
+			runtimeCandidateSearcher.stopTimeOriginalPartialRectanglesFind();
 			
 			List<RectangleWithTag> reducedRectangles = reduceRectangles(originalRectangles);
 			
@@ -43,7 +45,9 @@ public class CandidateSearcher  implements ICandidateSearcher{
 			
 		} catch (OriginalPartialRectanglesFinderException  e) {
 			throw new CandidateSearcherException(e);
-		} 
+		}  catch (RuntimeExceptionLamps rte) {
+			throw new CandidateSearcherException(rte);
+		}
 		
 		return centersOfReducedRectangles;		
 	}

@@ -81,6 +81,8 @@ public class Main {
 				UserSolveAAS userSolveAAS;
 				int numberOfLampsInSolution;
 				
+				printMessageToConsole("Starting computation ...");
+				
 				switch(parameterSet.getRunParameter()) {
 				case "s":
 					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
@@ -88,6 +90,7 @@ public class Main {
 					userSolveAAS = new UserSolveAAS();
 					numberOfLampsInSolution = userSolveAAS.solve(room, parameterSet.getTimeLimit());
 					userReadWriteAAS.writeOutput(room);
+					printMessageToConsole("Computation finished ...");
 					break;
 				case "sd":
 					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
@@ -97,20 +100,24 @@ public class Main {
 					userReadWriteAAS.writeOutput(room);
 					userDisplayAAS = new UserDisplayAAS();
 					userDisplayAAS.display(room);
+					printMessageToConsole("Computation finished ...");
+					printMessageToConsole("Number of lamps necessary:" + numberOfLampsInSolution); // TODO
+					printMessageToConsole(userSolveAAS.getRuntimeInformation().toString());
 					break;
 				case "v":
 					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
 					userValidateAAS = new UserValidateAAS();
 					userValidateAAS.validate(room);
-					System.out.println(userValidateAAS.getResultString());
+					printMessageToConsole(userValidateAAS.getResultString());
 					break;
 				case "vd":
 					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
 					userValidateAAS = new UserValidateAAS();
 					userValidateAAS.validate(room);
-					System.out.println(userValidateAAS.getResultString());
+					//System.out.println(userValidateAAS.getResultString());
+					printMessageToConsole(userValidateAAS.getResultString());
 					userDisplayAAS = new UserDisplayAAS();
 					userDisplayAAS.display(room);
 					break;

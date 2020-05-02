@@ -1,15 +1,17 @@
 package fernuni.propra.algorithm;
 
-import fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester;
+import fernuni.propra.algorithm.runtime_information.IRuntimeInformation;
+import fernuni.propra.algorithm.runtime_information.IRuntimeReader;
 import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
 import fernuni.propra.internal_data_model.IRoom;
 
 public class UserValidateAAS {
 	private ValidateK validateK  = new ValidateK();
 	private String resultString;
+	IRuntimeInformation runtimeInfo = new RuntimeInformation();
 	
 	public boolean validate(IRoom room) throws UserValidateAASException{
-		IRuntimeIlluminationTester runtimeInfo = new RuntimeInformation();
+		//IRuntimeIlluminationTester runtimeInfo = new RuntimeInformation();
 		try {
 			boolean isIlluminated = validateK.validate(room, runtimeInfo);
 			resultString = computeResultString(room, isIlluminated);
@@ -33,6 +35,10 @@ public class UserValidateAAS {
 	
 	public String getResultString() {
 		return resultString;
+	}
+	
+	public IRuntimeReader getRuntimeInformation() {
+		return runtimeInfo;
 	}
 	
 }

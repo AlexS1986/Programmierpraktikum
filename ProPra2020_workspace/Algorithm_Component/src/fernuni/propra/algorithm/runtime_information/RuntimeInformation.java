@@ -66,7 +66,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		if (originalPartialRectanglesFindStartTime == -1 || originalPartialRectanglesFindStopTime != -1) {
 			throw new RuntimeExceptionLamps();
 		}
-		candidateSearchStopTime = System.nanoTime();
+		originalPartialRectanglesFindStopTime = System.nanoTime();
 		
 	}
 
@@ -185,16 +185,58 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 	
 	@Override
 	public String toString() {
-		long elapsedTimeSeconds = -1;
+		String lineSeparator = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("Runtime Information");
+		sb.append(lineSeparator);
+		sb.append("Total runtime: ");
 		try {
-			elapsedTimeSeconds = TimeUnit.NANOSECONDS.toSeconds(getElapsedTime());
+			sb.append((double) Math.round((double) getElapsedTime() / 1_000_000_000 * 100)/100);
+			sb.append(" s,");
 		} catch (RuntimeExceptionLamps e) {
-			return "No time intervall recorded!";
+			sb.append("not available");
 		}
-		String outString = "Elapsed time in seconds: ";
-		outString = outString + String.valueOf(elapsedTimeSeconds);
+		sb.append(lineSeparator);
+		sb.append("thereof ");
+		sb.append(lineSeparator);
+		
+		sb.append("searching for lamp position candidates: ");
+		try {
+			sb.append((double) Math.round((double) getElapsedTimeCandidateSearch() / 1_000_000_000 * 100)/100);
+			sb.append(" s.");
+		} catch (RuntimeExceptionLamps e) {
+			sb.append("not available");
+		}
+		sb.append(lineSeparator);
+		
+		
+		sb.append("optimizing lamp positions: ");
+		try {
+			sb.append((double) Math.round((double) getElapsedTimeOptimizePositions() / 1_000_000_000 * 100)/100);
+			sb.append(" s.");
+		} catch (RuntimeExceptionLamps e) {
+			sb.append("not available");
+		}
+		sb.append(lineSeparator);
+		
+		sb.append("testing if room is illuminated: ");
+		try {
+			sb.append((double) Math.round((double) getElapsedTimeIlluminationTest() / 1_000_000_000 * 100)/100);
+			sb.append(" s.");
+		} catch (RuntimeExceptionLamps e) {
+			sb.append("not available");
+		}
+		sb.append(lineSeparator);
+		
+		sb.append("constructing original partial rectangles: ");
+		try {
+			sb.append((double) Math.round((double) getElapsedTimeOriginalPartialRectanglesFind() / 1_000_000_000 * 100)/100);
+			sb.append(" s.");
+		} catch (RuntimeExceptionLamps e) {
+			sb.append("not available");
+		}
+		
+		String outString = sb.toString();
 		return outString;
 	}
-
 
 }

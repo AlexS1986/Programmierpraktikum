@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester;
+import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
@@ -17,7 +18,9 @@ public class IlluminationTester implements IIlluminationTester{
 	public boolean testIfRoomIsIlluminated(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws IlluminationTesterException {
 		try {
 			IOriginalPartialRectanglesFinder originalRectanglesFinder = new OriginalPartialRectanglesFinder();
+			runtimeInfo.startTimeOriginalPartialRectanglesFind();
 			List<RectangleWithTag> rectanglesWithTag = originalRectanglesFinder.findOriginalPartialRectangles(room, runtimeInfo);	
+			runtimeInfo.stopTimeOriginalPartialRectanglesFind();
 			HashSet<Integer> allTags = originalRectanglesFinder.getAllTags();
 			
 			// assign lamps to tags/rectangles
@@ -48,6 +51,8 @@ public class IlluminationTester implements IIlluminationTester{
 			
 		} catch (OriginalPartialRectanglesFinderException e) {
 			throw new IlluminationTesterException(e);
+		} catch (RuntimeExceptionLamps rte) {
+			throw new IlluminationTesterException(rte);
 		}
 	}
 	

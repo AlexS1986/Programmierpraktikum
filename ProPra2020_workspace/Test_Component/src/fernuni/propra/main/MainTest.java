@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-
-
 public class MainTest {
 
 	@Before
@@ -15,6 +13,7 @@ public class MainTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUseCase_D() {
 		//Arrange
 		String[] commandLineParameters = new String[] {"r=d", 
@@ -35,7 +34,7 @@ public class MainTest {
 		//Assert
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testUseCase_SD() {
 		//Arrange

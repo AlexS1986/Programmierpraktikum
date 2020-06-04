@@ -19,6 +19,7 @@ public class UserSolveAAS {
 		SolveK solveControl = new SolveK(room, runTimeInformation);
 		try {
 			runTimeInformation.startTime();
+			
 			if (time > 0) { // if time argument is smaller than zero time limit is ignored
 				Timer timer = new Timer(time * 1000, new ActionListener() {
 					
@@ -28,7 +29,8 @@ public class UserSolveAAS {
 					}
 				});		
 				timer.start();
-			}
+			} 
+			
 			solveControl.start();
 	
 			SolveKException solveException = solveControl.testIfComputationFinished();

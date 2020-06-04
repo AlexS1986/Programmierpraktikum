@@ -96,7 +96,7 @@ public class UserSolveAASTest {
 		
 		//Act
 		try {
-			userSolve.solve(room, 2);
+			userSolve.solve(room, 100);
 		} catch (UserSolveAASException e) {
 			fail();
 		}

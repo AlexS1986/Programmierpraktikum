@@ -1,9 +1,0 @@
-package fernuni.propra.algorithm;
-
-import fernuni.propra.algorithm.RuntimeExceptionLamps;
-
-public interface IRuntimeIlluminationTester extends IRuntimeOriginalPartialRectanglesFinder{
-	void startTimeIlluminationTest() throws RuntimeExceptionLamps;
-	void stopTimeIlluminationTest() throws RuntimeExceptionLamps;
-	void resetTimeIlluminationTest();
-}

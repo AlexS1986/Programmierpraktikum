@@ -16,8 +16,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.StringReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -34,11 +37,14 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 class FilePersistence implements IPersistence {
-    private static final String DTD = System.getProperty("user.dir")+"/../File_Processing_Component/Model/DataModel.dtd";    
+    //private static final String DTD = System.getProperty("user.dir")+"/../File_Processing_Component/Model/DataModel.dtd";    
     
     //all lamps are turned on initially
 	@Override
 	public IRoom readInput(String xmlFilePath) throws PersistenceException {	
+		
+		
+		
 		Document document = null;
 		InputStreamReader isr = null;
 		Room outRoom = null;
@@ -237,7 +243,9 @@ class FilePersistence implements IPersistence {
 	}
 	
 	private String readDTDFile() throws IOException{
-		File dtdFile = new File(FilePersistence.DTD);
+		
+		
+		
 		
 		InputStreamReader isr = null;
 		//BufferedReader br = null; 
@@ -249,7 +257,30 @@ class FilePersistence implements IPersistence {
 		//TODO ohne readline 
 		
 		try {
-			isr = new InputStreamReader(new FileInputStream(dtdFile));
+			InputStream inputStream = getClass().getResourceAsStream("/DataModel.dtd");
+			/*if(myURL == null) {
+				throw new IOException("DataModel.dtd not found. Cannot read input files.");
+			}
+			
+			
+			
+			String pathToDataModel = myURL.getFile(); */
+			//InputStreamReader isr2 = new InputStreamReader(inputStream);
+			
+			/*int cc;
+			StringBuilder sb1 = new StringBuilder ("");
+			while ((cc =  isr2.read()) != -1) {
+				sb1.append((char) cc);
+			}
+			
+			String pathToDataModel = sb1.toString();
+			System.out.println(pathToDataModel);
+			
+			File dtdFile = new File(pathToDataModel);
+			
+			
+			isr = new InputStreamReader(new FileInputStream(dtdFile)); */
+			isr = new InputStreamReader(inputStream);
 			boolean firstTagRead = false;
 			int c = -1;
 			while((c=isr.read())!=-1) {

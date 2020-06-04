@@ -179,7 +179,7 @@ public class PositionOptimizerTest {
 			Lamp lamp = new Lamp(0.0,0.0);
 			lamp.addTag(1);
 			taggedCandidates.add(lamp);
-		} catch (CandidateSearcherException e) {
+		} catch (CandidateSearcherException | InterruptedException e) {
 			fail("Candidates Searcher failed!");
 		}
 		
@@ -215,8 +215,20 @@ public class PositionOptimizerTest {
 		taggedCandidates2.add(lamp9); taggedCandidates2.add(lamp10); taggedCandidates2.add(lamp11);
 		
 		//Act
-		List<Lamp> optimizedLamps = positionOptimizer.optimizePositions(null, taggedCandidates, null);
-		List<Lamp> optimizedLamps2 = positionOptimizer2.optimizePositions(null, taggedCandidates2, null);
+		List<Lamp> optimizedLamps = new LinkedList<Lamp>();
+		try {
+			optimizedLamps = positionOptimizer.optimizePositions(null, taggedCandidates, null);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Lamp> optimizedLamps2 = new LinkedList<Lamp>();
+		try {
+			optimizedLamps2 = positionOptimizer2.optimizePositions(null, taggedCandidates2, null);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//Assert
 		for (int i = 0; i< optimizedLamps2.size()-1; i++) {

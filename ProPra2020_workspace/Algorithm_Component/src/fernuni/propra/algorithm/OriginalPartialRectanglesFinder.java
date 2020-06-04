@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import fernuni.propra.algorithm.runtime_information.IRuntimeOriginalPartialRectanglesFinder;
+import fernuni.propra.algorithm.util.Rectangle;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Point;
@@ -18,7 +19,8 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 	private WallContainerNorth wallContainerNorth = new WallContainerNorth();
 	private WallContainerWest wallContainerWest = new WallContainerWest();
 	private WallContainerSouth wallContainerSouth = new WallContainerSouth();
-	private ArrayList<RectangleWithTag> originalRectangles = new ArrayList<RectangleWithTag>();
+	private HashSet<Rectangle> originalRectangles = new HashSet<Rectangle>();
+	private ArrayList<RectangleWithTag> originalRectanglesTagged = new ArrayList<RectangleWithTag>();
 
 	public OriginalPartialRectanglesFinder() {
 		// TODO Auto-generated constructor stub
@@ -40,7 +42,7 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 			throw new OriginalPartialRectanglesFinderException(e);
 		}
 		
-		return originalRectangles;
+		return originalRectanglesTagged;
 	}
 
 	@Override
@@ -144,18 +146,19 @@ public class OriginalPartialRectanglesFinder implements IOriginalPartialRectangl
 		}		
 	} 
 	
-	private int addOriginalPartialRectangle(int rectangleNo, double yNorth, double xWest, double xEast, double ySouth) {
+	private int addOriginalPartialRectangle(int rectangleNo,double yNorth, double xWest, double xEast, double ySouth) {
 		Point southWestCorner = new Point(xWest,ySouth);
 		Point northEastCorner = new Point(xEast,yNorth);
-		int tag = rectangleNo++;
-		RectangleWithTag partialRectangle = new RectangleWithTag(southWestCorner, northEastCorner, tag);
-		allTags.add(tag);
-		originalRectangles.add(partialRectangle);
+		Rectangle partialRectangle = new Rectangle(southWestCorner, northEastCorner);
+		if (!originalRectangles.contains(partialRectangle)) { // same rectangle does not already exist -> add
+			originalRectangles.add(partialRectangle);
+			originalRectanglesTagged.add(new RectangleWithTag(partialRectangle, rectangleNo++));
+		}
 		return rectangleNo;
 	}
 	
 	public Iterator<RectangleWithTag> iteratorOriginalRectangles() {
-		return originalRectangles.iterator();
+		return originalRectanglesTagged.iterator();
 	}
 	
 	// TODO for tests

@@ -1,8 +1,0 @@
-package fernuni.propra.algorithm;
-
-public interface IRuntimeInformation extends IRuntimeCandidateSearcher, 
-	IRuntimePositionOptimizer, IRuntimeIlluminationTester, IRuntimeReader{
-	void startTime() throws RuntimeException;
-	void stopTime() throws RuntimeException;
-	void resetTime();
-}

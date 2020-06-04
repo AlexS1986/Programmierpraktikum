@@ -1,7 +1,0 @@
-package fernuni.propra.algorithm;
-
-public abstract class AbstractAlgorithmFactory {
-	
-	public abstract ICandidateSearcher createCandidateSearcher() 
-
-}

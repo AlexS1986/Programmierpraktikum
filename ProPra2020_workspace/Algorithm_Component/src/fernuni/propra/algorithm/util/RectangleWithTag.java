@@ -69,7 +69,7 @@ public class RectangleWithTag extends Rectangle{
 		return tags.iterator();
 	}
 	
-	public boolean tagsOfOtherRectangleAreSubsetOfThisTags(RectangleWithTag other) {
+	public boolean tagsOfOtherRectangleAreSubsetOfThisTags(RectangleWithTag other) { //TODO implement with contains all
 		boolean subset = true;
 		Iterator<Integer> tagsOfOther = other.getTagIterator();
 		while(tagsOfOther.hasNext()) {
@@ -81,6 +81,10 @@ public class RectangleWithTag extends Rectangle{
 		return subset;
 	} 
 	
+	
+	public boolean tagsAreEqual(RectangleWithTag other) {
+		return this.tags.containsAll(other.tags) && other.tags.containsAll(this.tags);
+	}
 	
 	public HashSet<Integer> getCopyOfTags() { 
 		HashSet<Integer> outTags = new HashSet<Integer>();

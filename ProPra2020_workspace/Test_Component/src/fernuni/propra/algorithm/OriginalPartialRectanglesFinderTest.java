@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
 import fernuni.propra.algorithm.util.Rectangle;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
@@ -48,7 +49,8 @@ public class OriginalPartialRectanglesFinderTest {
 				"instances/validationInstances/Selbsttest_20a_solved.xml", // 8
 				"instances/validationInstances/Selbsttest_20a.xml", // 9
 				"instances/validationInstances/Selbsttest_20b.xml", // 10
-				"instances/validationInstances/Selbsttest_20c.xml"	// 11	
+				"instances/validationInstances/Selbsttest_20c.xml",	// 11
+				"instances/validationInstances/Zufallsraum_144_solved.xml" // 12
 		};
 		
 		rooms = new ArrayList<IRoom>();
@@ -223,6 +225,9 @@ public class OriginalPartialRectanglesFinderTest {
 		RoomPanel roomPanel = new RoomPanel(testRoom);
 		Color[] colors = {Color.blue, Color.red, Color.green, Color.yellow};
 		
+		
+		
+		
 		//TODO Aufräumen
 		
 		/*int index = 10;
@@ -239,11 +244,17 @@ public class OriginalPartialRectanglesFinderTest {
 			roomPanel.addRectangle(String.valueOf(i), colors[i % 3], rec.getP1().getX(), rec.getP1().getY(), width, height);
 		}*/
 		
-		List<RectangleWithTag> reducedRectangles = candidateSearcher.reduceRectangles(rectanglesWithTag); //TODO
+		/*
+		List<RectangleWithTag> reducedRectangles = null;
+		try {
+			reducedRectangles = candidateSearcher.reduceRectangles(rectanglesWithTag);
+		} catch (InterruptedException e2) {
+			fail(e2.getMessage());
+		} //TODO
 		List<Lamp> lamps = new LinkedList<Lamp>();
 		try {
-			lamps = candidateSearcher.searchCandidates(testRoom, null);
-		} catch (CandidateSearcherException e1) {
+			lamps = candidateSearcher.searchCandidates(testRoom, new RuntimeInformation());
+		} catch (CandidateSearcherException | InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -258,8 +269,45 @@ public class OriginalPartialRectanglesFinderTest {
 		double height = rec.getP3().getY() - rec.getP1().getY();
 		roomPanel.addRectangle(String.valueOf(i), colors[i % 3], rec.getP1().getX(), rec.getP1().getY(), width, height);
 		} 
+		*/
+		//RoomFrame roomFrame = new RoomFrame(roomPanel);
 		
-		RoomFrame roomFrame = new RoomFrame(roomPanel);
+		
+		
+		IRoom testRoom2 = rooms.get(12);
+		//Act
+		
+		//IRoom testRoom = roomStar;
+		ArrayList<RectangleWithTag> rectanglesWithTag2 = new ArrayList<RectangleWithTag>();
+		try {
+			rectanglesWithTag2 = (new OriginalPartialRectanglesFinder()).findOriginalPartialRectangles(testRoom2, null);
+		} catch (OriginalPartialRectanglesFinderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		RoomPanel roomPanel2 = new RoomPanel(testRoom2);
+		Color[] colors2 = {Color.blue, Color.red, Color.green, Color.yellow};
+		
+		List<RectangleWithTag> rectanglesWithTag3 = new ArrayList<RectangleWithTag>();
+		try {
+			rectanglesWithTag3 = (new CandidateSearcher()).reduceRectangles(rectanglesWithTag2);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		RoomFrame roomFrame = new RoomFrame(roomPanel2);
+		
+		for (int i = 0; i<rectanglesWithTag3.size(); i++) {
+		RectangleWithTag rec = rectanglesWithTag3.get(i);
+		double width = rec.getP2().getX() - rec.getP1().getX();
+		double height = rec.getP3().getY() - rec.getP1().getY();
+		roomPanel2.addRectangle(String.valueOf(i), colors[i % 3], rec.getP1().getX(), rec.getP1().getY(), width, height);
+		roomPanel2.repaint();
+		//roomPanel2.removeLastRectangle();
+		} 
+		
 		
 		try {
 			Thread.currentThread().sleep(100000);

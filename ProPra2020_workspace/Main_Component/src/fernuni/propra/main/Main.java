@@ -44,6 +44,10 @@ public class Main {
 	
 	
 	public static void main(String[] args) {
+		
+		for (String arg : args) { // Debug
+			System.out.println(arg);
+		}
 
 		ParameterSet parameterSet = new ParameterSet();
 		try {
@@ -57,7 +61,6 @@ public class Main {
 						parameterSet.setRunParameter(parameterValue);
 						break;
 					case "if":
-						//parameterValue = parameterValue.replace("\"", "");
 						parameterSet.setInputFile(parameterValue);
 						break;
 					case "l":

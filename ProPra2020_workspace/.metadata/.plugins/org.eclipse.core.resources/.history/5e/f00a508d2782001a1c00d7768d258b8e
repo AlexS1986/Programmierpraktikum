@@ -1,9 +1,0 @@
-package fernuni.propra.algorithm;
-
-public class AbstractAlgorithmFactory implements IAbstractAlgorithmFactory {
-
-	public AbstractAlgorithmFactory() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

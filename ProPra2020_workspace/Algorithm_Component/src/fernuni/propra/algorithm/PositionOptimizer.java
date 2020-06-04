@@ -19,7 +19,8 @@ public class PositionOptimizer implements IPositionOptimizer{
 	}
 
 	@Override
-	public List<Lamp> optimizePositions(IRoom room, List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation) {
+	public List<Lamp> optimizePositions(IRoom room, List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation) throws InterruptedException
+	{
  
 		// all lamps are on -> illuminated
 		currentBestSolution = taggedCandidates;
@@ -28,7 +29,7 @@ public class PositionOptimizer implements IPositionOptimizer{
 		
 		HashSet<Integer> allTags = new HashSet<Integer>();
 		for (Lamp lamp : taggedCandidates) {
-			lamp.turnOff(); // make sure all lamps are turned off
+			lamp.turnOn(); // make sure all lamps are turned on
 			Iterator<Integer> tagIterator = lamp.iteratorTag();
 			while(tagIterator.hasNext()) {
 				allTags.add(tagIterator.next());
@@ -40,7 +41,7 @@ public class PositionOptimizer implements IPositionOptimizer{
 		//HashSet<Integer> illuminated = new HashSet<Integer>();
 		
 
-		searchSolution(lamps,0, allTags, 0,runTimeInformation);
+		searchSolution(lamps,0, allTags, numberIlluminatedLampsBestSolution,runTimeInformation);
 		
 		return currentBestSolution;
 		
@@ -49,24 +50,38 @@ public class PositionOptimizer implements IPositionOptimizer{
 	}
 	
 	private void searchSolution(ArrayList<Lamp> lamps, int idx, 
-			HashSet<Integer> allTags, int numberLampsOn, IRuntimePositionOptimizer runTimeInformation) {
+			HashSet<Integer> allTags, int numberLampsOn, IRuntimePositionOptimizer runTimeInformation) throws InterruptedException{
+		if(Thread.currentThread().isInterrupted()) {
+			throw new InterruptedException("Computation interrupted.");
+		}
+		
 		if(illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, runTimeInformation)) { // valid solution found
-			if (numberLampsOn<=numberIlluminatedLampsBestSolution) {
+			if (numberLampsOn<numberIlluminatedLampsBestSolution) { // new best solution found
+				System.out.println("Solution found with " + numberLampsOn + " lamps turned on.");
 				currentBestSolution = deepCopyLamps(lamps);
 				numberIlluminatedLampsBestSolution = numberLampsOn;
-			}
-		} else { // not a valid solution
+				
+				
+			} 
+			
 			if (idx < lamps.size()) {
-				if(numberLampsOn<numberIlluminatedLampsBestSolution) {
-					Lamp lamp = lamps.get(idx);
-					lamp.turnOn();	
-					searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn+1, runTimeInformation);
-					
-					lamp.turnOff();
-					searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn, runTimeInformation);
-									
-				}
+				Lamp lamp = lamps.get(idx);
+				
+				/*if (!lamp.getOn()) {
+					System.out.println("hi");
+				}*/
+				//lamp.turnOn(); // lamp is always turned on
+				
+				
+				searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn, runTimeInformation);
+				
+				lamp.turnOff();
+				searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn-1, runTimeInformation);
+				
 			}
+						
+		} else { // not a valid solution, with all lamps > idx turned on 
+
 		}
 	}
 	

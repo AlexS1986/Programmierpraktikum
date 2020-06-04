@@ -38,7 +38,7 @@ public class MainTest {
 	@Test
 	public void testUseCase_SD() {
 		//Arrange
-		String[] commandLineParameters = new String[] {"if=\"instances/validationInstances/Selbsttest_100b3.xml\"", "r=sd", "l=100" };
+		String[] commandLineParameters = new String[] {"if=\"instances/validationInstances/Selbsttest_100b.xml\"", "r=sd", "l=15" };
 		
 		//Act
 		Main.main(commandLineParameters);

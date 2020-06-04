@@ -21,7 +21,7 @@ public class CandidateSearcher  implements ICandidateSearcher{
 	}
 
 	@Override
-	public List<Lamp> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws CandidateSearcherException {
+	public List<Lamp> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws CandidateSearcherException, InterruptedException {
 		// computes lists of tagged list of lamps at candidate positions
 		
 		List<Lamp> centersOfReducedRectangles = null;
@@ -45,7 +45,7 @@ public class CandidateSearcher  implements ICandidateSearcher{
 			
 		} catch (OriginalPartialRectanglesFinderException  e) {
 			throw new CandidateSearcherException(e);
-		}  catch (RuntimeExceptionLamps rte) {
+		}	catch (RuntimeExceptionLamps rte) {
 			throw new CandidateSearcherException(rte);
 		}
 		
@@ -58,58 +58,104 @@ public class CandidateSearcher  implements ICandidateSearcher{
 	}
 
 	
-	List<RectangleWithTag> reduceRectangles(ArrayList<RectangleWithTag> originalRectangles) {
+	ArrayList<RectangleWithTag> reduceRectangles(ArrayList<RectangleWithTag> originalRectanglesTagged) throws InterruptedException{
 		
-		// TODO die die im letzten schritt keinen overlap hatten müssen auch nicht mehr angeschaut werden
 		
-		ArrayList<RectangleWithTag> lastIterationRectangles = originalRectangles;
-		boolean combinationsOccured; // to determine to stop further iterations
+		
+		ArrayList<RectangleWithTag> lastIteration = originalRectanglesTagged;
+		ArrayList<RectangleWithTag> minRectangleWithTags = null;
+		
+	
+		
+		boolean intersectFound;
 		do {
-			combinationsOccured = false;
-			HashSet<RectangleWithTag> currentIterationRectangles = new HashSet<RectangleWithTag>();
-			HashSet<Integer> originalTagsAlreadyCoveredInIteration = new HashSet<Integer>();
-			
-			for (int i = 0; i< lastIterationRectangles.size(); i++) {
-				RectangleWithTag rectangleWithTagI = lastIterationRectangles.get(i);
-				boolean validOverlapFoundForI = false; // if no valid overlap found -> keep partial area
-				for (int j = i+1; j< lastIterationRectangles.size(); j++) {
-					RectangleWithTag rectangleWithTagJ = lastIterationRectangles.get(j);
-					Rectangle overlappingRectangle = rectangleWithTagI.overlap(rectangleWithTagJ);	
+		
+		intersectFound = false;
+		ArrayList<RectangleWithTag>intersectedRectangleWithTags = new ArrayList<RectangleWithTag>();
+		for (int i = 0; i < lastIteration.size(); i++) {
+			RectangleWithTag rectangleWithTagI = lastIteration.get(i);
+			boolean intersectFoundI = false;
+			for (int j = i+1; j< lastIteration.size(); j++) {
+				RectangleWithTag rectangleWithTagJ = lastIteration.get(j);
+				
+				Rectangle overlappingRectangle = rectangleWithTagI.overlap(rectangleWithTagJ);
+				
+				if(overlappingRectangle != null) { // intersection detected
 					
-					if (overlappingRectangle != null) { // overlap found
-						
-						// determine tags of overlap
-						HashSet<Integer> tagsOfOverlap= new HashSet<Integer>();
-						Iterator<Integer> tagsI = rectangleWithTagI.getTagIterator();
-						Iterator<Integer> tagsJ = rectangleWithTagJ.getTagIterator();	
-						while(tagsI.hasNext()) {
-							tagsOfOverlap.add(tagsI.next());
+					intersectFoundI = true;
+					
+					
+					// determine tags of overlap
+					HashSet<Integer> tagsOfOverlap= new HashSet<Integer>();
+					tagsOfOverlap.addAll(rectangleWithTagI.getCopyOfTags());
+					tagsOfOverlap.addAll(rectangleWithTagJ.getCopyOfTags());
+					
+					// determine all rectangles that also contain center of overlapping rectangle
+					
+					for (int k = j+1; k < lastIteration.size(); k++) {
+						RectangleWithTag rectangleWithTagK = lastIteration.get(k);
+						if(overlappingRectangle.getCenter().isInsideRectangle(rectangleWithTagK.getP1(), rectangleWithTagK.getP3()) ) {
+							tagsOfOverlap.addAll(rectangleWithTagK.getCopyOfTags());
 						}
-						while(tagsJ.hasNext()) {
-							tagsOfOverlap.add(tagsJ.next());
-						}
-						
-						RectangleWithTag overlappingRectangleWithTag = new RectangleWithTag(overlappingRectangle, tagsOfOverlap);
-						
-						//add to next iteration rectangles if rectangle does not already exist
-						if (!currentIterationRectangles.contains(overlappingRectangleWithTag)) { 
-							currentIterationRectangles.add(overlappingRectangleWithTag);
-							originalTagsAlreadyCoveredInIteration.addAll(overlappingRectangleWithTag.getCopyOfTags()); // all original rectangles are now covered
-							combinationsOccured = true;
-							validOverlapFoundForI = true;
-						}							
 					}
+					
+					// add to all intersections of rec_i
+					RectangleWithTag overlappingRectangleWithTag = new RectangleWithTag(overlappingRectangle, tagsOfOverlap);
+					
+					intersectedRectangleWithTags.add(overlappingRectangleWithTag);
+									
 				}
-				if (!validOverlapFoundForI && !originalTagsAlreadyCoveredInIteration.containsAll(rectangleWithTagI.getCopyOfTags())) { // TODO test for contains necessary? 
-					currentIterationRectangles.add(rectangleWithTagI);
-					originalTagsAlreadyCoveredInIteration.addAll(rectangleWithTagI.getCopyOfTags());
-				}
-			}		
-			lastIterationRectangles = new ArrayList<RectangleWithTag>(currentIterationRectangles);
-		} while(combinationsOccured);
-		return lastIterationRectangles;
-	}
+				
+			}
+			if (!intersectFoundI) {
+				intersectedRectangleWithTags.add(rectangleWithTagI);
+			}
+		}
 		
 		
+		
+		
+		// add only those rectangles that are not contained in another rectangle
+		minRectangleWithTags = new ArrayList<RectangleWithTag>();
+		boolean[] isMinRectangle = new boolean[intersectedRectangleWithTags.size()]; 
+		for (int i = 0; i<isMinRectangle.length; i++) {
+			isMinRectangle[i] = true;;
+		}
+		
+		for (int i = 0; i<intersectedRectangleWithTags.size(); i++) {
+			RectangleWithTag rectangleWithTagI = intersectedRectangleWithTags.get(i);
+			
+		
+			for (int j = i+1; j < intersectedRectangleWithTags.size(); j++) {
+				RectangleWithTag rectangleWithTagJ = intersectedRectangleWithTags.get(j);
+				boolean iSubsetOfJ = rectangleWithTagJ.getCopyOfTags().containsAll(rectangleWithTagI.getCopyOfTags());
+				boolean jSubsetOfI = rectangleWithTagI.getCopyOfTags().containsAll(rectangleWithTagJ.getCopyOfTags());
+				
+				if (iSubsetOfJ && jSubsetOfI) { // equal
+					isMinRectangle[i] = false;
+				} else if (iSubsetOfJ) {
+					isMinRectangle[i] = false;
+				} else if(jSubsetOfI) {
+					isMinRectangle[j] = false;
+				}
+			}
+			
+		}
+		
+		for (int i = 0; i<isMinRectangle.length; i++) {
+			if (isMinRectangle[i]) {
+				minRectangleWithTags.add(intersectedRectangleWithTags.get(i));
+			} else {
+				intersectFound = true; // overlap detected
+			}
+		}
+		
+		lastIteration = minRectangleWithTags;
+		
+		} while(intersectFound);
+		
+		return minRectangleWithTags;
+	}	
+	
 
 }

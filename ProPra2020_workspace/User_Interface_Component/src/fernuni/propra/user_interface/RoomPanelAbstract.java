@@ -40,6 +40,10 @@ public abstract class RoomPanelAbstract extends JPanel{
 		scaleBackToScreenCoordinates(g2D);
 		drawLamps(g2D);
 		drawRectangles(g2D); // TODO nur Test
+		
+		g2D.scale(1, -1);
+		g2D.translate(0, -getHeight());
+		
 			
 	}
 	protected abstract void drawRectangles(Graphics2D g2D);

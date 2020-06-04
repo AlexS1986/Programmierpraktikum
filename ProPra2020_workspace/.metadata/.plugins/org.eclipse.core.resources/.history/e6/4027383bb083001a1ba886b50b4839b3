@@ -1,8 +1,0 @@
-package fernuni.propra.algorithm;
-
-public interface IRuntimePositionOptimizer extends IRuntimeIlluminationTester {
-	void startTimeOptimizePositions();
-	void stopTimeOptimizePositions();
-	long getElapsedTimeOptimizePositions();
-	void resetTimeOptimizePositions();
-}

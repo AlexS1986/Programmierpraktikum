@@ -1,9 +1,0 @@
-package fernuni.propra.algorithm;
-
-import fernuni.propra.algorithm.RuntimeExceptionLamps;
-
-public interface IRuntimeCandidateSearcher extends IRuntimeOriginalPartialRectanglesFinder{
-	void startTimeCandidateSearch() throws RuntimeExceptionLamps;
-	void stopTimeCandidateSearch() throws RuntimeExceptionLamps;
-	void resetTimeCandidateSearch();
-}

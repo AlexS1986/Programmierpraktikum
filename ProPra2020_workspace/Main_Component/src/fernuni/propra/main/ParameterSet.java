@@ -1,6 +1,5 @@
 package fernuni.propra.main;
 
-import java.util.HashSet;
 
 public class ParameterSet {
 	private String runParameter;
@@ -34,13 +33,14 @@ public class ParameterSet {
 	void setInputFile(String inputFile) throws ParameterSetException {
 		if (this.inputFile != null) {
 			throw new ParameterSetException("Path to input file is already set. Please provide only one input file specification.");
-		} else if (!inputFile.startsWith("\"") || !inputFile.endsWith("\"")) {
-			throw new ParameterSetException("The input file parameter needs to start and end with  \" . "
+		} /*else if (!inputFile.startsWith("\"") || !inputFile.endsWith("\"")) {
+			throw new ParameterSetException("The path to the input file you entered is: " + inputFile +System.getProperty("line.separator") + " The input file parameter needs to start and end with  \" . "
 					+ "Please supply the path to the input file in the form: if=\"pathToFile\"");
-		} else {
+		} */
+		else {
 			this.inputFile = inputFile.replace("\"", "");
 			
-		}
+		} 
 	}
 	
 	void setTimeLimit(int timeLimit) throws ParameterSetException {

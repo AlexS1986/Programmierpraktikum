@@ -46,6 +46,12 @@ public class RoomPanel extends RoomPanelAbstract{
 		rectangles.add(new PlotRectangle(name, color, x, y, width, height));
 	}
 	
+	public void removeLastRectangle() { // TODO for Debug
+		if (rectangles.size() > 0) {
+			rectangles.remove(rectangles.size() -1);
+		}
+	}
+	
 
 	@Override
 	protected void drawLamps(Graphics2D g2D) {
@@ -79,6 +85,8 @@ public class RoomPanel extends RoomPanelAbstract{
 			p.addPoint((int) (corner.getX()), (int) (corner.getY()));
 		}
 		
+		
+		
 		g2D.setColor(Color.ORANGE);
 		g2D.fillPolygon(p);
 		
@@ -89,6 +97,8 @@ public class RoomPanel extends RoomPanelAbstract{
 			g2D.drawLine((int) wall.getP1().getX(),(int) wall.getP1().getY(),
 					(int) wall.getP2().getX(), (int) wall.getP2().getY());
 		}
+		
+		
 	}
 
 	@Override

@@ -1,7 +1,0 @@
-package fernuni.propra.algorithm;
-
-public interface IRuntimeOriginalPartialRectanglesFinder {
-	void startTimeOriginalPartialRectanglesFind() throws RuntimeException;
-	void stopTimeOriginalPartialRectanglesFind() throws RuntimeException;
-	void resetTimeOriginalPartialRectanglesFind();
-}

@@ -9,6 +9,6 @@ import fernuni.propra.internal_data_model.Point;
 
 public interface ICandidateSearcher {
 
-	List<Lamp> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws CandidateSearcherException;
+	List<Lamp> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws CandidateSearcherException, InterruptedException;
 
 }

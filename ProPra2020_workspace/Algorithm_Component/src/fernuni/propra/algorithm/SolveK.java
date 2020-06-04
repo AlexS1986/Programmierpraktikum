@@ -26,18 +26,34 @@ public class SolveK extends Thread{
 	}
 	
 	
-	public void solve(IRuntimeInformation runTimeInformation, IRoom room) throws SolveKException{
+	public void solve(IRuntimeInformation runTimeInformation, IRoom room) throws SolveKException, InterruptedException{
 		List<Lamp> candidates;
 		try {
 			runTimeInformation.startTimeCandidateSearch();
-			candidates = candidateSearcher.searchCandidates(room, 
-					runTimeInformation);
+			try {
+				candidates = candidateSearcher.searchCandidates(room, 
+						runTimeInformation);
+			} catch(InterruptedException ie) {
+				runTimeInformation.stopTimeCandidateSearch();
+				throw new InterruptedException(ie.getMessage());
+			} 
 			runTimeInformation.stopTimeCandidateSearch();
 			
+			System.out.println("Number of candidates found: " + candidates.size());
+			
 			runTimeInformation.startTimeOptimizePositions();
-			positionOptimizer.optimizePositions(room, 
-					candidates, runTimeInformation); 
+			try {
+				positionOptimizer.optimizePositions(room, 
+						candidates, runTimeInformation); 
+			} catch (InterruptedException ie) {
+				runTimeInformation.stopTimeOptimizePositions();
+				throw new InterruptedException(ie.getMessage()); 
+			} 
 			runTimeInformation.stopTimeOptimizePositions();
+			
+			
+			
+			
 			
 		} catch (CandidateSearcherException e) {
 			throw new SolveKException(e);
@@ -50,14 +66,15 @@ public class SolveK extends Thread{
 	public void run() {
 		
 		boolean isSolved = false;
-		do {
-			try {
-				solve(runTimeInformation, room);
-				isSolved = true;
-			} catch (SolveKException e) {
-				this.exception = e; // TODO break?
-			}
-		} while(!isInterrupted() && !isSolved);
+		try {
+			solve(runTimeInformation, room);
+			isSolved = true;
+		} catch(SolveKException e) {
+			this.exception = e;
+		} catch(InterruptedException ie) {
+		}
+		
+		
 		
 		
 		bestSolution = positionOptimizer.getCurrentBestSolution();
@@ -65,7 +82,7 @@ public class SolveK extends Thread{
 		if(bestSolution != null) { // null if interrupted or exception at candidate searcher -> no solution available
 			room.replaceLamps(bestSolution);
 		} else {
-			exception = new SolveKException("Not enough time to compute best solution!");
+			exception = new SolveKException("Not enough time to compute a solution!");
 		}
 		
 		setComputationFinished(true);

@@ -1,0 +1,10 @@
+package fernuni.propra.algorithm;
+
+public abstract class AbstractAlgorithmFactory {
+
+	
+	private AbstractAlgorithmFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

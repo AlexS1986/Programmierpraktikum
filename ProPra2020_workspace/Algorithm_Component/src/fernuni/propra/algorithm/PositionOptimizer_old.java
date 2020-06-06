@@ -13,7 +13,7 @@ import fernuni.propra.internal_data_model.Lamp;
 public class PositionOptimizer_old implements IPositionOptimizer{
 	private static List<Lamp> currentBestSolution;
 	private static int numberIlluminatedLampsBestSolution;
-	private static IIlluminationTester illuminationTester = AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
+	private static IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
 
 	public PositionOptimizer_old() {
 	}

@@ -1,0 +1,37 @@
+package fernuni.propra.algorithm;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+import fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+
+/**
+ * A provider of an algorithm that tests if a room is illuminated by a number of lamps.
+ * <p>
+ * Implementing classes: {@link IlluminationTester}
+ * <p>
+ * @author alex
+ *
+ */
+public interface IIlluminationTester {
+	/**
+	 * Tests whether an instance of {@link IRoom} is illuminated, by the {@link Lamp}s that are part of that {@link IRoom}.
+	 * @param room : The {@link IRoom} instance to be checked (must contain information about the {@link Lamp}s)
+	 * @param runtimeInfo : A data structure of type {@link IRuntimeIlluminationTester} that can store runtime information.
+	 * @return A boolean that represents whether room is illuminated (true) or not (false).
+	 * @throws IlluminationTesterException
+	 */
+	boolean testIfRoomIsIlluminated(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws IlluminationTesterException;
+	
+	/**
+	 * 
+	 * @param taggedLampsIterator
+	 * @param allTags
+	 * @param runtimeInfo
+	 * @return
+	 */
+	boolean testIfRoomIsIlluminated(Iterator<Lamp> taggedLampsIterator, HashSet<Integer> allTags, IRuntimeIlluminationTester runtimeInfo);
+	boolean testIfRoomIsIlluminated(HashSet<Integer> illuminatedTags, HashSet<Integer> allTags, IRuntimeIlluminationTester runtimeInfo);
+}

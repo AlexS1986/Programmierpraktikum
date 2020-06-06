@@ -10,3 +10,7 @@
 1591247035300	Copy compilation unit
 1591250854332	Rename local variable 'intersectDetected'
 1591253562011	Copy compilation unit
+1591439851290	Rename local variable 'intersectFound'
+1591439872486	Rename local variable 'lastIteration'
+1591439906293	Rename local variable 'minRectangleWithTags'
+1591439960228	Rename local variable 'setOfRectanglesReducedInCurrentIteration'

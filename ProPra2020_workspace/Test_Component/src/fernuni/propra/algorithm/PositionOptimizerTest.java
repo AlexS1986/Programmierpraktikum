@@ -169,9 +169,9 @@ public class PositionOptimizerTest {
 	@Test
 	public void testOptimizePositions() {
 		//Arrange
-		IPositionOptimizer positionOptimizer = AlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
-		IPositionOptimizer positionOptimizer2 = AlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
-		ICandidateSearcher candidateSearcher = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		IPositionOptimizer positionOptimizer = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		IPositionOptimizer positionOptimizer2 = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		ICandidateSearcher candidateSearcher = AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
 		
 		List<Lamp> taggedCandidates = null;
 		try {

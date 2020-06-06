@@ -17,7 +17,7 @@ public  class ValidateK {
 			}
 			
 			runtimeInfo.startTimeIlluminationTest();
-			boolean isIlluminated = AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester().testIfRoomIsIlluminated(room, runtimeInfo);
+			boolean isIlluminated = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester().testIfRoomIsIlluminated(room, runtimeInfo);
 			runtimeInfo.stopTimeIlluminationTest();
 			return isIlluminated;
 			//return computeResultString(room, isIlluminated);

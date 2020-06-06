@@ -10,39 +10,72 @@ import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 
+/**
+ * A specific provider of an algorithm that can check whether a room is illuminated by a set of {@link Lamp}s
+ * or not.
+ * <p>
+ * Several methods are provided for this purpose.
+ * <p>
+ * The algorithm for {@link testIfRoomIsIlluminated}({@link IRoom} room, ...) works as follows:
+ * <p>
+ * 1.) Find all original partial rectangles by forwarding to {@link OriginalPartialRectanglesFinder}
+ * <p>
+ * 2.) Iterate over all {@link Lamp}s in room and compute the set of illuminated rectangles by checking if an illuminated
+ *  {@link Lamp} is inside a rectangle and (if yes) adding the tags of that rectangle to the set of illuminated rectangles.
+ * <p>
+ * 3.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles
+ * <p> 
+ * <p>
+ The algorithm for {@link testIfRoomIsIlluminated}({@link Iterator}<{@link Lamp}> taggedLampsIterator, {@link HashSet}<{@link Integer}> allTags, ...) works as follows:
+ * <p>
+ * 1.) Iterate over tagged lamps and construct a set of tags of illuminated original rectangles
+ * <p>
+ * 2.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles 
+ * <p> 
+ * <p>
+ The algorithm for {@link testIfRoomIsIlluminated}({@link HashSet}<{@link Integer}> illuminatedTags, {@link HashSet}<{@link Integer}> allTags, ...) works as follows:
+ * <p>
+ * 1.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles 
+ * <p> 
+ * <p>
+ * Implemented interfaces and super classes: {@link ICandidateSearcher}
+ * @author alex
+ *
+ */
 public class IlluminationTester implements IIlluminationTester{ 
 	
 	public IlluminationTester() {}
 	
+	
 	@Override	
 	public boolean testIfRoomIsIlluminated(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws IlluminationTesterException {
 		try {
+			// find original rectangles
 			IOriginalPartialRectanglesFinder originalRectanglesFinder = new OriginalPartialRectanglesFinder();
 			runtimeInfo.startTimeOriginalPartialRectanglesFind();
 			List<RectangleWithTag> rectanglesWithTag = originalRectanglesFinder.findOriginalPartialRectangles(room, runtimeInfo);	
 			runtimeInfo.stopTimeOriginalPartialRectanglesFind();
+			
+			// store all tags
 			HashSet<Integer> allTags = originalRectanglesFinder.getAllTags();
 			
-			// assign lamps to tags/rectangles
+			// compute set of tags of illuminated lamps
 			HashSet<Integer> tagsOfAllIlluminatedLamps = new HashSet<Integer>();
-			
-			//List<Lamp> taggedLamps = new LinkedList<Lamp>();
 			Iterator<Lamp> lampIterator = room.getLamps();
 			while(lampIterator.hasNext()) {
 				Lamp lamp = lampIterator.next();
 				if(lamp.getOn()) {
-					//taggedLamps.add(lamp);
 					for(RectangleWithTag rec : rectanglesWithTag) {
 						if(lamp.isInsideRectangle(rec.getP1(), rec.getP3())) {
 							Iterator<Integer> tagIterator = rec.getTagIterator();
 							while(tagIterator.hasNext()) {
 								tagsOfAllIlluminatedLamps.add(tagIterator.next());
-								//lamp.addTag(tagIterator.next());
 							}
 						}
 					}
 				}	
 			}
+			// check if the set of tags of illuminated rectangles contains the tags of all rectangles
 			if(tagsOfAllIlluminatedLamps.containsAll(allTags)) {
 				return true;
 			} else {
@@ -62,7 +95,7 @@ public class IlluminationTester implements IIlluminationTester{
 	}
 
 	private static boolean illuminatedLampsCoverAllTags(Iterator<Lamp> taggedLampsIterator, HashSet<Integer> allTags) {
-		// TODO Auto-generated method stub
+		// compute set of tags of illuminated rectangles
 		HashSet<Integer> tagsOfAllIlluminatedLamps = new HashSet<Integer>();
 		while(taggedLampsIterator.hasNext()) {
 			Lamp lamp = taggedLampsIterator.next();

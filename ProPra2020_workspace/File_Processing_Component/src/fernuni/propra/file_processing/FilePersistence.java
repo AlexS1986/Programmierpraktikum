@@ -36,8 +36,8 @@ import org.jdom2.input.sax.XMLReaders;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-class FilePersistence implements IPersistence {
-    //private static final String DTD = System.getProperty("user.dir")+"/../File_Processing_Component/Model/DataModel.dtd";    
+class FilePersistence implements IPersistence { 
+	private static final String DTDFileName = "DataModel.dtd";
     
     //all lamps are turned on initially
 	@Override
@@ -243,59 +243,25 @@ class FilePersistence implements IPersistence {
 	}
 	
 	private String readDTDFile() throws IOException{
-		
-		
-		
-		
-		InputStreamReader isr = null;
-		//BufferedReader br = null; 
+		InputStreamReader isr = null; 
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("<!DOCTYPE Raum [");
-		//sb.append(System.getProperty("line.separator"));
-		
-		//TODO ohne readline 
 		
 		try {
-			InputStream inputStream = getClass().getResourceAsStream("/DataModel.dtd");
-			/*if(myURL == null) {
-				throw new IOException("DataModel.dtd not found. Cannot read input files.");
-			}
-			
-			
-			
-			String pathToDataModel = myURL.getFile(); */
-			//InputStreamReader isr2 = new InputStreamReader(inputStream);
-			
-			/*int cc;
-			StringBuilder sb1 = new StringBuilder ("");
-			while ((cc =  isr2.read()) != -1) {
-				sb1.append((char) cc);
-			}
-			
-			String pathToDataModel = sb1.toString();
-			System.out.println(pathToDataModel);
-			
-			File dtdFile = new File(pathToDataModel);
-			
-			
-			isr = new InputStreamReader(new FileInputStream(dtdFile)); */
+			InputStream inputStream = getClass().getResourceAsStream(System.getProperty("file.separator") + DTDFileName);
 			isr = new InputStreamReader(inputStream);
 			boolean firstTagRead = false;
 			int c = -1;
 			while((c=isr.read())!=-1) {
 				if(firstTagRead) {
 					sb.append((char) c);
-					if (c==62) {
-						//sb.append(System.getProperty("line.separator"));
-					}
 				} 
 				else {
 					if(c==62) {
 						firstTagRead = true;
 					}
-				}
-				
+				}	
 			}
 		} catch (IOException e) {
 			throw new IOException(e);
@@ -310,43 +276,8 @@ class FilePersistence implements IPersistence {
 		}
 		sb.append(System.getProperty("line.separator"));
 		sb.append("]>");
-		//sb.append(FilePersistence.LS);
 		return sb.toString();
 	}
-
-	/*private boolean isValidCorners(List<Point> corners, Point bottomMostRightMostPoint) {
-		return corners.size()>3;
-	}*/
-	
-	/*public static boolean isCounterClockWise(List<Point> corners, Point bottomMostRightMostPoint) {
-		// https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#1180256
-		int indexOfBMRMP = corners.indexOf(bottomMostRightMostPoint);
-		Point previous;
-		Point next;
-		if (indexOfBMRMP == 0) {
-			previous = corners.get(corners.size()-1);
-			next = corners.get(indexOfBMRMP+1);
-		} else if(indexOfBMRMP == (corners.size()-1)) {
-			previous = corners.get(indexOfBMRMP-1);
-			next = corners.get(0);
-		} else {
-			previous = corners.get(indexOfBMRMP-1);
-			next = corners.get(indexOfBMRMP+1);
-		}
-		
-		double dx1 = bottomMostRightMostPoint.getX()-previous.getX();
-		double dx2 = next.getX() - bottomMostRightMostPoint.getX();
-		
-		double dy1 = bottomMostRightMostPoint.getY()-previous.getY();
-		double dy2 = next.getY() - bottomMostRightMostPoint.getY();
-		
-		double crossProduct = dx1*dy2 - dx2*dy1;
-		return crossProduct > 0;
-	} */
-
-
-
-	
 	
 	
 }

@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
 import fernuni.propra.algorithm.util.Rectangle;
 import fernuni.propra.algorithm.util.RectangleWithTag;
 import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
@@ -24,12 +25,13 @@ import fernuni.propra.internal_data_model.Room;
 import fernuni.propra.internal_data_model.Wall;
 
 public class CandidateSearcherTest {
+	
 	private IRoom mockRoom, room, room2, roomStar, roomHufeisen;
-	private Point p1, p2, p3,p4, p5, p6, p7, p8;
 	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
 	private Point p31, p32, p33, p34, p35, p36, p37, p38;
-	private Wall w1, w2,w3,w4;
-	private LinkedList<Point> corners, corners2;
+	
+	
+	
 	private static List<IRoom> rooms;
 	
 	@BeforeClass
@@ -64,111 +66,8 @@ public class CandidateSearcherTest {
 	
 	@Before
 	public void setup() {
-		p1 = new Point(0,0);
-		p2 = new Point(1,0);
-		p3 = new Point (1,1);
-		p4 = new Point(0,1);
 		
-		p5 = new Point(0.5, 1.0);
-		p6 = new Point(0.5, 0.5);
-		p7 = new Point(0,   0.5);
-		
-		
-		
-		w1 = new Wall(p1,p2);
-		w2 = new Wall(p2,p3);
-		w3 = new Wall(p3,p4);
-		w4 = new Wall(p4,p1);
-		
-		List<Wall> walls = new LinkedList<Wall>();
-		walls.add(w1); walls.add(w2); walls.add(w3); walls.add(w4);
-		
-		corners= new LinkedList<Point>();
-		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
-		
-		corners2= new LinkedList<Point>();
-		corners2.add(p1); corners2.add(p2); corners2.add(p3); corners2.add(p5);
-		corners2.add(p6); corners2.add(p7);
-		
-		room = new Room("test", null, corners);	
-		room2 = new Room("test", null, corners2);	
-		mockRoom = new IRoom() {
-			
-			@Override
-			public Iterator<Wall> getWalls() {
-				// TODO Auto-generated method stub
-				return walls.iterator();
-			}
-			
-			@Override
-			public int getNumberOfLamps() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMinY() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMinX() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMaxY() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMaxX() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public Iterator<Lamp> getLamps() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public String getID() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Iterator<Point> getCorners() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public void addLamp(Lamp lamp) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void replaceLamps(List<Lamp> lamps) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public String printLampPositions() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
-		
-		
-	
+		// build room star
 		pc1 = new Point(1,-1);
 		pc2 = new Point(2,-1);
 		pc3 = new Point(2,1);
@@ -188,7 +87,7 @@ public class CandidateSearcherTest {
 		
 		roomStar = new Room("star", null, cornersStar);
 		
-		
+		// build room Hufeisen
 		p31 = new Point(-2,0);
 		p32 = new Point(2,0);
 		p33 = new Point(2,2);
@@ -203,26 +102,24 @@ public class CandidateSearcherTest {
 		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);
 		
 		
-		
-		
-		
 	}
 	
 	@Test
 	public void testSearchCandidates() {
 		//Arrange 
-		ICandidateSearcher candidateSearcher1 = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
-		ICandidateSearcher candidateSearcher2 = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
-		ICandidateSearcher candidateSearcher3 = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		CandidateSearcher candidateSearcher1 = new CandidateSearcher();
+		CandidateSearcher candidateSearcher2 = new CandidateSearcher();
+		CandidateSearcher candidateSearcher3 = new CandidateSearcher();
+		
 		
 		//Act
 		List<Lamp> candidates = null;
 		List<Lamp> candidates2 = null;
 		List<Lamp> candidates3 = null;
 		try {
-			candidates = candidateSearcher1.searchCandidates(room,null);
-			candidates2 = candidateSearcher2.searchCandidates(roomHufeisen,null);
-			candidates3 = candidateSearcher2.searchCandidates(rooms.get(9),null);
+			candidates  = candidateSearcher1.searchCandidates(roomStar, new RuntimeInformation());
+			candidates2 = candidateSearcher2.searchCandidates(roomHufeisen, new RuntimeInformation());
+			candidates3 = candidateSearcher3.searchCandidates(rooms.get(9), new RuntimeInformation());
 		} catch (CandidateSearcherException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -236,83 +133,38 @@ public class CandidateSearcherTest {
 		assertTrue(candidates2.get(1).isEqual(new Point(1.5,0.5)));
 	}
 
-
+	/** Checks if CandidateSearcher correctly determines the reduced tagged rectangles from a set of tagged rectangles that might overlap.
+	 * The reduced set contains the rectangles that result from overlapping. Only rectangles whose tags are not a subset of the tags of another rectangle are kept.
+	*/
 	@Test
-	public void testReduceRectangles() {
+	public void testReduceRectangles() { 
 		// Arrange
-		CandidateSearcher candidateSearcher = (CandidateSearcher) AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
-		RectangleWithTag refRectangle = new RectangleWithTag(new Point(0,0), new Point(1,1),0);
-		refRectangle.addTag(1); refRectangle.addTag(2); refRectangle.addTag(3);
-		RectangleWithTag refRectangle2 = new RectangleWithTag(new Point(0.5,0), new Point(1,0.5),0);
-		refRectangle2.addTag(1); refRectangle2.addTag(2); refRectangle2.addTag(3); refRectangle2.addTag(4); refRectangle2.addTag(5);
+		ArrayList<RectangleWithTag> rectanglesWithTagIn = new ArrayList<RectangleWithTag>();
+		CandidateSearcher candidateSearcher = new CandidateSearcher();
+		RectangleWithTag refRectangleWithTag = new RectangleWithTag(new Point(-2,0), new Point(-1,1), 0);
+		refRectangleWithTag.addTag(1);
+		RectangleWithTag refRectangleWithTag2 = new RectangleWithTag(new Point(1,0), new Point(2,1),1);
+		refRectangleWithTag2.addTag(2);
 		
-		RectangleWithTag refRectangle3 = new RectangleWithTag(pc10, pc4, 0);
-		refRectangle3.addTag(1); refRectangle3.addTag(2); refRectangle3.addTag(3); refRectangle3.addTag(4); refRectangle3.addTag(5);
-		refRectangle3.addTag(6); refRectangle3.addTag(7); refRectangle3.addTag(8); refRectangle3.addTag(9); refRectangle3.addTag(10);
-		refRectangle3.addTag(11);
+		// Hufeisenkonfiguration von Rechtecken
+		RectangleWithTag rec0 = new RectangleWithTag(new Point(-2, 0), new Point(-1, 2), 0);
+		RectangleWithTag rec1 = new RectangleWithTag(new Point(-2, 0), new Point(2, 1), 1);
+		RectangleWithTag rec2 = new RectangleWithTag(new Point(1,0), new Point(2,2),2);
+		rectanglesWithTagIn.add(rec0); rectanglesWithTagIn.add(rec1); rectanglesWithTagIn.add(rec2);
 		
-		RectangleWithTag refRectangle4 = new RectangleWithTag(p31, p36, 0);
-		refRectangle4.addTag(2); refRectangle4.addTag(3); refRectangle4.addTag(6); refRectangle4.addTag(7); 
 		
-		RectangleWithTag refRectangle5 = new RectangleWithTag(new Point(1,0), new Point(2,1), 0);
-		refRectangle5.addTag(1); refRectangle5.addTag(4); refRectangle5.addTag(5); refRectangle5.addTag(7);
-
-		//Act
-		//1st room
-		List<RectangleWithTag> reducedRectangles = null;
+		// Act 
+		ArrayList<RectangleWithTag> reducedRectangles = new ArrayList<RectangleWithTag>();
 		try {
-			reducedRectangles = candidateSearcher.reduceRectangles(
-					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(room, null));
-
-		} catch (OriginalPartialRectanglesFinderException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			fail(e.getMessage());
-		}
-				
-		//2nd room
-		List<RectangleWithTag> reducedRectangles2 = null;
-		try {
-			reducedRectangles2  = candidateSearcher.reduceRectangles(
-					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(room2, null));
-		} catch (OriginalPartialRectanglesFinderException | InterruptedException e) {
-			// TODO Auto-generated catch block
+			reducedRectangles = candidateSearcher.reduceRectangles(rectanglesWithTagIn);
+		} catch (InterruptedException e) {
 			fail(e.getMessage());
 		}
 		
-		
-		//3rd room
-		List<RectangleWithTag> reducedRectangles3 = null;
-		try {
-			reducedRectangles3 = candidateSearcher.reduceRectangles(
-					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(roomStar, null));
-		} catch (OriginalPartialRectanglesFinderException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			fail(e.getMessage());
-		}
-		
-		
-		//4th room
-		List<RectangleWithTag> reducedRectangles4 = null;
-		try {
-			reducedRectangles4  = candidateSearcher.reduceRectangles(
-					new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(roomHufeisen, null));
-		} catch (OriginalPartialRectanglesFinderException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				
-		//Assert
-		boolean test1 = reducedRectangles != null && reducedRectangles.size()==1;
-		boolean test2 = reducedRectangles.get(0).equals(refRectangle);
-		boolean test3 = reducedRectangles != null && reducedRectangles.size()==1;
-		boolean test4 = reducedRectangles2.get(0).equals(refRectangle2);
-		boolean test5 = reducedRectangles3 != null && reducedRectangles3.size()==1;
-		boolean test6 = reducedRectangles3.get(0).equals(refRectangle3);
-		boolean test7 = reducedRectangles4.get(0).equals(refRectangle4);
-		boolean test8 = reducedRectangles4.get(1).equals(refRectangle5);
-		
-		
-		assertTrue(test1 && test2 && test3 && test4 && test5 && test6 && test7 && test8);
+		// Assert
+		assertTrue("Number of reduced rectangles is not correct.", reducedRectangles.size() == 2);
+		assertTrue(reducedRectangles.get(0).equals(refRectangleWithTag));
+		assertTrue(reducedRectangles.get(1).equals(refRectangleWithTag2));
 		
 	}
 	

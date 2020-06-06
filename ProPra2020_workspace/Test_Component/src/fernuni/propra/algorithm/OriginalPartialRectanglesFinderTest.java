@@ -210,7 +210,7 @@ public class OriginalPartialRectanglesFinderTest {
 	public void testFindOriginalPartialRectangles() {
 		//Arrange
 		OriginalPartialRectanglesFinder rectanglesFinder3 = new OriginalPartialRectanglesFinder();
-		CandidateSearcher candidateSearcher = (CandidateSearcher) AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		CandidateSearcher candidateSearcher = (CandidateSearcher) AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
 		
 		//Act
 		IRoom testRoom = rooms.get(9);

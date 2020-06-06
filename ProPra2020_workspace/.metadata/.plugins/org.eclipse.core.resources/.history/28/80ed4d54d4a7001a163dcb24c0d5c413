@@ -1,0 +1,11 @@
+package fernuni.propra.algorithm;
+
+
+
+public abstract class AbstractAlgorithmFactory {
+	
+	protected abstract ICandidateSearcher createCandidateSearcher();
+	protected abstract IPositionOptimizer createPositionOptimizer();
+	protected abstract IIlluminationTester createIlluminiationTester();
+
+}

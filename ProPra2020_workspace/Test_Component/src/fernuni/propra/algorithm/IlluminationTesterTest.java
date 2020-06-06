@@ -93,7 +93,7 @@ public class IlluminationTesterTest {
 	@Test
 	public void testTestIfRoomIsIlluminatedIRoomIRuntimeIlluminationTester() {
 		//Arrange 
-		IIlluminationTester illuminationTester = AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
+		IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
 		
 		//Act
 		boolean test1 = false;
@@ -159,7 +159,7 @@ public class IlluminationTesterTest {
 	@Test
 	public void testTestIfRoomIsIlluminatedIteratorOfLampHashSetOfIntegerIRuntimeIlluminationTester() {
 		//Arrange 
-		IIlluminationTester illuminationTester = AlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
+		IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
 		HashSet<Integer> allTags = new HashSet<Integer>();
 		allTags.add(0); allTags.add(1); allTags.add(2); allTags.add(3);
 		List<Lamp> lamps= new LinkedList<Lamp>();

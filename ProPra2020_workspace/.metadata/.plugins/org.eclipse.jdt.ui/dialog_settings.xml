@@ -10,7 +10,7 @@
 	<section name="JavaElementSearchActions">
 	</section>
 	<section name="BuildPathsPropertyPage">
-		<item key="pageIndex" value="1"/>
+		<item key="pageIndex" value="0"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>
@@ -118,5 +118,19 @@
 		<item key="DIALOG_WIDTH" value="519"/>
 		<item key="DIALOG_HEIGHT" value="639"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+	<section name="FatJarPackageWizard">
+		<item key="FatJarPackageWizardPage.ANTSCRIPT_SAVE" value="false"/>
+		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="/Users/alex/Desktop/Programmierpraktikum/ProPra2020_workspace"/>
+		<item key="FatJarPackageWizardPage.LIBRARY_HANDLING" value="2"/>
+		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="Main - Main_Component"/>
+		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="/Users/alex/Desktop/test.jar"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/Users/alex/Desktop/test.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="/Users/alex/Desktop/Programmierpraktikum/ProPra2020_workspace.xml"/>
+			<item value=".xml"/>
+		</list>
 	</section>
 </section>

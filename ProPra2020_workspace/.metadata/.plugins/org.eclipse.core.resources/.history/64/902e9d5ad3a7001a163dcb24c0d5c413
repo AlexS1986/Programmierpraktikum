@@ -1,0 +1,10 @@
+package fernuni.propra.algorithm;
+
+
+
+public abstract class AbstractAlgorithmFactory {
+	
+	
+	protected abstract AbstractAlgorithmFactory deliverNewAbstractAlgorithmFactory();
+
+}

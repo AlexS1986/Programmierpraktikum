@@ -1,0 +1,42 @@
+package fernuni.propra.algorithm;
+
+/**
+ * An abstract factory that configures the solution algorithm by instantiating specific instances of the 
+ * interfaces {@link ICandidateSearcher}, {@link IPositionOptimizer} and {@link IIlluminationTester} that are
+ * to be used within the algorithm.
+ * <p>
+ * The {@link AlgorithmFactory} implements the "abstract factory" and "singleton" design patterns.
+ * <p>
+ * 
+ * 
+ * @author alex
+ *
+ */
+public class AlgorithmFactory extends AbstractAlgorithmFactory{
+	private static AlgorithmFactory singleton; 
+	
+	private AlgorithmFactory() {}
+	
+	public static AlgorithmFactory getAlgorithmFactory() {
+		if (singleton == null) {
+			singleton = new AlgorithmFactory();
+		}
+		
+		return singleton;
+	}
+	
+	@Override
+	public ICandidateSearcher createCandidateSearcher() {
+		return new CandidateSearcher();
+	}
+
+	
+	public IPositionOptimizer createPositionOptimizer() {
+		return new PositionOptimizer();
+	}
+	
+	protected IIlluminationTester createIlluminiationTester() {
+		return new IlluminationTester();
+	}
+
+}

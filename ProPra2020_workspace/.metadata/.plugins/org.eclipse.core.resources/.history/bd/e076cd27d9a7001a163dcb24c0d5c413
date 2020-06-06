@@ -1,0 +1,37 @@
+package fernuni.propra.algorithm;
+
+
+/**
+ * Specifies an interface for the construction of parts of an algorithm defined by consistent
+ * instances of {@link ICandidateSearcher}, {@link IPositionOptimizer} and {@link IIlluminationTester}.
+ * <p>
+ * Implements the abstract factory design pattern. Subclasses, i.e. "concrete factories "
+ * must implement this interface.
+ * <p>
+ * 
+ * Implementing classes: {@link AlgorithmFactory1}
+ * 
+ * 
+ * @author alex
+ *
+ */
+public abstract class AbstractAlgorithmFactory {
+	
+	/**
+	 * Provides an instance of a "concrete factory", that can deliver consistent {@link ICandidateSearcher},
+	 * {@link IPositionOptimizer} and {@link IIlluminationTester} objects.
+	 * @return An instance of a "concrete factory".
+	 */
+	public static AbstractAlgorithmFactory getAlgorithmFactory() {
+		return AlgorithmFactory1.getAlgorithmFactory1();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract ICandidateSearcher createCandidateSearcher();
+	public abstract IPositionOptimizer createPositionOptimizer();
+	public abstract IIlluminationTester createIlluminiationTester();
+
+}

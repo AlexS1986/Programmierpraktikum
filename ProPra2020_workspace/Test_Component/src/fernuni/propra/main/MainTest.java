@@ -17,9 +17,9 @@ public class MainTest {
 	public void testUseCase_D() {
 		//Arrange
 		String[] commandLineParameters = new String[] {"r=d", 
-				"if=\"/Users/alex/Desktop/Programmierpraktikum/ProPra2020_workspace/Test_Component/instances/validationInstances/Selbsttest_20b.xml\""};
+				"if=instances/validationInstances/Selbsttest_20b.xml"};
 		String[] commandLineParameters2 = new String[] {"r=d", 
-		"if=\"instances/validationInstances/Selbsttest_20b.xml\""};
+		"if=instances/validationInstances/Selbsttest_20b.xml"};
 		
 		//Act
 		Main.main(commandLineParameters);
@@ -38,7 +38,7 @@ public class MainTest {
 	@Test
 	public void testUseCase_SD() {
 		//Arrange
-		String[] commandLineParameters = new String[] {"if=\"instances/validationInstances/Selbsttest_100b.xml\"", "r=sd", "l=15" };
+		String[] commandLineParameters = new String[] {"if=instances/validationInstances/Selbsttest_100b.xml", "r=sd", "l=15" };
 		
 		//Act
 		Main.main(commandLineParameters);
@@ -56,7 +56,7 @@ public class MainTest {
 	@Test
 	public void testUseCase_V() {
 		// Arrange
-		String[] commandLineParameters = new String[] {"if=\"instances/validationInstances/Selbsttest_20a_incomplete.xml\"", "r=v" };
+		String[] commandLineParameters = new String[] {"if=instances/validationInstances/Selbsttest_20a_incomplete.xml", "r=v" };
 		
 		//Act
 		Main.main(commandLineParameters);

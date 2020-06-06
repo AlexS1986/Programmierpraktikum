@@ -21,8 +21,8 @@ public class SolveK extends Thread{
 	public SolveK(IRoom room, IRuntimeInformation runTimeInformation) {
 		this.room = room;
 		this.runTimeInformation = runTimeInformation;
-		this.candidateSearcher = AlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
-		this.positionOptimizer = AlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		this.candidateSearcher = AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		this.positionOptimizer = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
 	}
 	
 	

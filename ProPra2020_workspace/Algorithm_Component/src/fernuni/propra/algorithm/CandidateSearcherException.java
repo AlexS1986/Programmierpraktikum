@@ -1,19 +1,25 @@
 package fernuni.propra.algorithm;
 
+/**
+ * An exception that is thrown if the search of potential candidates for lamp positions fails due 
+ * to some unexpected error.
+ * @author alex
+ *
+ */
 public class CandidateSearcherException extends Exception {
 
 	public CandidateSearcherException() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public CandidateSearcherException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public CandidateSearcherException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

@@ -38,8 +38,6 @@ public class PositionOptimizer implements IPositionOptimizer{
 		
 		ArrayList<Lamp> lamps = deepCopyLamps(taggedCandidates);
 		
-		//HashSet<Integer> illuminated = new HashSet<Integer>();
-		
 
 		searchSolution(lamps,0, allTags, numberIlluminatedLampsBestSolution,runTimeInformation);
 		
@@ -66,11 +64,6 @@ public class PositionOptimizer implements IPositionOptimizer{
 			
 			if (idx < lamps.size()) {
 				Lamp lamp = lamps.get(idx);
-				
-				/*if (!lamp.getOn()) {
-					System.out.println("hi");
-				}*/
-				//lamp.turnOn(); // lamp is always turned on
 				
 				
 				searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn, runTimeInformation);

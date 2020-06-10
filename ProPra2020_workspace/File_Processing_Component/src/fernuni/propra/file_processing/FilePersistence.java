@@ -71,7 +71,7 @@ class FilePersistence implements IPersistence {
 				Point tmpPoint = new Point(Double.parseDouble(cornerNode.getChildText("x")), Double.parseDouble(cornerNode.getChildText("y")));
 				// add wall
 				if (!corners.isEmpty()) {
-					LineSegment newWall = new Wall(corners.getLast(), tmpPoint);
+					LineSegment newWall = new LineSegment(corners.getLast(), tmpPoint);
 					testAndAddWallToWalls(newWall, walls);
 				}
 				
@@ -79,7 +79,7 @@ class FilePersistence implements IPersistence {
 				corners.add(tmpPoint);
 			}
 			// add last wall
-			LineSegment newWall = new Wall(corners.getLast(), corners.getFirst());
+			LineSegment newWall = new LineSegment(corners.getLast(), corners.getFirst());
 			testAndAddWallToWalls(newWall, walls);
 			
 

@@ -22,7 +22,7 @@ import fernuni.propra.internal_data_model.Point;
  * The algorithm works as follows:
  * <p>
  * 1.) The original partial rectangles (instances of {@link RectangleWithTag}) of the room are constructed for {@link IRoom} according the method described in [1].
- *     This is delegated to {@link OriginalPartialRectanglesFinder}. The rectangles are the original set of potential lamp positions.
+ *     This is delegated to {@link OriginalPartialRectanglesFinder}. The set of potential lamp positions is initialized as the returned set.
  * <p> 
  * 2.) 	All pairs of original partial rectangles are intersected. If an overlap is found, 
  * 		the resulting rectangle is added to the set of potential lamp positions and the tags of both original
@@ -65,7 +65,9 @@ public class CandidateSearcher  implements ICandidateSearcher{
 		try {
 			// find original partial rectangles
 			runtimeCandidateSearcher.startTimeOriginalPartialRectanglesFind(); // store runtime for construction of original partial rectangles
-			ArrayList<RectangleWithTag> originalRectangles = constructOriginalPartialRectangles(room, runtimeCandidateSearcher);
+			ArrayList<RectangleWithTag> originalRectangles = 
+					AbstractAlgorithmFactory.getAlgorithmFactory().createOriginalPartialRectanglesFinder().
+					findOriginalPartialRectangles(room, runtimeCandidateSearcher);
 			runtimeCandidateSearcher.stopTimeOriginalPartialRectanglesFind();
 			
 			// reduce rectangles: result is non overlapping set of rectangles. Each rectangle contains all tags of 
@@ -93,16 +95,6 @@ public class CandidateSearcher  implements ICandidateSearcher{
 		return centersOfReducedRectangles;		
 	}
 
-	/**
-	 * Delegates construction of original partial rectangles to {@link OriginalPartialRectanglesFinder}.
-	 * @param room : An {@link IRoom} instance
-	 * @param runtimeCandidateSearcher : A data structure that can be used to store runtime information
-	 * @return
-	 * @throws OriginalPartialRectanglesFinderException
-	 */
-	ArrayList<RectangleWithTag> constructOriginalPartialRectangles(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws OriginalPartialRectanglesFinderException {
-		return new OriginalPartialRectanglesFinder().findOriginalPartialRectangles(room, runtimeCandidateSearcher);
-	}
 
 	/**
 	 * Reduces an original set of tagged partial rectangles to a set of non-overlapping partial rectangles that contain all tags of 

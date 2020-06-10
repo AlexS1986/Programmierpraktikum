@@ -1,0 +1,205 @@
+package fernuni.propra.algorithm;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import fernuni.propra.algorithm.runtime_information.IRuntimeCandidateSearcher;
+import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
+import fernuni.propra.algorithm.util.Rectangle;
+import fernuni.propra.algorithm.util.RectangleWithTag;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
+
+/**
+ * 
+ * A specific provider of an algorithm that can compute a {@link List} of potential {@link Lamp} positions 
+ * for an instance of {@link IRoom}.
+ * <p>
+ * The algorithm works as follows:
+ * <p>
+ * 1.) The original partial rectangles (instances of {@link RectangleWithTag}) of the room are constructed for {@link IRoom} according the method described in [1].
+ *     This is delegated to {@link OriginalPartialRectanglesFinder}. The rectangles are the original set of potential lamp positions.
+ * <p> 
+ * 2.) 	All pairs of original partial rectangles are intersected. If an overlap is found, 
+ * 		the resulting rectangle is added to the set of potential lamp positions and the tags of both original
+ * 		rectangles are added to the tags of the new rectangle
+ * <p>
+ * 3.)  The set of potential lamp positions is reduced by only keeping those lamp positions whose tags are not a subset of 
+ * 		the tags of other rectangles in the set
+ * <p>
+ * 4.) 	Steps 2.) and 3.) are repeated until the set does not change any more
+ * <p>
+ * 5.) 	The potential lamp positions are the centers of the remaining tagged rectangles
+ * <p>
+ * 6.) 	{@link Lamp} objects are created at these {@ Point}s and the lamps are tagged with the tags of
+ *  	the corresponding tagged {@link RectangleWithTag}, i.e. the tags of all original partial rectangles 
+ *      of the room that contain the {@link Lamp} are saved to the {@Lamp}s tags.
+ * <p>     
+ * 7.) 	A {@link List} of all such {@link Lamp}s is returned.
+ * 
+ * <p> 
+ * Implemented interfaces and super classes: {@link ICandidateSearcher}
+ * 
+ * <p>
+ * <p>
+ * [1]: Aufgabenstellung zum Grundpraktikum Programmierung im Sommersemester 2020
+ * 
+ * 
+ * 
+ * @author alex
+ *
+ */
+public class CandidateSearcher  implements ICandidateSearcher{
+
+	
+	public CandidateSearcher() {
+	}
+
+	@Override
+	public List<Lamp> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws CandidateSearcherException, InterruptedException {
+		List<Lamp> centersOfReducedRectangles = null; // the potential lamp positions
+		try {
+			// find original partial rectangles
+			runtimeCandidateSearcher.startTimeOriginalPartialRectanglesFind(); // store runtime for construction of original partial rectangles
+			ArrayList<RectangleWithTag> originalRectangles = constructOriginalPartialRectangles(room, runtimeCandidateSearcher);
+			runtimeCandidateSearcher.stopTimeOriginalPartialRectanglesFind();
+			
+			// reduce rectangles: result is non overlapping set of rectangles. Each rectangle contains all tags of 
+			// original rectangles that it overlaps
+			List<RectangleWithTag> reducedRectangles = reduceRectangles(originalRectangles);
+			
+			// create lamp objects at each potential position
+			centersOfReducedRectangles = new LinkedList<Lamp>();
+			for (RectangleWithTag rectangle : reducedRectangles) {
+				Point point = rectangle.getCenter();
+				Lamp lamp = new Lamp(point.getX(), point.getY());
+				Iterator<Integer> tagsOfRectangleIterator = rectangle.getTagIterator();
+				while(tagsOfRectangleIterator.hasNext()) {
+					lamp.addTag(tagsOfRectangleIterator.next());
+				}
+				centersOfReducedRectangles.add(lamp);
+			}
+			
+		} catch (OriginalPartialRectanglesFinderException  e) {
+			throw new CandidateSearcherException(e); // chain exceptions
+		}	catch (RuntimeExceptionLamps rte) {
+			throw new CandidateSearcherException(rte);
+		}
+		
+		return centersOfReducedRectangles;		
+	}
+
+	/**
+	 * Delegates construction of original partial rectangles to {@link OriginalPartialRectanglesFinder}.
+	 * @param room : An {@link IRoom} instance
+	 * @param runtimeCandidateSearcher : A data structure that can be used to store runtime information
+	 * @return
+	 * @throws OriginalPartialRectanglesFinderException
+	 */
+	ArrayList<RectangleWithTag> constructOriginalPartialRectangles(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher) throws OriginalPartialRectanglesFinderException {
+		return AbstractAlgorithmFactory.getAlgorithmFactory().createOriginalPartialRectanglesFinder().findOriginalPartialRectangles(room, runtimeCandidateSearcher);
+	}
+
+	/**
+	 * Reduces an original set of tagged partial rectangles to a set of non-overlapping partial rectangles that contain all tags of 
+	 * all original partial rectangles that intersect the final rectangle.
+	 * <p>
+	 * The algorithm works as follows: 
+	 * @param originalRectanglesTagged : The original rectangles
+	 * @return A set of reduced rectangles as described above.
+	 * @throws InterruptedException
+	 */
+	ArrayList<RectangleWithTag> reduceRectangles(ArrayList<RectangleWithTag> originalRectanglesTagged) throws InterruptedException{
+		
+		
+		ArrayList<RectangleWithTag> reducedRectanglesLastIteration = originalRectanglesTagged;
+		ArrayList<RectangleWithTag> reducedRectanglesCurrentIteration = null;
+		
+		boolean reductionOccured; // the set of rectangles has been further reduced in the current iteration
+		do { // as long as set of rectangles can still be reduced
+		
+		reductionOccured = false;
+		ArrayList<RectangleWithTag> intersectedRectangleWithTags = new ArrayList<RectangleWithTag>(); // set of rectangles with tag that can be constructed from intersections of last iteration rectangles
+		for (int i = 0; i < reducedRectanglesLastIteration.size(); i++) {
+			RectangleWithTag rectangleWithTagI = reducedRectanglesLastIteration.get(i);
+			boolean intersectFoundI = false;
+			for (int j = i+1; j< reducedRectanglesLastIteration.size(); j++) {
+				RectangleWithTag rectangleWithTagJ = reducedRectanglesLastIteration.get(j);
+				Rectangle overlappingRectangle = rectangleWithTagI.overlap(rectangleWithTagJ);
+				
+				if(overlappingRectangle != null) { // intersection detected
+					intersectFoundI = true;
+					
+					// determine tags of overlap
+					HashSet<Integer> tagsOfOverlap= new HashSet<Integer>();
+					tagsOfOverlap.addAll(rectangleWithTagI.getCopyOfTags());
+					tagsOfOverlap.addAll(rectangleWithTagJ.getCopyOfTags());
+					
+					// determine all rectangles that also contain center of overlapping rectangle and add that to the tags of the overlap
+					for (int k = j+1; k < reducedRectanglesLastIteration.size(); k++) {
+						RectangleWithTag rectangleWithTagK = reducedRectanglesLastIteration.get(k);
+						if(overlappingRectangle.getCenter().isInsideRectangle(rectangleWithTagK.getP1(), rectangleWithTagK.getP3()) ) {
+							tagsOfOverlap.addAll(rectangleWithTagK.getCopyOfTags());
+						}
+					}
+					
+					// add to all new rectangles 
+					RectangleWithTag overlappingRectangleWithTag = new RectangleWithTag(overlappingRectangle, tagsOfOverlap);	
+					intersectedRectangleWithTags.add(overlappingRectangleWithTag);					
+				}	
+			}
+			// still need to keep rectangleWithTagI if no intersection with other rectangles is found
+			if (!intersectFoundI) { 
+				intersectedRectangleWithTags.add(rectangleWithTagI);
+			}
+		}
+		
+		// determine those rectangles whose tags are not contained in another rectangle's tags
+		reducedRectanglesCurrentIteration = new ArrayList<RectangleWithTag>();
+		boolean[] isMinRectangle = new boolean[intersectedRectangleWithTags.size()]; // isMinRectangle[i] = true -> tags of rec_i are not contained in another rectangle
+		for (int i = 0; i<isMinRectangle.length; i++) {
+			isMinRectangle[i] = true;;
+		}
+		
+		for (int i = 0; i<intersectedRectangleWithTags.size(); i++) {
+			RectangleWithTag rectangleWithTagI = intersectedRectangleWithTags.get(i);
+			
+			
+			for (int j = i+1; j < intersectedRectangleWithTags.size(); j++) {
+				RectangleWithTag rectangleWithTagJ = intersectedRectangleWithTags.get(j);
+				boolean iSubsetOfJ = rectangleWithTagJ.getCopyOfTags().containsAll(rectangleWithTagI.getCopyOfTags());
+				boolean jSubsetOfI = rectangleWithTagI.getCopyOfTags().containsAll(rectangleWithTagJ.getCopyOfTags());
+				if (iSubsetOfJ && jSubsetOfI) { // equal
+					isMinRectangle[i] = false;
+				} else if (iSubsetOfJ) {
+					isMinRectangle[i] = false;
+				} else if(jSubsetOfI) {
+					isMinRectangle[j] = false;
+				}
+			}
+			
+		}
+		
+		// keep only those rectangles whose tags are not contained in another rectangle's tags for next iteration 
+		for (int i = 0; i<isMinRectangle.length; i++) {
+			if (isMinRectangle[i]) {
+				reducedRectanglesCurrentIteration.add(intersectedRectangleWithTags.get(i));
+			} else {
+				reductionOccured = true; // overlap detected
+			}
+		}
+		
+		// overwrite for next iteration
+		reducedRectanglesLastIteration = reducedRectanglesCurrentIteration;
+		
+		} while(reductionOccured);
+		
+		return reducedRectanglesCurrentIteration;
+	}	
+	
+
+}

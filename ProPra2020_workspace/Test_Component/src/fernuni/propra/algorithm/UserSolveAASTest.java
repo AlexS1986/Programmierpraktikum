@@ -35,13 +35,7 @@ public class UserSolveAASTest {
 		p6 = new Point(0.5, 0.5);
 		p7 = new Point(0,   0.5);
 		
-		w1 = new Wall(p1,p2);
-		w2 = new Wall(p2,p3);
-		w3 = new Wall(p3,p4);
-		w4 = new Wall(p4,p1);
 		
-		List<Wall> walls = new LinkedList<Wall>();
-		walls.add(w1); walls.add(w2); walls.add(w3); walls.add(w4);
 		
 		corners= new LinkedList<Point>();
 		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);

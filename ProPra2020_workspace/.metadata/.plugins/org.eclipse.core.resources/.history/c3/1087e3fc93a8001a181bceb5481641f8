@@ -1,0 +1,26 @@
+package fernuni.propra.algorithm;
+
+/**
+ * An exception that is thrown if the search of potential candidates for lamp positions fails due 
+ * to some unexpected error.
+ * <p>
+ * @author alex
+ *
+ */
+public class IlluminationTesterException extends Exception {
+	public IlluminationTesterException() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public IlluminationTesterException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+	public IlluminationTesterException(Throwable cause) {
+		super(cause);
+		// TODO Auto-generated constructor stub
+	}
+
+
+}

@@ -5,7 +5,7 @@ import fernuni.propra.file_processing.UserReadInputWriteOutputException;
 import fernuni.propra.internal_data_model.IRoom;
 
 /**
- * Diese Klasse wird als API (Application Programming INteraface) verwendet. Das
+ * Diese Klasse wird als API (Application Programming Interaface) verwendet. Das
  * bedeutet, dass diese Klasse als Bibliothek für andere Applikationen verwendet
  * werden kann.
  * 

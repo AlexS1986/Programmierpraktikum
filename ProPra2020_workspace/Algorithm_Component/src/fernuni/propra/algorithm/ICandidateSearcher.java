@@ -12,7 +12,12 @@ import fernuni.propra.internal_data_model.Point;
  * A provider of an algorithm that can compute a {@link List} of potential {@link Lamp} positions 
  * for an instance of {@link IRoom}.
  * 
+ * <p>
+ * Implementing classes: {@link CandidateSearcher}
+ * <p>
+ * 
  * @author alex
+ *
  *
  *  
  */

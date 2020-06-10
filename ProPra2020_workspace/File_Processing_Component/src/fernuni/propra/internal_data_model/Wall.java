@@ -2,13 +2,17 @@ package fernuni.propra.internal_data_model;
 
 
 public class Wall extends LineSegment{
+	private int tag;
 	
-	public Wall(Point p1, Point p2) {
+	
+	public Wall(Point p1, Point p2, int tag) {
 		super(p1, p2);
+		this.tag = tag;
 	}
 	
-	public Wall(LineSegment lineSegment) {
+	public Wall(LineSegment lineSegment, int tag) {
 		super(lineSegment.getP1(), lineSegment.getP2());
+		this.tag = tag;
 	}
 	
 	public boolean isNorthWall() {
@@ -25,6 +29,10 @@ public class Wall extends LineSegment{
 	
 	public boolean isEastWall() {
 		return isVertical() && getP2().largerY(getP1());
+	}
+	
+	public int getTag() {
+		return tag;
 	}
 
 	

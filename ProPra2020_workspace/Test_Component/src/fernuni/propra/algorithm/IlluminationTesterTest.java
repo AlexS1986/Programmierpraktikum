@@ -21,7 +21,6 @@ public class IlluminationTesterTest {
 	private Point p1, p2, p3,p4, p5, p6, p7, p8;
 	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
 	private Point p31, p32, p33, p34, p35, p36, p37, p38;
-	private Wall w1, w2,w3,w4;
 	private LinkedList<Point> corners, corners2;
 
 	@Before
@@ -37,13 +36,7 @@ public class IlluminationTesterTest {
 		
 		
 		
-		w1 = new Wall(p1,p2);
-		w2 = new Wall(p2,p3);
-		w3 = new Wall(p3,p4);
-		w4 = new Wall(p4,p1);
 		
-		List<Wall> walls = new LinkedList<Wall>();
-		walls.add(w1); walls.add(w2); walls.add(w3); walls.add(w4);
 		
 		corners= new LinkedList<Point>();
 		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);

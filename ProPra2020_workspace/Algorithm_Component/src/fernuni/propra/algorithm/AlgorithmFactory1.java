@@ -40,4 +40,9 @@ public class AlgorithmFactory1 extends AbstractAlgorithmFactory{
 		return new IlluminationTester();
 	}
 
+	@Override
+	public IOriginalPartialRectanglesFinder createOriginalPartialRectanglesFinder() {
+		return new OriginalPartialRectanglesFinder();
+	}
+	
 }

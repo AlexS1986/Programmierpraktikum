@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
-    <fullyQualifiedTypeName name="fernuni.propra.main.GeneralException"/>
-    <fullyQualifiedTypeName name="fernuni.propra.file_processing.UserReadInputWriteOutputAAS"/>
-    <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.IRoom"/>
-    <fullyQualifiedTypeName name="fernuni.propra.user_interface.UserDisplayAAS"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.UserValidateAAS"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.UserSolveAAS"/>
-    <fullyQualifiedTypeName name="com.sun.tools.javac.Main"/>
-    <fullyQualifiedTypeName name="fernuni.propra.main.ParameterSetException"/>
-    <fullyQualifiedTypeName name="org.junit.BeforeClass"/>
     <fullyQualifiedTypeName name="fernuni.propra.user_interface.RoomPanel"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.ICandidateSearcher"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.AlgorithmFactory"/>
     <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.Lamp"/>
     <fullyQualifiedTypeName name="java.awt.Point"/>
     <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.Point"/>
@@ -27,9 +16,7 @@
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.RuntimeExceptionLamps"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="org.junit.Ignore"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.ValidateKException"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeReader"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeInformation"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
@@ -48,16 +35,29 @@
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.SolveKException"/>
     <fullyQualifiedTypeName name="fernuni.propra.user_interface.RoomFrame"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.OriginalPartialRectanglesFinder"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.Rectangle"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.IlluminationTesterException"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.RuntimeInformation"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcher"/>
+    <fullyQualifiedTypeName name="org.graalvm.compiler.nodes.extended.GetClassNode"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.AlgorithmFactory"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.AlgorithmFactory1"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester"/>
+    <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.IRoom"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeOriginalPartialRectanglesFinder"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.RectangleWithTag"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcher"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.OriginalPartialRectanglesFinderException"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.util.Rectangle"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.WallContainerEast"/>
+    <fullyQualifiedTypeName name="fernuni.propra.internal_data_model.LineSegment"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.IOriginalPartialRectanglesFinder"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.OriginalPartialRectanglesFinder"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.AbstractAlgorithmFactory"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.OriginalPartialRectanglesFinder2"/>
 </qualifiedTypeNameHistroy>

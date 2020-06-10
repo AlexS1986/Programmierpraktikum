@@ -16,7 +16,7 @@ import fernuni.propra.internal_data_model.Lamp;
  * <p>
  * Several methods are provided for this purpose.
  * <p>
- * The algorithm for {@link testIfRoomIsIlluminated}({@link IRoom} room, ...) works as follows:
+ * The algorithm for {@link testIfRoomIsIlluminated}({@link IRoom} room, {@link IRuntimeIlluminationTester} runtimeInfo) works as follows:
  * <p>
  * 1.) Find all original partial rectangles by forwarding to {@link OriginalPartialRectanglesFinder}
  * <p>
@@ -26,16 +26,16 @@ import fernuni.propra.internal_data_model.Lamp;
  * 3.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles
  * <p> 
  * <p>
- The algorithm for {@link testIfRoomIsIlluminated}({@link Iterator}<{@link Lamp}> taggedLampsIterator, {@link HashSet}<{@link Integer}> allTags, ...) works as follows:
+ The algorithm for {@link testIfRoomIsIlluminated}({@link Iterator}<{@link Lamp}> taggedLampsIterator, {@link HashSet}<{@link Integer}> allTags, {@link IRuntimeIlluminationTester} runtimeInfo) works as follows:
  * <p>
  * 1.) Iterate over tagged lamps and construct a set of tags of illuminated original rectangles
  * <p>
  * 2.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles 
  * <p> 
  * <p>
- The algorithm for {@link testIfRoomIsIlluminated}({@link HashSet}<{@link Integer}> illuminatedTags, {@link HashSet}<{@link Integer}> allTags, ...) works as follows:
+ The algorithm for {@link testIfRoomIsIlluminated}({@link HashSet}<{@link Integer}> illuminatedTags, {@link HashSet}<{@link Integer}> allTags, {@link IRuntimeIlluminationTester} runtimeInfo) works as follows:
  * <p>
- * 1.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles 
+ * 1.) Check if the set of tags of illuminated rectangles (illuminatedTags) contains all tags of original rectangles (allTags)
  * <p> 
  * <p>
  * Implemented interfaces and super classes: {@link ICandidateSearcher}
@@ -51,7 +51,7 @@ public class IlluminationTester implements IIlluminationTester{
 	public boolean testIfRoomIsIlluminated(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws IlluminationTesterException {
 		try {
 			// find original rectangles
-			IOriginalPartialRectanglesFinder originalRectanglesFinder = new OriginalPartialRectanglesFinder();
+			IOriginalPartialRectanglesFinder originalRectanglesFinder = AbstractAlgorithmFactory.getAlgorithmFactory().createOriginalPartialRectanglesFinder();
 			runtimeInfo.startTimeOriginalPartialRectanglesFind();
 			List<RectangleWithTag> rectanglesWithTag = originalRectanglesFinder.findOriginalPartialRectangles(room, runtimeInfo);	
 			runtimeInfo.stopTimeOriginalPartialRectanglesFind();

@@ -43,5 +43,11 @@ public abstract class AbstractAlgorithmFactory {
 	 * @return A consistent instance of {@link IIlluminationTester}
 	 */
 	public abstract IIlluminationTester createIlluminiationTester();
+	
+	/**
+	 * Delivers an instance of {@link IOriginalPartialRectanglesFinder} that works with the algorithms defined by the inheriting "concrete factor"
+	 * @return
+	 */
+	public abstract IOriginalPartialRectanglesFinder createOriginalPartialRectanglesFinder();
 
 }

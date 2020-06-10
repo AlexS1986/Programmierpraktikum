@@ -86,6 +86,10 @@ public class RectangleWithTag extends Rectangle{
 		return this.tags.containsAll(other.tags) && other.tags.containsAll(this.tags);
 	}
 	
+	public Rectangle getRectangle() {
+		return new Rectangle(getP1(), getP3());
+	}
+	
 	public HashSet<Integer> getCopyOfTags() { 
 		HashSet<Integer> outTags = new HashSet<Integer>();
 		for (Integer tag : tags) {

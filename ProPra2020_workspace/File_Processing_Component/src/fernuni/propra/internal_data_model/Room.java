@@ -115,18 +115,20 @@ public class Room implements IRoom {
 		Point previousCorner = null;
 		
 		Iterator<Point> cornersIterator = getCorners();
+		int tag = 0;
 		
 		while(cornersIterator.hasNext()) {
 			Point corner = cornersIterator.next();
 			if (firstCorner == null) {
 				firstCorner = corner;
 			} else {
-				Wall newWall = new Wall(previousCorner, corner);
+				Wall newWall = new Wall(previousCorner, corner, tag);
 				walls.add(newWall);
 			}
 			previousCorner = corner;
+			tag++;
 		}
-		Wall newWall = new Wall(previousCorner, firstCorner);	
+		Wall newWall = new Wall(previousCorner, firstCorner, tag);	
 		walls.add(newWall);
 	}
 

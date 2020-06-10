@@ -36,14 +36,7 @@ public class PositionOptimizerTest {
 		p7 = new Point(0,   0.5);
 		
 		
-		
-		w1 = new Wall(p1,p2);
-		w2 = new Wall(p2,p3);
-		w3 = new Wall(p3,p4);
-		w4 = new Wall(p4,p1);
-		
-		List<Wall> walls = new LinkedList<Wall>();
-		walls.add(w1); walls.add(w2); walls.add(w3); walls.add(w4);
+	
 		
 		corners= new LinkedList<Point>();
 		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
@@ -54,80 +47,7 @@ public class PositionOptimizerTest {
 		
 		room = new Room("test", null, corners);	
 		room2 = new Room("test", null, corners2);	
-		mockRoom = new IRoom() {
-			
-			@Override
-			public Iterator<Wall> getWalls() {
-				// TODO Auto-generated method stub
-				return walls.iterator();
-			}
-			
-			@Override
-			public int getNumberOfLamps() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMinY() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMinX() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMaxY() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public double getMaxX() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public Iterator<Lamp> getLamps() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public String getID() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Iterator<Point> getCorners() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public void addLamp(Lamp lamp) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void replaceLamps(List<Lamp> lamps) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public String printLampPositions() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		
 		
 		
 	

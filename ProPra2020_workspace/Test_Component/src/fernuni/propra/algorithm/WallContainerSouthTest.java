@@ -19,17 +19,17 @@ public class WallContainerSouthTest {
 		p2 = new Point(1,0);
 		p3 = new Point(1,1);
 		p4 = new Point(0,1);
-		w1 = new Wall(p1,p2);
-		w2 = new Wall(p2,p3);
-		w3 = new Wall(p3,p4);
-		w4 = new Wall(p4,p1);
+		w1 = new Wall(p1,p2,0);
+		w2 = new Wall(p2,p3,0);
+		w3 = new Wall(p3,p4,0);
+		w4 = new Wall(p4,p1,0);
 		
-		w5 = new Wall(p2,p1);
-		w6 = new Wall(p3, p2);
-		w7 = new Wall(p4, p3);
-		w8 = new Wall(p1,p4);
+		w5 = new Wall(p2,p1,0);
+		w6 = new Wall(p3, p2,0);
+		w7 = new Wall(p4, p3,0);
+		w8 = new Wall(p1,p4,0);
 		
-		w9 = new Wall(p1,p1);
+		w9 = new Wall(p1,p1,0);
 	}
 	
 

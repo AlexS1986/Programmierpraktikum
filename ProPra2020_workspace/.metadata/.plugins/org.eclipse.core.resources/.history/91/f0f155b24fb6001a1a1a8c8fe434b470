@@ -1,0 +1,16 @@
+package fernuni.propra.algorithm;
+
+public class UserValidateAASException extends Exception {
+
+	public UserValidateAASException() {
+	}
+
+	public UserValidateAASException(String message) {
+		super(message);
+	}
+
+	public UserValidateAASException(Throwable cause) {
+		super(cause);
+	}
+
+}

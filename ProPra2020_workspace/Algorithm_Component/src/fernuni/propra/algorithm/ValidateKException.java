@@ -1,19 +1,23 @@
 package fernuni.propra.algorithm;
 
+/**
+ * Thrown if something went wrong within the validation algorithm, i.e. the check
+ * whether an {@link IRoom} is illuminated by its {@link Lamp}s.
+ * <p>
+ * @author alex
+ *
+ */
 public class ValidateKException extends Exception {
 
 	public ValidateKException() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public ValidateKException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ValidateKException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
 	}
 
 }

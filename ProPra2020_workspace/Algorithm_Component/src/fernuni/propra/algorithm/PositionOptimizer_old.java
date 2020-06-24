@@ -19,7 +19,7 @@ public class PositionOptimizer_old implements IPositionOptimizer{
 	}
 
 	@Override
-	public List<Lamp> optimizePositions(IRoom room, List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation) throws InterruptedException{
+	public List<Lamp> optimizePositions( List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation) throws InterruptedException{
  
 		// all lamps are on -> illuminated
 		currentBestSolution = taggedCandidates;

@@ -106,7 +106,6 @@ public class Room implements IRoom {
 			computeWalls();
 		}
 		
-		// TODO Auto-generated method stub
 		return walls.iterator();
 	}
 

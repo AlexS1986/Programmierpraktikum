@@ -18,12 +18,13 @@ import fernuni.propra.internal_data_model.Lamp;
  * <p>
  * The algorithm for {@link testIfRoomIsIlluminated}({@link IRoom} room, {@link IRuntimeIlluminationTester} runtimeInfo) works as follows:
  * <p>
- * 1.) Find all original partial rectangles by forwarding to {@link OriginalPartialRectanglesFinder}
+ * 1.) Find all original partial rectangles by forwarding to {@link OriginalPartialRectanglesFinder} and determine the tags of all "parts" that consitute the room
+ *     e.g. all walls.
  * <p>
  * 2.) Iterate over all {@link Lamp}s in room and compute the set of illuminated rectangles by checking if an illuminated
  *  {@link Lamp} is inside a rectangle and (if yes) adding the tags of that rectangle to the set of illuminated rectangles.
  * <p>
- * 3.) Check if the set of tags of illuminated rectangles contains all tags of original rectangles
+ * 3.) Check if the set of tags of illuminated rectangles contains all tags of the room.
  * <p> 
  * <p>
  The algorithm for {@link testIfRoomIsIlluminated}({@link Iterator}<{@link Lamp}> taggedLampsIterator, {@link HashSet}<{@link Integer}> allTags, {@link IRuntimeIlluminationTester} runtimeInfo) works as follows:

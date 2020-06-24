@@ -137,14 +137,14 @@ public class PositionOptimizerTest {
 		//Act
 		List<Lamp> optimizedLamps = new LinkedList<Lamp>();
 		try {
-			optimizedLamps = positionOptimizer.optimizePositions(null, taggedCandidates, null);
+			optimizedLamps = positionOptimizer.optimizePositions( taggedCandidates, null);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Lamp> optimizedLamps2 = new LinkedList<Lamp>();
 		try {
-			optimizedLamps2 = positionOptimizer2.optimizePositions(null, taggedCandidates2, null);
+			optimizedLamps2 = positionOptimizer2.optimizePositions( taggedCandidates2, null);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

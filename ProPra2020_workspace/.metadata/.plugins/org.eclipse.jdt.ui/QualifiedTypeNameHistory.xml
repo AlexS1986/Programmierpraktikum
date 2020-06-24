@@ -18,7 +18,6 @@
     <fullyQualifiedTypeName name="org.junit.Ignore"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.ValidateKException"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeReader"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeInformation"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
     <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
@@ -33,7 +32,6 @@
     <fullyQualifiedTypeName name="java.util.concurrent.ExecutorService"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.CandidateSearcherException"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="fernuni.propra.algorithm.SolveKException"/>
     <fullyQualifiedTypeName name="fernuni.propra.user_interface.RoomFrame"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.OriginalPartialRectanglesFinder"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.AbstractAlgorithmFactory"/>
     <fullyQualifiedTypeName name="fernuni.propra.algorithm.OriginalPartialRectanglesFinder2"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.runtime_information.IRuntimeInformation"/>
+    <fullyQualifiedTypeName name="fernuni.propra.algorithm.SolveKException"/>
 </qualifiedTypeNameHistroy>

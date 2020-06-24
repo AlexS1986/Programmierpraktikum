@@ -1,19 +1,24 @@
 package fernuni.propra.algorithm;
 
+/**
+ * An exception that is thrown if the computation of original partial rectangles of an {@link IRoom} fails due 
+ * to some unexpected error.
+ * @author alex
+ *
+ */
 public class OriginalPartialRectanglesFinderException extends Exception {
 
 	public OriginalPartialRectanglesFinderException() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public OriginalPartialRectanglesFinderException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public OriginalPartialRectanglesFinderException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
 	}
 
 

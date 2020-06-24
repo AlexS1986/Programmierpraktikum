@@ -14,11 +14,11 @@ public abstract class WallContainerAbstract implements Iterable<Wall> {
 	public WallContainerAbstract() {
 		walls = new LinkedList<Wall>();
 		
-		
 	}
 	
 	public void add(Wall wall) throws WallContainerException{
-		if (!isCorrectWallType(wall)) throw new WallContainerException("Wall is not a north wall!");
+		if (!isCorrectWallType(wall)) throw new WallContainerException("Wall does not "
+				+ "have the correct orientation for this wall container!");
 		walls.add(wall);
 		walls.sort(getComparator());
 	}

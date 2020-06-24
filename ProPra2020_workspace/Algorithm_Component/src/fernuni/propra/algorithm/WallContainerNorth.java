@@ -9,7 +9,6 @@ public class WallContainerNorth extends WallContainerAbstract{
 
 	@Override
 	protected boolean isValidWall(Wall wall, double limit, double low, double high) {
-		// TODO Auto-generated method stub
 		return wall.overlapsXrange(low, high) &&  wall.getP1().getY()>=limit;
 	}
 

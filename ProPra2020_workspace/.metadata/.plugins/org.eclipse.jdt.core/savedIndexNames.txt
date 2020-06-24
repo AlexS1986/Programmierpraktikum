@@ -7,5 +7,4 @@ INDEX VERSION 1.131+/Users/alex/Desktop/Programmierpraktikum/ProPra2020_workspac
 4149785951.index
 4244143021.index
 939283709.index
-3400106341.index
 1976446946.index

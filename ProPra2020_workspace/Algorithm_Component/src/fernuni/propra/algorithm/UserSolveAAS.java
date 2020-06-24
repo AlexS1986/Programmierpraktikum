@@ -12,9 +12,31 @@ import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
 import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
 import fernuni.propra.internal_data_model.IRoom;
 
+/**
+ * Use case that provides access to the solution algorithm, which allows to compute the optimal {@link Lamp} 
+ * positions for a given {@link IRoom} instance and a given time limit which has to be specified as an integer number
+ * representing the seconds a solution is allowed to take.
+ *
+ * @author alex
+ *
+ */
 public class UserSolveAAS {
 	IRuntimeInformation runTimeInformation = new RuntimeInformation();
 	
+	/**
+	 * The interface to the solution algorithm. A separate thread is started to handle the algorithm that is
+	 *  interrupted after the time limit has been reached. 
+	 *  <p>
+	 *  The solving is delegated to an instance of {@link SolveK} that controls the execution of the algorithm
+	 *  and makes the results available.
+	 *  <p>
+	 * 
+	 * @param room : {@link IRoom} instance for which the optimal {@link Lamp} positions have to be found.
+	 * @param time : The time limit in seconds as an integer number. Negative numbers are treated as infinite
+	 * 				 time limits.
+	 * @return The number of {@link Lamp}s that are turned on in the best solution.
+	 * @throws UserSolveAASException
+	 */
 	public int solve(IRoom room, int time) throws UserSolveAASException {
 		SolveK solveControl = new SolveK(room, runTimeInformation);
 		try {
@@ -30,7 +52,6 @@ public class UserSolveAAS {
 				});		
 				timer.start();
 			} 
-			
 			solveControl.start();
 	
 			SolveKException solveException = solveControl.testIfComputationFinished();
@@ -53,6 +74,10 @@ public class UserSolveAAS {
 		}
 	}
 	
+	/**
+	 * Provides access to runtime information.
+	 * @return A data structure of type {@link IRuntimeReader} that allows to obtain run time information.
+	 */
 	public IRuntimeReader getRuntimeInformation() {
 		return runTimeInformation;
 	}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PointTest" project="Test_Component" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.internal_data_model.PointTest" time="0.001">
+    <testcase name="testIsInXRange" classname="fernuni.propra.internal_data_model.PointTest" time="0.001"/>
+    <testcase name="testIsInYRange" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+    <testcase name="testIsOnLineSegmentLineSegment" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+    <testcase name="testIsOnLineSegmentPointPoint" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+    <testcase name="testIsInsidePolygon" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+  </testsuite>
+</testrun>

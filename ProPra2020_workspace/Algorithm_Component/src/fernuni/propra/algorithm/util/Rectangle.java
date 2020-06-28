@@ -133,8 +133,8 @@ public class Rectangle {
 			return false;
 		}
 		Rectangle r = (Rectangle) o;
-		return getP1().isEqual(r.getP1()) && getP2().isEqual(r.getP2()) 
-				&& getP3().isEqual(r.getP3()) && getP4().isEqual(r.getP4()) ;
+		return getP1().equals(r.getP1()) && getP2().equals(r.getP2()) 
+				&& getP3().equals(r.getP3()) && getP4().equals(r.getP4()) ;
 	}
 	
 	@Override

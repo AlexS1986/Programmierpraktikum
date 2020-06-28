@@ -29,9 +29,8 @@ public class PositionOptimizer_old implements IPositionOptimizer{
 		HashSet<Integer> allTags = new HashSet<Integer>();
 		for (Lamp lamp : taggedCandidates) {
 			lamp.turnOff(); // make sure all lamps are turned off
-			Iterator<Integer> tagIterator = lamp.iteratorTag();
-			while(tagIterator.hasNext()) {
-				allTags.add(tagIterator.next());
+			for (Integer tag : lamp.getCopyOfTags()) {
+				allTags.add(tag);
 			}
 		}
 		

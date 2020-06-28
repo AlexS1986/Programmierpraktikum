@@ -252,7 +252,11 @@ class FilePersistence implements IPersistence {
 		return sb;
 	}
 	
-	
+	/**
+	 * Checks whether the specified file indeed exists
+	 * @param xmlFile
+	 * @throws FileNotFoundException : thrown if the specified file does not exist.
+	 */
 	private static void checkFileAvailability(File xmlFile) throws FileNotFoundException {
 		if (!xmlFile.exists()) {
 			throw new FileNotFoundException("File not found at \"" +  xmlFile + "\". Enter a valid file path.");
@@ -262,6 +266,14 @@ class FilePersistence implements IPersistence {
 		}
 	}
 	
+	/**
+	 * Checks if the new {@link Wall} intersects any {@link Wall} in the supplied {@link Wall} set.
+	 * This would mean that the defined {@link Wall} is not a valid {@link Wall}. If the wall is valid
+	 * it is added to the provided set of {@link Wall}s
+	 * @param newWall : The new {@link Wall} to add.
+	 * @param walls : The set of already present {@link Wall}s
+	 * @throws PersistenceException : if intersection found
+	 */
 	static void testAndAddWallToWalls(LineSegment newWall, List<LineSegment> walls) throws PersistenceException {
 		//checks intersections and perpendicularity
 		if (walls.isEmpty()) {
@@ -279,6 +291,11 @@ class FilePersistence implements IPersistence {
 		}
 	}
 	
+	/**
+	 * Reads the content of the DTD file for use with JDOM xml parser.
+	 * @return : The content of the DTD file as a String.
+	 * @throws IOException
+	 */
 	private String readDTDFile() throws IOException{
 		InputStreamReader isr = null; 
 		
@@ -291,7 +308,7 @@ class FilePersistence implements IPersistence {
 			boolean firstTagRead = false;
 			int c = -1;
 			while((c=isr.read())!=-1) {
-				if(firstTagRead) {
+				if(firstTagRead) { // ignore the content up until the first tag
 					sb.append((char) c);
 				} 
 				else {

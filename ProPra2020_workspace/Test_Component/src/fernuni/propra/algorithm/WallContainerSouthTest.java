@@ -86,7 +86,7 @@ public class WallContainerSouthTest {
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test1 = w10.getP1().isEqual(w1.getP1()) && w10.getP2().isEqual(w1.getP2());
+		boolean test1 = w10.getP1().equals(w1.getP1()) && w10.getP2().equals(w1.getP2());
 		
 		Wall w11 = null;
 		try {
@@ -94,7 +94,7 @@ public class WallContainerSouthTest {
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test2 = w11.getP1().isEqual(w7.getP1()) && w11.getP2().isEqual(w7.getP2());
+		boolean test2 = w11.getP1().equals(w7.getP1()) && w11.getP2().equals(w7.getP2());
 		
 		Wall w12 = null;
 		try {
@@ -102,7 +102,7 @@ public class WallContainerSouthTest {
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test3 = w12.getP1().isEqual(w7.getP1()) && w12.getP2().isEqual(w7.getP2());
+		boolean test3 = w12.getP1().equals(w7.getP1()) && w12.getP2().equals(w7.getP2());
 		
 		Wall w13 = null;
 		try {

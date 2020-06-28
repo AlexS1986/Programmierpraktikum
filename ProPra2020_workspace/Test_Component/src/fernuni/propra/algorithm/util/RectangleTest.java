@@ -61,7 +61,7 @@ public class RectangleTest {
 		Point result = rec.getCenter();
 		
 		//Assert
-		assertTrue(result.isEqual(new Point(0.5, 0.5)));
+		assertTrue(result.equals(new Point(0.5, 0.5)));
 		
 	}
 

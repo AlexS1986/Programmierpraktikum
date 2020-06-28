@@ -320,12 +320,12 @@ public class LineSegmentTest {
 		}
 		
 		//Assert
-		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test1 != null && test1.isEqual(new Point(0, 0.5)));
-		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test2 != null && test2.isEqual(new Point(1.0, 0.5)));
-		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test3 != null && test3.isEqual(new Point(0.5, 1.0)));
-		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test4 != null && test4.isEqual(new Point(0.5, 0.0)));
+		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test1 != null && test1.equals(new Point(0, 0.5)));
+		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test2 != null && test2.equals(new Point(1.0, 0.5)));
+		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test3 != null && test3.equals(new Point(0.5, 1.0)));
+		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test4 != null && test4.equals(new Point(0.5, 0.0)));
 		assertTrue("No intersection point should have been found",test5);
-		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test6 != null && test6.isEqual(new Point(1.0, 0.0)));
+		assertTrue("Intersection needs to be at x = 0.0, y = 0.5", test6 != null && test6.equals(new Point(1.0, 0.0)));
 		assertTrue("Not intersection pint should have been found", test7);
 		assertTrue("Not intersection pint should have been found", test8);
 	}

@@ -110,9 +110,9 @@ public class WallContainerEastTest {
 		
 		
 		//Assert
-		assertTrue(w10.getP1().isEqual(w2.getP1()) && w10.getP2().isEqual(w2.getP2()));
-		assertFalse(w11.getP1().isEqual(w2.getP1()) && w11.getP2().isEqual(w2.getP2()));
-		assertTrue(w12.getP1().isEqual(w8.getP1()) && w12.getP2().isEqual(w8.getP2()));
+		assertTrue(w10.getP1().equals(w2.getP1()) && w10.getP2().equals(w2.getP2()));
+		assertFalse(w11.getP1().equals(w2.getP1()) && w11.getP2().equals(w2.getP2()));
+		assertTrue(w12.getP1().equals(w8.getP1()) && w12.getP2().equals(w8.getP2()));
 		assertTrue(w13 == null);
 		
 	}

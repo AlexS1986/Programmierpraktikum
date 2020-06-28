@@ -70,9 +70,11 @@ public class RectangleWithTag extends Rectangle{
 	}
 	
 	/**
-	 * Tests whether the tags of this {@link RectangleWithTag} contain a certain tag
+	 * Tests whether the tags of this {@link RectangleWithTag} 
+	 * contain a certain tag
 	 * @param tag : the integer tag that is to be checked
-	 * @return : a boolean that represents whether this {@link RectangleWithTag} contains the tag
+	 * @return : a boolean that represents whether this 
+	 * {@link RectangleWithTag} contains the tag
 	 */
 	public boolean containsTag(Integer tag) {
 		return tags.contains(tag);
@@ -88,7 +90,8 @@ public class RectangleWithTag extends Rectangle{
 	
 	/**
 	 * Returns a copy of the {@link RectangleWithTag}s tags.
-	 * @return : A {@link HashSet} with all copies of the tags of this {@link RectangleWithTag}.
+	 * @return : A {@link HashSet} with all copies of the tags of 
+	 * this {@link RectangleWithTag}.
 	 */
 	public HashSet<Integer> getCopyOfTags() { 
 		HashSet<Integer> outTags = new HashSet<Integer>();
@@ -117,8 +120,9 @@ public class RectangleWithTag extends Rectangle{
 			return false;
 		}
 		RectangleWithTag r = (RectangleWithTag) o;
-		return getP1().isEqual(r.getP1()) && getP2().isEqual(r.getP2()) 
-				&& getP3().isEqual(r.getP3()) && getP4().isEqual(r.getP4()) && getSumOfTags() == r.getSumOfTags() ;
+		return getP1().equals(r.getP1()) && getP2().equals(r.getP2()) 
+				&& getP3().equals(r.getP3()) && getP4().equals(r.getP4()) 
+				&& getSumOfTags() == r.getSumOfTags() ;
 	}
 	
 	@Override

@@ -33,23 +33,7 @@ public class PointTest {
 	}
 	
 
-	@Test
-	public void testIsEqual() {
-		//Arrange
-		Point pt1 = new Point(0,0.01);
-		Point pt2 = new Point(0.001,0.0);
-		Point pt3 = new Point(131221.2,-500.7);
-		
-		//Act
-		boolean test1 = p1.isEqual(pt1);
-		boolean test2 = p1.isEqual(pt2);
-		boolean test3 = pt3.isEqual(pt3);
-		
-		//Assert 
-		assertTrue(!test1);
-		assertTrue(!test2);
-		assertTrue(test3);
-	}
+
 
 	@Test
 	public void testIsOnLineSegmentPointPoint() {

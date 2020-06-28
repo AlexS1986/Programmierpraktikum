@@ -1,0 +1,49 @@
+package fernuni.propra.internal_data_model;
+
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * An interface that specifies the functionality and properties of a room,
+ * as defined in [1].
+ * <p>
+ * An {@link IRoom}, i.e. a room, is specified by a {@link List}<{@link Point}>
+ * that contains its corners. {@link Wall}s are defined by the line segment between
+ * two successive {@link Point}s in that list. It must be ensured that
+ * {@link Wall}s can only have vertical or horizontal orientation, and that
+ * these orientations alternate, with respect to the order defined by the corner list.
+ * <p>
+ * A {@link IRoom} may also contain {@link Lamp}s that must be contained in the polygon
+ * which is defined by the {@link Wall}s. All {@link Lamp}s (i.e. also candidates
+ * that are not part of a potential optimal solution) are included.
+ * In order to obtain the {@link Lamp}s that are part of the optimal solution
+ * 
+ * <p>
+ * A {@link IRoom} is also associated with an ID (a String).
+ * <p>
+ * [1] Aufgabenstellung Programmierpraktikum Fernuniversität Hagen, SS2020
+ * <p>
+ * @author alex
+ *
+ */
+public interface IRoom{
+	/**
+	 * 
+	 * @return an {@link Iterator}<{@link Lamp}> that can be used to iterate over all
+	 * the {@link Lamp}s of an {@link IRoom}.
+	 */
+	Iterator<Lamp> getLamps();
+	int getNumberOfLamps();
+	void addLamp(Lamp lamp);
+	Iterator<Point> getCorners();
+	Iterator<Wall> getWalls();
+	double getMinX();
+	double getMaxX();
+	double getMinY();
+	double getMaxY();
+	String getID();
+	void replaceLamps(List<Lamp> lamps);
+	String printLampPositions();
+	
+}
+

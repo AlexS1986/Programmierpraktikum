@@ -234,28 +234,28 @@ public class OriginalPartialRectanglesFinderTest {
 				boolean test11 = east.hasNext();
 				Wall wallEast = east.next();
 				boolean test12 = !east.hasNext();
-				boolean test13 = wallEast.getP1().isEqual(w2.getP1()) && wallEast.getP2().isEqual(w2.getP2());
+				boolean test13 = wallEast.getP1().equals(w2.getP1()) && wallEast.getP2().equals(w2.getP2());
 				boolean eastBool = test11 && test12 && test13;
 				
 				//north
 				boolean test21 = north.hasNext();
 				Wall wallNorth = north.next(); 
 				boolean test22 = !north.hasNext();
-				boolean test23 = wallNorth.getP1().isEqual(w3.getP1()) && wallNorth.getP2().isEqual(w3.getP2());
+				boolean test23 = wallNorth.getP1().equals(w3.getP1()) && wallNorth.getP2().equals(w3.getP2());
 				boolean northBool = test21 && test22 && test23;
 				
 				//west
 				boolean test31 = west.hasNext();
 				Wall wallWest = west.next(); 
 				boolean test32 = !west.hasNext();
-				boolean test33 = wallWest.getP1().isEqual(w4.getP1()) && wallWest.getP2().isEqual(w4.getP2());
+				boolean test33 = wallWest.getP1().equals(w4.getP1()) && wallWest.getP2().equals(w4.getP2());
 				boolean westBool = test31 && test32 && test33;
 				
 				//west
 				boolean test41 = south.hasNext();
 				Wall wallSouth = south.next(); 
 				boolean test42 = !south.hasNext();
-				boolean test43 = wallSouth.getP1().isEqual(w1.getP1()) && wallSouth.getP2().isEqual(w1.getP2());
+				boolean test43 = wallSouth.getP1().equals(w1.getP1()) && wallSouth.getP2().equals(w1.getP2());
 				boolean southBool = test41 && test42 && test43;
 				
 				assertTrue(eastBool && northBool && westBool && southBool);

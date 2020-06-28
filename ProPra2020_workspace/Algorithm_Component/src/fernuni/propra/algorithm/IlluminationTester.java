@@ -102,7 +102,7 @@ public class IlluminationTester implements IIlluminationTester{
 		while(taggedLampsIterator.hasNext()) {
 			Lamp lamp = taggedLampsIterator.next();
 			if (lamp.getOn()) {
-				Iterator<Integer> tagIterator = lamp.iteratorTag();
+				Iterator<Integer> tagIterator = lamp.getCopyOfTags().iterator();
 				while(tagIterator.hasNext()) {
 					tagsOfAllIlluminatedLamps.add(tagIterator.next());
 				}

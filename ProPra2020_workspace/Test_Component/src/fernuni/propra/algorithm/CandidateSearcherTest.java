@@ -126,11 +126,11 @@ public class CandidateSearcherTest {
 		}
 		
 		//Assert
-		assertTrue(candidates != null && candidates.size() == 1 && candidates.get(0).isEqual(new Point(0.5,0.5)));
+		assertTrue(candidates != null && candidates.size() == 1 && candidates.get(0).equals(new Point(0.5,0.5)));
 		
 		assertTrue(candidates2 != null && candidates2.size() == 2);
-		assertTrue(candidates2.get(0).isEqual(new Point(-1.5,0.5)));
-		assertTrue(candidates2.get(1).isEqual(new Point(1.5,0.5)));
+		assertTrue(candidates2.get(0).equals(new Point(-1.5,0.5)));
+		assertTrue(candidates2.get(1).equals(new Point(1.5,0.5)));
 	}
 
 	/** Checks if CandidateSearcher correctly determines the reduced tagged rectangles from a set of tagged rectangles that might overlap.

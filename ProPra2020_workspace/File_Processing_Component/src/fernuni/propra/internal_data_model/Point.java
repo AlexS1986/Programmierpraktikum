@@ -3,35 +3,64 @@ package fernuni.propra.internal_data_model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A {@link Point} represents a geometric point in a x-y plane. The {@link Point} class 
+ * also provides functionality to support the overall algorithm.
+ * <p>
+ * Extending classes: {@link Lamp}
+ * <p>
+ * @author alex
+ *
+ */
 public class Point {
 	private final double x;
 	private final double y;
-	private final static double TOL = 0.0001;
-	private final static int PRECISION = 1000;
-	public final static double INF = 100000000;
+	private final static double TOL = 0.000001;
 	
+	/* precision at which doubles should be compared 
+	to identify equal Points */
+	private final static int PRECISION = 100000; 
+	
+	/* A large number representing infinity */
+	private final static double INF = Double.MAX_VALUE;
+	
+	/**
+	 * Constructor
+	 * @param x : the x-coordinate of the new {@link Point}
+	 * @param y : the y-coordinate of the new {@link Point}
+	 */
 	public Point(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+	/**
+	 * 
+	 * @return the x-coordinate
+	 */
 	public double getX() {
 		return x;
 	}
 	
+	/**
+	 * 
+	 * @return the y-coordinate
+	 */
 	public double getY() {
 		return y;
 	}
 	
-	public boolean isEqual(Point other) {
-		if (other == null) return false;
-			return (Math.round(getX() * PRECISION) == Math.round(other.getX() * PRECISION)) 
-					&& (Math.round(getY() * PRECISION) == Math.round(other.getY() * PRECISION));
-		//return (Math.abs(getX()-other.getX())  + Math.abs(getY()-other.getY()))  < TOL;
-	}
-	
+	/**
+	 * Checks whether this {@link Point} is on a {@link LineSegment}.
+	 * @param p1 : The start {@link Point} of the {@link LineSegment}
+	 * @param p2 : The end {@link Point} of the {@link LineSegment}
+	 * @return A boolean representing whether this {@link Point} 
+	 * is on the {@link LineSegment}
+	 * defined by p1 and p2
+	 */
 	public boolean isOnLineSegment(Point p1, Point p2) {
-		if (!p1.sameX(p2) && !p1.sameY(p2)) throw new IllegalArgumentException("Input is not a horizontal or vertical line!");
+		if (!p1.sameX(p2) && !p1.sameY(p2)) throw 
+		new IllegalArgumentException("Input is not a horizontal or vertical line!");
 		boolean xAgrees = this.sameX(p1) 
 				&& this.sameX(p2);
 		boolean yAgrees = Point.agrees(getY(), p1.getY()) 
@@ -79,10 +108,6 @@ public class Point {
 				} else {
 					intersectionCountXP++;
 				}
-				/*if (lineSegment.getP1().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2()) ||
-					lineSegment.getP2().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2())) {
-					intersectedLineSegmentHasEndPointOnTestLineSegCount ++;
-				} */
 			} catch (LineSegmentException e) {
 			}
 			
@@ -93,10 +118,6 @@ public class Point {
 				} else {
 					intersectionCountYP++;
 				}
-				/*if (lineSegment.getP1().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2()) ||
-					lineSegment.getP2().isOnLineSegment(testLineSeg.getP1(), testLineSeg.getP2())) {
-					intersectedLineSegmentHasEndPointOnTestLineSegCount ++;
-				} */
 			} catch (LineSegmentException e) {
 			}
 			
@@ -136,6 +157,12 @@ public class Point {
 		return (Math.min(x1, x2) < x + TOL) && (Math.max(x1, x2) > x - TOL);				
 	}
 	
+	private boolean isEqual(Point other) {
+		if (other == null) return false;
+			return (Math.round(getX() * PRECISION) == Math.round(other.getX() * PRECISION)) 
+					&& (Math.round(getY() * PRECISION) == Math.round(other.getY() * PRECISION));
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o == this) return true;
@@ -144,7 +171,6 @@ public class Point {
 		}
 		
 		Point point = (Point) o;
-		
 		return isEqual(point);
 	}
 	

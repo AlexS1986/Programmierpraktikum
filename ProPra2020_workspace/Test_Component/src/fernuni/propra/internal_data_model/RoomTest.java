@@ -61,16 +61,16 @@ public class RoomTest {
 		Wall w7 = wallIteratorClockWise.next();
 		Wall w8 = wallIteratorClockWise.next();
 		
-		boolean test1 = w1.isEqual(l1);
-		boolean test2 = w2.isEqual(l2);
-		boolean test3 = w3.isEqual(l3);
-		boolean test4 = w4.isEqual(l4);
+		boolean test1 = w1.equals(l1);
+		boolean test2 = w2.equals(l2);
+		boolean test3 = w3.equals(l3);
+		boolean test4 = w4.equals(l4);
 		
 		
-		boolean test5 = w5.isEqual(l2);
-		boolean test6 = w6.isEqual(l3);
-		boolean test7 = w7.isEqual(l4);
-		boolean test8 = w8.isEqual(l1);
+		boolean test5 = w5.equals(l2);
+		boolean test6 = w6.equals(l3);
+		boolean test7 = w7.equals(l4);
+		boolean test8 = w8.equals(l1);
 		
 		assertTrue(test1 && test2 && test3 && test4);
 		assertTrue(test5 && test6 && test7 && test8);

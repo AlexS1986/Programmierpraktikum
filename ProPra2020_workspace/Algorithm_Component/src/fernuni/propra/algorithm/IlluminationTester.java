@@ -68,7 +68,8 @@ public class IlluminationTester implements IIlluminationTester{
 				if(lamp.getOn()) {
 					for(RectangleWithTag rec : rectanglesWithTag) {
 						if(lamp.isInsideRectangle(rec.getP1(), rec.getP3())) {
-							Iterator<Integer> tagIterator = rec.getTagIterator();
+							Iterator<Integer> tagIterator = rec.getCopyOfTags().iterator();
+							//Iterator<Integer> tagIterator = rec.getTagIterator();
 							while(tagIterator.hasNext()) {
 								tagsOfAllIlluminatedLamps.add(tagIterator.next());
 							}

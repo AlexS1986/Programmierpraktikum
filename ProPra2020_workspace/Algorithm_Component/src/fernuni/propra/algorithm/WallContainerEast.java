@@ -5,18 +5,30 @@ import java.util.Iterator;
 
 import fernuni.propra.internal_data_model.Wall;
 
+/**
+ * A specific container that stores east walls. Those {@link Wall}s can be specified by
+ * two {@link Point}s in a horizontal-vertical coordinate system. The {@link Wall}s
+ * in this container are ordered in ascending order with respect to the horizontal component 
+ * (x-component) of their {@link Point}s.
+ * <p>
+ * The total ordering requested by {@link WallContainerAbstract} is such that walls
+ * <p>
+ * Extended classes and implemented interfaces: {@link WallContainerAbstract}.
+ * <p>
+ * @author alex
+ *
+ */
 public class WallContainerEast extends WallContainerAbstract {
 
 	@Override
 	protected boolean isValidWall(Wall wall, double limit, double low, double high) {
-		// TODO Auto-generated method stub
 		return wall.overlapsYrange(low, high) &&  wall.getP1().getX()>=limit;
 	}
 
 
 	@Override
 	protected Comparator<Wall> getComparator() {
-		return new Comparator<Wall>() { // TODO: dont sort complete list -> find correct position and insert there
+		return new Comparator<Wall>() { 
 			@Override
 			public int compare(Wall o1, Wall o2) {
 				if (o1.getP1().getX() < o2.getP1().getX()) {

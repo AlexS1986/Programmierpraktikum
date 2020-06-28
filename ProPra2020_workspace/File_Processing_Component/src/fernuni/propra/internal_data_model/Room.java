@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jdom2.Element;
+
 
 public class Room implements IRoom {
 	private List<Lamp> lamps = new LinkedList<Lamp>();

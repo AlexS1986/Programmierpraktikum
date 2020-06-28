@@ -1,104 +1,107 @@
 package fernuni.propra.algorithm.util;
 
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 
 import fernuni.propra.internal_data_model.Point;
 
+/**
+ * A rectangle that can also be tagged, i.e. have a set of integers that represent the tags.
+ * <p>
+ * The {@link RectangleWithTag} is designed to represent an original partial rectangle of an {@link IRoom}
+ * instance.
+ * The tags typically represent the portions of the {@link IRoom} that are illuminated if the associated
+ * {@link RectangleWithTag} is illuminated. This means that the union of the
+ *  tags of all {@RectangleWithTag}s of an {@link IRoom} should be equal to all tags, i.e. all portions of the
+ *  {@link IRoom}. The tags are stored internally as a {@link HashSet}<{@link Integer}>.
+ * <p> 
+ * <p>
+ * Extended classes: {@link Rectangle}
+ * <p>
+ * @author alex
+ *
+ */
 public class RectangleWithTag extends Rectangle{
 
-	HashSet<Integer> tags = new HashSet<Integer>();
+	private HashSet<Integer> tags = new HashSet<Integer>(); // the tags of the Rectangle
 	
-	public RectangleWithTag(Point p1, Point p2, List<Integer> initialTags) {
-		super(p1,p2);
-		
+	/**
+	 * Constructor
+	 * @param p1 : left bottom {@link Point}
+	 * @param p3 : top right {@link Point}
+	 * @param initialTags : a {@link Collection} of initial tags.
+	 */
+	public RectangleWithTag(Point p1, Point p3, Collection<Integer> initialTags) {
+		super(p1,p3);
 		if (initialTags != null) {
-			for (Integer tag : initialTags) {
-				tags.add(tag);
-			}
+			tags.addAll(initialTags);
 		}
 	}
 	
-	public RectangleWithTag(Point p1, Point p2, Integer initialTag) {
-		super(p1,p2);
+	/**
+	 * Constructor
+	 * @param rectangle : A {@link Rectangle} that is used to create the new {@link RectangleWithTag}
+	 * @param initialTags : a {@link Collection} of initial tags.
+	 */
+	public RectangleWithTag(Rectangle rectangle, Collection<Integer> initialTags) {
+		this(rectangle.getP1(), rectangle.getP3(), initialTags);
+	}
+	
+	/**
+	 * Constructor
+	 * @param p1 : left bottom {@link Point}
+	 * @param p3 : top right {@link Point}
+	 * @param initialTags : a single  initial tag.
+	 */
+	public RectangleWithTag(Point p1, Point p3, Integer initialTag) {
+		super(p1,p3);
 		if (initialTag != null) {
 			tags.add(initialTag);
 		}
 	}
 	
-	public RectangleWithTag(Rectangle rectangle, List<Integer> initialTags) {
-		super(rectangle.getP1(),rectangle.getP3());
-		
-		if (initialTags != null) {
-			for (Integer tag : initialTags) {
-				tags.add(tag);
-			}
-		}
-	}
-	
-	public RectangleWithTag(Rectangle rectangle, HashSet<Integer> initialTags) {
-		super(rectangle.getP1(),rectangle.getP3());
-		if (initialTags != null) {
-			tags = initialTags;
-		}
-	}
-	
+	/**
+	 * Constructor
+	 * @param rectangle : A {@link Rectangle} that is used to create the new {@link RectangleWithTag}
+	 * @param initialTag : a single initial tag.
+	 */
 	public RectangleWithTag(Rectangle rectangle, Integer initialTag) {
-		super(rectangle.getP1(),rectangle.getP3());
-		if (initialTag != null) {
-			tags.add(initialTag);
-		}
+		this(rectangle.getP1(),rectangle.getP3(), initialTag);
 	}
 	
+	/**
+	 * Tests whether the tags of this {@link RectangleWithTag} contain a certain tag
+	 * @param tag : the integer tag that is to be checked
+	 * @return : a boolean that represents whether this {@link RectangleWithTag} contains the tag
+	 */
 	public boolean containsTag(Integer tag) {
 		return tags.contains(tag);
 	}
 
+	/**
+	 * Adds a certain tag to the tags of this {@link Rectangle}
+	 * @param tag : the integer tag to be added
+	 */
 	public void addTag(Integer tag) {
 		tags.add(tag);
 	}
 	
-	public void addTags(Iterator<Integer> tagIterator) {
-		while(tagIterator.hasNext()) {
-			this.tags.add(tagIterator.next());
-		}
-	}
-	
-	public Iterator<Integer> getTagIterator() {
-		return tags.iterator();
-	}
-	
-	public boolean tagsOfOtherRectangleAreSubsetOfThisTags(RectangleWithTag other) { //TODO implement with contains all
-		boolean subset = true;
-		Iterator<Integer> tagsOfOther = other.getTagIterator();
-		while(tagsOfOther.hasNext()) {
-			if (!tags.contains(tagsOfOther.next())) {
-				subset = false;
-				break;
-			}
-		}
-		return subset;
-	} 
-	
-	
-	public boolean tagsAreEqual(RectangleWithTag other) {
-		return this.tags.containsAll(other.tags) && other.tags.containsAll(this.tags);
-	}
-	
-	public Rectangle getRectangle() {
-		return new Rectangle(getP1(), getP3());
-	}
-	
+	/**
+	 * Returns a copy of the {@link RectangleWithTag}s tags.
+	 * @return : A {@link HashSet} with all copies of the tags of this {@link RectangleWithTag}.
+	 */
 	public HashSet<Integer> getCopyOfTags() { 
 		HashSet<Integer> outTags = new HashSet<Integer>();
 		for (Integer tag : tags) {
-			outTags.add(tag);
+			outTags.add(tag.intValue()); // boxing + unboxing TODO
 		}
 		return outTags;
 	}
 	
-	
+	/**
+	 * 
+	 * @return sum of all tags for hashCode
+	 */
 	private int getSumOfTags() {
 		int result = 0;
 		for (Integer tag: tags) {

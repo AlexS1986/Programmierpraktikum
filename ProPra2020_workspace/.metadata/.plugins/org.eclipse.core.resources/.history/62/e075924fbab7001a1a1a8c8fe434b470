@@ -1,0 +1,16 @@
+package fernuni.propra.algorithm.runtime_information;
+
+/**
+ * An interface that extends the extended interfaces so that implementing classes can declare
+ * that they are capable of storing runtime information for the part of the algorithm that deals
+ * with finding candidates for {@link Lamp} positions.
+ * <p>
+ * Implementing classes: {@link RuntimeInformation}
+ * <p>
+ * @author alex
+ *
+ */
+public interface IRuntimeOriginalPartialRectanglesFinder {
+	void startTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps;
+	void stopTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps;
+}

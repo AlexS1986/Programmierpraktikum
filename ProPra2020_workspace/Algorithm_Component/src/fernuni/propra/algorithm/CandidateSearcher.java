@@ -79,7 +79,8 @@ public class CandidateSearcher  implements ICandidateSearcher{
 			for (RectangleWithTag rectangle : reducedRectangles) {
 				Point point = rectangle.getCenter();
 				Lamp lamp = new Lamp(point.getX(), point.getY());
-				Iterator<Integer> tagsOfRectangleIterator = rectangle.getTagIterator();
+				//Iterator<Integer> tagsOfRectangleIterator = rectangle.getTagIterator();
+				Iterator<Integer> tagsOfRectangleIterator = rectangle.getCopyOfTags().iterator();
 				while(tagsOfRectangleIterator.hasNext()) {
 					lamp.addTag(tagsOfRectangleIterator.next());
 				}

@@ -1,0 +1,21 @@
+package fernuni.propra.algorithm;
+/**
+ * 
+ * @author alex
+ *
+ */
+public class WallContainerException extends Exception {
+
+	public WallContainerException(String message) {
+		super(message);
+	}
+
+	public WallContainerException(Throwable cause) {
+		super(cause);
+	}
+	
+	public WallContainerException() {
+		super();
+	}
+
+}

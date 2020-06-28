@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Model"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/External_Libs_Component"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -13,5 +12,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/External_Libs_Component/jdom/jdom-2.0.6-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/External_Libs_Component"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

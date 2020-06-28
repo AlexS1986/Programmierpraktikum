@@ -5,6 +5,19 @@ import java.util.Iterator;
 
 import fernuni.propra.internal_data_model.Wall;
 
+/**
+ * A specific container that stores north walls. Those {@link Wall}s can be specified by
+ * two {@link Point}s in a horizontal-vertical coordinate system. The {@link Wall}s
+ * in this container are ordered in ascending order with respect to the vertical component 
+ * (y-component) of their {@link Point}s.
+ * <p>
+ * The total ordering requested by {@link WallContainerAbstract} is such that walls
+ * <p>
+ * Extended classes and implemented interfaces: {@link WallContainerAbstract}.
+ * <p>
+ * @author alex
+ *
+ */
 public class WallContainerNorth extends WallContainerAbstract{
 
 	@Override

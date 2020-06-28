@@ -1,0 +1,20 @@
+package fernuni.propra.file_processing;
+
+import fernuni.propra.internal_data_model.IRoom;
+
+/**
+ * A provider of an algorithm that provides persistence to an {@link IRoom} instance.
+ * @author alex
+ *
+ */
+public interface IPersistence {
+	/**
+	 * Used to read an {@link IRoom} 
+	 * @param location
+	 * @return
+	 * @throws PersistenceException
+	 */
+	IRoom readInput(String location) throws PersistenceException;
+	void writeOutput(IRoom room, String location) throws PersistenceException;
+
+}

@@ -45,12 +45,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		return candidateSearchStopTime-candidateSearchStartTime;
 	}
 
-	@Override
-	public void resetTimeCandidateSearch() {
-		candidateSearchStartTime = -1;
-		candidateSearchStopTime = -1;
-		
-	}
+
 
 	@Override
 	public void startTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps {
@@ -78,11 +73,6 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		return originalPartialRectanglesFindStopTime-originalPartialRectanglesFindStartTime;
 	}
 
-	@Override
-	public void resetTimeOriginalPartialRectanglesFind() {
-		originalPartialRectanglesFindStartTime = -1;
-		originalPartialRectanglesFindStopTime = -1;	
-	}
 
 	@Override
 	public void startTimeOptimizePositions() throws RuntimeExceptionLamps {
@@ -143,12 +133,6 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		return illuminationTestStopTime-illuminationTestStopTime;
 	}
 
-	@Override
-	public void resetTimeIlluminationTest() {
-		illuminationTestStartTime = -1;
-		illuminationTestStopTime = -1;
-		
-	}
 
 	@Override
 	public void startTime() throws RuntimeExceptionLamps {
@@ -176,12 +160,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		return stopTime-startTime;
 	}
 
-	@Override
-	public void resetTime() {
-		startTime = -1;
-		stopTime = -1;
-		
-	}
+	
 	
 	@Override
 	public String toString() {

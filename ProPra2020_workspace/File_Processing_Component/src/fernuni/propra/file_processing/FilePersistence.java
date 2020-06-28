@@ -5,44 +5,57 @@ import fernuni.propra.internal_data_model.Lamp;
 import fernuni.propra.internal_data_model.LineSegment;
 import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Room;
-import fernuni.propra.internal_data_model.Wall;
-import fernuni.propra.internal_data_model.LineSegment;
-import fernuni.propra.internal_data_model.LineSegmentException;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jdom2.DocType;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
-import org.jdom2.JDOMFactory;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaders;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+/**
+ * A specific provider of persistence for an {@link IRoom} that stores/and reads  the {@link IRoom} 
+ * from an xml-file that adheres to the Document Type Definition (DTD) specified in Listing 1 of [1], i.e.
+ * 
+ * 	01 <?xml version="1.0" encoding="UTF-8"?> 
+ *  02 <!ELEMENT Raum (ID, ecken, lampen?)> 
+ *  03 <!ELEMENT ID (#PCDATA)>
+ *  04 <!ELEMENT ecken (Ecke*)>
+ *  05 <!ELEMENT lampen (Lampe*)> 
+ *  06 <!ELEMENT Ecke (x, y)>
+ *  07 <!ELEMENT Lampe (x, y)> 
+ *  08 <!ELEMENT x (#PCDATA)>
+ *  09 <!ELEMENT y (#PCDATA)>
+ *  <p>
+ *  {@link FilePersistence} makes use of 
+ *  the JDOM2-library (see http://www.jdom.org/) 
+ * 
+ * @author alex
+ *
+ * [1] Aufgabenstellung Programmierpraktikum SS 2020
+ */
 class FilePersistence implements IPersistence { 
 	private static final String DTDFileName = "DataModel.dtd";
     
     //all lamps are turned on initially
 	@Override
 	public IRoom readInput(String xmlFilePath) throws PersistenceException {	
-		
 		
 		
 		Document document = null;
@@ -55,18 +68,22 @@ class FilePersistence implements IPersistence {
 			isr = new FileReader(xmlFile);
 			StringBuilder sb = insertDTDForValidation(isr);
 			
-			//handle xml
+			//parse xml
 			SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
 			document = builder.build(new StringReader(sb.toString()));
-			Element raumNode = document.getRootElement();
+			Element roomNode = document.getRootElement();
 			
-			String ID = raumNode.getChildText("ID");
+			String ID = roomNode.getChildText("ID");
 			
-			Element cornersNode = raumNode.getChild("ecken");	
+			Element cornersNode = roomNode.getChild("ecken");
+			if (cornersNode == null) { // if no corners are provided (which is valid according to DTD) an exception is thrown since no computation can be done
+				throw new PersistenceException("No corners provided. Cannot compute anything. Please provide an input file with a valid number of Ecken.");
+			}
 			List<Element> cornerNodes = cornersNode.getChildren("Ecke");
 			LinkedList<Point> corners = new LinkedList<Point>();
 			List<LineSegment> walls = new ArrayList<LineSegment>(); 
 			
+			//loop over all corners
 			for(Element cornerNode : cornerNodes) {
 				Point tmpPoint = new Point(Double.parseDouble(cornerNode.getChildText("x")), Double.parseDouble(cornerNode.getChildText("y")));
 				// add wall
@@ -74,7 +91,6 @@ class FilePersistence implements IPersistence {
 					LineSegment newWall = new LineSegment(corners.getLast(), tmpPoint);
 					testAndAddWallToWalls(newWall, walls);
 				}
-				
 				// add corner
 				corners.add(tmpPoint);
 			}
@@ -82,9 +98,8 @@ class FilePersistence implements IPersistence {
 			LineSegment newWall = new LineSegment(corners.getLast(), corners.getFirst());
 			testAndAddWallToWalls(newWall, walls);
 			
-
 			//add lamps
-			List<Lamp> lamps = getLamps(raumNode, walls);
+			List<Lamp> lamps = getLamps(roomNode, walls);
 			
 			outRoom = new Room(ID,lamps, corners);
 			
@@ -113,20 +128,25 @@ class FilePersistence implements IPersistence {
 		try {
 			fos = new FileOutputStream(xmlFile);
 			
+			//build xml structure conforming with DTD definition
 			Document outDocument = new Document();
 			
-			Element raumNode = new Element("Raum");
-			outDocument.addContent(raumNode);
+			//root node
+			Element roomNode = new Element("Raum");
+			outDocument.addContent(roomNode);
 			
+			// write ID
 			Element ID = new Element("ID");
 			ID.addContent(room.getID());
-			raumNode.addContent(ID);
+			roomNode.addContent(ID);
 			
+			// write corners
 			Element cornersNode = new Element("ecken");
 			Iterator<Point> cornersOfRoomIterator = room.getCorners();
 			while(cornersOfRoomIterator.hasNext()) {
 				Point corner = cornersOfRoomIterator.next();
 				Element cornerNode = new Element("Ecke");
+				// write x,y
 				Element xNode = new Element("x");
 				Element yNode = new Element("y");
 				xNode.addContent(String.valueOf(corner.getX()));
@@ -135,36 +155,40 @@ class FilePersistence implements IPersistence {
 				cornerNode.addContent(yNode);
 				cornersNode.addContent(cornerNode);
 			}
-			raumNode.addContent(cornersNode);
+			roomNode.addContent(cornersNode);
 			
 			Iterator<Lamp> lampIterator = room.getLamps();
 			if (lampIterator.hasNext()) {
 				Element lampsNode = new Element("lampen");
 				while(lampIterator.hasNext()) {
 					Lamp lamp = lampIterator.next();
-					Element lampNode = new Element("Lampe");
-					Element xNode = new Element("x");
-					Element yNode = new Element("y");
-					xNode.addContent(String.valueOf(lamp.getX()));
-					yNode.addContent(String.valueOf(lamp.getY()));
-					lampNode.addContent(xNode);
-					lampNode.addContent(yNode);
-					lampsNode.addContent(lampNode);
+					if (lamp.getOn()) { // lamps are only appended to output if they are turned on in the solution, i.e. they
+										//	are not only candidates but part of the best solution.
+						Element lampNode = new Element("Lampe");
+						Element xNode = new Element("x");
+						Element yNode = new Element("y");
+						xNode.addContent(String.valueOf(lamp.getX()));
+						yNode.addContent(String.valueOf(lamp.getY()));
+						lampNode.addContent(xNode);
+						lampNode.addContent(yNode);
+						lampsNode.addContent(lampNode);
+					}
+					
 				}
-				raumNode.addContent(lampsNode);
+				roomNode.addContent(lampsNode);
 			}
 			
 			XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+			xmlOutputter.getFormat().setEncoding("UTF-8");
 			try {
+				// actually write output
 				xmlOutputter.output(outDocument, fos);
 			} catch (IOException e) {
 				throw new PersistenceException(e);
 			}
-			
-			
 		} catch(IOException ioe) {
 			throw new PersistenceException(ioe);
-		} finally {
+		} finally { // clean up
 			if (fos != null) {
 				try {
 					fos.close();
@@ -176,16 +200,21 @@ class FilePersistence implements IPersistence {
 		
 	}
 	
-	
-	private List<Lamp> getLamps(Element raumNode, List<LineSegment> walls) throws IOException {
-		Element lampsNode = raumNode.getChild("lampen");
+	/**
+	 * Returns a {@link List} of {@link Lamp}s that have been specified in the xml file. Uses JDOM-2.
+	 * @param roomNode : The "Raum" xml-Node of this valid inputfile
+	 * @param walls
+	 * @return
+	 * @throws IOException
+	 */
+	private List<Lamp> getLamps(Element roomNode, List<LineSegment> walls) throws IOException {
+		Element lampsNode = roomNode.getChild("lampen");
 		List<Lamp> lamps = new LinkedList<Lamp>();
 		if(lampsNode != null) { // contains lamps
 			List<Element> lampNodes = lampsNode.getChildren("Lampe");	
 			for (Element lampNode: lampNodes) {
 				Lamp tmpLamp = new Lamp(Double.parseDouble(lampNode.getChildText("x")), Double.parseDouble(lampNode.getChildText("y")));				
-				if (tmpLamp.isInsidePolygon(walls)) {
-					//tmpLamp.turnOn();
+				if (tmpLamp.isInsidePolygon(walls)) { // the lamp is actually positioned inside the room
 					lamps.add(tmpLamp);
 				} else {
 					throw new IOException("Not all lamps are actually inside the room. Please provide a valid room layout");
@@ -195,6 +224,14 @@ class FilePersistence implements IPersistence {
 		return lamps;
 	}
 
+	/**
+	 * Allows for format checking of the file content that is provided by an {@link InputStreamReader}. Inserts the DTD specification
+	 * after the first ">" (ASCII dez = 62) has been read -> works for xml-files. Otherwise the specification is appended to the end of the
+	 * file, which will produce nothing meaning full.
+	 * @param isr : The {@link InputStreamReader} obtained from an xml file
+	 * @return A {@link StringBuilder} that has the DTD-specification added to its xml-header.
+	 * @throws IOException : If read from the supplied {@link InputStreamReader} fails.
+	 */
 	private StringBuilder insertDTDForValidation(InputStreamReader isr) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		

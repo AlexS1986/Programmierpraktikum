@@ -12,8 +12,9 @@ import fernuni.propra.internal_data_model.Wall;
  * where the type of the {@link WallContainerAbstract} must be specified by implementing subclasses.
  * <p>
  * {@link Wall}s in the container are sorted according to total order specified by a {@link Comparator}<{@link Wall}>,
- * where the ordering must be specified by implementing subclasses. The total ordering is done by mapping {@link Wall}s on integer numbers and
- * using the total ordering defined by the ordering in double numbers.
+ * where the ordering must be specified by implementing subclasses. The total ordering is done 
+ * by mapping {@link Wall}s on double numbers and
+ * using the total ordering defined by the ordering of real numbers.
  * <p>
  * {@link Wall}s can be added if they are of the correct type.
  * <p>
@@ -83,7 +84,8 @@ public abstract class WallContainerAbstract implements Iterable<Wall> {
 	}
 	
 	/**
-	 * Computes whether a {@link Wall} has indeed 
+	 * Computes whether a {@link Wall} has is indeed a subsequent - relative to the limit -  {@link Wall} with respect to to the
+	 * total ordering of this container.
 	 * @param wall
 	 * @param limit : limit that characterizes the wall and is used to decide if wall is indeed a subsequent {@link Wall} with respect to the 
 	 * total ordering of {@link Wall}s in the container.
@@ -102,7 +104,7 @@ public abstract class WallContainerAbstract implements Iterable<Wall> {
 	
 	/**
 	 * 
-	 * @param wall
+	 * @param wall : the {@link Wall} to be checked.
 	 * @return a boolean that indicates whether wall has the suited type for this container.s
 	 */
 	protected abstract boolean isCorrectWallType(Wall wall);

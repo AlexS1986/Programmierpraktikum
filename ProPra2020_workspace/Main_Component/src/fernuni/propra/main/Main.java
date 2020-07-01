@@ -1,6 +1,5 @@
 package fernuni.propra.main;
 
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import fernuni.propra.algorithm.UserSolveAAS;
@@ -10,47 +9,96 @@ import fernuni.propra.algorithm.UserValidateAASException;
 import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
 import fernuni.propra.file_processing.UserReadInputWriteOutputException;
 import fernuni.propra.internal_data_model.IRoom;
-import fernuni.propra.internal_data_model.Lamp;
-import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.user_interface.UserDisplayAAS;
 
 /**
- * Haupteinstiegspunkt der Anwendung.
- *
- * In der Main-Komponente m&uumlssen unter anderem die Eingabeparameter verarbeitet werden.</br>
- * 
- * f&uumlr den Ablaufparameter "r" wird folgende Festlegung getroffen:
- * <ul>
- * <li>"s" (solve): f&uumlr die durch die XML-Datei beschriebene Probleminstanz wird eine L&oumlsung ermittelt. Die Positionen der Lampen werden in der angegebenen XML-Datei gespeichert. Wenn in der XML-Datei bereits eine L&oumlsung enthalten ist, so ist diese zu &uumlberschreiben.</li>
- * <li>"sd" (solve & display): wie "s", nur dass der Raum sowie die ermittelten Positionen der Lampen zus&aumltzlich in der grafischen Oberfl&aumlche gezeigt werden.</li>
- * <li>"v" (validate): durch diese Option wird gepr&uumlft, ob der in der angegebenen XML-Datei enthaltene Raum durch die ebenso dort angegebenen Lampen vollst&aumlndig ausgeleuchtet ist. Das Ergebnis der Pr&uumlfung sowie die Anzahl und Positionen der Lampen werden ausgegeben. Falls die angegebene XML-Datei keinen zul&aumlssigen Raum enth&aumllt, wird eine Fehlermeldung ausgegeben. Die Ausgabe erfolgt in der Kommandozeile.</li>
- * <li>"vd" (validate & display): wie "v", nur dass der Raum und die Lampen nach der Validierung zus&aumltzlich in der grafischen Oberfl&aumlche angezeigt werden.</li>
- * <li>"d" (display): der in der XML-Datei enthaltene Raum und die Lampen werden in der grafischen Oberfl&aumlche angezeigt. Falls die angegebene XML-Datei keinen zul&aumlssigen Raum enth&aumllt, wird eine Fehlermeldung auf der Kommandozeile ausgegeben.</li>
- * </ul>
- * Der Eingabedateiparameter "if" ist ein String, der den Pfad der Eingabedatei beinhaltet.</br>
- * 
- * Der Parameter f&uumlr ein Zeitlimit "l" ist eine positive nat&uumlrliche Zahl, welche die maximale Rechenzeit in Sekunden angibt.
+ * Main access point to this application.</br>
+ *<p>
+ * In this component, among other things the input 
+ * parameters are parsed and handled.</br>
+ * <p>
+ * According to the choice of the parameters, 
+ * the program flow is delegated to 
+ * the matching use cases.
+ * <p>
  */
 public class Main {
 
 	/**
 	 * Haupteinstiegsfunktion
 	 */
-	private static final String generalHelpMessage = "Java -jar ProPra.jar r=runParameter if=\"pathToFile\" l=timeLimit \n \n "
-			+ "The runParameter specified by r =runParameter is mandatory and must be one of s,sd,v,vd or d .\n "
-			+ "The input file parameter is also mandatory. pathToFile specifies the full path to a valid input file. The \" before and after pathToFile are mandatory\n"
-			+ "The time limit parameter is optional. For runParameter = s or runParameter = sd. This parameter specifies how long the solution algorithm searches for an optimal lamp layout. Time limit must be a positive integer number.";
+	private static final String generalHelpMessage =
+			"Java -jar ProPra.jar r=runParameter "
+			+ "if=\"pathToFile\" l=timeLimit \n \n "
+			+ "The runParameter specified by r =runParameter is mandatory "
+			+ "and must be one of s,sd,v,vd or d .\n "
+			+ "The input file parameter is also mandatory. pathToFile "
+			+ "specifies the full path to a valid input file. "
+			+ "The \" before and after pathToFile are mandatory\n"
+			+ "The time limit parameter is optional. "
+			+ "For runParameter = s or runParameter = sd. "
+			+ "This parameter specifies how long the solution "
+			+ "algorithm searches for an optimal lamp layout. "
+			+ "Time limit must be a positive integer number.";
 	
 	
-	
+	/**
+	 * General access point to the functionality of this program.
+	 * @param args Three input parameters have to be provided as 
+	 * command line parameters in the form
+	 * r=value_r if=pathToFile l=timeLimit.
+	 * <p>
+	 * The control flow parameter r is treated as follows:
+	 * <ul>
+	 * 
+	 * <li>r="s" (solve): 
+	 *  for the problem instance described by the given xml-file
+	 *  a solution is computed. The computed lamp positions are saved to the
+	 *  given xml-file. Already existing lamp positions will be replaced in the
+	 *  xml-file.</li>
+	 *  
+	 * <li>r="sd" (solve & display): like r="s", 
+	 *  except for the fact that the room, including lamps, is also displayed graphically. 
+	 *  </li>
+	 *  
+	 * <li>r="v" (validate): 
+	 * this option checks whether the room defined in the given xml-file is illuminated
+	 * by its lamps. The result as well as the number of lamps is 
+	 * printed to the command line display. .</li>
+	 * 
+	 * <li>r="vd" (validate & display): like r="v",  
+	 * except for the fact that after validation
+	 * the room is also displayed graphically. </li>
+	 * 
+	 * <li>r="d" (display): The room given by the specified xml-file, 
+	 * including lamps is displayed graphically. </li>
+	 * </ul>
+	 * The input parameter "if" is a String that that 
+	 * defines the absolute path to a valid xml-file that describes an room
+	 * according to the format specified in [1]. If the room is not valid, an error
+	 * message is printed to the command line display.
+	 * <p>
+	 * The parameter time limit parameter "l" is used to s
+	 * pecify a time limit in seconds
+	 * after which the computation will be aborted for the cases r="s" and r = "sd".
+	 * The best available setting of lamps is displayed if a solution has been found,
+	 * if not then no changes will be made to the xml-file and also nothing will be 
+	 * displayed, except for a warning on the console.
+	 * <p>
+	 * [1] 	Aufgabenstellung Programmierpraktikum Fernuni 
+	 * 		Hagen Sommersemester 2020, Listing 1
+	 */
 	public static void main(String[] args) {
 		
+		System.out.println("The input parameters you specified are:");
 		for (String arg : args) { // Debug
 			System.out.println(arg);
 		}
+		System.out.println();
 
 		ParameterSet parameterSet = new ParameterSet();
 		try {
+			//parse input parameters by delegating to ParameterSet
 			for (String paramString : args) {
 				StringTokenizer st = new StringTokenizer(paramString, "=");
 				if(st.countTokens()==2) {
@@ -64,14 +112,14 @@ public class Main {
 						parameterSet.setInputFile(parameterValue);
 						break;
 					case "l":
-						parameterSet.setTimeLimit(Integer.parseInt(parameterValue));
+						parameterSet.setTimeLimit(Integer.parseInt(
+								parameterValue));
 						break;
-					default:
-						throw new GeneralException();
-						
+					default: // other parameter names are not valid
+						throw new GeneralException();	
 					}
 					
-				} else {
+				} else { // not a valid input format
 					throw new GeneralException();
 				}
 			}
@@ -88,64 +136,118 @@ public class Main {
 				
 				switch(parameterSet.getRunParameter()) {
 				case "s":
-					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
+					// read input
+					userReadWriteAAS = new UserReadInputWriteOutputAAS(
+							parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
+					
+					// solve
 					userSolveAAS = new UserSolveAAS();
-					numberOfLampsInSolution = userSolveAAS.solve(room, parameterSet.getTimeLimit());
+					numberOfLampsInSolution = userSolveAAS.solve(
+							room, parameterSet.getTimeLimit());
+					
+					// write results to xml
 					userReadWriteAAS.writeOutput(room);
-					printMessageToConsole("Computation finished ...");
+					
+					// write results  and runtime information
+					// to command line 
+					printMessageToConsole(
+							"Number of lamps necessary:" + 
+					numberOfLampsInSolution); 
+					printMessageToConsole(
+							userSolveAAS.getRuntimeInformation().toString());
 					break;
 				case "sd":
-					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
+					// read input
+					userReadWriteAAS = new UserReadInputWriteOutputAAS(
+							parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
+					
+					//solve
 					userSolveAAS = new UserSolveAAS();
-					numberOfLampsInSolution = userSolveAAS.solve(room, parameterSet.getTimeLimit());
+					numberOfLampsInSolution = userSolveAAS.solve(
+							room, parameterSet.getTimeLimit());
+					
+					// write results to xml
 					userReadWriteAAS.writeOutput(room);
+					
+					// display
 					userDisplayAAS = new UserDisplayAAS();
 					userDisplayAAS.display(room);
-					printMessageToConsole("Computation finished ...");
-					printMessageToConsole("Number of lamps necessary:" + numberOfLampsInSolution); // TODO
-					printMessageToConsole(userSolveAAS.getRuntimeInformation().toString());
+					
+					// write results  and runtime information
+					// to command line
+					printMessageToConsole(
+							"Number of lamps necessary:" + 
+					numberOfLampsInSolution); 
+					printMessageToConsole(
+							userSolveAAS.getRuntimeInformation().toString());
 					break;
 				case "v":
-					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
+					// read input
+					userReadWriteAAS = new UserReadInputWriteOutputAAS(
+							parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
+					
+					// validate whether room is illuminated
 					userValidateAAS = new UserValidateAAS();
 					userValidateAAS.validate(room);
+					
+					// write results  and runtime information
+					// to command line
 					printMessageToConsole(userValidateAAS.getResultString());
+					printMessageToConsole(
+							userValidateAAS.getRuntimeInformation().toString());
 					break;
 				case "vd":
-					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
+					
+					// read input
+					userReadWriteAAS = new UserReadInputWriteOutputAAS(
+							parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
+					
+					// validate whether room is illuminated
 					userValidateAAS = new UserValidateAAS();
 					userValidateAAS.validate(room);
-					//System.out.println(userValidateAAS.getResultString());
+					
+					// write results  and runtime information
+					// to command line
 					printMessageToConsole(userValidateAAS.getResultString());
+					printMessageToConsole(
+							userValidateAAS.getRuntimeInformation().toString());
+					
+					// display
 					userDisplayAAS = new UserDisplayAAS();
 					userDisplayAAS.display(room);
 					break;
 				case "d":
-					userReadWriteAAS = new UserReadInputWriteOutputAAS(parameterSet.getInputFile());
+					// read input
+					userReadWriteAAS = new UserReadInputWriteOutputAAS(
+							parameterSet.getInputFile());
 					room = userReadWriteAAS.readInput();
+					
+					// display
 					userDisplayAAS = new UserDisplayAAS();
 					userDisplayAAS.display(room);
 					break;
 				default:
 					
 				}
+				printMessageToConsole(
+						"Computation finished ...");
+				
 						
-			} else {
+			} else { // not a valid paramter set
 				throw new GeneralException();
 			}
-			
-			
-			
-		}catch (ParameterSetException e) {
-			printMessageToConsole(e.getMessage());
+					
+		}catch (ParameterSetException e) { // specific help message
+			printMessageToConsole(e.getMessage()); 
 			System.exit(0);
 		} catch(NumberFormatException nfe) {
-			printMessageToConsole("The timeLimit parameter specified by l=timeLimit is not an integer number");
-		} catch(GeneralException ge) {
+			printMessageToConsole("The timeLimit parameter specified by "
+					+ "l=timeLimit is not an integer number");
+		} catch(GeneralException ge) { // give hints
 			printMessageToConsole(generalHelpMessage);
 			System.exit(0); 
 		} catch (UserReadInputWriteOutputException e) {
@@ -163,5 +265,6 @@ public class Main {
 	
 	private static void printMessageToConsole(String message) {
 		System.out.println(message);
+		System.out.println();
 	}
 }

@@ -1,0 +1,23 @@
+package fernuni.propra.main;
+
+/**
+ * 
+ * @author alex
+ *
+ */
+public class ParameterSetException extends Exception {
+
+	public ParameterSetException() {
+	}
+
+	public ParameterSetException(String message) {
+		super(message);
+		
+	}
+
+	public ParameterSetException(Throwable cause) {
+		super(cause);
+		
+	}
+
+}

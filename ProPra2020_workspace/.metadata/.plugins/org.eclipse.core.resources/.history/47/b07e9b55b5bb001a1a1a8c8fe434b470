@@ -1,0 +1,18 @@
+package fernuni.propra.main;
+
+public class ParameterSetException extends Exception {
+
+	public ParameterSetException() {
+	}
+
+	public ParameterSetException(String message) {
+		super(message);
+		
+	}
+
+	public ParameterSetException(Throwable cause) {
+		super(cause);
+		// TODO Auto-generated constructor stub
+	}
+
+}

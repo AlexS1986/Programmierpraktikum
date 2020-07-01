@@ -19,6 +19,11 @@ import fernuni.propra.internal_data_model.LineSegment;
 import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Wall;
 
+/**
+ * 
+ * @author alex
+ *
+ */
 public class RoomPanel extends RoomPanelAbstract{ 
 	private static final int PIXEL_LAMP_DIAMETER = 10; // in pixels
 	private List<PlotRectangle> rectangles = new ArrayList<PlotRectangle>();
@@ -57,17 +62,24 @@ public class RoomPanel extends RoomPanelAbstract{
 	protected void drawLamps(Graphics2D g2D) {
 		double scale = getScale();
 		IRoom room = getRoom();
+		
+		double pixelOffsetX = getPixelOffsetX();
+		double pixelOffsetY = getPixelOffsetY();
+
 		Iterator<Lamp> lampIterator = room.getLamps();
 		while(lampIterator.hasNext()) {
 			Lamp lamp = lampIterator.next();
 			Color lampColor = lamp.getOn() ? Color.YELLOW :  Color.DARK_GRAY;
 			g2D.setColor(lampColor);
-			g2D.fillOval( (int) (lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
-					(int) (lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
+			g2D.fillOval( (int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
+					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
 			g2D.setStroke(new BasicStroke(2));
 			g2D.setColor(Color.BLACK);
-			g2D.drawOval((int) (lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
-					(int) (lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
+			g2D.drawOval((int) (pixelOffsetX + lamp.getX() * scale)
+					- (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
+					(int) (pixelOffsetY+lamp.getY() * scale) 
+					- (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
+					PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
 		}
 		
 	}
@@ -76,16 +88,21 @@ public class RoomPanel extends RoomPanelAbstract{
 	protected void drawRoom(Graphics2D g2D) {
 		double scale = getScale();
 		IRoom room = getRoom();
-		g2D.setStroke(new BasicStroke(2/((float) scale)));
+		
+		double pixelOffsetX = getPixelOffsetX();
+		double pixelOffsetY = getPixelOffsetY();
+		
+		g2D.setStroke(new BasicStroke(2));
 		Polygon p = new Polygon();
+		
+		
 		
 		Iterator<Point> cornerIterator = room.getCorners();
 		while(cornerIterator.hasNext()) {
 			Point corner = cornerIterator.next();
-			p.addPoint((int) (corner.getX()), (int) (corner.getY()));
+			p.addPoint((int) (pixelOffsetX  +corner.getX() * scale), 
+					(int) (pixelOffsetY + corner.getY() * scale));
 		}
-		
-		
 		
 		g2D.setColor(Color.ORANGE);
 		g2D.fillPolygon(p);
@@ -94,24 +111,33 @@ public class RoomPanel extends RoomPanelAbstract{
 		Iterator<Wall> wallIterator = room.getWalls();
 		while(wallIterator.hasNext()) {
 			LineSegment wall = wallIterator.next();
-			g2D.drawLine((int) wall.getP1().getX(),(int) wall.getP1().getY(),
-					(int) wall.getP2().getX(), (int) wall.getP2().getY());
+			g2D.drawLine((int) (pixelOffsetX + wall.getP1().getX() * scale),
+					(int) (pixelOffsetY + wall.getP1().getY() * scale),
+					(int) (pixelOffsetX + wall.getP2().getX() * scale), 
+					(int) (pixelOffsetY + wall.getP2().getY() * scale));
 		}
-		
-		
+			
 	}
 
 	@Override
-	protected void drawRectangles(Graphics2D g2D) { //TODO nur Test
+	protected void drawRectangles(Graphics2D g2D) { 
 		double scale = getScale();
+		double pixelOffsetX = getPixelOffsetX();
+		double pixelOffsetY = getPixelOffsetY();
+		
 		g2D.setStroke(new BasicStroke(2));
 		for (PlotRectangle rectangle: rectangles) {
 			g2D.setColor(rectangle.color);
-			g2D.drawRect((int) (rectangle.x * scale), (int) (rectangle.y * scale), (int) (rectangle.width * scale), (int) (rectangle.height * scale));
-			g2D.drawString(rectangle.name, (int) ((rectangle.x + rectangle.width/2) * scale), 
-					(int) ((rectangle.y + rectangle.height/2) * scale) );
+			g2D.drawRect((int) (pixelOffsetX + rectangle.x * scale), 
+					(int) (pixelOffsetY + rectangle.y * scale), 
+					(int) (rectangle.width * scale), (int) (rectangle.height * scale));
+			g2D.drawString(rectangle.name, 
+					(int) ((pixelOffsetX + rectangle.x + rectangle.width/2) * scale), 
+					(int) ((pixelOffsetY + rectangle.y + rectangle.height/2) * scale) );
 		}
 	}
+
+	
 	
 	
 }

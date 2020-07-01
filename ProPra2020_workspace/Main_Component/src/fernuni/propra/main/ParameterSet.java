@@ -1,25 +1,42 @@
 package fernuni.propra.main;
 
-
+/**
+ * Supports parsing parameter Strings that are
+ * provided via the command line when
+ * calling ProPra.jar.
+ * <p>
+ * @author alex
+ *
+ */
 public class ParameterSet {
-	private String runParameter;
-	private String inputFile;
-	private Integer timeLimit;
-	private static String[] validRunParameters = {"s","sd","v","vd", "d"};
-	private static final String formInputFileParameter = " if=\"pathToFile\"";
-	private static final String formTimeLimitParameter = "l=timeLimit , where timeLimit is a positive Integer number";
+	private String runParameter; // the value of "r"
+	private String inputFile; // the value of "if"
+	private Integer timeLimit; // the value of "l"
+	private static String[] validRunParameters = {"s","sd",
+			"v","vd", "d"};
+	private static final String formInputFileParameter =
+			" if=\"pathToFile\"";
+	private static final String formTimeLimitParameter = 
+			"l=timeLimit , where timeLimit is a positive Integer number";
 	private static final String formRunParameter = "r=parameter";
 	
-	
-	public ParameterSet() {
-		
-	}
-	
+	/**
+	 * Checks whether the provided String parameter is a valid value 
+	 * of "r". If it is valid it will be accepted as the value of r. 
+	 * @param runParameter: the requested value of "r".
+	 * @throws ParameterSetException : if runParameter is not valid
+	 * or "r" has already been specified.
+	 */
 	void setRunParameter(String runParameter) throws ParameterSetException{
-		if (this.runParameter != null) {
-			throw new ParameterSetException("Run parameter is already set. Please provide only one run parameter specification.");
-		} else if (!isValidRunParameter(runParameter)) {
-			String message = "Run parameter is not valid. Please provide a valid run parameter in the form " + formRunParameter+ ", where parameter is one of: ";
+		if (this.runParameter != null) { // double specification
+			throw new ParameterSetException(
+					"Run parameter is already set. "
+					+ "Please provide only one run parameter specification.");
+		} else if (!isValidRunParameter(runParameter)) { // not valid
+			// build help message
+			String message = "Run parameter is not valid. Please provide a "
+					+ "valid run parameter in the form " + formRunParameter+ ","
+							+ " where parameter is one of: ";
 			for (String validParameter : validRunParameters) {
 				message = message + validParameter;
 				message = message + " ";	
@@ -30,52 +47,88 @@ public class ParameterSet {
 		}
 	}
 	
+	/**
+	 * Checks whether a value for "if" has not already been specified.
+	 * If not the value for "if" is accepted.
+	 * @param inputFile : the desired value for "if"
+	 * @throws ParameterSetException : thrown if "if" has already been
+	 * specified.
+	 */
 	void setInputFile(String inputFile) throws ParameterSetException {
-		if (this.inputFile != null) {
-			throw new ParameterSetException("Path to input file is already set. Please provide only one input file specification.");
-		} /*else if (!inputFile.startsWith("\"") || !inputFile.endsWith("\"")) {
-			throw new ParameterSetException("The path to the input file you entered is: " + inputFile +System.getProperty("line.separator") + " The input file parameter needs to start and end with  \" . "
-					+ "Please supply the path to the input file in the form: if=\"pathToFile\"");
-		} */
+		if (this.inputFile != null) { // double specification
+			throw new ParameterSetException("Path to input file is already set. "
+					+ "Please provide only one input file specification.");
+		} 
 		else {
 			this.inputFile = inputFile.replace("\"", "");
 			
 		} 
 	}
 	
+	/**
+	 * Checks whether a value for "l" has not already been specified.
+	 * If not the value for "l" is accepted.
+	 * @param timeLimit : the desired value for "l" in seconds
+	 * @throws ParameterSetException : thrown if "l" has already been
+	 * specified.
+	 */
 	void setTimeLimit(int timeLimit) throws ParameterSetException {
-		if (this.timeLimit != null) {
-			throw new ParameterSetException("Time limit is already set. Please provide only one time limit specification.");
+		if (this.timeLimit != null) { // double specification
+			throw new ParameterSetException("Time limit is already set. "
+					+ "Please provide only one time limit specification.");
 		} else {
 			this.timeLimit = timeLimit;
 		}
 	}
 	
+	/**
+	 * Checks whether the values given for "r" (mandatory), "if" (mandatory) and
+	 * "s" (mandatory for r=s or r=sd) add up to a valid input specification. 
+	 * @return A boolean that represents whether the parameter set is valid (true) or 
+	 * not (exception is thrown to return specific advice to the caller).
+	 * @throws ParameterSetException : thrown if parameter set is not valid
+	 * getMessage() should be called to get specific advice on how to fix the 
+	 * error.
+	 */
 	boolean isValidParameterSet() throws ParameterSetException {
 		if(runParameter == null) {
-			String message = "No run parameter provided. Please provide a valid run parameter in the form " + formRunParameter+ ", where parameter is one of: ";
+			String message = "No run parameter provided. "
+					+ "Please provide a valid run parameter in the form " 
+					+ formRunParameter+ ", where parameter is one of: ";
 			for (String validParameter : validRunParameters) {
 				message = message + validParameter;
 				message = message + " ";	
 			}
 			throw new ParameterSetException(message);
 		}
-		if (runParameter.equals("v") || runParameter.equals("vd") || runParameter.equals("d")) {
+		if (runParameter.equals("v") || runParameter.equals("vd") 
+				|| runParameter.equals("d")) {
 			if (inputFile != null) {
 				return true;
 			} else {
-				throw new ParameterSetException("No path to the input file is specified. Please provide the path to the input file in the form:" + formInputFileParameter);
+				throw new ParameterSetException(
+						"No path to the input file is specified. "
+						+ "Please provide the path to the input file in the form:"
+								+ formInputFileParameter);
 			} 
 		} else if (runParameter.equals("s") || runParameter.equals("sd")) {
 			if (inputFile == null ) {
-				throw new ParameterSetException("No path to the input file is specified. Please provide the path to the input file in the form:" + formInputFileParameter);
+				throw new ParameterSetException(
+						"No path to the input file is specified. "
+						+ "Please provide the path to the input file in the form:" 
+								+ formInputFileParameter);
 			} else if (timeLimit == null) {
-				throw new ParameterSetException("No time limit is specified. Please provide a time limit in the form:" + formTimeLimitParameter);
+				throw new ParameterSetException(
+						"No time limit is specified. "
+						+ "Please provide a time limit in the form:" 
+								+ formTimeLimitParameter);
 			} else {
 				return true;
 			}
 		} else {
-			String message = "Run parameter is not valid. Please provide a valid run parameter in the form " + formRunParameter+ ", where parameter is one of: ";
+			String message = "Run parameter is not valid. "
+					+ "Please provide a valid run parameter in the form " 
+					+ formRunParameter+ ", where parameter is one of: ";
 			for (String validParameter : validRunParameters) {
 				message = message + validParameter;
 				message = message + " ";
@@ -85,6 +138,11 @@ public class ParameterSet {
 	
 	}
 	
+	/**
+	 * Checks whether the given value of "r" is valid
+	 * @param runParameter
+	 * @return true if runParameter is valid or false otherwise
+	 */
 	private boolean isValidRunParameter(String runParameter) {
 		boolean isValid = false;
 		for (String validParameter :  validRunParameters) {
@@ -96,24 +154,28 @@ public class ParameterSet {
 		return isValid;
 	}
 	
+	/**
+	 * Getter for the value of "r"
+	 * @return The value of "r"
+	 */
 	String getRunParameter() {
 		return this.runParameter;
 	}
 	
+	/**
+	 * Getter for the value of "if"
+	 * @return The value of "if"
+	 */
 	String getInputFile() {
 		return this.inputFile;
 	}
 	
+	/**
+	 * Getter for the value of "l"
+	 * @return The value of "l"
+	 */
 	int getTimeLimit() {
 		return this.timeLimit;
 	}
 	
-	/*String[] getValidRunParameters() { // TODO
-		String[] outStrings = new String[validRunParameters.length];
-		for (int i = 0; i< validRunParameters.length; i++) {
-			outStrings[i] = validRunParameters[i];
-		}
-		return outStrings;
-	} */
-
 }

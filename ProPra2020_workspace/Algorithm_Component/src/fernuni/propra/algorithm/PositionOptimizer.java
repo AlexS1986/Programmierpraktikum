@@ -115,7 +115,6 @@ public class PositionOptimizer implements IPositionOptimizer{
 		if(illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, runTimeInformation)) { /* valid solution found, else case 
 			does not need to be investigated since it all lamps with an idx larger than the supplied idx are already turned on*/
 			if (numberLampsOn<numberIlluminatedLampsBestSolution) { // new best solution found
-				System.out.println("Solution found with " + numberLampsOn + " lamps turned on.");
 				currentBestSolution = deepCopyLamps(lamps);
 				numberIlluminatedLampsBestSolution = numberLampsOn;		
 			} 
@@ -127,8 +126,7 @@ public class PositionOptimizer implements IPositionOptimizer{
 				
 				//branch2
 				lamp.turnOff();
-				searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn-1, runTimeInformation);
-				
+				searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn-1, runTimeInformation);	
 			}
 						
 		} else { // not a valid solution, with all lamps > idx turned on 

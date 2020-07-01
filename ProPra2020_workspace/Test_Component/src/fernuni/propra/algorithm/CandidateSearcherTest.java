@@ -152,7 +152,6 @@ public class CandidateSearcherTest {
 		RectangleWithTag rec2 = new RectangleWithTag(new Point(1,0), new Point(2,2),2);
 		rectanglesWithTagIn.add(rec0); rectanglesWithTagIn.add(rec1); rectanglesWithTagIn.add(rec2);
 		
-		
 		// Act 
 		ArrayList<RectangleWithTag> reducedRectangles = new ArrayList<RectangleWithTag>();
 		try {

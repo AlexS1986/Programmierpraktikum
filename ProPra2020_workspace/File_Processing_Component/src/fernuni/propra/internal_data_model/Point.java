@@ -60,7 +60,8 @@ public class Point {
 	 */
 	public boolean isOnLineSegment(Point p1, Point p2) {
 		if (!p1.sameX(p2) && !p1.sameY(p2)) throw 
-		new IllegalArgumentException("Input is not a horizontal or vertical line!");
+		new IllegalArgumentException(
+				"Input is not a horizontal or vertical line!");
 		boolean xAgrees = this.sameX(p1) 
 				&& this.sameX(p2);
 		boolean yAgrees = Point.agrees(getY(), p1.getY()) 
@@ -70,29 +71,35 @@ public class Point {
 		return (xAgrees && yInRange) || (yAgrees && xInRange);
 	}
 	
+	/**
+	 * Checks whether the {@link Point} is on a {@link LineSegment}
+	 * @param lineSegment : the {@link LineSegment} to be checked  this
+	 * {@link Point} is on the {@link LineSegment} lineSegment
+	 * @return A boolean that represents whether the 
+	 */
 	public boolean isOnLineSegment (LineSegment lineSegment) {
 		return isOnLineSegment(lineSegment.getP1(), lineSegment.getP2());
 	}
 	
 	
-	boolean sameX(Point other) {
-		return Point.agrees(this.x, other.x);
-	}
-	
-	boolean sameY(Point other) {
-		return Point.agrees(this.y, other.y);
-	}
-	
-	boolean largerX(Point other) {
-		return Point.isLarger(this.x, other.x);
-	}
-	
-	boolean largerY(Point other) {
-		return Point.isLarger(this.y, other.y);
-	}
-	
+	/**
+	 * Checks whether this {@link Point} is inside a 
+	 * polygon defined by a {@link List}<{@link LinseSegment}>.
+	 * <p>
+	 * The algorithm constructs lines emanating from this
+	 * {@link Point} of ~infinity in x- as well
+	 * as in y-direction. The intersections of
+	 * these lines with the provided line set are counted,
+	 * e.g. as intersectionCountXP, and intersectionCountYP.
+	 * If one of these counts is an odd number, then this 
+	 * {@link Point} is considered to be inside the polygon.
+	 * @param lineSegments : the hull of the polygon.
+	 * @return A boolean that represents whether this {@link Point}
+	 * is inside the polygon .
+	 */
 	public boolean isInsidePolygon(List<LineSegment> lineSegments) {
-		ArrayList<LineSegment> arrayLinesSegments = new ArrayList<LineSegment>(lineSegments);
+		ArrayList<LineSegment> arrayLinesSegments = 
+				new ArrayList<LineSegment>(lineSegments);
 		
 		// pre lineSegment must be a valid polygonial
 		LineSegment testLineSegXP = new LineSegment(this, new Point(INF, getY()));
@@ -101,20 +108,24 @@ public class Point {
 		int intersectionCountXP = 0;
 		int intersectionCountYP = 0;
 		for (LineSegment lineSegment : lineSegments) {
+			// test for intersection in x-direction
 			try {
-				testLineSegXP.intersectionWithLinesegment(lineSegment);
-				if (isOnLineSegment(lineSegment.getP1(), lineSegment.getP2())) {
-					return true; // if point is on wall -> point is in polygonial
+				testLineSegXP.intersectionWithLinesegment(
+						lineSegment);
+				if (isOnLineSegment(lineSegment.getP1(), 
+						lineSegment.getP2())) {
+					return true; // if point is on wall -> point is in polygon
 				} else {
 					intersectionCountXP++;
 				}
 			} catch (LineSegmentException e) {
 			}
-			
+			// test for intersection in y direction
 			try {
 				testLineSegYP.intersectionWithLinesegment(lineSegment);
-				if (isOnLineSegment(lineSegment.getP1(), lineSegment.getP2())) {
-					return true; // if point is on wall -> point is in polygonial
+				if (isOnLineSegment(lineSegment.getP1(), 
+						lineSegment.getP2())) {
+					return true; // if point is on wall -> point is in polygon
 				} else {
 					intersectionCountYP++;
 				}
@@ -123,40 +134,151 @@ public class Point {
 			
 			
 		}
-
-		if ((intersectionCountXP % 2) != 0 || (intersectionCountYP % 2) != 0) { // if number of intersections is odd -> point is in polygonial
+		// if number of intersections is odd -> point is in polygon
+		if ((intersectionCountXP % 2) != 0 ||
+				(intersectionCountYP % 2) != 0) { 
 			return true;
 		} else {
 			return false;
 		}	
 	}
 	
+	/**
+	 * Checks whether the x-coordinate of this {@link Point}
+	 * is inside a certain range of x-values
+	 * @param xLow : the lower limit of the range
+	 * @param xHigh : the upper limit of the range
+	 * @return A boolean that represents whether the 
+	 * x-coordinate of this {@link Point}
+	 * is inside a certain range of x-values
+	 */
 	public boolean isInXRange(double xLow, double xHigh) {
 		if (xLow>xHigh) throw new IllegalArgumentException("xLow > xHigh");
 		return isInRange(getX(), xLow, xHigh);
 	}
 	
+	/**
+	 * Checks whether the y-coordinate of this {@link Point}
+	 * is inside a certain range of y-values
+	 * @param yLow : the lower limit of the range
+	 * @param yHigh : the upper limit of the range
+	 * @return A boolean that represents whether the 
+	 * y-coordinate of this {@link Point}
+	 * is inside a certain range of y-values
+	 */
 	public boolean isInYRange(double yLow, double yHigh) {
 		if(yLow > yHigh) throw new IllegalArgumentException("yLow > yHigh");
 		return isInRange(getY(), yLow, yHigh);
 	}
 	
+	/**
+	 * Checks whether this {@link Point} is inside a rectangle
+	 * defined by the bottom left {@link Point} and the top right
+	 * {@link Point}
+	 * @param p1 : the bottom left {@link Point}
+	 * @param p3 : the top right {@link Point}
+	 * @return A boolean that represents whether this 
+	 * {@link Point} is inside a rectangle
+	 * defined by the bottom left {@link Point} and the top right
+	 * {@link Point}
+	 */
 	public boolean isInsideRectangle(Point p1, Point p3) {
 		return isInXRange(p1.getX(), p3.getX()) && isInYRange(p1.getY(), p3.getY());
 	}
-	
-	private static boolean agrees(double x, double x1) {
-		return Math.abs(x-x1)<TOL;
+ 
+	/**
+	 * 
+	 * @param other
+	 * @return A boolean that represents whether this
+	 * {@link Point} and other have the same 
+	 * x-coordinate
+	 */
+	boolean sameX(Point other) {
+		return Point.agrees(this.x, other.x);
 	}
 	
-	private static boolean isLarger(double x, double x1) {
-		return x-x1 > TOL;
+	/**
+	 * 
+	 * @param other
+	 * @return A boolean that represents whether this
+	 * {@link Point} and other have the same 
+	 * y-coordinate
+	 */
+	boolean sameY(Point other) {
+		return Point.agrees(this.y, other.y);
 	}
 	
-	private static  boolean isInRange(double x, double x1, double x2) {
-		return (Math.min(x1, x2) < x + TOL) && (Math.max(x1, x2) > x - TOL);				
+	/**
+	 * 
+	 * @param other
+	 * @return A boolean that represents whether this
+	 * {@link Point} and has a x-coordinate larger than
+	 * others
+	 * x-coordinate
+	 */
+	boolean largerX(Point other) {
+		return Point.isLarger(this.x, other.x);
 	}
 	
+	/**
+	 * 
+	 * @param other
+	 * @return A boolean that represents whether this
+	 * {@link Point} and has a y-coordinate larger than
+	 * others
+	 * x-coordinate
+	 *y */
+	boolean largerY(Point other) {
+		return Point.isLarger(this.y, other.y);
+	}
+	
+	/**
+	 * A tests for two doubles to agree within a
+	 * certain tolerance.
+	 * @param a : one double
+	 * @param b : another double
+	 * @return A boolean that represents whether the two
+	 * doubles agree within a certain tolerance
+	 */
+	private static boolean agrees(double a, double b) {
+		return Math.abs(a-b)<TOL;
+	}
+	
+	/**
+	 * A tests for a double a to be greater than a double b
+	 * within a certain tolerance.
+	 * @param a : one double
+	 * @param b : another double
+	 * @return A boolean that represents whether the two
+	 * doubles agree within a certain tolerance
+	 */
+	private static boolean isLarger(double a, double b) {
+		return a-b > TOL;
+	}
+	
+	/**
+	 * A test for a double number to be in a certain range/
+	 * interval.
+	 * @param a : the number to be tested
+	 * @param aLow : one boundary of the interval
+	 * @param aHigh : another boundary of the interval
+	 * @return A boolean that represents whether a is in the interval
+	 * given by the two numbers aLow, aHigh.
+	 */
+	private static  boolean isInRange(double a, double aLow, double aHigh) {
+		return (Math.min(aLow, aHigh) < a + TOL) && (Math.max(aLow, aHigh) > a - TOL);				
+	}
+	
+	/**
+	 * A test for equality for this {@link Point} and
+	 * another {@link Point} other. The {@link Point}s
+	 * are considered to be equal if 
+	 * their x and y coordinates agree within a certain
+	 * precision.
+	 * @param other
+	 * @return A boolean that represents whether the two {@link Point}s
+	 * have the same coordinates within a certain precision/tolerance.
+	 */
 	private boolean isEqual(Point other) {
 		if (other == null) return false;
 			return (Math.round(getX() * PRECISION) == Math.round(other.getX() * PRECISION)) 
@@ -181,9 +303,5 @@ public class Point {
 		result = 31 * result + (int) Math.round(y * PRECISION);
 		return result;
 	}
-	
-	
-	
-
 
 }

@@ -179,7 +179,7 @@ public class FilePersistenceTest {
 		
 		//Act
 		try {
-			persistence.writeOutput(room,"/Users/alex/Desktop/test");
+			persistence.writeOutput(room,"instances/validationInstances/testOutput.xml");
 		} catch (PersistenceException e) {
 			fail(e.getMessage());
 		}

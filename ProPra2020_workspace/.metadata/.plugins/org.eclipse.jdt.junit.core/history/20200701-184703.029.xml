@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FilePersistenceTest" project="Test_Component" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.file_processing.FilePersistenceTest" time="0.905">
+    <testcase name="testReadInput" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.881"/>
+    <testcase name="testWriteOutput" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.023"/>
+    <testcase name="testTestWallAndAddToWalls" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.001"/>
+  </testsuite>
+</testrun>

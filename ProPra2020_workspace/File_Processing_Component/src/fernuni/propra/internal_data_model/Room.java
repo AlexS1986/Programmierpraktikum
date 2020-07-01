@@ -5,32 +5,51 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-
+/**
+ * A specific implementation of {@link IRoom} that is used to represent
+ * a complete room in the algorithm.
+ * 
+ * <p>
+ * Implemented interfaces: {@link IRoom}
+ * <p>
+ * @author alex
+ *
+ */
 public class Room implements IRoom {
-	private List<Lamp> lamps = new LinkedList<Lamp>();
+	//lamps of the room
+	private List<Lamp> lamps = 
+			new LinkedList<Lamp>();
+	
+	// corners of the room
 	private final LinkedList<Point> corners;
+	
+	// whether the corners are counter clockwise
+	// or clockwise oriented
 	private boolean counterClockWise;
+	
+	// the max/min x/y coordinates of corners of the room
 	private double minX, maxX, minY, maxY;
+	
+	// the walls of this room
 	private List<Wall> walls = new LinkedList<Wall>();
+	
+	// the name/ID of this room
 	private String ID;
 	
-	public double getMinX() {
-		return minX;
-	}
-
-	public double getMaxX() {
-		return maxX;
-	}
-
-	public double getMinY() {
-		return minY;
-	}
-
-	public double getMaxY() {
-		return maxY;
-	}
-
-	public Room(String ID, List<Lamp> lamps, LinkedList<Point> corners) {
+	
+	/**
+	 * Constructor
+	 * @param ID : the ID of the new {@link Room} as 
+	 * a String
+	 * @param lamps : the set of {@link Lamp}s of
+	 * the new {@link Room}. Might be null if 
+	 * no {@link Lamp}s exist in this room.
+	 * @param corners : the corners of this room
+	 * in either clock-wise or counter clock wise
+	 * order
+	 */
+	public Room(String ID, List<Lamp> lamps, 
+			LinkedList<Point> corners) {
 		if (lamps != null) {
 			this.lamps = lamps;
 		}
@@ -39,6 +58,26 @@ public class Room implements IRoom {
 		computeDimensionAndOrientation();
 		
 	}
+	
+	@Override
+	public double getMinX() {
+		return minX;
+	}
+
+	@Override
+	public double getMaxX() {
+		return maxX;
+	}
+	@Override
+	public double getMinY() {
+		return minY;
+	}
+	
+	@Override
+	public double getMaxY() {
+		return maxY;
+	}
+
 
 	@Override
 	public Iterator<Lamp> getLamps() {
@@ -65,19 +104,34 @@ public class Room implements IRoom {
 		return lamps.size();
 	}
 
+	/**
+	 * Computes the max/min x/y coordinates of 
+	 * corners in this room and also computes
+	 * the orientation of the corners,
+	 * i.e. determines whether they are given
+	 * in clock wise or counter clock wise order
+	 */
 	private void computeDimensionAndOrientation() {
 		if (corners.isEmpty()) {
-			throw new IllegalArgumentException("Room does not have any corners!");
+			throw new IllegalArgumentException(
+					"Room does not have any corners!");
 		} else {
 			minX = corners.get(0).getX(); maxX = minX;
 			minY = corners.get(0).getY(); maxY = minY;
 		}
 		
+		// search the point that has the smallest y 
+		// and largest x coordinates
+		
+		// also iterate over all corners to determine
+		// the min/max x/y coordinates of corners
 		Point mostBottomMostRightPoint = null;
 		for (Point corner :  corners ) {
 			if(mostBottomMostRightPoint != null) {
-				if( corner.getY() <= mostBottomMostRightPoint.getY()) {
-					if (corner.getX()>mostBottomMostRightPoint.getX()) {
+				if( corner.getY()
+						<= mostBottomMostRightPoint.getY()) {
+					if (corner.getX()
+							>mostBottomMostRightPoint.getX()) {
 						mostBottomMostRightPoint = corner;
 					}
 				}
@@ -109,6 +163,11 @@ public class Room implements IRoom {
 		return walls.iterator();
 	}
 
+	/**
+	 * Computes the {@link Wall}s of this {@link Room}
+	 * as a ordered list (either clockwise or counter
+	 * clockwise)
+	 */
 	private void computeWalls() {
 		Point firstCorner = null;
 		Point previousCorner = null;
@@ -127,6 +186,7 @@ public class Room implements IRoom {
 			previousCorner = corner;
 			tag++;
 		}
+		// last wall
 		Wall newWall = new Wall(previousCorner, firstCorner, tag);	
 		walls.add(newWall);
 	}
@@ -137,13 +197,29 @@ public class Room implements IRoom {
 	}
 	
 	
+	/**
+	 * Checks whether the orientation of this polygon
+	 * is clock wise or counter clock wise.
+	 * <p>
+	 * To this end the corner with the largest x
+	 * and smallest y coordinate (X) and its predecessor (P) as well
+	 * as its successor (S) are considered.
+	 * <p>
+	 * If the cross products XP x XS z-component is positive then
+	 * the corners of this polygon are oriented counter clockwise.
+	 * @param mostBottomMostRightPoint : the corner with the largest
+	 * x and smallest y coordinate.
+	 * @return A boolean that represents whether the corners of this room
+	 * are oriented counterclockwise (true) or clockwise (false)
+	 */
 	private boolean isCounterClockWise(Point mostBottomMostRightPoint) {
-		// https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#1180256
+		// https://stackoverflow.com/questions/1165647/how-to-determine-
+		//if-a-list-of-polygon-points-are-in-clockwise-order/1180256#1180256
 		int indexOfBMRMP = corners.indexOf(mostBottomMostRightPoint);
 		Point previous;
 		Point next;
 		if (indexOfBMRMP == 0) {
-			previous = corners.get(corners.size()-1); //TODO this is faster with ArrayList?
+			previous = corners.get(corners.size()-1); 
 			next = corners.get(indexOfBMRMP+1);
 		} else if(indexOfBMRMP == (corners.size()-1)) {
 			previous = corners.get(indexOfBMRMP-1);

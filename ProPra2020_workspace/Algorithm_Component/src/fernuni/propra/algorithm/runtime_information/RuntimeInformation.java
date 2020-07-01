@@ -165,20 +165,18 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 	@Override
 	public String toString() {
 		String lineSeparator = System.getProperty("line.separator");
-		StringBuilder sb = new StringBuilder("Runtime Information");
-		sb.append(lineSeparator);
-		sb.append("Total runtime: ");
+		StringBuilder sb = new StringBuilder("Total runtime: ");
 		try {
 			sb.append((double) Math.round((double) getElapsedTime() / 1_000_000_000 * 100)/100);
 			sb.append(" s,");
 		} catch (RuntimeExceptionLamps e) {
 			sb.append("not available");
 		}
+		sb.append(" thereof ");
 		sb.append(lineSeparator);
-		sb.append("thereof ");
 		sb.append(lineSeparator);
 		
-		sb.append("searching for lamp position candidates: ");
+		sb.append("1.) Searching for lamp position candidates: ");
 		try {
 			sb.append((double) Math.round((double) getElapsedTimeCandidateSearch() / 1_000_000_000 * 100)/100);
 			sb.append(" s.");
@@ -188,7 +186,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		sb.append(lineSeparator);
 		
 		
-		sb.append("optimizing lamp positions: ");
+		sb.append("2.) Optimizing lamp positions: ");
 		try {
 			sb.append((double) Math.round((double) getElapsedTimeOptimizePositions() / 1_000_000_000 * 100)/100);
 			sb.append(" s.");
@@ -197,7 +195,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		}
 		sb.append(lineSeparator);
 		
-		sb.append("testing if room is illuminated: ");
+		sb.append("3.) Testing if room is illuminated: ");
 		try {
 			sb.append((double) Math.round((double) getElapsedTimeIlluminationTest() / 1_000_000_000 * 100)/100);
 			sb.append(" s.");
@@ -206,7 +204,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		}
 		sb.append(lineSeparator);
 		
-		sb.append("constructing original partial rectangles: ");
+		sb.append("4.) constructing original partial rectangles: ");
 		try {
 			sb.append((double) Math.round((double) getElapsedTimeOriginalPartialRectanglesFind() / 1_000_000_000 * 100)/100);
 			sb.append(" s.");

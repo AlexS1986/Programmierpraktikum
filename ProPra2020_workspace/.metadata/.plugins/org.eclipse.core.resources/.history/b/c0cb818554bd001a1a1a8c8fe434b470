@@ -1,0 +1,49 @@
+package fernuni.propra.algorithm;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+import fernuni.propra.algorithm.runtime_information.IRuntimeIlluminationTester;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+
+/**
+ * A provider of an algorithm that tests if a room is illuminated by a number of lamps.
+ * <p>
+ * Implementing classes: {@link IlluminationTester}
+ * <p>
+ * @author alex
+ *
+ */
+public interface IIlluminationTester {
+	/**
+	 * Tests whether an instance of {@link IRoom} is illuminated, by the {@link Lamp}s that are part of that {@link IRoom}.
+	 * @param room : The {@link IRoom} instance to be checked (must contain information about the {@link Lamp}s)
+	 * @param runtimeInfo : A data structure of type {@link IRuntimeIlluminationTester} that can store runtime information.
+	 * @return A boolean that represents whether room is illuminated (true) or not (false).
+	 * @throws IlluminationTesterException
+	 */
+	boolean testIfRoomIsIlluminated(IRoom room, IRuntimeIlluminationTester runtimeInfo) throws IlluminationTesterException;
+	
+	/**
+	 * Tests whether an a room is illuminated. 
+	 * @param taggedLampsIterator : An Iterator for a set of {@link Lamp}s that are tagged. Each tag represents a portion 
+	 * of the room that is illuminated by that {@link Lamp}. 
+	 * @param allTags : The tags that represent all portions of the room. The union of all tagged portions of the room
+	 * 					retrieves the room.
+	 * @param runtimeInfo : A data structure of type {@link IRuntimeIlluminationTester} that can store runtime information.
+	 * @return
+	 */
+	//boolean testIfRoomIsIlluminated(Iterator<Lamp> taggedLampsIterator, HashSet<Integer> allTags, IRuntimeIlluminationTester runtimeInfo);
+	
+	/**
+	 * Tests whether an a room is illuminated.
+	 * @param illuminatedTags : A set of tags that represents illuminated portions of the room. Each tag represents
+	 * 							a portion of the room. The union of all tagged portions of the room retrieves the room.
+	 * @param allTags : The tags that represent all portions of the room. The union of all tagged portions of the room
+	 * 					retrieves the room.
+	 * @param runtimeInfo : A data structure of type {@link IRuntimeIlluminationTester} that can store runtime information.
+	 * @return
+	 */
+	boolean testIfRoomIsIlluminated(HashSet<Integer> illuminatedTags, HashSet<Integer> allTags, IRuntimeIlluminationTester runtimeInfo);
+}

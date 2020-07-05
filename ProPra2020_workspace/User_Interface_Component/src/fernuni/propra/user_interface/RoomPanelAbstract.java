@@ -1,16 +1,11 @@
 package fernuni.propra.user_interface;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Label;
 import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fernuni.propra.internal_data_model.IRoom;
@@ -30,6 +25,8 @@ import fernuni.propra.internal_data_model.IRoom;
  * <p>
  * 3.) Optional: How additional rectangles might be 
  * 	   displayed.
+ * <p>
+ * Implementing classes: {@link RoomPanel}
  * <p>
  * @author alex
  *
@@ -87,6 +84,7 @@ public abstract class RoomPanelAbstract extends JPanel{
 	
 	/**
 	 * Draw all rectangles in pixel coordinate system.
+	 * This function is mainly introduced for debugging.
 	 * @param g2D : The {@link Graphics2D} of this panel.
 	 */
 	protected abstract void drawRectangles(Graphics2D g2D);
@@ -153,13 +151,31 @@ public abstract class RoomPanelAbstract extends JPanel{
 	}
 	
 	/**
+	 * Add a rectangle to be plotted.
+	 * @param name: String to be displayed
+	 * @param color: Color of rectangle
+	 * @param x: x-coordinate of bottom left point
+	 * @param y: y coordinate of bottom left point
+	 * @param width : width of rectangle
+	 * @param height: height of rectangles
+	 */
+	protected abstract void addRectangle(String name, 
+			Color color,double x, double y, double width, double height);
+	
+	/**
+	 * Removes the rectangle that has been added last.
+	 */
+	protected abstract void removeLastRectangle();
+	
+	/**
 	 * Draws a simple explanatory string that describes how to interpret
 	 * the display.
 	 * @param g2D
 	 */
 	private void drawLegend(Graphics2D g2D) {
 		double centerOffset = 0.5*Math.min(0.1*getWidth(),0.1*getHeight());
-		g2D.drawString("yellow circle: lamp; black circle: lamp candidate ", (int) (centerOffset/2), (int) (centerOffset/2));
+		g2D.drawString("yellow circle: lamp; black circle: lamp candidate ",
+				(int) (centerOffset/2), (int) (centerOffset/2));
 	} 
 		
 }

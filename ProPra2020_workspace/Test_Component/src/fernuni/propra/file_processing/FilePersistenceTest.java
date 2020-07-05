@@ -184,21 +184,6 @@ public class FilePersistenceTest {
 			fail(e.getMessage());
 		}
 	}
-	
-	/*@Test
-	public void testIsCounterClockWise() {
-		Point p1 = new Point(0,0);
-		Point p2 = new Point(1,0);
-		Point p3 = new Point(1,1);
-		Point p4 = new Point(0,1);
-		List<Point> counterClockWise  = new ArrayList<Point>();
-		List<Point> clockWise = new ArrayList<Point>();
-		counterClockWise.add(p1); counterClockWise.add(p2); counterClockWise.add(p3); counterClockWise.add(p4);
-		clockWise.add(p4); clockWise.add(p3); clockWise.add(p2); clockWise.add(p1);
-		assertTrue(!FilePersistence.isCounterClockWise(clockWise, p2));
-		assertTrue(FilePersistence.isCounterClockWise(counterClockWise, p2));
-	}*/
-	
-
+		
 
 }

@@ -15,12 +15,11 @@ import fernuni.propra.internal_data_model.Room;
 import fernuni.propra.internal_data_model.Wall;
 
 public class UserValidateAASTest {
-	private IRoom room, room2, roomStar, roomHufeisen;
-	private Point p1, p2, p3,p4, p5, p6, p7, p8;
+	private IRoom roomSquare, roomStar, roomHufeisen;
+	private Point p1, p2, p3,p4;
 	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
 	private Point p31, p32, p33, p34, p35, p36, p37, p38;
-	private Wall w1, w2,w3,w4;
-	private LinkedList<Point> corners, corners2;
+	private LinkedList<Point> corners;
 	
 	@Before
 	public void setup() {
@@ -28,24 +27,12 @@ public class UserValidateAASTest {
 		p2 = new Point(1,0);
 		p3 = new Point (1,1);
 		p4 = new Point(0,1);
-		
-		p5 = new Point(0.5, 1.0);
-		p6 = new Point(0.5, 0.5);
-		p7 = new Point(0,   0.5);
-		
-		
-		
+	
 		corners= new LinkedList<Point>();
 		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
 		
-		corners2= new LinkedList<Point>();
-		corners2.add(p1); corners2.add(p2); corners2.add(p3); corners2.add(p5);
-		corners2.add(p6); corners2.add(p7);
-		
-		room = new Room("test", null, corners);	
-		room2 = new Room("test", null, corners2);	
-		
-	
+		roomSquare = new Room("test", null, corners);	
+
 		pc1 = new Point(1,-1);
 		pc2 = new Point(2,-1);
 		pc3 = new Point(2,1);
@@ -75,32 +62,55 @@ public class UserValidateAASTest {
 		p37 = new Point(-1,2);
 		p38 = new Point(-2,2);
 		LinkedList<Point> cornersHufeisen = new LinkedList<Point>();
-		cornersHufeisen.add(p31);cornersHufeisen.add(p32);cornersHufeisen.add(p33);cornersHufeisen.add(p34);cornersHufeisen.add(p35);
+		cornersHufeisen.add(p31);cornersHufeisen.add(p32);cornersHufeisen.add(p33);
+		cornersHufeisen.add(p34);cornersHufeisen.add(p35);
 		cornersHufeisen.add(p36);cornersHufeisen.add(p37);cornersHufeisen.add(p38);
 		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);
 		
 	}
 
+	/**
+	 * Tests whether roomStar is illuminated with 1 lamp in the center and
+	 * whether roomSquare is not illuminated without a lamp and
+	 * whether roomHufeisen is not illuminated with 1 lamp.
+	 */
 	@Test
 	public void testValidate() {
 		//Arrange
-		UserValidateAAS userValidateAAS = new UserValidateAAS();
+		// square
+		UserValidateAAS userValidateAASSquare = new UserValidateAAS();
+		
+		// star
+		UserValidateAAS userValidateAASStar = new UserValidateAAS();
 		Lamp lamp1 = new Lamp(0,0);
+		lamp1.turnOn();
 		roomStar.addLamp(lamp1);
 		
+		// Hufeisen
+		UserValidateAAS userValidateAASHufeisen = new UserValidateAAS();
+		Lamp lamp3 = new Lamp (2,0);
+		lamp3.turnOn();
+		roomHufeisen.addLamp(lamp3);
+		
 		//Act
-		boolean test1 = false;
-		boolean test2 = false;
+		boolean roomStarIlluminated = false;
+		boolean roomSquareIlluminated = false;
+		boolean roomHufeisenIlluminated = false;
 		try {
-			test1 = userValidateAAS.validate(roomStar);
-			test2 = userValidateAAS.validate(room);
+			roomStarIlluminated = userValidateAASStar.validate(roomStar);
+			roomSquareIlluminated = userValidateAASSquare.validate(roomSquare);
+			roomHufeisenIlluminated = userValidateAASHufeisen.validate(roomHufeisen);
 		} catch (UserValidateAASException e) {
 			fail("Test result should have been found!");
 		}
 		
 		//Assert
-		assertTrue("Test should have been correct!", test1);
-		assertFalse("Test should have been not correct!",test2);
+		assertTrue("roomStar needs to be illuminated with 1 lamp in its center",
+				roomStarIlluminated);
+		assertFalse("roomSquare should not be illuminated without a lamp!",
+				roomSquareIlluminated);
+		assertFalse("roomHufeisen should not be illuminated with just one lamp"
+				    + "that is turned on", roomHufeisenIlluminated);
 	}
 
 }

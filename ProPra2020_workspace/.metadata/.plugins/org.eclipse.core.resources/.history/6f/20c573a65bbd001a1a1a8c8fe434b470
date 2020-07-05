@@ -1,0 +1,273 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import fernuni.propra.algorithm.util.RectangleWithTag;
+import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
+import fernuni.propra.file_processing.UserReadInputWriteOutputException;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Room;
+import fernuni.propra.internal_data_model.Wall;
+import fernuni.propra.user_interface.RoomFrame;
+import fernuni.propra.user_interface.RoomPanel;
+
+public class OriginalPartialRectanglesFinderTest {
+	private IRoom  roomSquare, roomL;
+	private Point p1, p2, p3,p4, p5, p6, p7;
+	private Wall w1, w2,w3,w4;
+	private LinkedList<Point> cornersSquare, cornersL;
+	private static List<IRoom> rooms;
+	
+	@BeforeClass
+	public static void setupBC() {
+
+		String[] xmlPathesOK = {"instances/validationInstances/Selbsttest_clockwise.xml", //0
+				"instances/validationInstances/Selbsttest_counterClockwise.xml", //1
+				"instances/validationInstances/Selbsttest_100a_incomplete.xml", // 2
+				"instances/validationInstances/Selbsttest_100a_incomplete.xml", //3
+				"instances/validationInstances/Selbsttest_100a_solved.xml", // 4
+				"instances/validationInstances/Selbsttest_100a.xml", // 5
+				"instances/validationInstances/Selbsttest_100b.xml", // 6
+				"instances/validationInstances/Selbsttest_20a_incomplete.xml", // 7
+				"instances/validationInstances/Selbsttest_20a_solved.xml", // 8
+				"instances/validationInstances/Selbsttest_20a.xml", // 9
+				"instances/validationInstances/Selbsttest_20b.xml", // 10
+				"instances/validationInstances/Selbsttest_20c.xml",	// 11
+				"instances/validationInstances/Zufallsraum_144_solved.xml" // 12
+		};
+		
+		rooms = new ArrayList<IRoom>();
+		
+		for(String xmlPath : xmlPathesOK) {
+			UserReadInputWriteOutputAAS readAAS = new UserReadInputWriteOutputAAS(xmlPath);
+			try {
+				rooms.add(readAAS.readInput());
+			} catch (UserReadInputWriteOutputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		p1 = new Point(0,0);
+		p2 = new Point(1,0);
+		p3 = new Point (1,1);
+		p4 = new Point(0,1);
+		
+		p5 = new Point(0.5, 1.0);
+		p6 = new Point(0.5, 0.5);
+		p7 = new Point(0,   0.5);
+		
+		cornersSquare= new LinkedList<Point>();
+		cornersSquare.add(p1); cornersSquare.add(p2); cornersSquare.add(p3); 
+		cornersSquare.add(p4);
+		
+		cornersL= new LinkedList<Point>();
+		cornersL.add(p1); cornersL.add(p2); 
+		cornersL.add(p3); cornersL.add(p5);
+		cornersL.add(p6); cornersL.add(p7);
+		
+		roomSquare = new Room("test", null, cornersSquare);	
+		roomL = new Room("test", null, 
+				cornersL);
+		
+		w1 = new Wall(p1,p2,0);
+		w2 = new Wall(p2,p3,0);
+		w3 = new Wall(p3,p4,0);
+		w4 = new Wall(p4,p1,0);
+		
+	}
+	
+	@Test 
+	public void testFindOriginalPartialRectangles() {
+		//Arrange
+		OriginalPartialRectanglesFinder rectanglesFinder3 
+			= new OriginalPartialRectanglesFinder();
+		
+		
+		
+		Color[] colors = {Color.blue, Color.red, Color.green, Color.yellow};
+		
+		
+		
+		
+		IRoom testRoom2 = rooms.get(12);
+		//Act
+		
+		ArrayList<RectangleWithTag> rectanglesWithTag2 = new ArrayList<RectangleWithTag>();
+		try {
+			rectanglesWithTag2 = (new OriginalPartialRectanglesFinder()).findOriginalPartialRectangles(testRoom2, null);
+		} catch (OriginalPartialRectanglesFinderException e) {
+		}
+		RoomPanel roomPanel2 = new RoomPanel(testRoom2);
+		Color[] colors2 = {Color.blue, Color.red, Color.green, Color.yellow};
+		
+		List<RectangleWithTag> rectanglesWithTag3 = new ArrayList<RectangleWithTag>();
+		try {
+			rectanglesWithTag3 = (new CandidateSearcher()).reduceRectangles(rectanglesWithTag2);
+		} catch (InterruptedException e) {
+		}
+		
+		
+		RoomFrame roomFrame = new RoomFrame(roomPanel2);
+		
+		for (int i = 0; i<rectanglesWithTag3.size(); i++) {
+			RectangleWithTag rec = rectanglesWithTag3.get(i);
+			double width = rec.getP2().getX() - rec.getP1().getX();
+			double height = rec.getP3().getY() - rec.getP1().getY();
+			roomPanel2.addRectangle(String.valueOf(i), colors[i % 3], rec.getP1().getX(), rec.getP1().getY(), width, height);
+			roomPanel2.repaint();
+		} 
+		
+		
+		try {
+			Thread.currentThread().sleep(2000);
+		} catch (InterruptedException e) {
+			
+		}
+		
+		roomFrame.dispose();
+	}
+
+	@Test
+	public void testGetAllTags() {
+		// Arrange
+		OriginalPartialRectanglesFinder rectanglesFinder = new OriginalPartialRectanglesFinder();
+		HashSet<Integer> refSet = new HashSet<Integer>();
+		refSet.add(1);  refSet.add(2); refSet.add(3); refSet.add(4);
+		
+		//Act
+		try {
+			rectanglesFinder.sortWallsToContainers(roomSquare);
+			rectanglesFinder.constructOriginalPartialRectangles();
+		} catch (WallContainerException e) {
+			fail(e.getMessage());
+		} catch (OriginalPartialRectanglesFinderException e) {
+			fail(e.getMessage());
+		}
+		
+		//Assert
+		assertTrue(rectanglesFinder.getAllTags().containsAll(refSet));
+	}
+
+	@Test
+	public void testSortWallsToContainers() {
+		//Arrange
+				OriginalPartialRectanglesFinder originalRectanglesFinder = new OriginalPartialRectanglesFinder();
+				//Act
+				try {
+					originalRectanglesFinder.sortWallsToContainers(roomSquare);
+				} catch (OriginalPartialRectanglesFinderException e) {
+					fail(e.getMessage());
+				}
+				
+				//Assert
+				Iterator<Wall> east = originalRectanglesFinder.eastIterator();
+				Iterator<Wall> north = originalRectanglesFinder.northIterator();
+				Iterator<Wall> west = originalRectanglesFinder.westIterator();
+				Iterator<Wall> south = originalRectanglesFinder.southIterator();
+				
+				//east
+				boolean test11 = east.hasNext();
+				Wall wallEast = east.next();
+				boolean test12 = !east.hasNext();
+				boolean test13 = wallEast.getP1().equals(w2.getP1()) && wallEast.getP2().equals(w2.getP2());
+				boolean eastBool = test11 && test12 && test13;
+				
+				//north
+				boolean test21 = north.hasNext();
+				Wall wallNorth = north.next(); 
+				boolean test22 = !north.hasNext();
+				boolean test23 = wallNorth.getP1().equals(w3.getP1()) && wallNorth.getP2().equals(w3.getP2());
+				boolean northBool = test21 && test22 && test23;
+				
+				//west
+				boolean test31 = west.hasNext();
+				Wall wallWest = west.next(); 
+				boolean test32 = !west.hasNext();
+				boolean test33 = wallWest.getP1().equals(w4.getP1()) && wallWest.getP2().equals(w4.getP2());
+				boolean westBool = test31 && test32 && test33;
+				
+				//west
+				boolean test41 = south.hasNext();
+				Wall wallSouth = south.next(); 
+				boolean test42 = !south.hasNext();
+				boolean test43 = wallSouth.getP1().equals(w1.getP1()) && wallSouth.getP2().equals(w1.getP2());
+				boolean southBool = test41 && test42 && test43;
+				
+				assertTrue(eastBool && northBool && westBool && southBool);
+	}
+
+	@Test
+	public void testConstructOriginalPartialRectangles() {
+				// Arrange
+				OriginalPartialRectanglesFinder rectanglesFinder = new OriginalPartialRectanglesFinder();
+				OriginalPartialRectanglesFinder rectanglesFinder2 = new OriginalPartialRectanglesFinder();
+				
+				
+				//Act
+				try {
+					rectanglesFinder.sortWallsToContainers(roomSquare);
+					rectanglesFinder.constructOriginalPartialRectangles();
+				} catch (WallContainerException e) {
+					fail(e.getMessage());
+				} catch (OriginalPartialRectanglesFinderException e) {
+					fail(e.getMessage());
+				}
+				
+				//2nd room
+				try {
+					rectanglesFinder2.sortWallsToContainers(roomL);
+					rectanglesFinder2.constructOriginalPartialRectangles();
+				} catch (WallContainerException e) {
+					fail(e.getMessage());
+				} catch (OriginalPartialRectanglesFinderException e) {
+					fail(e.getMessage());
+				}
+				
+				
+				//Assert
+				Iterator<RectangleWithTag> rectIterator = rectanglesFinder.iteratorOriginalRectangles();
+				RectangleWithTag rec1 = rectIterator.next();
+				RectangleWithTag ref = new RectangleWithTag(p1, p3,1);
+				ref.addTag(2); ref.addTag(3); ref.addTag(4);
+				
+				boolean test1 = !rectIterator.hasNext();
+				boolean test2 = rec1.equals(ref);
+				
+				assertTrue(test1 && test2);
+				
+				
+				Iterator<RectangleWithTag> rectIterator2 = rectanglesFinder2.iteratorOriginalRectangles();
+				RectangleWithTag rec2_1 = rectIterator2.next();
+				RectangleWithTag rec2_2 = rectIterator2.next();
+				
+				RectangleWithTag ref2 = new RectangleWithTag(p1, new Point(1,0.5),1);
+				ref2.addTag(5); ref2.addTag(6);
+				RectangleWithTag ref3 = new RectangleWithTag(new Point(0.5,0), p3,2);
+				ref3.addTag(3); ref3.addTag(4);
+				
+				
+				boolean test7 = !rectIterator2.hasNext();
+				boolean test8 = rec2_1.equals(ref2);
+				boolean test9 = rec2_2.equals(ref3);
+				
+				
+				assertTrue(test7 && test8 && test9);
+	}
+
+}

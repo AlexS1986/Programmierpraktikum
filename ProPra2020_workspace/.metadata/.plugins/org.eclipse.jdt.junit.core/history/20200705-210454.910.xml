@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LineSegmentTestParameterized" project="Test_Component" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0">
+    <testsuite name="[0]" time="0.0">
+      <testcase name="testIsHorizontalParametrized[0]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+    </testsuite>
+    <testsuite name="[1]" time="0.0">
+      <testcase name="testIsHorizontalParametrized[1]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+    </testsuite>
+    <testsuite name="[2]" time="0.0">
+      <testcase name="testIsHorizontalParametrized[2]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+    </testsuite>
+    <testsuite name="[3]" time="0.0">
+      <testcase name="testIsHorizontalParametrized[3]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+    </testsuite>
+  </testsuite>
+</testrun>

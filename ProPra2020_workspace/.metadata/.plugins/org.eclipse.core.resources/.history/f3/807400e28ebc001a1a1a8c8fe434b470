@@ -1,0 +1,15 @@
+package fernuni.propra.user_interface;
+import fernuni.propra.internal_data_model.IRoom;
+
+/**
+ * This is an use case that provides the user with access to 
+ * @author alex
+ *
+ */
+public class UserDisplayAAS {
+	public void display(IRoom room) {
+		RoomPanelAbstract roomPanel = new RoomPanel(room);
+		RoomFrame roomFrame = new RoomFrame(roomPanel);
+	}
+
+}

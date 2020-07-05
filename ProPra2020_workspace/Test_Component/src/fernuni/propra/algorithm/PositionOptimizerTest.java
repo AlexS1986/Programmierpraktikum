@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 import fernuni.propra.internal_data_model.Point;
@@ -17,12 +18,9 @@ import fernuni.propra.internal_data_model.Room;
 import fernuni.propra.internal_data_model.Wall;
 
 public class PositionOptimizerTest {
-	private IRoom mockRoom, room, room2, roomStar, roomHufeisen;
-	private Point p1, p2, p3,p4, p5, p6, p7, p8;
-	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
-	private Point p31, p32, p33, p34, p35, p36, p37, p38;
-	private Wall w1, w2,w3,w4;
-	private LinkedList<Point> corners, corners2;
+	private IRoom room;
+	private Point p1, p2, p3,p4;
+	private LinkedList<Point> corners;
 	
 	@Before
 	public void setup() {
@@ -31,79 +29,43 @@ public class PositionOptimizerTest {
 		p3 = new Point (1,1);
 		p4 = new Point(0,1);
 		
-		p5 = new Point(0.5, 1.0);
-		p6 = new Point(0.5, 0.5);
-		p7 = new Point(0,   0.5);
-		
-		
-	
-		
 		corners= new LinkedList<Point>();
 		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
 		
-		corners2= new LinkedList<Point>();
-		corners2.add(p1); corners2.add(p2); corners2.add(p3); corners2.add(p5);
-		corners2.add(p6); corners2.add(p7);
-		
 		room = new Room("test", null, corners);	
-		room2 = new Room("test", null, corners2);	
-		
-		
-		
-	
-		pc1 = new Point(1,-1);
-		pc2 = new Point(2,-1);
-		pc3 = new Point(2,1);
-		pc4 = new Point(1,1);
-		pc5 = new Point(1,2);
-		pc6 = new Point(-1,2);
-		pc7 = new Point(-1,1);
-		pc8 = new Point(-2,1);
-		pc9 = new Point(-2,-1);
-		pc10 = new Point(-1,-1);
-		pc11 = new Point(-1,-2);
-		pc12 = new Point(1,-2);
-		LinkedList<Point> cornersStar = new LinkedList<Point>();
-		cornersStar.add(pc1);cornersStar.add(pc2);cornersStar.add(pc3);cornersStar.add(pc4);cornersStar.add(pc5);
-		cornersStar.add(pc6);cornersStar.add(pc7);cornersStar.add(pc8);cornersStar.add(pc9);cornersStar.add(pc10);
-		cornersStar.add(pc11);cornersStar.add(pc12);
-		
-		roomStar = new Room("star", null, cornersStar);
-		
-		
-		p31 = new Point(-2,0);
-		p32 = new Point(2,0);
-		p33 = new Point(2,2);
-		p34 = new Point(1,2);
-		p35 = new Point(1,1);
-		p36 = new Point(-1,1);
-		p37 = new Point(-1,2);
-		p38 = new Point(-2,2);
-		LinkedList<Point> cornersHufeisen = new LinkedList<Point>();
-		cornersHufeisen.add(p31);cornersHufeisen.add(p32);cornersHufeisen.add(p33);cornersHufeisen.add(p34);cornersHufeisen.add(p35);
-		cornersHufeisen.add(p36);cornersHufeisen.add(p37);cornersHufeisen.add(p38);
-		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);
-		
-	}
 
+	}
+	
+	/**
+	 * Test the position optimizer for roomSquare with two lamps (only one needed)
+	 * and a mock test where only one lamp is needed out of 11 lamps,
+	 * because it is the only one containing all tags.
+	 */
 	@Test
 	public void testOptimizePositions() {
 		//Arrange
-		IPositionOptimizer positionOptimizer = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
-		IPositionOptimizer positionOptimizer2 = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
-		ICandidateSearcher candidateSearcher = AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
 		
-		List<Lamp> taggedCandidates = null;
+		// for roomSquare
+		IPositionOptimizer positionOptimizerRoomSquare =
+				AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		ICandidateSearcher candidateSearcherRoomSquare =
+				AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		
+		List<Lamp> taggedCandidatesRoomSquare = null;
 		try {
-			taggedCandidates = candidateSearcher.searchCandidates(room, null);
+			taggedCandidatesRoomSquare = candidateSearcherRoomSquare.searchCandidates(room, 
+					new RuntimeInformation());
 			Lamp lamp = new Lamp(0.0,0.0);
 			lamp.addTag(1);
-			taggedCandidates.add(lamp);
+			taggedCandidatesRoomSquare.add(lamp);
 		} catch (CandidateSearcherException | InterruptedException e) {
-			fail("Candidates Searcher failed!");
+			fail("Candidates Searcher failed! Could not test position optimizer");
 		}
 		
-		List<Lamp> taggedCandidates2 = new LinkedList<Lamp>();
+		// for mock test
+		IPositionOptimizer positionOptimizer =
+				AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		List<Lamp> taggedCandidates = new LinkedList<Lamp>();
 		Lamp lamp1 = new Lamp(0,0);
 		lamp1.addTag(0); 
 		Lamp lamp2 = new Lamp(0,0);
@@ -130,34 +92,44 @@ public class PositionOptimizerTest {
 		Lamp lamp11 = new Lamp(0,0);
 		lamp11.addTag(0); lamp11.addTag(1); lamp11.addTag(2); lamp11.addTag(3);
 		
-		taggedCandidates2.add(lamp1); taggedCandidates2.add(lamp2); taggedCandidates2.add(lamp3); taggedCandidates2.add(lamp4);
-		taggedCandidates2.add(lamp5); taggedCandidates2.add(lamp6); taggedCandidates2.add(lamp7); taggedCandidates2.add(lamp8);
-		taggedCandidates2.add(lamp9); taggedCandidates2.add(lamp10); taggedCandidates2.add(lamp11);
+		taggedCandidates.add(lamp1); taggedCandidates.add(lamp2);
+		taggedCandidates.add(lamp3); taggedCandidates.add(lamp4);
+		taggedCandidates.add(lamp5); taggedCandidates.add(lamp6);
+		taggedCandidates.add(lamp7); taggedCandidates.add(lamp8);
+		taggedCandidates.add(lamp9); taggedCandidates.add(lamp10);
+		taggedCandidates.add(lamp11);
 		
 		//Act
+		
+		// roomSquare
+		List<Lamp> optimizedLampsRoomSquare = new LinkedList<Lamp>();
+		try {
+			optimizedLampsRoomSquare = positionOptimizerRoomSquare.optimizePositions(
+					taggedCandidatesRoomSquare, null);
+		} catch (InterruptedException e) {
+		}
+		
+		// mock test
 		List<Lamp> optimizedLamps = new LinkedList<Lamp>();
 		try {
 			optimizedLamps = positionOptimizer.optimizePositions( taggedCandidates, null);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<Lamp> optimizedLamps2 = new LinkedList<Lamp>();
-		try {
-			optimizedLamps2 = positionOptimizer2.optimizePositions( taggedCandidates2, null);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		//Assert
-		for (int i = 0; i< optimizedLamps2.size()-1; i++) {
-			assertFalse(optimizedLamps2.get(i).getOn());
-		}
-		assertTrue(optimizedLamps2.get(optimizedLamps2.size()-1).getOn());
+		// roomSquare
+		assertTrue("A mandatory lamp is not turned on",
+				optimizedLampsRoomSquare.get(0).getOn());
+		assertFalse("This lamps should not have been turned on",
+				optimizedLampsRoomSquare.get(1).getOn());
 		
-		assertTrue(optimizedLamps.get(0).getOn());
-		assertFalse(optimizedLamps.get(1).getOn());
+		//Mock test
+		// all lamps need to be on
+		for (int i = 0; i< optimizedLamps.size()-1; i++) {
+			assertFalse("All lamps need to be turned off except one",optimizedLamps.get(i).getOn());
+		}
+		assertTrue("The last lamp needs to be turned on.",
+				optimizedLamps.get(optimizedLamps.size()-1).getOn());
 	}
 
 }

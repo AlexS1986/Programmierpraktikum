@@ -1,0 +1,176 @@
+package fernuni.propra.user_interface;
+
+import static org.junit.Assert.*;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
+import fernuni.propra.file_processing.UserReadInputWriteOutputException;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Wall;
+
+public class RoomFrameTest {
+	Point p1,p2,p3,p4,p5;
+	Wall w1,w2,w3,w4,w5;
+	List<Wall> walls;
+	List<IRoom> rooms;
+	
+	
+	@Before
+	public void setUp() {
+		p1 = new Point (-1,-1);
+		p2 = new Point (1,-1);
+		p3 = new Point(1,1);
+		p4 = new Point(-1,1);
+		w1 = new Wall(p1, p2,0);
+		w2 = new Wall(p2, p3,0);
+		w3 = new Wall(p3,p4,0);
+		w4 = new Wall(p4,p1,0);
+		w5 = new Wall(p1, p3,0);
+		
+		walls = new ArrayList<Wall>();
+		walls.add(w1);walls.add(w2); walls.add(w3); walls.add(w4);
+		
+		
+		String[] xmlPathesOK = {"instances/validationInstances/Selbsttest_clockwise.xml",
+				"instances/validationInstances/Selbsttest_counterClockwise.xml",
+				"instances/validationInstances/Selbsttest_100a_incomplete.xml",
+				"instances/validationInstances/Selbsttest_100a_incomplete.xml",
+				"instances/validationInstances/Selbsttest_100a_solved.xml",
+				"instances/validationInstances/Selbsttest_100a.xml",
+				"instances/validationInstances/Selbsttest_100b.xml",
+				"instances/validationInstances/Selbsttest_20a_incomplete.xml",
+				"instances/validationInstances/Selbsttest_20a_solved.xml",
+				"instances/validationInstances/Selbsttest_20a.xml",
+				"instances/validationInstances/Selbsttest_20b.xml",
+				"instances/validationInstances/Selbsttest_20c.xml"		
+		};
+		
+		rooms = new ArrayList<IRoom>();
+		
+		for(String xmlPath : xmlPathesOK) {
+			UserReadInputWriteOutputAAS readAAS = new UserReadInputWriteOutputAAS(xmlPath);
+			try {
+				rooms.add(readAAS.readInput());
+			} catch (UserReadInputWriteOutputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
+	}
+
+	@Test
+	public void testRoomFrame() {
+		
+		//Arrange
+		IRoom mockRoom = new IRoom() {
+			@Override
+			public Iterator<Lamp> getLamps() {
+				List<Lamp> lamps = new ArrayList<Lamp>();
+				Lamp lamp = new Lamp(0.0,0.0);
+				lamps.add(lamp);
+				lamp.turnOn();
+				return lamps.iterator();
+			}
+
+			@Override
+			public int getNumberOfLamps() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public Iterator<Point> getCorners() {
+				List<Point> corners = new ArrayList<Point>();
+				corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
+				return corners.iterator();
+			}
+
+			@Override
+			public void addLamp(Lamp lamp) {
+
+				
+			}
+
+			@Override
+			public Iterator<Wall> getWalls() {
+				return walls.iterator();
+			}
+
+			@Override
+			public double getMinX() {
+				return -1;
+			}
+
+			@Override
+			public double getMaxX() {
+				return 1.0;
+			}
+
+			@Override
+			public double getMinY() {
+				return -1.0;
+			}
+
+			@Override
+			public double getMaxY() {
+				return 1.0;
+			}
+
+			@Override
+			public String getID() {
+				return "MockRoom";
+			}
+
+			@Override
+			public void replaceLamps(List<Lamp> lamps) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public String printLampPositions() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+		};
+		
+		
+		RoomPanel mockRoomPanel = new RoomPanel(mockRoom);
+		//RoomPanel roomPanel = new RoomPanel(mockRoom);
+		RoomFrame mockRoomFrame = new RoomFrame(mockRoomPanel);
+		try {
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mockRoomFrame.dispose();
+	
+		
+		for (IRoom room : rooms) {
+			RoomPanel roomPanel = new RoomPanel(room);
+			RoomFrame roomFrame = new RoomFrame(roomPanel);
+			try {
+				Thread.currentThread().sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			roomFrame.dispose();
+		}
+		
+	}
+
+}

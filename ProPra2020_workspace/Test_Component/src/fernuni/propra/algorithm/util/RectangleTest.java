@@ -14,29 +14,33 @@ public class RectangleTest {
 	@Before
 	public void setUp() {
 		//Arrange
-		p1 = new Point(0,0);
-		p2 = new Point(1,0);
-		p3 = new Point(1,1);
-		p4 = new Point(0,1);
-		rec = new Rectangle(p1, p3);
+		p1 = new Point(0,0); // bottom left
+		p2 = new Point(1,0); // bottom right
+		p3 = new Point(1,1); // top right
+		p4 = new Point(0,1); // top left
+		rec = new Rectangle(p1, p3); 
 	}
 
 	@Test
 	public void testOverlap() {
 		//Arrange
-		Point p5 = new Point(0.5,0.5);
-		Point p6 = new Point(1.5,0.5);
-		Point p7 = new Point(1.5,1.5);
-		Point p8 = new Point(0.5,1.5);
-		Point p9 = new Point(0.5,2.0);
-		Point p10 = new Point(-1, -1);
+		Point p5 = new Point(0.5,0.5); // center
+		Point p7 = new Point(1.5,1.5); // outside north east
+		Point p9 = new Point(0.5,2.0); // outside east
+		Point p10 = new Point(-1, -1); // outside south west
 		
-		Rectangle rec2 = new Rectangle(p5, p7);
-		Rectangle rec3 = new Rectangle(p5, p3);
-		Rectangle rec5 = new Rectangle(p3, p7);
-		Rectangle rec8 = new Rectangle(p10, p9);
-		Rectangle rec9 = new Rectangle(p1, new Point(0.5, 1.0));
-		Rectangle rec11 = new Rectangle(p2, new Point(2*p2.getX(), 1.0));
+		Rectangle rec2 = new Rectangle(
+				p5, p7);  // overlap north east
+		Rectangle rec3 = new Rectangle(
+				p5, p3); // overlap north east
+		Rectangle rec5 = new Rectangle(
+				p3, p7); // no overlap
+		Rectangle rec8 = new Rectangle(
+				p10, p9); // no overlap
+		Rectangle rec9 = new Rectangle(p1, 
+				new Point(0.5, 1.0)); // overlap left
+		Rectangle rec11 = new Rectangle(p2,
+				new Point(2*p2.getX(), 1.0)); // no overlap
 		
 		//Act
 		Rectangle rec4 = rec.overlap(rec2);
@@ -45,18 +49,25 @@ public class RectangleTest {
 		Rectangle rec10 = rec.overlap(rec8);
 		Rectangle rec12 = rec.overlap(rec11);
 		
-		
-		assertTrue(rec3.equals(rec4));
-		assertTrue(rec6 == null);
-		assertTrue(rec7.equals(rec));
-		assertTrue(rec9.equals(rec10));
-		assertTrue(rec12 == null);
+		//Assert
+		assertTrue("Overlap not correct!", rec3.equals(rec4));
+		assertTrue("No overlap should have been detected",
+				rec6 == null);
+		assertTrue("Overlap not correct",
+				rec7.equals(rec));
+		assertTrue("Overlap not correct",
+				rec9.equals(rec10));
+		assertTrue("Overlap should not have been detected",
+				rec12 == null);
 		
 	}
 
+	/**
+	 * checks whether rectangle can
+	 * return its center
+	 */
 	@Test
 	public void testGetCenter() {
-		
 		//Act
 		Point result = rec.getCenter();
 		
@@ -82,18 +93,5 @@ public class RectangleTest {
 		
 	}
 
-	@Test
-	public void testIsCounterClockWise() {
-		//Arrange
-		Rectangle rec2 = new Rectangle(p1, p1);
-		
-		//Act
-		boolean test1 = rec2.isCounterClockWise();
-		boolean test2 = rec.isCounterClockWise();
-		
-		//Assert
-		assertFalse(test1);
-		assertTrue(test2);
-	}
 
 }

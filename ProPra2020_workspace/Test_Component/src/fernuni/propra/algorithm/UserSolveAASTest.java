@@ -17,37 +17,15 @@ import fernuni.propra.internal_data_model.Wall;
 
 public class UserSolveAASTest {
 
-	private IRoom room, room2, roomStar, roomHufeisen;
-	private Point p1, p2, p3,p4, p5, p6, p7, p8;
+	private IRoom roomStar, roomHufeisen;
 	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
 	private Point p31, p32, p33, p34, p35, p36, p37, p38;
-	private Wall w1, w2,w3,w4;
-	private LinkedList<Point> corners, corners2;
 	
 	@Before
 	public void setup() {
-		p1 = new Point(0,0);
-		p2 = new Point(1,0);
-		p3 = new Point (1,1);
-		p4 = new Point(0,1);
-		
-		p5 = new Point(0.5, 1.0);
-		p6 = new Point(0.5, 0.5);
-		p7 = new Point(0,   0.5);
 		
 		
-		
-		corners= new LinkedList<Point>();
-		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
-		
-		corners2= new LinkedList<Point>();
-		corners2.add(p1); corners2.add(p2); corners2.add(p3); corners2.add(p5);
-		corners2.add(p6); corners2.add(p7);
-		
-		room = new Room("test", null, corners);	
-		room2 = new Room("test", null, corners2);	
-		
-	
+		// star
 		pc1 = new Point(1,-1);
 		pc2 = new Point(2,-1);
 		pc3 = new Point(2,1);
@@ -68,6 +46,7 @@ public class UserSolveAASTest {
 		roomStar = new Room("star", null, cornersStar);
 		
 		
+		// hufeisen
 		p31 = new Point(-2,0);
 		p32 = new Point(2,0);
 		p33 = new Point(2,2);
@@ -83,20 +62,45 @@ public class UserSolveAASTest {
 		
 	}
 
+	/**
+	 * Tests if only 1 lamp is found for roomStar
+	 * and 2 lamps are found for roomHufeisen
+	 */
 	@Test
 	public void testSolve() {
 		//Arrange
-		UserSolveAAS userSolve = new UserSolveAAS();
+		UserSolveAAS userSolveStar = new UserSolveAAS();
+		UserSolveAAS userSolveHufeisen = new UserSolveAAS();
 		
 		//Act
 		try {
-			userSolve.solve(room, 100);
+			userSolveStar.solve(roomStar, 100);
+			userSolveHufeisen.solve(roomHufeisen, 100);
 		} catch (UserSolveAASException e) {
 			fail();
 		}
+		Iterator<Lamp> lampIteratorStar = roomStar.getLamps();
+		Iterator<Lamp> lampIteratorHufeisen = roomHufeisen.getLamps();
 		
 		//Assert
-		assertTrue(room.getLamps().hasNext());
+		
+		// star
+		assertTrue("At least one lamp should have been found",
+				lampIteratorStar.hasNext());
+		lampIteratorStar.next();
+		assertFalse("Only one lamp should have been found",lampIteratorStar.hasNext());
+		
+		// Hufeisen
+		assertTrue("At least one lamp should have been found",
+				lampIteratorHufeisen.hasNext());
+		lampIteratorHufeisen.next(); 
+		assertTrue("Second lamp should have been found",
+				lampIteratorHufeisen.hasNext());
+		lampIteratorHufeisen.next();
+		assertFalse("Only two lamps should have been found",
+				lampIteratorHufeisen.hasNext());
+		
+		
 	}
 
 }

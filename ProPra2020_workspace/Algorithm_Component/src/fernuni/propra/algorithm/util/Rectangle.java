@@ -90,11 +90,7 @@ public class Rectangle {
 				Math.min(this.p3.getY(), other.p3.getY()));
 		if(isValidRectangle(p1, p3)) {
 			Rectangle outRectangle = new Rectangle(p1, p3);
-			if(outRectangle.isCounterClockWise()) {
-				return outRectangle;
-			} else {
-				return null;
-			}
+			return outRectangle;
 		} else {
 			return null;
 		}
@@ -111,20 +107,6 @@ public class Rectangle {
 		return new Point(p1.getX()+width/2.0, p1.getY()+height/2.0);
 	}
 	
-	/**
-	 * Checks if {@link Point}s have counter clock wise orientation 
-	 * by evaluating of the cross product P2P3 x P2P1 
-	 * <p>
-	 * @return A boolean that shows whether the {@link Rectangle} as counter clock wise orientation.
-	 */
-	boolean isCounterClockWise() {
-		double dx1 = 0.0;
-		double dx2 = p1.getX()-p2.getX();
-		double dy1 = p3.getY() - p2.getY();
-		double dy2 = 0.0;
-		
-		return dx1 * dy2 - dx2 * dy1 > 0;
-	}
 	
 	@Override
 	public boolean equals(Object o) {

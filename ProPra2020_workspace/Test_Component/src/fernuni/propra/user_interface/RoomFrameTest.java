@@ -148,14 +148,11 @@ public class RoomFrameTest {
 		
 		
 		RoomPanel mockRoomPanel = new RoomPanel(mockRoom);
-		mockRoomPanel.addRectangle("Nr.1", Color.BLUE, 0.5, 0.5, 0.25, 0.25);
 		//RoomPanel roomPanel = new RoomPanel(mockRoom);
 		RoomFrame mockRoomFrame = new RoomFrame(mockRoomPanel);
 		try {
-			Thread.currentThread().sleep(3000);
+			Thread.currentThread().sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		mockRoomFrame.dispose();
 	
@@ -166,7 +163,6 @@ public class RoomFrameTest {
 			try {
 				Thread.currentThread().sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			roomFrame.dispose();

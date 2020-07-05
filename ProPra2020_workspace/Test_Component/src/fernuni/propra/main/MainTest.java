@@ -1,7 +1,5 @@
 package fernuni.propra.main;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

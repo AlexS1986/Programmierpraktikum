@@ -1,0 +1,154 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Room;
+
+public class IlluminationTesterTest {
+	private IRoom roomSquare, roomHufeisen;
+	private Point p1, p2, p3,p4;
+	private Point p31, p32, p33, p34, p35, p36, p37, p38;
+	private LinkedList<Point> cornersSquare;
+
+	@Before
+	public void setUp() throws Exception {
+		
+		// build room squares
+		p1 = new Point(0,0);
+		p2 = new Point(1,0);
+		p3 = new Point (1,1);
+		p4 = new Point(0,1);
+		cornersSquare= new LinkedList<Point>();
+		cornersSquare.add(p1); cornersSquare.add(p2); 
+		cornersSquare.add(p3); cornersSquare.add(p4);
+		roomSquare = new Room("test", null, cornersSquare);		
+		
+		// build room Hufeisen
+		p31 = new Point(-2,0);
+		p32 = new Point(2,0);
+		p33 = new Point(2,2);
+		p34 = new Point(1,2);
+		p35 = new Point(1,1);
+		p36 = new Point(-1,1);
+		p37 = new Point(-1,2);
+		p38 = new Point(-2,2);
+		LinkedList<Point> cornersHufeisen = new LinkedList<Point>();
+		cornersHufeisen.add(p31);cornersHufeisen.add(p32);cornersHufeisen.add(p33);
+		cornersHufeisen.add(p34);cornersHufeisen.add(p35);
+		cornersHufeisen.add(p36);cornersHufeisen.add(p37);cornersHufeisen.add(p38);
+		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);
+	}
+
+	@Test
+	public void testTestIfRoomIsIlluminatedIRoomIRuntimeIlluminationTester() {
+		//Arrange 
+		IIlluminationTester illuminationTester 
+		= AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
+		
+		//Act
+		boolean roomSquareWOLamp = false;
+		boolean roomSquare1LampOff = false;
+		boolean roomSquare1LampOn = false;
+		boolean roomSquare1LampOnOutside = false;
+		boolean roomSquareLampOnCorner = false;
+		
+		boolean test6 = false;
+		boolean test7 = false;
+		boolean test8 = false;
+		boolean test9 = false;
+		boolean test10 = false;
+		
+		try {
+			//Room 1
+			roomSquareWOLamp = illuminationTester.testIfRoomIsIlluminated(
+					roomSquare, new RuntimeInformation());
+			Lamp lamp = new Lamp(0.5, 0.5);
+			lamp.turnOff();
+			roomSquare.addLamp(lamp);
+			roomSquare1LampOff = illuminationTester.testIfRoomIsIlluminated(
+					roomSquare, new RuntimeInformation());
+			lamp.turnOn();
+			roomSquare1LampOn = illuminationTester.testIfRoomIsIlluminated(
+					roomSquare, new RuntimeInformation());
+			lamp.turnOff();
+			
+			// lamp outside room
+			Lamp lamp2 = new Lamp(1.0, 3.0);
+			lamp2.turnOn();
+			roomSquare.addLamp(lamp2);
+			roomSquare1LampOnOutside = illuminationTester.testIfRoomIsIlluminated(
+					roomSquare, new RuntimeInformation());
+			
+			//lamp on corner
+			Lamp lamp3 = new Lamp(1.0, 1.0);
+			lamp3.turnOn();
+			roomSquare.addLamp(lamp3);
+			roomSquareLampOnCorner = illuminationTester.testIfRoomIsIlluminated(
+					roomSquare, new RuntimeInformation());
+			
+			//Room Hufeisen
+			test6 = illuminationTester.testIfRoomIsIlluminated(roomHufeisen, new RuntimeInformation());
+			Lamp lamp4 = new Lamp(-1.5, 0.5);
+			lamp4.turnOn();
+			roomHufeisen.addLamp(lamp4);
+			test7 = illuminationTester.testIfRoomIsIlluminated(roomHufeisen, new RuntimeInformation());
+			Lamp lamp5 = new Lamp(1.5, 0.5);
+			lamp5.turnOn();
+			roomHufeisen.addLamp(lamp5);
+			test8 = illuminationTester.testIfRoomIsIlluminated(roomHufeisen, new RuntimeInformation());
+			
+		} catch (IlluminationTesterException e) {
+		}
+
+		
+		
+		//Assert
+		assertFalse(roomSquareWOLamp);
+		assertFalse(roomSquare1LampOff);
+		assertTrue(roomSquare1LampOn);
+		assertFalse(roomSquare1LampOnOutside);
+		assertTrue(roomSquareLampOnCorner);
+		
+		assertFalse(test6);
+		assertFalse(test7);
+		assertTrue(test8);
+		
+	}
+
+	@Test
+	public void testTestIfRoomIsIlluminatedIteratorOfLampHashSetOfIntegerIRuntimeIlluminationTester() {
+		//Arrange 
+		IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
+		HashSet<Integer> allTags = new HashSet<Integer>();
+		allTags.add(0); allTags.add(1); allTags.add(2); allTags.add(3);
+		List<Lamp> lamps= new LinkedList<Lamp>();
+		Lamp lamp1 = new Lamp(0,0,0); 
+		lamp1.turnOn();
+		lamps.add(lamp1);
+		
+		//Act
+		boolean test1 = illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, null);
+		Lamp lamp2 = new Lamp(0,0,1);
+		lamp2.addTag(2); 
+		lamp2.addTag(3);
+		lamp2.turnOn();
+		lamps.add(lamp2);
+		boolean test2 = illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, null);
+		
+		//Assert
+		assertFalse(test1);
+		assertTrue(test2);
+	}
+
+}

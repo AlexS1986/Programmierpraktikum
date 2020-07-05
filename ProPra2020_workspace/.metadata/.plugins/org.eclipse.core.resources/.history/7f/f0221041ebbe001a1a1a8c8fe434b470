@@ -1,0 +1,133 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Wall;
+
+public class WallContainerSouthTest {
+	Point p1,p2,p3,p4;
+	Wall w1,w2,w3,w4,w5,w6,w7,w8,w9;
+	
+	@Before
+	public void setUp() {
+		//Arrange
+		p1 = new Point(0,0);
+		p2 = new Point(1,0);
+		p3 = new Point(1,1);
+		p4 = new Point(0,1);
+		w1 = new Wall(p1,p2,0);
+		w2 = new Wall(p2,p3,0);
+		w3 = new Wall(p3,p4,0);
+		w4 = new Wall(p4,p1,0);
+		
+		w5 = new Wall(p2,p1,0);
+		w6 = new Wall(p3, p2,0);
+		w7 = new Wall(p4, p3,0);
+		w8 = new Wall(p1,p4,0);
+		
+		w9 = new Wall(p1,p1,0);
+	}
+	
+	/** 
+	 * tests whether south wall can be added and
+	 * whether an east wall throws an exception.
+	 */
+	@Test
+	public void testAdd() {
+		//Arrange
+		WallContainerSouth wallContainerSouth = new WallContainerSouth();
+		
+		//Act
+		boolean eastWallAddedWException = false;
+		try {
+			wallContainerSouth.add(w2);
+			fail("WallContainerException expected");
+		} catch(WallContainerException ex) {
+			eastWallAddedWException = true;
+		}
+		
+		boolean southWallAddedWOException = false;
+		try {
+			wallContainerSouth.add(w1);
+			southWallAddedWOException = true;
+		} catch (WallContainerException ex) {
+			fail();
+		}
+		
+		//Assert
+		assertTrue("Adding an east wall should  throw an exception",
+				eastWallAddedWException);
+		assertTrue("Adding a south wall should throw an exception",
+				southWallAddedWOException);
+	}
+
+	
+	/**
+	 * Tests whether the nearest south wall is 
+	 * indeed returned.
+	 */
+	@Test
+	public void testGetNearestSouthWall() {
+		//Arrange
+		WallContainerSouth wallContainerSouth = new WallContainerSouth();
+		
+		try {
+			wallContainerSouth.add(w1);       // lower
+		} catch (WallContainerException e) {
+		}
+		
+		try {
+			wallContainerSouth.add(w7); // upper
+		} catch (WallContainerException e) {
+		}
+		
+		//Act
+		Wall w10 = null;
+		try {
+			w10 = wallContainerSouth.getNearestWall(-1, 1, 0.5); // lower expected 
+		} catch (WallContainerException e) {
+			fail(e.getMessage());
+		}
+		boolean isLowerWall = w10.getP1().equals(w1.getP1()) 
+				&& w10.getP2().equals(w1.getP2());
+		
+		Wall w11 = null;
+		try {
+			w11 = wallContainerSouth.getNearestWall(-1, 1, 1.0); // upper expected
+		} catch (WallContainerException e) {
+			fail(e.getMessage());
+		}
+		boolean isUpperWall = w11.getP1().equals(w7.getP1()) 
+				&& w11.getP2().equals(w7.getP2());
+		
+		Wall w12 = null;
+		try {
+			w12 = wallContainerSouth.getNearestWall(-1, 1, 1.001); // upper expected
+		} catch (WallContainerException e) {
+			fail(e.getMessage());
+		}
+		boolean isUpper = w12.getP1().equals(w7.getP1()) 
+				&& w12.getP2().equals(w7.getP2()); 
+		
+		Wall w13 = null;
+		try {
+			w13 = wallContainerSouth.getNearestWall(-1, -0.5, -0.001);
+		} catch (WallContainerException e) {
+			fail(e.getMessage());
+		}
+		boolean isNull = w13 == null; // none expected
+		
+		
+		//Assert
+		assertTrue("Lower wall should have been found",isLowerWall);
+		assertTrue("Upper wall should have been found",isUpperWall);
+		assertTrue("Upper wall should have been found",isUpper);
+		assertTrue("No wall should have been found",isNull);
+		
+	}
+
+}

@@ -1,0 +1,18 @@
+package fernuni.propra.main;
+
+public class GeneralException extends Exception {
+
+	public GeneralException() {
+	}
+
+	public GeneralException(String message) {
+		super(message);
+	}
+
+	public GeneralException(Throwable cause) {
+		super(cause);
+	}
+
+
+
+}

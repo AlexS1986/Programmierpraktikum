@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="OriginalPartialRectanglesFinderTest" project="Test_Component" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.014">
+    <testcase name="testSortWallsToContainers" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+    <testcase name="testGetAllTags" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+    <testcase name="testConstructOriginalPartialRectanglesComplicated" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.013"/>
+    <testcase name="testConstructOriginalPartialRectangles" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+  </testsuite>
+</testrun>

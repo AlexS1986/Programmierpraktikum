@@ -1,0 +1,108 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Room;
+import fernuni.propra.internal_data_model.Wall;
+
+public class PositionOptimizerTest {
+	private IRoom room;
+	private Point p1, p2, p3,p4;
+	private LinkedList<Point> corners;
+	
+	@Before
+	public void setup() {
+		p1 = new Point(0,0);
+		p2 = new Point(1,0);
+		p3 = new Point (1,1);
+		p4 = new Point(0,1);
+		
+		corners= new LinkedList<Point>();
+		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
+		
+		room = new Room("test", null, corners);	
+
+	}
+
+	@Test
+	public void testOptimizePositions() {
+		//Arrange
+		IPositionOptimizer positionOptimizerRoomSquare = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		IPositionOptimizer positionOptimizer = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		ICandidateSearcher candidateSearcherRoomSquare = AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		
+		List<Lamp> taggedCandidates = null;
+		try {
+			taggedCandidates = candidateSearcherRoomSquare.searchCandidates(room, null);
+			Lamp lamp = new Lamp(0.0,0.0);
+			lamp.addTag(1);
+			taggedCandidates.add(lamp);
+		} catch (CandidateSearcherException | InterruptedException e) {
+			fail("Candidates Searcher failed!");
+		}
+		
+		List<Lamp> taggedCandidates2 = new LinkedList<Lamp>();
+		Lamp lamp1 = new Lamp(0,0);
+		lamp1.addTag(0); 
+		Lamp lamp2 = new Lamp(0,0);
+		lamp2.addTag(1); 
+		Lamp lamp3 = new Lamp(0,0);
+		lamp3.addTag(2); 
+		Lamp lamp4 = new Lamp(0,0);
+		lamp4.addTag(3); 
+		
+		Lamp lamp5 = new Lamp(0,0);
+		lamp5.addTag(1); lamp5.addTag(2);
+		Lamp lamp6 = new Lamp(0,0);
+		lamp6.addTag(2);  lamp6.addTag(3);
+		Lamp lamp7 = new Lamp(0,0);
+		lamp7.addTag(3); lamp7.addTag(0);
+		
+		Lamp lamp8 = new Lamp(0,0);
+		lamp8.addTag(1); lamp8.addTag(2); lamp8.addTag(3);
+		Lamp lamp9 = new Lamp(0,0);
+		lamp9.addTag(2);  lamp9.addTag(3); lamp9.addTag(0);
+		Lamp lamp10 = new Lamp(0,0);
+		lamp10.addTag(3); lamp10.addTag(0); lamp10.addTag(1);
+		
+		Lamp lamp11 = new Lamp(0,0);
+		lamp11.addTag(0); lamp11.addTag(1); lamp11.addTag(2); lamp11.addTag(3);
+		
+		taggedCandidates2.add(lamp1); taggedCandidates2.add(lamp2); taggedCandidates2.add(lamp3); taggedCandidates2.add(lamp4);
+		taggedCandidates2.add(lamp5); taggedCandidates2.add(lamp6); taggedCandidates2.add(lamp7); taggedCandidates2.add(lamp8);
+		taggedCandidates2.add(lamp9); taggedCandidates2.add(lamp10); taggedCandidates2.add(lamp11);
+		
+		//Act
+		List<Lamp> optimizedLamps = new LinkedList<Lamp>();
+		try {
+			optimizedLamps = positionOptimizerRoomSquare.optimizePositions( taggedCandidates, null);
+		} catch (InterruptedException e) {
+		}
+		List<Lamp> optimizedLamps2 = new LinkedList<Lamp>();
+		try {
+			optimizedLamps2 = positionOptimizer.optimizePositions( taggedCandidates2, null);
+		} catch (InterruptedException e) {
+		}
+		
+		//Assert
+		for (int i = 0; i< optimizedLamps2.size()-1; i++) {
+			assertFalse(optimizedLamps2.get(i).getOn());
+		}
+		assertTrue(optimizedLamps2.get(optimizedLamps2.size()-1).getOn());
+		
+		assertTrue(optimizedLamps.get(0).getOn());
+		assertFalse(optimizedLamps.get(1).getOn());
+	}
+
+}

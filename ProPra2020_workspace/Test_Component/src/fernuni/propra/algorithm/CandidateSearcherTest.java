@@ -2,6 +2,7 @@ package fernuni.propra.algorithm;
 
 import static org.junit.Assert.*;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -23,21 +24,22 @@ import fernuni.propra.internal_data_model.Lamp;
 import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Room;
 import fernuni.propra.internal_data_model.Wall;
+import fernuni.propra.user_interface.RoomFrame;
+import fernuni.propra.user_interface.RoomPanel;
 
 public class CandidateSearcherTest {
 	
-	private IRoom mockRoom, room, room2, roomStar, roomHufeisen;
+	private IRoom roomSwissCross, roomHufeisen;
 	private Point pc1, pc2, pc3,pc4, pc5, pc6, pc7, pc8,pc9, pc10, pc11, pc12;
 	private Point p31, p32, p33, p34, p35, p36, p37, p38;
-	
-	
-	
-	private static List<IRoom> rooms;
+
+	private static List<IRoom> rooms; // a number of testRooms
 	
 	@BeforeClass
 	public static void setupBC() {
 
-		String[] xmlPathesOK = {"instances/validationInstances/Selbsttest_clockwise.xml", //0
+		String[] xmlPathesOK = {
+				"instances/validationInstances/Selbsttest_clockwise.xml", //0
 				"instances/validationInstances/Selbsttest_counterClockwise.xml", //1
 				"instances/validationInstances/Selbsttest_100a_incomplete.xml", // 2
 				"instances/validationInstances/Selbsttest_100a_incomplete.xml", //3
@@ -48,18 +50,17 @@ public class CandidateSearcherTest {
 				"instances/validationInstances/Selbsttest_20a_solved.xml", // 8
 				"instances/validationInstances/Selbsttest_20a.xml", // 9
 				"instances/validationInstances/Selbsttest_20b.xml", // 10
-				"instances/validationInstances/Selbsttest_20c.xml"	// 11	
+				"instances/validationInstances/Selbsttest_20c.xml",	// 11	
+				"instances/validationInstances/Zufallsraum_144_solved.xml" // 12
 		};
 		
 		rooms = new ArrayList<IRoom>();
-		
 		for(String xmlPath : xmlPathesOK) {
-			UserReadInputWriteOutputAAS readAAS = new UserReadInputWriteOutputAAS(xmlPath);
+			UserReadInputWriteOutputAAS readAAS = 
+					new UserReadInputWriteOutputAAS(xmlPath);
 			try {
 				rooms.add(readAAS.readInput());
 			} catch (UserReadInputWriteOutputException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
@@ -67,7 +68,7 @@ public class CandidateSearcherTest {
 	@Before
 	public void setup() {
 		
-		// build room star
+		// build room of that has shape of swiss cross
 		pc1 = new Point(1,-1);
 		pc2 = new Point(2,-1);
 		pc3 = new Point(2,1);
@@ -80,12 +81,14 @@ public class CandidateSearcherTest {
 		pc10 = new Point(-1,-1);
 		pc11 = new Point(-1,-2);
 		pc12 = new Point(1,-2);
-		LinkedList<Point> cornersStar = new LinkedList<Point>();
-		cornersStar.add(pc1);cornersStar.add(pc2);cornersStar.add(pc3);cornersStar.add(pc4);cornersStar.add(pc5);
-		cornersStar.add(pc6);cornersStar.add(pc7);cornersStar.add(pc8);cornersStar.add(pc9);cornersStar.add(pc10);
-		cornersStar.add(pc11);cornersStar.add(pc12);
-		
-		roomStar = new Room("star", null, cornersStar);
+		LinkedList<Point> cornersSwissCross = new LinkedList<Point>();
+		cornersSwissCross.add(pc1);cornersSwissCross.add(pc2);
+		cornersSwissCross.add(pc3);cornersSwissCross.add(pc4);
+		cornersSwissCross.add(pc5);cornersSwissCross.add(pc6);
+		cornersSwissCross.add(pc7);cornersSwissCross.add(pc8);
+		cornersSwissCross.add(pc9);cornersSwissCross.add(pc10);
+		cornersSwissCross.add(pc11);cornersSwissCross.add(pc12);
+		roomSwissCross = new Room("swissCross", null, cornersSwissCross);
 		
 		// build room Hufeisen
 		p31 = new Point(-2,0);
@@ -99,11 +102,13 @@ public class CandidateSearcherTest {
 		LinkedList<Point> cornersHufeisen = new LinkedList<Point>();
 		cornersHufeisen.add(p31);cornersHufeisen.add(p32);cornersHufeisen.add(p33);cornersHufeisen.add(p34);cornersHufeisen.add(p35);
 		cornersHufeisen.add(p36);cornersHufeisen.add(p37);cornersHufeisen.add(p38);
-		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);
-		
-		
+		roomHufeisen = new Room("hufeisen", null, cornersHufeisen);	
 	}
 	
+	/**
+	 * Checks whether the candidates for potential lamp positions are computed
+	   correctly
+	 */
 	@Test
 	public void testSearchCandidates() {
 		//Arrange 
@@ -111,60 +116,153 @@ public class CandidateSearcherTest {
 		CandidateSearcher candidateSearcher2 = new CandidateSearcher();
 		CandidateSearcher candidateSearcher3 = new CandidateSearcher();
 		
-		
 		//Act
 		List<Lamp> candidates = null;
 		List<Lamp> candidates2 = null;
 		List<Lamp> candidates3 = null;
 		try {
-			candidates  = candidateSearcher1.searchCandidates(roomStar, new RuntimeInformation());
-			candidates2 = candidateSearcher2.searchCandidates(roomHufeisen, new RuntimeInformation());
-			candidates3 = candidateSearcher3.searchCandidates(rooms.get(9), new RuntimeInformation());
+			candidates  = candidateSearcher1.searchCandidates(
+					roomSwissCross, new RuntimeInformation());
+			candidates2 = candidateSearcher2.searchCandidates(
+					roomHufeisen, new RuntimeInformation());
+			candidates3 = candidateSearcher3.searchCandidates(
+					rooms.get(6), new RuntimeInformation());
 		} catch (CandidateSearcherException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		//Assert
-		assertTrue(candidates != null && candidates.size() == 1 && candidates.get(0).equals(new Point(0.5,0.5)));
+		assertTrue("Only candidate of Room 'Swiss cross' "
+				+ "has to be at located at (0,0).",
+				candidates != null && candidates.size() == 1 && 
+				candidates.get(0).equals(new Point(0.0,0.0)));
 		
-		assertTrue(candidates2 != null && candidates2.size() == 2);
-		assertTrue(candidates2.get(0).equals(new Point(-1.5,0.5)));
-		assertTrue(candidates2.get(1).equals(new Point(1.5,0.5)));
+		assertTrue("The number of candidates for roomHufeisen has to be 2!",
+				candidates2 != null && candidates2.size() == 2);
+		assertTrue("The candidates for roomHufeisen need to be"
+				+ "located at (1.5,0) or (-1.5,0)", 
+				candidates2.get(0).equals(new Point(1.5,0.5)) ||
+				candidates2.get(0).equals(new Point(-1.5,0.5)));
+		assertTrue("The candidates for roomHufeisen need to be"
+				+ "located at (1.5,0) or (-1.5,0)", 
+				candidates2.get(1).equals(new Point(1.5,0.5)) ||
+				candidates2.get(1).equals(new Point(-1.5,0.5)));
+		assertTrue("The number of candidates for Selbsttest_100b "
+				+ "has to be 22!",
+				candidates3 != null && candidates3.size() == 22);
 	}
 
-	/** Checks if CandidateSearcher correctly determines the reduced tagged rectangles from a set of tagged rectangles that might overlap.
-	 * The reduced set contains the rectangles that result from overlapping. Only rectangles whose tags are not a subset of the tags of another rectangle are kept.
+	/** Checks if CandidateSearcher correctly determines the reduced set of tagged
+	 *  rectangles from a set of tagged rectangles that might overlap.
+	 * 	The reduced set contains the rectangles that result from overlapping. 
+	 * 	Only rectangles whose tags are not a subset 
+	 * of the tags of another rectangle are kept.
 	*/
 	@Test
 	public void testReduceRectangles() { 
 		// Arrange
-		ArrayList<RectangleWithTag> rectanglesWithTagIn = new ArrayList<RectangleWithTag>();
-		CandidateSearcher candidateSearcher = new CandidateSearcher();
-		RectangleWithTag refRectangleWithTag = new RectangleWithTag(new Point(-2,0), new Point(-1,1), 0);
+		ArrayList<RectangleWithTag> rectanglesWithTagIn =
+				new ArrayList<RectangleWithTag>();
+		CandidateSearcher candidateSearcher =
+				new CandidateSearcher();
+		// expected solution 1
+		RectangleWithTag refRectangleWithTag = 
+				new RectangleWithTag(new Point(-2,0), new Point(-1,1), 0);
 		refRectangleWithTag.addTag(1);
-		RectangleWithTag refRectangleWithTag2 = new RectangleWithTag(new Point(1,0), new Point(2,1),1);
+		//expected solution 2
+		RectangleWithTag refRectangleWithTag2 = 
+				new RectangleWithTag(new Point(1,0), new Point(2,1),1);
 		refRectangleWithTag2.addTag(2);
 		
-		// Hufeisenkonfiguration von Rechtecken
-		RectangleWithTag rec0 = new RectangleWithTag(new Point(-2, 0), new Point(-1, 2), 0);
-		RectangleWithTag rec1 = new RectangleWithTag(new Point(-2, 0), new Point(2, 1), 1);
-		RectangleWithTag rec2 = new RectangleWithTag(new Point(1,0), new Point(2,2),2);
-		rectanglesWithTagIn.add(rec0); rectanglesWithTagIn.add(rec1); rectanglesWithTagIn.add(rec2);
+		// Set of rectangles to be reduced (Hufeisen shape)
+		RectangleWithTag rec0 = 
+				new RectangleWithTag(new Point(-2, 0), new Point(-1, 2), 0);
+		RectangleWithTag rec1 = 
+				new RectangleWithTag(new Point(-2, 0), new Point(2, 1), 1);
+		RectangleWithTag rec2 = 
+				new RectangleWithTag(new Point(1,0), new Point(2,2),2);
+		rectanglesWithTagIn.add(rec0); rectanglesWithTagIn.add(rec1); 
+		rectanglesWithTagIn.add(rec2);
 		
 		// Act 
-		ArrayList<RectangleWithTag> reducedRectangles = new ArrayList<RectangleWithTag>();
+		ArrayList<RectangleWithTag> reducedRectangles =
+				new ArrayList<RectangleWithTag>();
 		try {
-			reducedRectangles = candidateSearcher.reduceRectangles(rectanglesWithTagIn);
+			reducedRectangles =
+					candidateSearcher.reduceRectangles(rectanglesWithTagIn);
 		} catch (InterruptedException e) {
 			fail(e.getMessage());
 		}
 		
 		// Assert
-		assertTrue("Number of reduced rectangles is not correct.", reducedRectangles.size() == 2);
-		assertTrue(reducedRectangles.get(0).equals(refRectangleWithTag));
-		assertTrue(reducedRectangles.get(1).equals(refRectangleWithTag2));
+		assertTrue("Number of reduced rectangles is not correct.", 
+				reducedRectangles.size() == 2);
+		assertTrue("The computed rectangle with index 0 does not match a solution", 
+				reducedRectangles.get(0).equals(refRectangleWithTag) ||
+				reducedRectangles.get(1).equals(refRectangleWithTag));
+		assertTrue("The computed rectangle with index 0 does not match a solution",
+				reducedRectangles.get(0).equals(refRectangleWithTag2) || 
+				reducedRectangles.get(1).equals(refRectangleWithTag2));
 		
+	}
+	
+	
+	/**
+	 * Checks whether the reduced rectangles,
+	 * i.e. candidates for lamp positions, 
+	 * can be found for a complicated
+	 * room
+	 */
+	@Test 
+	public void testReduceRectanglesComplicatedRoom() {
+		//Arrange
+	
+		// display a complicated room and check whether original
+		// partial rectangles are correct
+		Color[] colors = {Color.blue, Color.red, Color.green, Color.yellow};
+		IRoom testRoom = rooms.get(12);
+		ArrayList<RectangleWithTag> originalPartialRectangles = new ArrayList<RectangleWithTag>();
+		// find original partial rectangles
+				try {
+					originalPartialRectangles = (
+							new OriginalPartialRectanglesFinder()).findOriginalPartialRectangles(testRoom, null);
+				} catch (OriginalPartialRectanglesFinderException e) {
+				}
+		
+		
+		//Act
+		// reduce rectangles
+		List<RectangleWithTag> candidateRectangles = new ArrayList<RectangleWithTag>();
+		try {
+			candidateRectangles = 
+					(new CandidateSearcher()).reduceRectangles(originalPartialRectangles);
+		} catch (InterruptedException e) {
+		}
+		
+		//Assert
+		
+		// display room
+		RoomPanel roomPanel = new RoomPanel(testRoom);
+		RoomFrame roomFrame = new RoomFrame(roomPanel);
+		for (int i = 0; i<candidateRectangles.size(); i++) {
+			RectangleWithTag rec = candidateRectangles.get(i);
+			double width = rec.getP2().getX() - rec.getP1().getX();
+			double height = rec.getP3().getY() - rec.getP1().getY();
+			roomPanel.addRectangle(String.valueOf(i), colors[i % 3],
+					rec.getP1().getX(), rec.getP1().getY(), width, height);
+			roomPanel.repaint();
+		} 
+		
+		// show room for 2 seconds and continue subsequently
+		try {
+			Thread.currentThread().sleep(4000);
+		} catch (InterruptedException e) {
+			
+		}
+		roomFrame.dispose();
+		
+		//Assert
+		assertTrue("25 Lamp candidates have not"
+				+ "been found for Zufallsraum_144! Failed!", candidateRectangles.size()==25);
 	}
 	
 }

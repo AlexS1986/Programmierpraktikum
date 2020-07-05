@@ -1,0 +1,125 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
+import fernuni.propra.internal_data_model.Room;
+import fernuni.propra.internal_data_model.Wall;
+
+public class PositionOptimizerTest {
+	private IRoom room;
+	private Point p1, p2, p3,p4;
+	private LinkedList<Point> corners;
+	
+	@Before
+	public void setup() {
+		p1 = new Point(0,0);
+		p2 = new Point(1,0);
+		p3 = new Point (1,1);
+		p4 = new Point(0,1);
+		
+		corners= new LinkedList<Point>();
+		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
+		
+		room = new Room("test", null, corners);	
+
+	}
+
+	@Test
+	public void testOptimizePositions() {
+		//Arrange
+		
+		// for roomSquare
+		IPositionOptimizer positionOptimizerRoomSquare =
+				AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		ICandidateSearcher candidateSearcherRoomSquare =
+				AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		
+		List<Lamp> taggedCandidatesRoomSquare = null;
+		try {
+			taggedCandidatesRoomSquare = candidateSearcherRoomSquare.searchCandidates(room, null);
+			Lamp lamp = new Lamp(0.0,0.0);
+			lamp.addTag(1);
+			taggedCandidatesRoomSquare.add(lamp);
+		} catch (CandidateSearcherException | InterruptedException e) {
+			fail("Candidates Searcher failed! Could not test position optimizer");
+		}
+		
+		// for mock test
+		IPositionOptimizer positionOptimizer =
+				AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+		List<Lamp> taggedCandidates = new LinkedList<Lamp>();
+		Lamp lamp1 = new Lamp(0,0);
+		lamp1.addTag(0); 
+		Lamp lamp2 = new Lamp(0,0);
+		lamp2.addTag(1); 
+		Lamp lamp3 = new Lamp(0,0);
+		lamp3.addTag(2); 
+		Lamp lamp4 = new Lamp(0,0);
+		lamp4.addTag(3); 
+		
+		Lamp lamp5 = new Lamp(0,0);
+		lamp5.addTag(1); lamp5.addTag(2);
+		Lamp lamp6 = new Lamp(0,0);
+		lamp6.addTag(2);  lamp6.addTag(3);
+		Lamp lamp7 = new Lamp(0,0);
+		lamp7.addTag(3); lamp7.addTag(0);
+		
+		Lamp lamp8 = new Lamp(0,0);
+		lamp8.addTag(1); lamp8.addTag(2); lamp8.addTag(3);
+		Lamp lamp9 = new Lamp(0,0);
+		lamp9.addTag(2);  lamp9.addTag(3); lamp9.addTag(0);
+		Lamp lamp10 = new Lamp(0,0);
+		lamp10.addTag(3); lamp10.addTag(0); lamp10.addTag(1);
+		
+		Lamp lamp11 = new Lamp(0,0);
+		lamp11.addTag(0); lamp11.addTag(1); lamp11.addTag(2); lamp11.addTag(3);
+		
+		taggedCandidates.add(lamp1); taggedCandidates.add(lamp2);
+		taggedCandidates.add(lamp3); taggedCandidates.add(lamp4);
+		taggedCandidates.add(lamp5); taggedCandidates.add(lamp6);
+		taggedCandidates.add(lamp7); taggedCandidates.add(lamp8);
+		taggedCandidates.add(lamp9); taggedCandidates.add(lamp10);
+		taggedCandidates.add(lamp11);
+		
+		//Act
+		
+		// roomSquare
+		List<Lamp> optimizedLampsRoomSquare = new LinkedList<Lamp>();
+		try {
+			optimizedLampsRoomSquare = positionOptimizerRoomSquare.optimizePositions(
+					taggedCandidatesRoomSquare, null);
+		} catch (InterruptedException e) {
+		}
+		
+		// mock test
+		List<Lamp> optimizedLamps = new LinkedList<Lamp>();
+		try {
+			optimizedLamps = positionOptimizer.optimizePositions( taggedCandidates, null);
+		} catch (InterruptedException e) {
+		}
+		
+		//Assert
+		// roomSquare
+		assertTrue("A mandatory lamp is not turned on",optimizedLampsRoomSquare.get(0).getOn());
+		assertFalse(optimizedLampsRoomSquare.get(1).getOn());
+		
+		//Mock test
+		// all lamps need to be on
+		for (int i = 0; i< optimizedLamps.size()-1; i++) {
+			assertFalse("All lamps need to be turned on",optimizedLamps.get(i).getOn());
+		}
+		assertTrue(optimizedLamps.get(optimizedLamps.size()-1).getOn());
+	}
+
+}

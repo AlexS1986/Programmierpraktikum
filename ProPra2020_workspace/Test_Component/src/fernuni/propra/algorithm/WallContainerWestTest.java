@@ -33,76 +33,85 @@ public class WallContainerWestTest {
 	}
 	
 
+	/** 
+	 * tests whether west wall can be added and
+	 * whether a south wall throws an exception.
+	 */
 	@Test
 	public void testAdd() {
 		//Arrange
 		WallContainerWest wallContainerWest = new WallContainerWest();
 		
 		//Act
-		boolean test1 = false;
+		boolean southWallAddedWException = false;
 		try {
 			wallContainerWest.add(w1);
 			fail("WallContainerException expected");
 		} catch(WallContainerException ex) {
-			test1 = true;
+			southWallAddedWException = true;
 		}
 		
-		boolean test2 = false;
+		boolean westWallAddedWOException = false;
 		try {
 			wallContainerWest.add(w4);
-			test2 = true;
+			westWallAddedWOException = true;
 		} catch (WallContainerException ex) {
 			fail();
 		}
 		
 		//Assert
-		assertTrue(test1);
-		assertTrue(test2);
+		assertTrue("Adding a south wall should throw an exception",
+				southWallAddedWException);
+		assertTrue("Adding a west wall should not throw an exception",
+				westWallAddedWOException);
 	}
 
+	/**
+	 * Tests whether the nearest west wall is 
+	 * indeed returned.
+	 */
 	@Test
 	public void testGetNearestWestWall() {
 		//Arrange
 		WallContainerWest wallContainerWest = new WallContainerWest();
 		
 		try {
-			wallContainerWest.add(w4);
+			wallContainerWest.add(w4); // left wall
 		} catch (WallContainerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		try {
-			wallContainerWest.add(w6);
+			wallContainerWest.add(w6); // right wall
 		} catch (WallContainerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		//Act
 		Wall w10 = null;
 		try {
-			w10 = wallContainerWest.getNearestWall(-1, 1, 0.5);
+			w10 = wallContainerWest.getNearestWall(-1, 1, 0.5); // left expected
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test1 = w10.getP1().equals(w4.getP1()) && w10.getP2().equals(w4.getP2());
+		boolean isLeftWall = w10.getP1().equals(w4.getP1())
+				&& w10.getP2().equals(w4.getP2());
 		
 		Wall w11 = null;
 		try {
-			w11 = wallContainerWest.getNearestWall(-1, 1, 1.0);
+			w11 = wallContainerWest.getNearestWall(-1, 1, 1.0); // right expected
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test2 = w11.getP1().equals(w4.getP1()) && w11.getP2().equals(w4.getP2());
+		boolean isRightWall = w11.getP1().equals(w6.getP1()) 
+				&& w11.getP2().equals(w6.getP2());
 		
 		Wall w12 = null;
 		try {
-			w12 = wallContainerWest.getNearestWall(-1, 1, 1.001);
+			w12 = wallContainerWest.getNearestWall(-1, 1, 1.001); // right expected
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test3 = w12.getP1().equals(w6.getP1()) && w12.getP2().equals(w6.getP2());
+		boolean isRightWall2 = w12.getP1().equals(w6.getP1()) 
+				&& w12.getP2().equals(w6.getP2()); // null expected
 		
 		Wall w13 = null;
 		try {
@@ -110,14 +119,14 @@ public class WallContainerWestTest {
 		} catch (WallContainerException e) {
 			fail(e.getMessage());
 		}
-		boolean test4 = w13 == null;
+		boolean isNull= w13 == null;
 		
 		
 		//Assert
-		assertTrue(test1);
-		assertTrue(!test2);
-		assertTrue(test3);
-		assertTrue(test4);
+		assertTrue(isLeftWall);
+		assertTrue(isRightWall);
+		assertTrue(isRightWall2);
+		assertTrue(isNull);
 		
 	}
 

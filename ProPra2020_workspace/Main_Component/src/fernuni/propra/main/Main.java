@@ -23,18 +23,19 @@ import fernuni.propra.user_interface.UserDisplayAAS;
  * <p>
  */
 public class Main {
-
-	/**
-	 * Haupteinstiegsfunktion
-	 */
+	
+	private static final String ls = System.getProperty("line.separator");
 	private static final String generalHelpMessage =
+			"Could not run the program. Please call the program correctly." 
+			+ ls + ls
+			+"The correct syntax is:" + ls + ls + 
 			"Java -jar ProPra.jar r=runParameter "
-			+ "if=\"pathToFile\" l=timeLimit \n \n "
+			+ "if=\"pathToFile\" l=timeLimit" + ls + ls
 			+ "The runParameter specified by r =runParameter is mandatory "
-			+ "and must be one of s,sd,v,vd or d .\n "
+			+ "and must be one of s,sd,v,vd or d ." + ls
 			+ "The input file parameter is also mandatory. pathToFile "
 			+ "specifies the full path to a valid input file. "
-			+ "The \" before and after pathToFile are mandatory\n"
+			+ "The \" before and after pathToFile are mandatory" + ls
 			+ "The time limit parameter is optional. "
 			+ "For runParameter = s or runParameter = sd. "
 			+ "This parameter specifies how long the solution "
@@ -91,8 +92,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 		System.out.println("The input parameters you specified are:");
+		System.out.println();
 		for (String arg : args) { // Debug
 			System.out.println(arg);
+		} 
+		if (args.length == 0) {
+			System.out.println("None specified.");
 		}
 		System.out.println();
 
@@ -242,6 +247,7 @@ public class Main {
 			}
 					
 		}catch (ParameterSetException e) { // specific help message
+			printMessageToConsole(generalHelpMessage);
 			printMessageToConsole(e.getMessage()); 
 			System.exit(0);
 		} catch(NumberFormatException nfe) {

@@ -1,19 +1,22 @@
 package fernuni.propra.main;
 
+/**
+ * Thrown if the user handles the program incorrectly
+ * 
+ * @author alex
+ *
+ */
 public class GeneralException extends Exception {
 
 	public GeneralException() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public GeneralException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	public GeneralException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
 	}
 
 

@@ -17,7 +17,7 @@ import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Room;
 
 public class FilePersistenceTest {
-	Point p1,p2,p3,p4,p5;
+	Point p1,p2,p3,p4,p5, p6;
 	LineSegment l1,l2,l3,l4,l5;
 	List<LineSegment> lineSegments;
 	IRoom room;
@@ -30,13 +30,13 @@ public class FilePersistenceTest {
 		p2 = new Point (1,0);
 		p3 = new Point(1,1);
 		p4 = new Point(0,1);
+		p5 = new Point(0.5,0.5);
+		p6 = new Point(1.5,0.5);
 		l1 = new LineSegment(p1, p2);
 		l2 = new LineSegment(p2, p3);
 		l3 = new LineSegment(p3,p4);
 		l4 = new LineSegment(p4,p1);
 		l5 = new LineSegment(p1, p3);
-		lineSegments = new ArrayList<LineSegment>();
-		lineSegments.add(l1);lineSegments.add(l2); lineSegments.add(l3); lineSegments.add(l4);
 		
 		corners= new LinkedList<Point>();
 		corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
@@ -44,7 +44,11 @@ public class FilePersistenceTest {
 		room = new Room("test", null, corners);
 	}
 	
-	
+	/**
+	 * Checks whether the procedure for adding only
+	 * valid (walls that dont intersect the current wall set)
+	 * walls works.
+	 */
 	@Test
 	public void testTestWallAndAddToWalls() {
 		//Arrange
@@ -113,23 +117,46 @@ public class FilePersistenceTest {
 			fail(e.getMessage());
 		}
 		
+		boolean intersectionDetected = false;
+		try {
+			FilePersistence.testAndAddWallToWalls(
+					new LineSegment(p5, p6), walls8);
+		} catch(PersistenceException e) {
+			intersectionDetected = true;
+		}
+		
 		//Assert
-		assertEquals(walls1.get(0), lccw1);
-		assertEquals(walls2.get(1), lccw2);
-		assertEquals(walls3.get(2), lccw3);
-		assertEquals(walls4.get(3), lccw4);
-		assertEquals(walls5.get(0), l1);
-		assertEquals(walls6.get(1), l2);
-		assertEquals(walls7.get(2), l3);
-		assertEquals(walls8.get(3), l4);
+		assertEquals("A reference wall could not be added.",
+				walls1.get(0), lccw1);
+		assertEquals("A reference wall could not be added.",
+				walls2.get(1), lccw2);
+		assertEquals("A reference wall could not be added.",
+				walls3.get(2), lccw3);
+		assertEquals("A reference wall could not be added.",
+				walls4.get(3), lccw4);
+		assertEquals("A reference wall could not be added.",
+				walls5.get(0), l1);
+		assertEquals("A reference wall could not be added.",
+				walls6.get(1), l2);
+		assertEquals("A reference wall could not be added.",
+				walls7.get(2), l3);
+		assertEquals("A reference wall could not be added.",
+				walls8.get(3), l4);
+		assertTrue("Intersection of walls should have been"
+				+ "detected.",
+				intersectionDetected);
 		
 	}
 	
-	
+	/**
+	 * Checks whether correct input files are read correctly
+	 * and whether incorrect input files throw an exception.
+	 */
 	@Test
 	public void testReadInput() {
 		//Arrange
-		String[] xmlPathesOK = {"instances/validationInstances/Selbsttest_clockwise.xml",
+		String[] xmlPathesOK = {
+				"instances/validationInstances/Selbsttest_clockwise.xml",
 				"instances/validationInstances/Selbsttest_counterClockwise.xml",
 				"instances/validationInstances/Selbsttest_100a_incomplete.xml",
 				"instances/validationInstances/Selbsttest_100a_incomplete.xml",
@@ -147,7 +174,6 @@ public class FilePersistenceTest {
 				"instances/validationInstances/Selbsttest_counterClockwiseNOK.xml"	
 		};
 		
-
 		FilePersistence persistence = new FilePersistence();
 		
 		//Act, Assert
@@ -156,7 +182,8 @@ public class FilePersistenceTest {
 			try {
 				room = persistence.readInput(xmlFile);
 			} catch(PersistenceException e) {
-				fail(e.getMessage());
+				fail("This room should have been read." + 
+						e.getMessage());
 			}
 		}
 		
@@ -164,7 +191,10 @@ public class FilePersistenceTest {
 			IRoom room = null;
 			try {
 				room = persistence.readInput(xmlFile);
-				fail("This xml file is not OK!" + xmlFile);
+				fail("This xml file is not OK!" +
+				     "It should not have been read "
+				     + "without exception"
+				+ xmlFile);
 			} catch(PersistenceException e) {
 				
 			}
@@ -172,17 +202,36 @@ public class FilePersistenceTest {
 			
 	}
 
+	/**
+	 * Tests whether writing output works
+	 */
 	@Test
 	public void testWriteOutput() {
 		//Arrange
 		IPersistence persistence = new FilePersistence();
 		
 		//Act
+		boolean writeCorrectOutputWorked = false;
 		try {
 			persistence.writeOutput(room,"instances/validationInstances/testOutput.xml");
+			writeCorrectOutputWorked = true;
 		} catch (PersistenceException e) {
-			fail(e.getMessage());
 		}
+		
+		boolean writeInCorrectOutputDidNotWork = false;
+		try {
+			persistence.writeOutput(room,"unknownFolder/testOutput.xml");
+			
+		} catch (PersistenceException e) {
+			writeInCorrectOutputDidNotWork = true;
+		}
+		
+		//Assert
+		assertTrue("This output write operation should have worked",
+				writeCorrectOutputWorked);
+		assertTrue("his output write operation should not have worked",
+				writeInCorrectOutputDidNotWork);
+		
 	}
 		
 

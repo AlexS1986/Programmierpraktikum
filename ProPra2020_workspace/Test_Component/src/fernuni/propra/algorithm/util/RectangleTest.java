@@ -21,6 +21,9 @@ public class RectangleTest {
 		rec = new Rectangle(p1, p3); 
 	}
 
+	/**
+	 * Checks whether overlap is determined correctly
+	 */
 	@Test
 	public void testOverlap() {
 		//Arrange
@@ -76,10 +79,12 @@ public class RectangleTest {
 		
 	}
 
+	/**
+	 * Checks whether test for equality works.
+	 */
 	@Test
-	public void testIsEqual() {
+	public void testEquals() {
 		//Arrange
-		Point p5 = new Point(2,0);
 		Point p6 = new Point(2,2);
 		Rectangle rec2 = new Rectangle(p1, p6);
 		

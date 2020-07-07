@@ -1,0 +1,98 @@
+package fernuni.propra.algorithm.util;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.Point;
+
+public class RectangleWithTagTest {
+	private Point p1,p2,p3,p4;
+	private RectangleWithTag rec1;
+
+	@Before
+	public void setUp() throws Exception {
+		
+		//Arrange
+		p1 = new Point(0,0);
+		p2 = new Point(1,0);
+		p3 = new Point(1,1);
+		p4 = new Point(0,1);
+		List<Integer> initTags = new ArrayList<Integer>();
+		initTags.add(1);
+		rec1 = new  RectangleWithTag(p1, p3, initTags);
+	}
+
+	/**
+	 * tests if check for tags works
+	 */
+	@Test
+	public void testContainsTag() {
+		//Act
+		boolean tag1isContained = rec1.containsTag(1);
+		boolean tag2isContained = !rec1.containsTag(2);
+		
+		//Assert
+		assertTrue("Tag 1 should be in tags.", 
+				tag1isContained);
+		assertTrue("Tag 2 should be in tags.",
+				tag2isContained);
+		assertFalse("Tag 3 should not be in tags.",
+				rec1.containsTag(3));
+	}
+
+	/**
+	 * tests if tags can be added
+	 */
+	@Test
+	public void testAddTag() {
+		//Act
+		rec1.addTag(2);
+		
+		//Assert
+		assertTrue("Tag 2 should have been added",
+				rec1.containsTag(2));
+	}
+
+	/**
+	 * Checks whether RectangleWirthTag can be used in
+	 * HashSets
+	 */
+	@Test
+	public void testHashSet() {
+		//Arrange
+		List<Integer> initTags2 =
+				new ArrayList<Integer>(); 
+		initTags2.add(2);
+		RectangleWithTag newRectangleWithTag =
+				new RectangleWithTag(p1, p3, initTags2 );
+		HashSet<RectangleWithTag> rectanglesWithTags =
+				new HashSet<RectangleWithTag>();
+		rectanglesWithTags.add(rec1);
+		
+		//Act
+		boolean canBeFoundInHashSet = rectanglesWithTags.contains(newRectangleWithTag);
+		boolean rectanglesAreEqual = rec1.equals(newRectangleWithTag);
+		
+		//Assert
+		assertFalse("The rectangle can be found in HashSet",
+				canBeFoundInHashSet);
+		assertFalse("Tags do not agree, should not be equal.",
+				rectanglesAreEqual);
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetCopyOfTags() {
+		&&
+		
+	}
+	
+}

@@ -1,0 +1,97 @@
+package fernuni.propra.algorithm.util;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import fernuni.propra.internal_data_model.Point;
+
+public class RectangleTest {
+	Point p1,p2,p3,p4;
+	Rectangle rec;
+	
+	@Before
+	public void setUp() {
+		//Arrange
+		p1 = new Point(0,0); // bottom left
+		p2 = new Point(1,0); // bottom right
+		p3 = new Point(1,1); // top right
+		p4 = new Point(0,1); // top left
+		rec = new Rectangle(p1, p3); 
+	}
+
+	@Test
+	public void testOverlap() {
+		//Arrange
+		Point p5 = new Point(0.5,0.5); // center
+		Point p7 = new Point(1.5,1.5); // outside north east
+		Point p9 = new Point(0.5,2.0); // outside east
+		Point p10 = new Point(-1, -1); // outside south west
+		
+		Rectangle rec2 = new Rectangle(
+				p5, p7);  // overlap north east
+		Rectangle rec3 = new Rectangle(
+				p5, p3); // overlap north east
+		Rectangle rec5 = new Rectangle(
+				p3, p7); // no overlap
+		Rectangle rec8 = new Rectangle(
+				p10, p9); // no overlap
+		Rectangle rec9 = new Rectangle(p1, 
+				new Point(0.5, 1.0)); // overlap left
+		Rectangle rec11 = new Rectangle(p2,
+				new Point(2*p2.getX(), 1.0)); // no overlap
+		
+		//Act
+		Rectangle rec4 = rec.overlap(rec2);
+		Rectangle rec6 = rec.overlap(rec5);
+		Rectangle rec7 = rec.overlap(rec);
+		Rectangle rec10 = rec.overlap(rec8);
+		Rectangle rec12 = rec.overlap(rec11);
+		
+		//Assert
+		assertTrue("Overlap not correct!", rec3.equals(rec4));
+		assertTrue("No overlap should have been detected",
+				rec6 == null);
+		assertTrue("Overlap not correct",
+				rec7.equals(rec));
+		assertTrue("Overlap not correct",
+				rec9.equals(rec10));
+		assertTrue("Overlap should not have been detected",
+				rec12 == null);
+		
+	}
+
+	/**
+	 * checks whether rectangle can
+	 * return its center
+	 */
+	@Test
+	public void testGetCenter() {
+		//Act
+		Point result = rec.getCenter();
+		
+		//Assert
+		assertTrue(result.equals(new Point(0.5, 0.5)));
+		
+	}
+
+	@Test
+	public void testIsEqual() {
+		//Arrange
+		Point p5 = new Point(2,0);
+		Point p6 = new Point(2,2);
+		Rectangle rec2 = new Rectangle(p1, p6);
+		
+		//Act
+		boolean test1 = rec.equals(rec);
+		boolean test2 = rec.equals(rec2);
+		
+		//Assert
+		assertTrue(test1);
+		assertFalse(test2);
+		
+	}
+
+
+}

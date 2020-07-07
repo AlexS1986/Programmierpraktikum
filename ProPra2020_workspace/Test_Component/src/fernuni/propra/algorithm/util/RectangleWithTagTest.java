@@ -28,38 +28,84 @@ public class RectangleWithTagTest {
 		rec1 = new  RectangleWithTag(p1, p3, initTags);
 	}
 
+	/**
+	 * tests if check for tags works
+	 */
 	@Test
 	public void testContainsTag() {
 		//Act
-		boolean test1 = rec1.containsTag(1);
-		boolean test2 = !rec1.containsTag(2);
+		boolean tag1isContained = rec1.containsTag(1);
+		boolean tag2isContained = !rec1.containsTag(2);
 		
 		//Assert
-		assertTrue(test1);
-		assertTrue(test2);
+		assertTrue("Tag 1 should be in tags.", 
+				tag1isContained);
+		assertTrue("Tag 2 should be in tags.",
+				tag2isContained);
+		assertFalse("Tag 3 should not be in tags.",
+				rec1.containsTag(3));
 	}
 
+	/**
+	 * tests if tags can be added
+	 */
 	@Test
 	public void testAddTag() {
-		fail("Not yet implemented");
+		//Act
+		rec1.addTag(2);
+		
+		//Assert
+		assertTrue("Tag 2 should have been added",
+				rec1.containsTag(2));
 	}
 
+	/**
+	 * Checks whether RectangleWirthTag can be used in
+	 * HashSets
+	 */
 	@Test
 	public void testHashSet() {
 		//Arrange
-		List<Integer> initTags2 = new ArrayList<Integer>(); initTags2.add(2);
-		RectangleWithTag newRectangleWithTag = new RectangleWithTag(p1, p3, initTags2 );
-		HashSet<RectangleWithTag> rectanglesWithTags = new HashSet<RectangleWithTag>();
+		List<Integer> initTags2 =
+				new ArrayList<Integer>(); 
+		initTags2.add(2);
+		RectangleWithTag newRectangleWithTag =
+				new RectangleWithTag(p1, p3, initTags2 );
+		HashSet<RectangleWithTag> rectanglesWithTags =
+				new HashSet<RectangleWithTag>();
 		rectanglesWithTags.add(rec1);
 		
-		
 		//Act
-		boolean test1 = rectanglesWithTags.contains(newRectangleWithTag);
-		boolean test2 = rec1.equals(newRectangleWithTag);
+		boolean canBeFoundInHashSet = rectanglesWithTags.contains(newRectangleWithTag);
+		boolean rectanglesAreEqual = rec1.equals(newRectangleWithTag);
 		
 		//Assert
-		assertFalse(test1);
-		assertFalse(test2);
+		assertFalse("The rectangle can be found in HashSet",
+				canBeFoundInHashSet);
+		assertFalse("Tags do not agree, should not be equal.",
+				rectanglesAreEqual);
+	}
+	
+	/**
+	 * Checks whether a copy of the tags can be obtained
+	 */
+	@Test
+	public void testGetCopyOfTags() {
+		//Arrange
+		rec1.addTag(15);
+		
+		//Act
+		HashSet<Integer> hs = rec1.getCopyOfTags();
+		// check that a true copy is returned
+		HashSet<Integer> hs2 = rec1.getCopyOfTags();
+		hs2.remove(15);
+		
+		//Assert
+		assertTrue("The hash set should have 2 entries",
+				hs.size() == 2);
+		assertTrue("Hash set should contain 15.",
+				hs.contains(15));
+		
 	}
 	
 }

@@ -56,7 +56,8 @@ public interface IRoom{
 	/**
 	 * 
 	 * @return an {@link Iterator}<{@link Point}> that can be used
-	 * 		   to iterate over all corners of this {@link IRoom}
+	 * 		   to iterate over all corners of this {@link IRoom} in 
+	 * 			counter clockwise ordering
 	 */
 	Iterator<Point> getCorners();
 	

@@ -29,12 +29,14 @@ public class PointTest {
 		l4 = new LineSegment(p4,p1);
 		l5 = new LineSegment(p1, p3);
 		lineSegments = new ArrayList<LineSegment>();
-		lineSegments.add(l1);lineSegments.add(l2); lineSegments.add(l3); lineSegments.add(l4);
+		lineSegments.add(l1);lineSegments.add(l2); 
+		lineSegments.add(l3); lineSegments.add(l4);
 	}
 	
-
-
-
+	/**
+	 * Checks if test for test whether point is 
+	 * on a line segment works
+	 */
 	@Test
 	public void testIsOnLineSegmentPointPoint() {
 		//Arrange 
@@ -73,6 +75,10 @@ public class PointTest {
 		
 	}
 
+	/**
+	 * Checks if test for test whether point is 
+	 * on a line segment works
+	 */
 	@Test
 	public void testIsOnLineSegmentLineSegment() {
 		//Act 
@@ -87,6 +93,10 @@ public class PointTest {
 
 	}
 
+	/**
+	 * Checks if test for test whether point is 
+	 * insided a polygon works
+	 */
 	@Test
 	public void testIsInsidePolygon() {
 		//Arrange
@@ -108,6 +118,10 @@ public class PointTest {
 		assertTrue(!test4);
 	}
 
+	/**
+	 * Checks if test for test whether point is 
+	 * inside a x-range works
+	 */
 	@Test
 	public void testIsInXRange() {
 		
@@ -130,6 +144,10 @@ public class PointTest {
 		assertTrue(test4);
 	}
 
+	/**
+	 * Checks if test for test whether point is 
+	 * inside a y-range works
+	 */
 	@Test
 	public void testIsInYRange() {
 		//Act

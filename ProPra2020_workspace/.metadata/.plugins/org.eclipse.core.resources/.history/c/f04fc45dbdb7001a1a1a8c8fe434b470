@@ -1,9 +1,0 @@
-package fernuni.propra.file_processing;
-
-public class UserReadInputWriteOutputException {
-
-	public UserReadInputWriteOutputException() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

@@ -1,0 +1,21 @@
+package fernuni.propra.main_test;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import Algorithm_Component.API_Test_Validation;
+import fernuni.propra.algorithm.AlgorithmTests;
+import fernuni.propra.algorithm.util.AlgoithmUtilTests;
+import fernuni.propra.file_processing.FileProcessingTests;
+
+@RunWith(Suite.class)
+@SuiteClasses(
+    {FileProcessingTests.class,
+	AlgorithmTests.class,
+	API_Test_Validation.class,
+	AlgoithmUtilTests.class,
+	})
+public class AllTests {
+
+}

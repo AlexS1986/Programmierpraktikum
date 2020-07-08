@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;ParameterSetTest.java&apos; to &apos;Test_Component/src/fernuni.propra.main&apos;&#x0A;- Original project: &apos;Main_Component&apos;&#x0A;- Destination element: &apos;Test_Component/src/fernuni.propra.main&apos;&#x0A;- Original element: &apos;fernuni.propra.main.ParameterSetTest.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=Test_Component/src&lt;fernuni.propra.main" element1="/src&lt;fernuni.propra.main{ParameterSetTest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1594223355375" units="1" version="1.0"/>
+</session>

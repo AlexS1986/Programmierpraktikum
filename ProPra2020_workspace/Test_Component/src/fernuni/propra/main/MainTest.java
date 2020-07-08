@@ -11,22 +11,16 @@ public class MainTest {
 	}
 
 	@Test
-	@Ignore
 	public void testUseCase_D() {
 		//Arrange
 		String[] commandLineParameters = new String[] {"r=d", 
 				"if=instances/validationInstances/Selbsttest_20b.xml"};
-		String[] commandLineParameters2 = new String[] {"r=d", 
-		"if=instances/validationInstances/Selbsttest_20b.xml"};
 		
 		//Act
 		Main.main(commandLineParameters);
-		Main.main(commandLineParameters2);
 		try {
-			Thread.currentThread().sleep(1000);
+			Thread.currentThread().sleep(3000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		//Assert
@@ -40,12 +34,9 @@ public class MainTest {
 		
 		//Act
 		Main.main(commandLineParameters);
-		
 		try {
-			Thread.currentThread().sleep(4000);
+			Thread.currentThread().sleep(3000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}
@@ -60,6 +51,21 @@ public class MainTest {
 		Main.main(commandLineParameters);
 		
 		//Assert
+	}
+	
+	@Test
+	public void testUseCase_VD() {
+		// Arrange
+		String[] commandLineParameters = new String[] {"if=instances/validationInstances/Selbsttest_20a_incomplete.xml", "r=vd" };
+		
+		//Act
+		Main.main(commandLineParameters);
+		
+		//Assert
+		try {
+			Thread.currentThread().sleep(3000);
+		} catch (InterruptedException e) {
+		}
 	}
 
 }

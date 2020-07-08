@@ -1,9 +1,0 @@
-package fernuni.propra.file_processing;
-
-public class PersistenceException {
-
-	public PersistenceException() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

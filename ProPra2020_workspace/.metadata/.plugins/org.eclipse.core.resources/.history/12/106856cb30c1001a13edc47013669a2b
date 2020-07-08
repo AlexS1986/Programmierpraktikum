@@ -1,0 +1,29 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class UserValidateAASTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testValidate() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetResultString() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetRuntimeInformation() {
+		fail("Not yet implemented");
+	}
+
+}

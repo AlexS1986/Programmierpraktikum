@@ -1,5 +1,0 @@
-package fernuni.propra.file_processing;
-
-public interface IPersistence {
-
-}

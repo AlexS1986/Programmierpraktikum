@@ -1,8 +1,5 @@
 package fernuni.propra.user_interface;
 
-import static org.junit.Assert.*;
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +11,6 @@ import fernuni.propra.file_processing.UserReadInputWriteOutputAAS;
 import fernuni.propra.file_processing.UserReadInputWriteOutputException;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
-import fernuni.propra.internal_data_model.LineSegment;
 import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Wall;
 
@@ -62,8 +58,6 @@ public class RoomFrameTest {
 			try {
 				rooms.add(readAAS.readInput());
 			} catch (UserReadInputWriteOutputException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 			
@@ -85,7 +79,6 @@ public class RoomFrameTest {
 
 			@Override
 			public int getNumberOfLamps() {
-				// TODO Auto-generated method stub
 				return 0;
 			}
 
@@ -98,8 +91,7 @@ public class RoomFrameTest {
 
 			@Override
 			public void addLamp(Lamp lamp) {
-
-				
+	
 			}
 
 			@Override
@@ -134,21 +126,18 @@ public class RoomFrameTest {
 
 			@Override
 			public void replaceLamps(List<Lamp> lamps) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public String printLampPositions() {
-				// TODO Auto-generated method stub
-				return null;
+				return "";
 			}
 			
 		};
 		
-		
+		// show mock room for 3 seconds
 		RoomPanel mockRoomPanel = new RoomPanel(mockRoom);
-		//RoomPanel roomPanel = new RoomPanel(mockRoom);
 		RoomFrame mockRoomFrame = new RoomFrame(mockRoomPanel);
 		try {
 			Thread.currentThread().sleep(1000);
@@ -156,7 +145,7 @@ public class RoomFrameTest {
 		}
 		mockRoomFrame.dispose();
 	
-		
+		// show each room for 3 seconds
 		for (IRoom room : rooms) {
 			RoomPanel roomPanel = new RoomPanel(room);
 			RoomFrame roomFrame = new RoomFrame(roomPanel);

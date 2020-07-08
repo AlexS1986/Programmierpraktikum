@@ -89,5 +89,17 @@ public class WallTest {
 		assertFalse(test3);
 		assertFalse(test4);
 	}
+	
+	@Test
+	public void testGetTag() {
+		//Arrange
+		Wall w = new Wall(p1,p2,10);
+		
+		//Act
+		boolean tagIs10 = w.getTag()==10;
+		
+		//Assert
+		assertTrue("tagIsNot10",tagIs10);
+	}
 
 }

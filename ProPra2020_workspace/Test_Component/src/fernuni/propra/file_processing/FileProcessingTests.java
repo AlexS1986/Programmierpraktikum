@@ -11,5 +11,4 @@ import fernuni.propra.internal_data_model.PointTest;
 @RunWith(Suite.class)
 @SuiteClasses({ FilePersistenceTest.class, LineSegmentTest.class, LineSegmentTestParameterized.class, PointTest.class })
 public class FileProcessingTests {
-
 }

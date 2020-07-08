@@ -40,7 +40,8 @@ public class LineSegmentTest {
 	}
 
 
-
+	/**
+	 */
 	@Test
 	public void testGetP1() {
 		//Arrange 
@@ -52,10 +53,14 @@ public class LineSegmentTest {
 		Point px = linesegment.getP1();
 		
 		//Assert
-		assertSame(p1, px);
+		assertSame("P1 not returned correctly",
+				p1, px);
 		
 	}
 
+	/**
+	 * Tests if P2s can be retrieved correctly
+	 */
 	@Test
 	public void testGetP2() {
 		//Arrange 
@@ -67,28 +72,39 @@ public class LineSegmentTest {
 		Point px = linesegment.getP2();
 		
 		//Assert
-		assertSame(p2, px);
+		assertSame("P1 not returned correctly",
+				p2, px);
 	}
-
+	
+	/**
+	 * test if test for horizontal works
+	 */
 	@Test
 	public void testIsHorizontal() {
 		//Arrange 
 		Point p1 = new Point (0,0);
 		Point p2 = new Point (0,1);
-		LineSegment linesegment = new LineSegment(p1, p2);
-		LineSegment l2 = new LineSegment(null, p2);
+		LineSegment verticalLine = new LineSegment(p1, p2);
+		LineSegment horizontalLine = new LineSegment(p1,
+				new Point(1,0));
+		LineSegment invalidLine = new LineSegment(null, p2);
 		
 		//Act
-		boolean isHorizontal = linesegment.isHorizontal();
+		boolean isHorizontal = verticalLine.isHorizontal();
+		boolean isHorizontal2 = horizontalLine.isHorizontal();
 		try {
-			l2.isHorizontal();
-			fail();
+			invalidLine.isHorizontal();
+			fail("An Exception should have been thrown for"
+					+ "invalid LineSegment");
 		} catch (NullPointerException ex) {
 		}
 		
 		
 		//Assert
-		assertTrue(!isHorizontal);
+		assertTrue("This line is not horizontal!",
+				!isHorizontal);
+		assertTrue("This line is horizontal",
+				isHorizontal2);
 		
 	}
 	
@@ -99,15 +115,26 @@ public class LineSegmentTest {
 		//Arrange 
 		Point p1 = new Point (0,0);
 		Point p2 = new Point (0,1);
-		LineSegment linesegment = new LineSegment(p1, p2);
+		LineSegment verticalLine = new LineSegment(p1, p2);
+		LineSegment horizontalLine = new LineSegment(p1,
+				new Point(1,0));
+		
+	
 		
 		//Act
-		boolean isVertical = linesegment.isVertical();
+		boolean isVertical = verticalLine.isVertical();
+		boolean isVertical2= horizontalLine.isVertical();
 		
 		//Assert
-		assertTrue(isVertical);
+		assertTrue("This line should be vertical.",
+				isVertical);
+		assertFalse("This line should not be vertical!",
+				isVertical2);
 	}
 
+	/**
+	 * Checks if computing overlaps work of x-Range
+	 */
 	@Test
 	public void testOverlapsXrange() {
 		// Act
@@ -138,6 +165,9 @@ public class LineSegmentTest {
 		
 	}
 
+	/**
+	 * Checks if computing overlaps work of Y-Range
+	 */
 	@Test
 	public void testOverlapsYrange() {
 		// Act
@@ -168,6 +198,9 @@ public class LineSegmentTest {
 		assertTrue(test7);
 	}
 
+	/**
+	 * Checks if the test for perpendicular works
+	 */
 	@Test
 	public void testPerpendicularPointPoint() {
 		//Act 
@@ -182,6 +215,9 @@ public class LineSegmentTest {
 		
 	}
 
+	/**
+	 * Checks if the test for perpendicular works
+	 */
 	@Test
 	public void testPerpendicularLineSegment() {
 		//Arrange 
@@ -199,6 +235,9 @@ public class LineSegmentTest {
 		
 	}
 
+	/**
+	 * Checks if the test for intersection works
+	 */
 	@Test
 	public void testLineSegmentDoesNotIntersectLineSegments() {
 		//Arrange
@@ -241,7 +280,10 @@ public class LineSegmentTest {
 		assertTrue(!test8);
 
 	}
-
+	
+	/**
+	 * Checks if intersection point can be found correctly
+	 */
 	@Test
 	public void testIntersectionWithLinesegment() {
 		//Arrange
@@ -253,7 +295,6 @@ public class LineSegmentTest {
 		Point pt9 = new Point(2.0, 0.0);
 		Point pt10 = new Point(0.1, -4.0);
 		Point pt11 = new Point(0.1, -6.0);
-		
 		
 		
 		LineSegment ls4 = new LineSegment(center, pt5);

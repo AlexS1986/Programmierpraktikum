@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Not all"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="isEqual"/>
+			<item value="frame"/>
+			<item value="\n"/>
 			<item value="not all"/>
 			<item value="Enter"/>
 			<item value="clone"/>

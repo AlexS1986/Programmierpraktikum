@@ -31,13 +31,16 @@ public class RoomTest {
 		l5 = new LineSegment(p1, p3);
 		
 		corners= new LinkedList<Point>();
-		corners.add(p1); corners.add(p2); corners.add(p3);corners.add(p4);
+		corners.add(p1); corners.add(p2); 
+		corners.add(p3);corners.add(p4);
 		
 		cornersClockWise = new LinkedList<Point>();
-		cornersClockWise.add(p1); cornersClockWise.add(p4); cornersClockWise.add(p3); cornersClockWise.add(p2);
+		cornersClockWise.add(p1); cornersClockWise.add(p4); 
+		cornersClockWise.add(p3); cornersClockWise.add(p2);
 		
 		lineSegments = new ArrayList<LineSegment>();
-		lineSegments.add(l1);lineSegments.add(l2); lineSegments.add(l3); lineSegments.add(l4);
+		lineSegments.add(l1);lineSegments.add(l2); 
+		lineSegments.add(l3); lineSegments.add(l4);
 	}
 
 	@Test
@@ -72,28 +75,69 @@ public class RoomTest {
 		boolean test7 = w7.equals(l4);
 		boolean test8 = w8.equals(l1);
 		
-		assertTrue(test1 && test2 && test3 && test4);
-		assertTrue(test5 && test6 && test7 && test8);
+		assertTrue("Counter clockwise room does not work",
+				test1 && test2 && test3 && test4);
+		assertTrue("Clock Wise Room does not work",
+				test5 && test6 && test7 && test8);
 	}
 	
 	@Test
 	public void testGetLamps() {
-		fail("Not yet implemented");
+		//Arrange
+		Room room = new Room("test",null, corners);
+		Lamp lamp1 = new Lamp(0,0);
+		Lamp lamp2 = new Lamp(0,0);
+		room.addLamp(lamp1);
+		room.addLamp(lamp2);
+		
+		//Act
+		Iterator<Lamp> lampIterator = room.getLamps();
+		Lamp outLamp1 = lampIterator.next();
+		Lamp outLamp2 = lampIterator.next();
+		
+		//Assert
+		assertSame(lamp1,outLamp1);
+		assertSame(lamp2,outLamp2);
+		
 	}
 
 	@Test
 	public void testGetCorners() {
-		fail("Not yet implemented");
+		//Arrange
+		Room roomClockWise = 
+				new Room("test", null, cornersClockWise);
+		//Act
+		Iterator<Point> cornerIterator = 
+				roomClockWise.getCorners();
+		boolean p1Correct = cornerIterator.next().equals(p2);
+		boolean p2Correct = cornerIterator.next().equals(p3);
+		boolean p3Correct = cornerIterator.next().equals(p4);
+		boolean p4Correct = cornerIterator.next().equals(p1);
+		
+		//Assert
+		assertTrue("The corners have not been returned in"
+				+ "counter clockwise order",
+				p1Correct && p2Correct && p3Correct && p4Correct);
+		
 	}
 
-	@Test
-	public void testAddLamp() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetNumberOfLamps() {
-		fail("Not yet implemented");
+		//Arrange
+		Room room = new Room("test",null, corners);
+		for (int i=0;i<21;i++) {
+			Lamp tmpLamp = new Lamp(0, 0);
+			room.addLamp(tmpLamp);
+		}
+		
+		//Act
+		int numberLamps = room.getNumberOfLamps();
+		
+		//Assert
+		assertTrue("21 lamps should have been returned",
+				numberLamps==21);
+		
 	}
 	
 	@Test
@@ -131,5 +175,42 @@ public class RoomTest {
 		
 	}
 	
+	@Test
+	public void testReplaceLamps() {
+		//Arrange
+		Room room = new Room("test",null, corners);
+		Lamp lamp1 = new Lamp(0,0);
+		Lamp lamp2 = new Lamp(0,0);
+		room.addLamp(lamp1);
+		room.addLamp(lamp2);
+		ArrayList<Lamp> newLamps = new ArrayList<Lamp>();
+		Lamp lamp3 = new Lamp(0,0);
+		newLamps.add(lamp3);
+		
+		//Act
+		room.replaceLamps(newLamps);
+		
+		//Assert
+		Lamp outLamp = room.getLamps().next();
+		
+		assertSame(outLamp,lamp3);
+		
+	}
+	
+	@Test
+	public void testPrintLampPostions() {
+		//Arrange
+		Room room = new Room("test",null, corners);
+		Lamp lamp1 = new Lamp(0,0);
+		Lamp lamp2 = new Lamp(0,0);
+		
+		//Act
+		room.addLamp(lamp1);
+		room.addLamp(lamp2);
+		room.printLampPositions();
+		
+		//Assert
+		
+	}
 
 }

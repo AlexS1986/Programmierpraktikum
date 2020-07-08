@@ -1,0 +1,51 @@
+package fernuni.propra.algorithm;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class AlgorithmFactory1Test {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testCreateCandidateSearcher() {
+		//Act
+		boolean isICandidateSearcher = 
+				AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher()
+				instanceof ICandidateSearcher;
+		
+		//Assert
+		assertTrue(isICandidateSearcher);
+		
+	}
+
+	@Test
+	public void testCreatePositionOptimizer() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testCreateIlluminiationTester() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testCreateOriginalPartialRectanglesFinder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetAlgorithmFactory1() {
+		//Act
+		AbstractAlgorithmFactory af1 = AbstractAlgorithmFactory.getAlgorithmFactory();
+		AbstractAlgorithmFactory af2 = AbstractAlgorithmFactory.getAlgorithmFactory();
+		
+		//Assert
+		assertSame(af1,af2);
+	}
+
+}

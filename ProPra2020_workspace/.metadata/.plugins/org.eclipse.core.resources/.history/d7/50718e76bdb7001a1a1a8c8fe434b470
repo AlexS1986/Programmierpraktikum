@@ -1,9 +1,0 @@
-package fernuni.propra.file_processing;
-
-public class UserReadInputWriteOuptputAAS {
-
-	public UserReadInputWriteOuptputAAS() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

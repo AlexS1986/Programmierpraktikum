@@ -207,7 +207,7 @@ public class CandidateSearcherTest {
 		// display a complicated room and check whether original
 		// partial rectangles are correct
 		Color[] colors = { Color.blue, Color.red, Color.green, Color.yellow };
-		IRoom testRoom = rooms.get(12);
+		IRoom testRoom = rooms.get(5);
 		ArrayList<RectangleWithTag> originalPartialRectangles = new ArrayList<RectangleWithTag>();
 		// find original partial rectangles
 		try {
@@ -229,13 +229,14 @@ public class CandidateSearcherTest {
 		// display room
 		RoomPanel roomPanel = new RoomPanel(testRoom);
 		RoomFrame roomFrame = new RoomFrame(roomPanel);
-		for (int i = 0; i < candidateRectangles.size(); i++) {
-			RectangleWithTag rec = candidateRectangles.get(i);
+		for (int i = 0; i < originalPartialRectangles.size(); i++) {
+			RectangleWithTag rec = originalPartialRectangles.get(i);
 			double width = rec.getP2().getX() - rec.getP1().getX();
 			double height = rec.getP3().getY() - rec.getP1().getY();
 			roomPanel.addRectangle(String.valueOf(i), colors[i % 3], rec.getP1().getX(), rec.getP1().getY(), width,
 					height);
 			roomPanel.repaint();
+			roomPanel.removeLastRectangle();
 		}
 
 		// show room for 2 seconds and continue subsequently

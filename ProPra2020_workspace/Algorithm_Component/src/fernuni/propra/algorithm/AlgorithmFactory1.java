@@ -30,7 +30,7 @@ public class AlgorithmFactory1 extends AbstractAlgorithmFactory {
 
 	@Override
 	public ICandidateSearcher createCandidateSearcher() {
-		return new CandidateSearcher2();
+		return new CandidateSearcher4();
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class MainTest {
 	public void testUseCase_V() {
 		// Arrange
 		String[] commandLineParameters = new String[] {
-				"if=instances/validationInstances/Selbsttest_100b3.xml", "r=v" };
+				"if=instances/validationInstances/Selbsttest_100b3.xml", "r=vd" };
 
 		// Act
 		Main.main(commandLineParameters);

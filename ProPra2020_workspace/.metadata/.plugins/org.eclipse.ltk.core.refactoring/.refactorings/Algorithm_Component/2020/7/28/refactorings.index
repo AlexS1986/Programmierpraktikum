@@ -8,3 +8,8 @@
 1594323112863	Rename type 'rectanglesFinder'
 1594330237500	Copy compilation unit
 1594333990152	Copy compilation unit
+1594368588331	Copy compilation unit
+1594369406449	Rename local variable 'outRectangleWithTag2'
+1594369885279	Delete element
+1594370912710	Copy compilation unit
+1594371485496	Rename local variable 'outPartialRectangles'

@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
-import fernuni.propra.internal_data_model.LineSegment;
+import fernuni.propra.internal_data_model.Wall;
 import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Wall;
 
@@ -82,6 +82,7 @@ public class RoomPanel extends RoomPanelAbstract {
 		double pixelOffsetY = getPixelOffsetY();
 
 		Iterator<Lamp> lampIterator = room.getLamps();
+		int n=0;
 		while (lampIterator.hasNext()) {
 			Lamp lamp = lampIterator.next();
 
@@ -101,6 +102,9 @@ public class RoomPanel extends RoomPanelAbstract {
 			g2D.drawOval((int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
 					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
 					PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
+			
+			g2D.drawString(String.valueOf(n++), (int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
+					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0));
 		}
 
 	}
@@ -130,12 +134,17 @@ public class RoomPanel extends RoomPanelAbstract {
 		// draw boundary
 		g2D.setColor(Color.BLACK);
 		Iterator<Wall> wallIterator = room.getWalls();
+		int n = 0;
 		while (wallIterator.hasNext()) {
-			LineSegment wall = wallIterator.next();
+			Wall wall = wallIterator.next();
 			g2D.drawLine((int) (pixelOffsetX + wall.getP1().getX() * scale),
 					(int) (pixelOffsetY + wall.getP1().getY() * scale),
 					(int) (pixelOffsetX + wall.getP2().getX() * scale),
 					(int) (pixelOffsetY + wall.getP2().getY() * scale));
+			double xCenter = 0.5*(wall.getP1().getX() + wall.getP2().getX());
+			double yCenter = 0.5*(wall.getP1().getY() + wall.getP2().getY());
+			g2D.drawString(String.valueOf(wall.getTag()), (int) (pixelOffsetX + xCenter * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
+					(int) (pixelOffsetY + yCenter * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0));
 		}
 
 	}

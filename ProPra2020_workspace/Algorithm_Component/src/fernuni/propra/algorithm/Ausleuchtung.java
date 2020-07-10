@@ -18,13 +18,14 @@ public class Ausleuchtung implements IAusleuchtung {
 
 	/**
 	 * Überprüft die eingegebene Lösung auf Korrektheit
+	 * 
 	 * @param xmlFile Dokument mit der Lösung, die validiert werden soll.
 	 * @return true, falls die eingelesene Lösung korrekt ist
 	 */
 	@Override
 	public boolean validateSolution(String xmlFile) {
 		UserReadInputWriteOutputAAS userReadWriteAAS = new UserReadInputWriteOutputAAS(xmlFile);
-		
+
 		try {
 			IRoom room = userReadWriteAAS.readInput();
 			UserValidateAAS userValidateAAS = new UserValidateAAS();
@@ -32,41 +33,42 @@ public class Ausleuchtung implements IAusleuchtung {
 			return isIlluminated;
 		} catch (UserReadInputWriteOutputException e) {
 			// TODO Fehlermeldung auf Konsole ausgeben?
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (UserValidateAASException e) {
 			// TODO Fehlermeldung auf Konsole ausgeben?
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
-		
+
 	}
 
 	/**
 	 * Ermittelt eine Lösung zu den eingegebenen Daten
-	 * @param xmlFile Dokument, das die zu lösende Probleminstanz enthält
+	 * 
+	 * @param xmlFile   Dokument, das die zu lösende Probleminstanz enthält
 	 * @param timeLimit Zeitlimit in Sekunden
 	 * @return Anzahl der Lampen der ermittelten Lösung
 	 */
 	@Override
 	public int solve(String xmlFile, int timeLimit) {
 		UserReadInputWriteOutputAAS userReadWriteAAS = new UserReadInputWriteOutputAAS(xmlFile);
-		
+
 		try {
 			IRoom room = userReadWriteAAS.readInput();
-			UserSolveAAS userSolveAAS  = new UserSolveAAS();
+			UserSolveAAS userSolveAAS = new UserSolveAAS();
 			int numberOfLampsBestSolution = userSolveAAS.solve(room, timeLimit);
 			return numberOfLampsBestSolution;
 		} catch (UserReadInputWriteOutputException e) {
 			// TODO Fehlermeldung auf Konsole ausgeben?
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return 0;
 		} catch (UserSolveAASException e) {
 			// TODO Fehlermeldung auf Konsole ausgeben?
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return 0;
-		} 
-		
+		}
+
 	}
 
 }

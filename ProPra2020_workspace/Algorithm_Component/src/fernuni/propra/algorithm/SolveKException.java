@@ -3,6 +3,7 @@ package fernuni.propra.algorithm;
 /**
  * Thrown if an unexpected error occured during solution.
  * <p>
+ * 
  * @author alex
  *
  */

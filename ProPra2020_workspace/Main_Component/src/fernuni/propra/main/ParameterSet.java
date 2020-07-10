@@ -27,12 +27,11 @@ public class ParameterSet {
 	 */
 	void setRunParameter(String runParameter) throws ParameterSetException {
 		if (this.runParameter != null) { // double specification
-			throw new ParameterSetException("Run parameter is already set. " 
-			+ "Please provide only one run parameter specification.");
+			throw new ParameterSetException(
+					"Run parameter is already set. " + "Please provide only one run parameter specification.");
 		} else if (!isValidRunParameter(runParameter)) { // not valid
 			// build help message
-			String message = "Run parameter is not valid. Please provide a "
-					+ "valid run parameter in the form "
+			String message = "Run parameter is not valid. Please provide a " + "valid run parameter in the form "
 					+ formRunParameter + "," + " where parameter is one of: ";
 			for (String validParameter : validRunParameters) {
 				message = message + validParameter;
@@ -54,8 +53,7 @@ public class ParameterSet {
 	void setInputFile(String inputFile) throws ParameterSetException {
 		if (this.inputFile != null) { // double specification
 			throw new ParameterSetException(
-					"Path to input file is already set. " 
-			+ "Please provide only one input file specification.");
+					"Path to input file is already set. " + "Please provide only one input file specification.");
 		} else {
 			this.inputFile = inputFile.replace("\"", "");
 
@@ -72,8 +70,7 @@ public class ParameterSet {
 	void setTimeLimit(int timeLimit) throws ParameterSetException {
 		if (this.timeLimit != null) { // double specification
 			throw new ParameterSetException(
-					"Time limit is already set. " 
-			+ "Please provide only one time limit specification.");
+					"Time limit is already set. " + "Please provide only one time limit specification.");
 		} else {
 			this.timeLimit = timeLimit;
 		}
@@ -91,8 +88,7 @@ public class ParameterSet {
 	 */
 	boolean isValidParameterSet() throws ParameterSetException {
 		if (runParameter == null) {
-			String message = "No run parameter provided. " + 
-		"Please provide a valid run parameter in the form "
+			String message = "No run parameter provided. " + "Please provide a valid run parameter in the form "
 					+ formRunParameter + ", where parameter is one of: ";
 			for (String validParameter : validRunParameters) {
 				message = message + validParameter;
@@ -100,31 +96,25 @@ public class ParameterSet {
 			}
 			throw new ParameterSetException(message);
 		}
-		if (runParameter.equals("v") || runParameter.equals("vd") 
-				|| runParameter.equals("d")) {
+		if (runParameter.equals("v") || runParameter.equals("vd") || runParameter.equals("d")) {
 			if (inputFile != null) {
 				return true;
 			} else {
-				throw new ParameterSetException("No path to the input file is specified. "
-						+ "Please provide the path to the input file in the form:" 
-						+ formInputFileParameter);
+				throw new ParameterSetException("No path to " + "the input file is specified. "
+						+ "Please provide the path to the input file in the form:" + formInputFileParameter);
 			}
 		} else if (runParameter.equals("s") || runParameter.equals("sd")) {
 			if (inputFile == null) {
 				throw new ParameterSetException("No path to the input file is specified. "
-						+ "Please provide the path to the input file in the form:" 
-						+ formInputFileParameter);
+						+ "Please provide the path to the input file in the form:" + formInputFileParameter);
 			} else if (timeLimit == null) {
 				throw new ParameterSetException("No time limit is specified. "
-						+ "Please provide a time limit in the form:" 
-						+ formTimeLimitParameter);
+						+ "Please provide a time limit in the form:" + formTimeLimitParameter);
 			} else {
 				return true;
 			}
 		} else {
-			String message = "Run parameter is not valid. " 
-					+ "Please provide a "
-					+ "valid run parameter in the form "
+			String message = "Run parameter is not valid. " + "Please provide a " + "valid run parameter in the form "
 					+ formRunParameter + ", where parameter is one of: ";
 			for (String validParameter : validRunParameters) {
 				message = message + validParameter;

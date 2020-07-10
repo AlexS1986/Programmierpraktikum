@@ -582,55 +582,47 @@
   <lampen>
     <Lampe>
       <x>330.0</x>
-      <y>231.9</y>
-    </Lampe>
-    <Lampe>
-      <x>284.20000000000005</x>
-      <y>492.75</y>
-    </Lampe>
-    <Lampe>
-      <x>368.55</x>
-      <y>338.6</y>
-    </Lampe>
-    <Lampe>
-      <x>441.3</x>
-      <y>92.4</y>
-    </Lampe>
-    <Lampe>
-      <x>330.0</x>
       <y>428.35</y>
     </Lampe>
     <Lampe>
-      <x>330.0</x>
-      <y>150.35</y>
-    </Lampe>
-    <Lampe>
-      <x>118.9</x>
-      <y>285.75</y>
-    </Lampe>
-    <Lampe>
       <x>205.5</x>
-      <y>492.75</y>
-    </Lampe>
-    <Lampe>
-      <x>192.1</x>
-      <y>231.9</y>
-    </Lampe>
-    <Lampe>
-      <x>165.0</x>
-      <y>315.9</y>
+      <y>492.65</y>
     </Lampe>
     <Lampe>
       <x>153.8</x>
       <y>231.9</y>
     </Lampe>
     <Lampe>
-      <x>368.55</x>
-      <y>102.75</y>
+      <x>330.0</x>
+      <y>150.35</y>
+    </Lampe>
+    <Lampe>
+      <x>330.0</x>
+      <y>338.6</y>
     </Lampe>
     <Lampe>
       <x>428.0</x>
       <y>492.75</y>
+    </Lampe>
+    <Lampe>
+      <x>165.0</x>
+      <y>315.9</y>
+    </Lampe>
+    <Lampe>
+      <x>368.55</x>
+      <y>102.75</y>
+    </Lampe>
+    <Lampe>
+      <x>441.3</x>
+      <y>92.4</y>
+    </Lampe>
+    <Lampe>
+      <x>192.1</x>
+      <y>231.9</y>
+    </Lampe>
+    <Lampe>
+      <x>118.9</x>
+      <y>285.75</y>
     </Lampe>
     <Lampe>
       <x>165.0</x>

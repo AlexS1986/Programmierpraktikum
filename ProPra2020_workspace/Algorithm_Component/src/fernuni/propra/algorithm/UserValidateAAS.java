@@ -5,28 +5,31 @@ import fernuni.propra.algorithm.runtime_information.IRuntimeReader;
 import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
 import fernuni.propra.algorithm.runtime_information.RuntimeInformation;
 import fernuni.propra.internal_data_model.IRoom;
+
 /**
- * Use case that provides access to the validation algorithm for an {@link IRoom} instance.
+ * Use case that provides access to the validation algorithm for an
+ * {@link IRoom} instance.
  * <p>
- * The test for illumination is delegated to an instance of {@link ValidateK} that controls the
- * execution of the algorithm and returns the result.
+ * The test for illumination is delegated to an instance of {@link ValidateK}
+ * that controls the execution of the algorithm and returns the result.
  * <p>
  * 
  * @author alex
  *
  */
 public class UserValidateAAS {
-	private ValidateK validateK  = new ValidateK();
+	private ValidateK validateK = new ValidateK();
 	private String resultString; // the result to be displayed.
 	IRuntimeInformation runtimeInfo = new RuntimeInformation();
-	
+
 	/**
 	 * Provides the user with access to the validation algorithm
+	 * 
 	 * @param room
 	 * @return
 	 * @throws UserValidateAASException
 	 */
-	public boolean validate(IRoom room) throws UserValidateAASException{
+	public boolean validate(IRoom room) throws UserValidateAASException {
 		try {
 			runtimeInfo.startTime();
 			boolean isIlluminated = validateK.validate(room, runtimeInfo);
@@ -42,12 +45,14 @@ public class UserValidateAAS {
 
 	/**
 	 * Computes a result string that can be displayed to the user.
-	 * @param room : {@link IRoom} instance that has to be checked.
-	 * @param isIlluminated : a boolean that represents whether the room is illuminated or not
+	 * 
+	 * @param room          : {@link IRoom} instance that has to be checked.
+	 * @param isIlluminated : a boolean that represents whether the room is
+	 *                      illuminated or not
 	 * @return
 	 */
 	private static String computeResultString(IRoom room, Boolean isIlluminated) {
-		String lineSeparator =  System.getProperty("line.separator");
+		String lineSeparator = System.getProperty("line.separator");
 		StringBuilder sb = new StringBuilder("The room ");
 		sb.append(room.getID());
 		String illuminatedOrNot = isIlluminated ? " is illuminated. " : " is NOT illuminated. ";
@@ -57,28 +62,32 @@ public class UserValidateAAS {
 		String outString = sb.toString();
 		return outString;
 	}
-	
+
 	/**
-	 * Can be used to get the result of the algorithm once it is available due to a prior call to 
-	 * validate of the same instance.
+	 * Can be used to get the result of the algorithm once it is available due to a
+	 * prior call to validate of the same instance.
+	 * 
 	 * @return A string that represents the result of the test.
-	 * @throws UserValidateAASException : e.g. if validate has not been called prior to this.
+	 * @throws UserValidateAASException : e.g. if validate has not been called prior
+	 *                                  to this.
 	 */
-	public String getResultString() throws UserValidateAASException{
+	public String getResultString() throws UserValidateAASException {
 		if (resultString != null) {
 			return resultString;
 		} else {
 			throw new UserValidateAASException("No result available. Call validate first.");
 		}
-		
+
 	}
-	
+
 	/**
 	 * Get runtime information.
-	 * @return a data structure of type {@link IRuntimeReader} that can be used to obtain runtime information.
+	 * 
+	 * @return a data structure of type {@link IRuntimeReader} that can be used to
+	 *         obtain runtime information.
 	 */
 	public IRuntimeReader getRuntimeInformation() {
 		return runtimeInfo;
 	}
-	
+
 }

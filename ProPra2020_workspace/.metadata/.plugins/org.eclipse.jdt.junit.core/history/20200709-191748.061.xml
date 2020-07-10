@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="RuntimeInformationTest" project="Test_Component" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="3.382">
+    <testcase name="testStartStopGetTimeCandidateSearch" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+    <testcase name="testToString" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+    <testcase name="testStartStopGetTimeIlluminationTest" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="3.38"/>
+    <testcase name="testStartStopGetTimeOptimizePositions" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+    <testcase name="testStartStopGetTime" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.001"/>
+    <testcase name="testStopStartGetTimeOriginalPartialRectanglesFind" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.001"/>
+  </testsuite>
+</testrun>

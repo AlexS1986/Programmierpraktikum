@@ -1,6 +1,8 @@
 package fernuni.propra.internal_data_model;
+
 /**
  * Thrown if any of the operations of {@link LineSegment} fail.
+ * 
  * @author alex
  *
  */

@@ -1,5 +1,6 @@
 package fernuni.propra.user_interface;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,63 +16,63 @@ import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Wall;
 
 public class RoomFrameTest {
-	Point p1,p2,p3,p4,p5;
-	Wall w1,w2,w3,w4,w5;
+	Point p1, p2, p3, p4, p5;
+	Wall w1, w2, w3, w4, w5;
 	List<Wall> walls;
 	List<IRoom> rooms;
-	
-	
+
 	@Before
 	public void setUp() {
-		p1 = new Point (-1,-1);
-		p2 = new Point (1,-1);
-		p3 = new Point(1,1);
-		p4 = new Point(-1,1);
-		w1 = new Wall(p1, p2,0);
-		w2 = new Wall(p2, p3,0);
-		w3 = new Wall(p3,p4,0);
-		w4 = new Wall(p4,p1,0);
-		w5 = new Wall(p1, p3,0);
-		
+		p1 = new Point(-1, -1);
+		p2 = new Point(1, -1);
+		p3 = new Point(1, 1);
+		p4 = new Point(-1, 1);
+		w1 = new Wall(p1, p2, 0);
+		w2 = new Wall(p2, p3, 0);
+		w3 = new Wall(p3, p4, 0);
+		w4 = new Wall(p4, p1, 0);
+		w5 = new Wall(p1, p3, 0);
+
 		walls = new ArrayList<Wall>();
-		walls.add(w1);walls.add(w2); walls.add(w3); walls.add(w4);
-		
-		
-		String[] xmlPathesOK = {"instances/validationInstances/Selbsttest_clockwise.xml",
+		walls.add(w1);
+		walls.add(w2);
+		walls.add(w3);
+		walls.add(w4);
+
+		String[] xmlPathesOK = { "instances/validationInstances/Selbsttest_clockwise.xml",
 				"instances/validationInstances/Selbsttest_counterClockwise.xml",
 				"instances/validationInstances/Selbsttest_100a_incomplete.xml",
 				"instances/validationInstances/Selbsttest_100a_incomplete.xml",
 				"instances/validationInstances/Selbsttest_100a_solved.xml",
 				"instances/validationInstances/Selbsttest_100a.xml",
+				"instances/validationInstances/Selbsttest_100b3.xml",
 				"instances/validationInstances/Selbsttest_100b.xml",
 				"instances/validationInstances/Selbsttest_20a_incomplete.xml",
 				"instances/validationInstances/Selbsttest_20a_solved.xml",
-				"instances/validationInstances/Selbsttest_20a.xml",
-				"instances/validationInstances/Selbsttest_20b.xml",
-				"instances/validationInstances/Selbsttest_20c.xml"		
-		};
-		
+				"instances/validationInstances/Selbsttest_20a.xml", "instances/validationInstances/Selbsttest_20b.xml",
+				"instances/validationInstances/Selbsttest_20c.xml" };
+
 		rooms = new ArrayList<IRoom>();
-		
-		for(String xmlPath : xmlPathesOK) {
+
+		for (String xmlPath : xmlPathesOK) {
 			UserReadInputWriteOutputAAS readAAS = new UserReadInputWriteOutputAAS(xmlPath);
 			try {
 				rooms.add(readAAS.readInput());
 			} catch (UserReadInputWriteOutputException e) {
 			}
 		}
-			
+
 	}
 
 	@Test
 	public void testRoomFrame() {
-		
-		//Arrange
+
+		// Arrange
 		IRoom mockRoom = new IRoom() {
 			@Override
 			public Iterator<Lamp> getLamps() {
 				List<Lamp> lamps = new ArrayList<Lamp>();
-				Lamp lamp = new Lamp(0.0,0.0);
+				Lamp lamp = new Lamp(0.0, 0.0);
 				lamps.add(lamp);
 				lamp.turnOn();
 				return lamps.iterator();
@@ -85,13 +86,16 @@ public class RoomFrameTest {
 			@Override
 			public Iterator<Point> getCorners() {
 				List<Point> corners = new ArrayList<Point>();
-				corners.add(p1); corners.add(p2); corners.add(p3); corners.add(p4);
+				corners.add(p1);
+				corners.add(p2);
+				corners.add(p3);
+				corners.add(p4);
 				return corners.iterator();
 			}
 
 			@Override
 			public void addLamp(Lamp lamp) {
-	
+
 			}
 
 			@Override
@@ -126,16 +130,16 @@ public class RoomFrameTest {
 
 			@Override
 			public void replaceLamps(List<Lamp> lamps) {
-				
+
 			}
 
 			@Override
 			public String printLampPositions() {
 				return "";
 			}
-			
+
 		};
-		
+
 		// show mock room for 3 seconds
 		RoomPanel mockRoomPanel = new RoomPanel(mockRoom);
 		RoomFrame mockRoomFrame = new RoomFrame(mockRoomPanel);
@@ -144,7 +148,16 @@ public class RoomFrameTest {
 		} catch (InterruptedException e) {
 		}
 		mockRoomFrame.dispose();
-	
+		
+		
+		RoomPanel roomPanel1 = new RoomPanel(rooms.get(6));
+		roomPanel1.addRectangle("", Color.BLUE, 120, 30, 40, 100);
+		roomPanel1.addRectangle("", Color.RED, 220, 230, 110, 10);
+		roomPanel1.addRectangle("", Color.GREEN, 250, 290, 50, 50);
+		roomPanel1.addRectangle("", Color.YELLOW, 150, 30, 10, 130);
+		roomPanel1.addRectangle("", Color.GRAY, 220, 200, 70, 40);
+		RoomFrame roomFrame2 = new RoomFrame(roomPanel1);
+
 		// show each room for 3 seconds
 		for (IRoom room : rooms) {
 			RoomPanel roomPanel = new RoomPanel(room);
@@ -156,7 +169,7 @@ public class RoomFrameTest {
 			}
 			roomFrame.dispose();
 		}
-		
+
 	}
 
 }

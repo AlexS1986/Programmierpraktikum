@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MainTest" project="Test_Component" tests="4" started="4" failures="0" errors="0" ignored="3">
+  <testsuite name="fernuni.propra.main.MainTest" time="8.218">
+    <testcase name="testUseCase_SD" classname="fernuni.propra.main.MainTest" time="0.0" ignored="true"/>
+    <testcase name="testUseCase_VD" classname="fernuni.propra.main.MainTest" time="0.0" ignored="true"/>
+    <testcase name="testUseCase_D" classname="fernuni.propra.main.MainTest" time="0.0" ignored="true"/>
+    <testcase name="testUseCase_V" classname="fernuni.propra.main.MainTest" time="8.218"/>
+  </testsuite>
+</testrun>

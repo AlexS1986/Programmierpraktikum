@@ -1,31 +1,28 @@
 package fernuni.propra.algorithm.runtime_information;
 
-import java.util.concurrent.TimeUnit;
-
 public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 	private volatile long startTime = -1;
 	private volatile long stopTime = -1;
-	
+
 	private volatile long candidateSearchStartTime = -1;
 	private volatile long candidateSearchStopTime = -1;
-	
+
 	private volatile long originalPartialRectanglesFindStartTime = -1;
 	private volatile long originalPartialRectanglesFindStopTime = -1;
-	
+
 	private volatile long optimizePositionsStartTime = -1;
 	private volatile long optimizePositionsStopTime = -1;
-	
+
 	private volatile long illuminationTestStartTime = -1;
 	private volatile long illuminationTestStopTime = -1;
-	
-	
+
 	@Override
 	public void startTimeCandidateSearch() throws RuntimeExceptionLamps {
 		if (candidateSearchStartTime != -1 && candidateSearchStopTime != -1) {
 			throw new RuntimeExceptionLamps();
 		}
 		candidateSearchStartTime = System.nanoTime();
-		
+
 	}
 
 	@Override
@@ -34,18 +31,16 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		candidateSearchStopTime = System.nanoTime();
-		
+
 	}
 
 	@Override
 	public long getElapsedTimeCandidateSearch() throws RuntimeExceptionLamps {
-		if (candidateSearchStartTime == -1 && candidateSearchStopTime == -1) {
+		if (candidateSearchStartTime == -1 || candidateSearchStopTime == -1) {
 			throw new RuntimeExceptionLamps();
 		}
-		return candidateSearchStopTime-candidateSearchStartTime;
+		return candidateSearchStopTime - candidateSearchStartTime;
 	}
-
-
 
 	@Override
 	public void startTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps {
@@ -53,7 +48,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		originalPartialRectanglesFindStartTime = System.nanoTime();
-		
+
 	}
 
 	@Override
@@ -62,17 +57,16 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		originalPartialRectanglesFindStopTime = System.nanoTime();
-		
+
 	}
 
 	@Override
 	public long getElapsedTimeOriginalPartialRectanglesFind() throws RuntimeExceptionLamps {
-		if (originalPartialRectanglesFindStartTime == -1 && originalPartialRectanglesFindStopTime == -1) {
+		if (originalPartialRectanglesFindStartTime == -1 || originalPartialRectanglesFindStopTime == -1) {
 			throw new RuntimeExceptionLamps();
 		}
-		return originalPartialRectanglesFindStopTime-originalPartialRectanglesFindStartTime;
+		return originalPartialRectanglesFindStopTime - originalPartialRectanglesFindStartTime;
 	}
-
 
 	@Override
 	public void startTimeOptimizePositions() throws RuntimeExceptionLamps {
@@ -80,7 +74,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		optimizePositionsStartTime = System.nanoTime();
-		
+
 	}
 
 	@Override
@@ -89,22 +83,22 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		optimizePositionsStopTime = System.nanoTime();
-		
+
 	}
 
 	@Override
 	public long getElapsedTimeOptimizePositions() throws RuntimeExceptionLamps {
-		if (optimizePositionsStartTime == -1 && optimizePositionsStopTime == -1) {
+		if (optimizePositionsStartTime == -1 || optimizePositionsStopTime == -1) {
 			throw new RuntimeExceptionLamps();
 		}
-		return optimizePositionsStopTime-optimizePositionsStartTime;
+		return optimizePositionsStopTime - optimizePositionsStartTime;
 	}
 
 	@Override
 	public void resetTimeOptimizePositions() {
 		optimizePositionsStartTime = -1;
 		optimizePositionsStopTime = -1;
-		
+
 	}
 
 	@Override
@@ -113,7 +107,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		illuminationTestStartTime = System.nanoTime();
-		
+
 	}
 
 	@Override
@@ -122,17 +116,16 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		illuminationTestStopTime = System.nanoTime();
-		
+
 	}
 
 	@Override
 	public long getElapsedTimeIlluminationTest() throws RuntimeExceptionLamps {
-		if (illuminationTestStartTime == -1 && illuminationTestStopTime == -1) {
+		if (illuminationTestStartTime == -1 || illuminationTestStopTime == -1) {
 			throw new RuntimeExceptionLamps();
 		}
-		return illuminationTestStopTime-illuminationTestStopTime;
+		return illuminationTestStopTime - illuminationTestStartTime;
 	}
-
 
 	@Override
 	public void startTime() throws RuntimeExceptionLamps {
@@ -140,7 +133,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		startTime = System.nanoTime();
-		
+
 	}
 
 	@Override
@@ -149,7 +142,7 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 			throw new RuntimeExceptionLamps();
 		}
 		stopTime = System.nanoTime();
-		
+
 	}
 
 	@Override
@@ -157,17 +150,15 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		if (startTime == -1 && stopTime == -1) {
 			throw new RuntimeExceptionLamps();
 		}
-		return stopTime-startTime;
+		return stopTime - startTime;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		String lineSeparator = System.getProperty("line.separator");
 		StringBuilder sb = new StringBuilder("Total runtime: ");
 		try {
-			sb.append((double) Math.round((double) getElapsedTime() / 1_000_000_000 * 100)/100);
+			sb.append((double) Math.round((double) getElapsedTime() / 1_000_000_000 * 100) / 100);
 			sb.append(" s,");
 		} catch (RuntimeExceptionLamps e) {
 			sb.append("not available");
@@ -175,43 +166,43 @@ public class RuntimeInformation implements IRuntimeInformation, IRuntimeReader {
 		sb.append(" thereof ");
 		sb.append(lineSeparator);
 		sb.append(lineSeparator);
-		
+
 		sb.append("1.) Searching for lamp position candidates: ");
 		try {
-			sb.append((double) Math.round((double) getElapsedTimeCandidateSearch() / 1_000_000_000 * 100)/100);
+			sb.append((double) Math.round((double) getElapsedTimeCandidateSearch() / 1_000_000_000 * 100) / 100);
 			sb.append(" s.");
 		} catch (RuntimeExceptionLamps e) {
 			sb.append("not available");
 		}
 		sb.append(lineSeparator);
-		
-		
+
 		sb.append("2.) Optimizing lamp positions: ");
 		try {
-			sb.append((double) Math.round((double) getElapsedTimeOptimizePositions() / 1_000_000_000 * 100)/100);
+			sb.append((double) Math.round((double) getElapsedTimeOptimizePositions() / 1_000_000_000 * 100) / 100);
 			sb.append(" s.");
 		} catch (RuntimeExceptionLamps e) {
 			sb.append("not available");
 		}
 		sb.append(lineSeparator);
-		
+
 		sb.append("3.) Testing if room is illuminated: ");
 		try {
-			sb.append((double) Math.round((double) getElapsedTimeIlluminationTest() / 1_000_000_000 * 100)/100);
+			sb.append((double) Math.round((double) getElapsedTimeIlluminationTest() / 1_000_000_000 * 100) / 100);
 			sb.append(" s.");
 		} catch (RuntimeExceptionLamps e) {
 			sb.append("not available");
 		}
 		sb.append(lineSeparator);
-		
+
 		sb.append("4.) constructing original partial rectangles: ");
 		try {
-			sb.append((double) Math.round((double) getElapsedTimeOriginalPartialRectanglesFind() / 1_000_000_000 * 100)/100);
+			sb.append((double) Math.round((double) getElapsedTimeOriginalPartialRectanglesFind() / 1_000_000_000 * 100)
+					/ 100);
 			sb.append(" s.");
 		} catch (RuntimeExceptionLamps e) {
 			sb.append("not available");
 		}
-		
+
 		String outString = sb.toString();
 		return outString;
 	}

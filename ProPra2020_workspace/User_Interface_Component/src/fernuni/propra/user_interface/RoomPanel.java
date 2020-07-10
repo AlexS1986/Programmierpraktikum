@@ -1,4 +1,5 @@
 package fernuni.propra.user_interface;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,157 +21,142 @@ import fernuni.propra.internal_data_model.Point;
 import fernuni.propra.internal_data_model.Wall;
 
 /**
- * A concrete {@link RoomPanelAbstract} that can display
- * an {@link IRoom} in a 1024x768 window. 
+ * A concrete {@link RoomPanelAbstract} that can display an {@link IRoom} in a
+ * 1024x768 window.
  * <p>
+ * 
  * @author alex
  *
  */
-public class RoomPanel extends RoomPanelAbstract{ 
+public class RoomPanel extends RoomPanelAbstract {
 	private static final int PIXEL_LAMP_DIAMETER = 10; // in pixels
-	private List<PlotRectangle> rectangles = 
-			new ArrayList<PlotRectangle>(); // the rectangles to be
-											// displayed
-	
+	private List<PlotRectangle> rectangles = new ArrayList<PlotRectangle>(); // the rectangles to be
+																				// displayed
+
 	public RoomPanel(IRoom room) {
 		super(room);
 	}
-	
-	/** 
-	 * Auxiliary class that is used to plot rectangles
-	 * in the associated {@link IRoom}.
+
+	/**
+	 * Auxiliary class that is used to plot rectangles in the associated
+	 * {@link IRoom}.
 	 * <p>
+	 * 
 	 * @author alex
 	 *
 	 */
-	private static class PlotRectangle { 
-		private double x,y,width,height;
+	private static class PlotRectangle {
+		private double x, y, width, height;
 		private Color color;
 		private String name;
-		
-		public PlotRectangle(String name, Color color, double x,
-				double y, double width, double height) {
+
+		public PlotRectangle(String name, Color color, double x, double y, double width, double height) {
 			this.x = x;
 			this.y = y;
 			this.width = width;
 			this.height = height;
 			this.name = name;
 			this.color = color;
-		}        
-	}
-	
-	@Override
-	public void addRectangle(String name, Color color,double x,
-			double y, double width, double height) { 
-		rectangles.add(new PlotRectangle(name, color,
-				x, y, width, height));
-	}
-	
-	@Override
-	public void removeLastRectangle() { 
-		if (rectangles.size() > 0) {
-			rectangles.remove(rectangles.size() -1);
 		}
 	}
-	
+
+	@Override
+	public void addRectangle(String name, Color color, double x, double y, double width, double height) {
+		rectangles.add(new PlotRectangle(name, color, x, y, width, height));
+	}
+
+	@Override
+	public void removeLastRectangle() {
+		if (rectangles.size() > 0) {
+			rectangles.remove(rectangles.size() - 1);
+		}
+	}
 
 	@Override
 	protected void drawLamps(Graphics2D g2D) {
 		IRoom room = getRoom();
-		
+
 		// prepare mapping to pixel coordinates
 		double scale = getScale();
 		double pixelOffsetX = getPixelOffsetX();
 		double pixelOffsetY = getPixelOffsetY();
 
 		Iterator<Lamp> lampIterator = room.getLamps();
-		while(lampIterator.hasNext()) {
+		while (lampIterator.hasNext()) {
 			Lamp lamp = lampIterator.next();
-			
+
 			// lamps are drawn as yellow circles
 			// candidates are black
-			Color lampColor = lamp.getOn() ? 
-					Color.YELLOW :  Color.DARK_GRAY;
+			Color lampColor = lamp.getOn() ? Color.YELLOW : Color.DARK_GRAY;
 			g2D.setColor(lampColor);
-			
+
 			// draw lamp body
-			g2D.fillOval((int) (pixelOffsetX + lamp.getX() * scale)
-					- (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
-					(int) (pixelOffsetY + lamp.getY() * scale) 
-					- (int) Math.round(PIXEL_LAMP_DIAMETER/2.0),
+			g2D.fillOval((int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
+					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
 					PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
-			
+
 			// draw lamp boundary
 			g2D.setStroke(new BasicStroke(2));
 			g2D.setColor(Color.BLACK);
-			g2D.drawOval((int) (pixelOffsetX + lamp.getX() * scale)
-					- (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
-					(int) (pixelOffsetY+lamp.getY() * scale) 
-					- (int) Math.round(PIXEL_LAMP_DIAMETER/2.0), 
+			g2D.drawOval((int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
+					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
 					PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
 		}
-		
+
 	}
 
 	@Override
 	protected void drawRoom(Graphics2D g2D) {
 		IRoom room = getRoom();
-		
+
 		// prepare mapping to pixel coordinates
 		double scale = getScale();
 		double pixelOffsetX = getPixelOffsetX();
 		double pixelOffsetY = getPixelOffsetY();
-		
+
 		// build contour of room
 		Polygon p = new Polygon();
 		Iterator<Point> cornerIterator = room.getCorners();
-		while(cornerIterator.hasNext()) {
+		while (cornerIterator.hasNext()) {
 			Point corner = cornerIterator.next();
-			p.addPoint((int) (pixelOffsetX  +corner.getX() * scale), 
-					(int) (pixelOffsetY + corner.getY() * scale));
+			p.addPoint((int) (pixelOffsetX + corner.getX() * scale), (int) (pixelOffsetY + corner.getY() * scale));
 		}
-		
+
 		// draw contour
 		g2D.setStroke(new BasicStroke(2));
 		g2D.setColor(Color.ORANGE);
 		g2D.fillPolygon(p);
-		
+
 		// draw boundary
 		g2D.setColor(Color.BLACK);
 		Iterator<Wall> wallIterator = room.getWalls();
-		while(wallIterator.hasNext()) {
+		while (wallIterator.hasNext()) {
 			LineSegment wall = wallIterator.next();
 			g2D.drawLine((int) (pixelOffsetX + wall.getP1().getX() * scale),
 					(int) (pixelOffsetY + wall.getP1().getY() * scale),
-					(int) (pixelOffsetX + wall.getP2().getX() * scale), 
+					(int) (pixelOffsetX + wall.getP2().getX() * scale),
 					(int) (pixelOffsetY + wall.getP2().getY() * scale));
 		}
-			
+
 	}
 
 	@Override
-	protected void drawRectangles(Graphics2D g2D) { 
-		
+	protected void drawRectangles(Graphics2D g2D) {
+
 		// prepare mapping to pixel coordinates
 		double scale = getScale();
 		double pixelOffsetX = getPixelOffsetX();
 		double pixelOffsetY = getPixelOffsetY();
-		
-		// draw rectangles 
+
+		// draw rectangles
 		g2D.setStroke(new BasicStroke(2));
-		for (PlotRectangle rectangle: rectangles) {
+		for (PlotRectangle rectangle : rectangles) {
 			g2D.setColor(rectangle.color);
-			g2D.drawRect((int) (pixelOffsetX + rectangle.x * scale), 
-					(int) (pixelOffsetY + rectangle.y * scale), 
-					(int) (rectangle.width * scale),
-					(int) (rectangle.height * scale));
-			g2D.drawString(rectangle.name, 
-					(int) ((pixelOffsetX + rectangle.x 
-							+ rectangle.width/2) * scale), 
-					(int) ((pixelOffsetY + rectangle.y 
-							+ rectangle.height/2) * scale) );
+			g2D.drawRect((int) (pixelOffsetX + rectangle.x * scale), (int) (pixelOffsetY + rectangle.y * scale),
+					(int) (rectangle.width * scale), (int) (rectangle.height * scale));
+			g2D.drawString(rectangle.name, (int) ((pixelOffsetX + rectangle.x + rectangle.width / 2) * scale),
+					(int) ((pixelOffsetY + rectangle.y + rectangle.height / 2) * scale));
 		}
 	}
 
-		
 }

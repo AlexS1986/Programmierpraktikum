@@ -5,19 +5,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CandidateSearcherTest.class,
-	IlluminationTesterTest.class,
-	OriginalPartialRectanglesFinderTest.class,
-		PositionOptimizerTest.class,
-		UserSolveAASTest.class,
-		UserValidateAASTest.class,
-		WallContainerEastTest.class,
-		WallContainerNorthTest.class,
-		WallContainerSouthTest.class,
-		WallContainerWestTest.class,
-		AlgorithmFactory1Test.class,
-		SolveKTest.class,
-		ValidateKTest.class})
+@SuiteClasses({ CandidateSearcherTest.class, IlluminationTesterTest.class, OriginalPartialRectanglesFinderTest.class,
+		PositionOptimizerTest.class, UserSolveAASTest.class, UserValidateAASTest.class, WallContainerEastTest.class,
+		WallContainerNorthTest.class, WallContainerSouthTest.class, WallContainerWestTest.class,
+		AlgorithmFactory1Test.class, SolveKTest.class, ValidateKTest.class })
 
 public class AlgorithmTests {
 

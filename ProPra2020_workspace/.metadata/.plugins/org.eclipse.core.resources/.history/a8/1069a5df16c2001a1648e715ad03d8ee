@@ -1,0 +1,74 @@
+package fernuni.propra.main;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+public class MainTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testUseCase_D() {
+		// Arrange
+		String[] commandLineParameters = new String[] { "r=d", "if=instances/validationInstances/Selbsttest_20b.xml" };
+
+		// Act
+		Main.main(commandLineParameters);
+		try {
+			Thread.currentThread().sleep(3000);
+		} catch (InterruptedException e) {
+		}
+
+		// Assert
+	}
+	
+	@Ignore
+	@Test
+	public void testUseCase_SD() {
+		// Arrange
+		String[] commandLineParameters = new String[] { "if=instances/validationInstances/Selbsttest_100b.xml", "r=sd",
+				"l=-15" };
+
+		// Act
+		Main.main(commandLineParameters);
+		try {
+			Thread.currentThread().sleep(3000);
+		} catch (InterruptedException e) {
+		}
+
+	}
+	
+	@Test
+	public void testUseCase_V() {
+		// Arrange
+		String[] commandLineParameters = new String[] {
+				"if=instances/validationInstances/Selbsttest_100b3.xml", "r=v" };
+
+		// Act
+		Main.main(commandLineParameters);
+
+		// Assert
+		System.out.println();
+	}
+
+	@Ignore
+	@Test
+	public void testUseCase_VD() {
+		// Arrange
+		String[] commandLineParameters = new String[] {
+				"if=instances/validationInstances/Selbsttest_20a_incomplete.xml", "r=vd" };
+
+		// Act
+		Main.main(commandLineParameters);
+
+		// Assert
+		try {
+			Thread.currentThread().sleep(3000);
+		} catch (InterruptedException e) {
+		}
+	}
+
+}

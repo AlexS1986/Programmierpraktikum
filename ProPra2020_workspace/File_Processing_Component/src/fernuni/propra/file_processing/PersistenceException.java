@@ -2,6 +2,7 @@ package fernuni.propra.file_processing;
 
 /**
  * Thrown if a persistence operation fails.
+ * 
  * @author alex
  *
  */

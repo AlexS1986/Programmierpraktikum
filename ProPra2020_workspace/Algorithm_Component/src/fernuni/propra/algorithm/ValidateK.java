@@ -8,23 +8,28 @@ import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 
 /**
- * A controll class that controls the program flow for the validation of an {@link IRoom} instance,
- * i.e. for the test whether that {@link IRoom} is illuminated by its associated {@link Lamp}s or not.
+ * A controll class that controls the program flow for the validation of an
+ * {@link IRoom} instance, i.e. for the test whether that {@link IRoom} is
+ * illuminated by its associated {@link Lamp}s or not.
  * <p>
- * Delegates the algorithm to an instance of {@link IIlluminationTester}, which is obtained from a call to
- * the {@link AbstractAlgorithmFactory}.
+ * Delegates the algorithm to an instance of {@link IIlluminationTester}, which
+ * is obtained from a call to the {@link AbstractAlgorithmFactory}.
  * <p>
- * Furthermore a data structure is given to {@link ValidateK} in order to store runtime information to that
- * data structure.
+ * Furthermore a data structure is given to {@link ValidateK} in order to store
+ * runtime information to that data structure.
  * <p>
+ * 
  * @author alex
  *
  */
-public  class ValidateK {
+public class ValidateK {
 	/**
-	 * Checks whether an {@link IRoom} instance is illuminated or not by delegating to {@link IIlluminationTester}.
-	 * @param room : the {@link IRoom} to be checked
-	 * @param runtimeInfo : {@link IRoom} the data structure to which {@link ValidateK} will write runtime information.
+	 * Checks whether an {@link IRoom} instance is illuminated or not by delegating
+	 * to {@link IIlluminationTester}.
+	 * 
+	 * @param room        : the {@link IRoom} to be checked
+	 * @param runtimeInfo : {@link IRoom} the data structure to which
+	 *                    {@link ValidateK} will write runtime information.
 	 * @return
 	 * @throws ValidateKException
 	 */
@@ -32,20 +37,19 @@ public  class ValidateK {
 		try {
 			// turn all lamps on
 			Iterator<Lamp> lampIterator = room.getLamps();
-			while(lampIterator.hasNext()) {
+			while (lampIterator.hasNext()) {
 				lampIterator.next().turnOn();
 			}
 			runtimeInfo.startTimeIlluminationTest();
-			boolean isIlluminated = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester().testIfRoomIsIlluminated(room, runtimeInfo);
+			boolean isIlluminated = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester()
+					.testIfRoomIsIlluminated(room, runtimeInfo);
 			runtimeInfo.stopTimeIlluminationTest();
 			return isIlluminated;
 		} catch (IlluminationTesterException e) {
 			throw new ValidateKException(e);
-		} catch( RuntimeExceptionLamps rte) {
+		} catch (RuntimeExceptionLamps rte) {
 			throw new ValidateKException(rte);
 		}
 	}
-	
-	
-	
+
 }

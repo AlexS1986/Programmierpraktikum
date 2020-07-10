@@ -1,0 +1,194 @@
+package fernuni.propra.algorithm.runtime_information;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class RuntimeInformationTest {
+	private RuntimeInformation rti1,rti2,rti3;
+
+	@Before
+	public void setUp() throws Exception {
+		rti1 = new RuntimeInformation();
+		rti2 = new RuntimeInformation();
+		rti3 = new RuntimeInformation();
+	}
+
+	@Test
+	public void testStartStopGetTimeCandidateSearch() {
+		//Act
+		// normal program flow
+		long runtime = 0;
+		try {
+			rti1.startTimeCandidateSearch();
+			rti1.stopTimeCandidateSearch();
+			runtime = rti1.getElapsedTimeCandidateSearch();
+		} catch (RuntimeExceptionLamps e) {
+		}
+		
+		// incorrect program flow 1
+		boolean incorrectProgramFlowDetected = false;
+		try {
+			rti2.stopTimeCandidateSearch();
+		} catch (RuntimeExceptionLamps e) {
+			incorrectProgramFlowDetected = true;
+		}
+		
+		// incorrect program flow 2
+		boolean incorrectProgramFlowDetected2 = false;
+		try {
+			rti3.getElapsedTimeCandidateSearch();
+		} catch (RuntimeExceptionLamps e) {
+			incorrectProgramFlowDetected2 = true;
+		}
+		
+		//Assert
+		
+		// normal program flow
+		assertTrue("Normal program flow failed",
+				runtime>0);
+		
+		// incorrect program flow
+		assertTrue("Incorrect program flow not detected",
+				incorrectProgramFlowDetected);
+		
+		// incorrect program flow
+		assertTrue("Incorrect program flow not detected",
+				incorrectProgramFlowDetected2);
+	}
+
+
+	@Test
+	public void testStopStartGetTimeOriginalPartialRectanglesFind() {
+		//Act
+				// normal program flow
+				long runtime = 0;
+				try {
+					rti1.startTimeOriginalPartialRectanglesFind();;
+					rti1.stopTimeOriginalPartialRectanglesFind();;
+					runtime = rti1.getElapsedTimeOriginalPartialRectanglesFind();
+				} catch (RuntimeExceptionLamps e) {
+				}
+				
+				// incorrect program flow 1
+				boolean incorrectProgramFlowDetected = false;
+				try {
+					rti2.stopTimeOriginalPartialRectanglesFind();
+				} catch (RuntimeExceptionLamps e) {
+					incorrectProgramFlowDetected = true;
+				}
+				
+				// incorrect program flow 2
+				boolean incorrectProgramFlowDetected2 = false;
+				try {
+					rti3.getElapsedTimeOriginalPartialRectanglesFind();
+				} catch (RuntimeExceptionLamps e) {
+					incorrectProgramFlowDetected2 = true;
+				}
+				
+				//Assert
+				
+				// normal program flow
+				assertTrue("Normal program flow failed",
+						runtime>0);
+				
+				// incorrect program flow
+				assertTrue("Incorrect program flow not detected",
+						incorrectProgramFlowDetected);
+				
+				// incorrect program flow
+				assertTrue("Incorrect program flow not detected",
+						incorrectProgramFlowDetected2);
+	}
+
+
+	@Test
+	public void testStartStopGetTimeOptimizePositions() {
+		//Act
+				// normal program flow
+				long runtime = 0;
+				try {
+					rti1.startTimeOptimizePositions();
+					rti1.stopTimeCandidateSearch();
+					runtime = rti1.getElapsedTimeCandidateSearch();
+				} catch (RuntimeExceptionLamps e) {
+				}
+				
+				// incorrect program flow 1
+				boolean incorrectProgramFlowDetected = false;
+				try {
+					rti2.stopTimeCandidateSearch();
+				} catch (RuntimeExceptionLamps e) {
+					incorrectProgramFlowDetected = true;
+				}
+				
+				// incorrect program flow 2
+				boolean incorrectProgramFlowDetected2 = false;
+				try {
+					rti3.getElapsedTimeCandidateSearch();
+				} catch (RuntimeExceptionLamps e) {
+					incorrectProgramFlowDetected2 = true;
+				}
+				
+				//Assert
+				
+				// normal program flow
+				assertTrue("Normal program flow failed",
+						runtime>0);
+				
+				// incorrect program flow
+				assertTrue("Incorrect program flow not detected",
+						incorrectProgramFlowDetected);
+				
+				// incorrect program flow
+				assertTrue("Incorrect program flow not detected",
+						incorrectProgramFlowDetected2);
+	}
+
+	@Test
+	public void testStopTimeOptimizePositions() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetElapsedTimeOptimizePositions() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testStartTimeIlluminationTest() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testStopTimeIlluminationTest() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetElapsedTimeIlluminationTest() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testStartTime() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testStopTime() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetElapsedTime() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testToString() {
+		fail("Not yet implemented");
+	}
+
+}

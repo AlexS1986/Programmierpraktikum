@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 
 public class API_Test_Validation {
-	
+
 	@Test
 	public void validateFileHasToBeValid() {
 		// Arrange
@@ -22,32 +22,27 @@ public class API_Test_Validation {
 		// Act
 		boolean solutionValid = api.validateSolution("");
 		// Assert
-		assertTrue("Ohne Angabe einer Datei wurde eine zulässige Lösung gefunden.",
-				!solutionValid);
+		assertTrue("Ohne Angabe einer Datei wurde eine zulässige Lösung gefunden.", !solutionValid);
 	}
-	
+
 	@Test
 	public void validateTruePositive() {
 		// Arrange
 		IAusleuchtung api = new Ausleuchtung();
 		// Act
-		boolean solutionValid = api.validateSolution(
-				"instances/validationInstances/Selbsttest_20a_solved.xml");
+		boolean solutionValid = api.validateSolution("instances/validationInstances/Selbsttest_20a_solved.xml");
 		// Assert
-		assertTrue("Eine zulässige Lösung wurde als nicht zulässig gewertet.",
-				solutionValid);
+		assertTrue("Eine zulässige Lösung wurde als nicht zulässig gewertet.", solutionValid);
 	}
-	
+
 	@Test
 	public void validateTrueNegative() {
 		// Arrange
 		IAusleuchtung api = new Ausleuchtung();
 		// Act
-		boolean solutionValid = api.validateSolution(
-				"instances/validationInstances/Selbsttest_20a_incomplete.xml");
+		boolean solutionValid = api.validateSolution("instances/validationInstances/Selbsttest_20a_incomplete.xml");
 		// Assert
-		assertTrue("Eine unzulässige Lösung wurde als zulässig gewertet.",
-				!solutionValid);
+		assertTrue("Eine unzulässige Lösung wurde als zulässig gewertet.", !solutionValid);
 	}
 
 }

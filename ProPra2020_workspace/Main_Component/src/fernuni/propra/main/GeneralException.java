@@ -19,6 +19,4 @@ public class GeneralException extends Exception {
 		super(cause);
 	}
 
-
-
 }

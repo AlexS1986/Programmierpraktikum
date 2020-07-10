@@ -1,0 +1,72 @@
+package fernuni.propra.main;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class ParameterSetTest {
+	private ParameterSet p1;
+	
+	@Before
+	public void setUp() throws Exception {
+		p1 = new ParameterSet();
+	}
+
+	@Test
+	public void testSetRunParameter() {
+		//Arrange
+		String validParameter = "sd";
+		String invalidParameter = "test";
+		
+		//Act
+		boolean parameterAccepted = false;
+		try {
+			p1.setRunParameter(validParameter);
+		} catch (ParameterSetException pe) {
+			
+		}
+		
+		boolean invalidParameterAccepted = true;
+		try {
+			p1.setRunParameter(invalidParameter);
+		} catch(ParameterSetException pe) {
+			invalidParameterAccepted = false;
+		}
+		
+		//Assert
+		assertTrue(validParameter);
+		
+	}
+
+	@Test
+	public void testSetInputFile() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSetTimeLimit() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsValidParameterSet() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetRunParameter() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetInputFile() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetTimeLimit() {
+		fail("Not yet implemented");
+	}
+
+}

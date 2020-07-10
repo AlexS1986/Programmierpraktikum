@@ -6,3 +6,8 @@
 1594217197433	Rename local variable 'l2'
 1594217210052	Rename local variable 'linesegment'
 1594223030077	Rename local variable 'isICandidateSearcher'
+1594227795384	Rename local variable 'correctLampNumber'
+1594229084904	Rename local variable 'computationNotFinishedWOStart'
+1594230624613	Rename local variable 'notIlluminated'
+1594309102278	Rename local variable 'validParameter'
+1594309649614	Rename local variable 'testOnlyRun'

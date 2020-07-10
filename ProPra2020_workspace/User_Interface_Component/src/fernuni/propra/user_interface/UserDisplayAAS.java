@@ -1,14 +1,14 @@
 package fernuni.propra.user_interface;
+
 import fernuni.propra.internal_data_model.IRoom;
 
 /**
- * This is an use case that provides the user with 
- * access to the possibility to display an {@link IRoom}
- * graphically on a screen.
+ * This is an use case that provides the user with access to the possibility to
+ * display an {@link IRoom} graphically on a screen.
  * <p>
- * The actual displaying is delegated to 
- * {@link RoomFrame} and {@link RoomPanel}
+ * The actual displaying is delegated to {@link RoomFrame} and {@link RoomPanel}
  * <p>
+ * 
  * @author alex
  *
  */

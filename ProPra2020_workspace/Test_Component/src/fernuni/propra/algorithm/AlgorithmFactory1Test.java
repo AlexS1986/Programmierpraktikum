@@ -13,61 +13,53 @@ public class AlgorithmFactory1Test {
 
 	@Test
 	public void testCreateCandidateSearcher() {
-		//Act
-		boolean isICandidateSearcher = 
-				AbstractAlgorithmFactory.getAlgorithmFactory().
-				createCandidateSearcher()
-				instanceof ICandidateSearcher;
-		
-		//Assert
+		// Act
+		boolean isICandidateSearcher = AbstractAlgorithmFactory.getAlgorithmFactory()
+				.createCandidateSearcher() instanceof ICandidateSearcher;
+
+		// Assert
 		assertTrue(isICandidateSearcher);
-		
+
 	}
 
 	@Test
 	public void testCreatePositionOptimizer() {
-		//Act
-		boolean isIPositionOptimizer = 
-			AbstractAlgorithmFactory.getAlgorithmFactory().
-			createPositionOptimizer()
-			instanceof IPositionOptimizer;
-				
-		//Assert
+		// Act
+		boolean isIPositionOptimizer = AbstractAlgorithmFactory.getAlgorithmFactory()
+				.createPositionOptimizer() instanceof IPositionOptimizer;
+
+		// Assert
 		assertTrue(isIPositionOptimizer);
 	}
 
 	@Test
 	public void testCreateIlluminiationTester() {
-		//Act
-		boolean isIlluminationTester = 
-				AbstractAlgorithmFactory.getAlgorithmFactory().
-				createIlluminiationTester()
-				instanceof IIlluminationTester;
-		
-		//Assert
+		// Act
+		boolean isIlluminationTester = AbstractAlgorithmFactory.getAlgorithmFactory()
+				.createIlluminiationTester() instanceof IIlluminationTester;
+
+		// Assert
 		assertTrue(isIlluminationTester);
 	}
 
 	@Test
 	public void testCreateOriginalPartialRectanglesFinder() {
-		//Act
-		boolean isOriginalPartialRectanglesFinder = 
-				AbstractAlgorithmFactory.getAlgorithmFactory().
-				createOriginalPartialRectanglesFinder()
-				instanceof IOriginalPartialRectanglesFinder;
-		
-		//Assert
+		// Act
+		boolean isOriginalPartialRectanglesFinder = AbstractAlgorithmFactory.getAlgorithmFactory()
+				.createOriginalPartialRectanglesFinder() instanceof IOriginalPartialRectanglesFinder;
+
+		// Assert
 		assertTrue(isOriginalPartialRectanglesFinder);
 	}
 
 	@Test
 	public void testGetAlgorithmFactory1() {
-		//Act
+		// Act
 		AbstractAlgorithmFactory af1 = AbstractAlgorithmFactory.getAlgorithmFactory();
 		AbstractAlgorithmFactory af2 = AbstractAlgorithmFactory.getAlgorithmFactory();
-		
-		//Assert
-		assertSame(af1,af2);
+
+		// Assert
+		assertSame(af1, af2);
 	}
 
 }

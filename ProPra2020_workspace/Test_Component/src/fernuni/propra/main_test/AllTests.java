@@ -14,15 +14,8 @@ import fernuni.propra.main.MainTests;
 import fernuni.propra.user_interface.RoomFrameTest;
 
 @RunWith(Suite.class)
-@SuiteClasses(
-    {FileProcessingTests.class,
-	AlgorithmTests.class,
-	API_Test_Validation.class,
-	AlgoithmUtilTests.class,
-	InternalDataModelTests.class,
-	MainTests.class,
-	RoomFrameTest.class,
-	RuntimeInformationTest.class})
+@SuiteClasses({ FileProcessingTests.class, AlgorithmTests.class, API_Test_Validation.class, AlgoithmUtilTests.class,
+		InternalDataModelTests.class, MainTests.class, RoomFrameTest.class, RuntimeInformationTest.class })
 public class AllTests {
 
 }

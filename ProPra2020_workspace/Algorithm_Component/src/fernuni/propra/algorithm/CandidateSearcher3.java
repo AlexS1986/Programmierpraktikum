@@ -1,0 +1,139 @@
+package fernuni.propra.algorithm;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import fernuni.propra.algorithm.runtime_information.IRuntimeCandidateSearcher;
+import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
+import fernuni.propra.algorithm.util.Rectangle;
+import fernuni.propra.algorithm.util.RectangleWithTag;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+import fernuni.propra.internal_data_model.Point;
+
+/**
+ * 
+ * A specific provider of an algorithm that can compute a {@link List} of
+ * potential {@link Lamp} positions for an instance of {@link IRoom}.
+ * <p>
+ * The algorithm works as follows:
+ * <p>
+ * 1.) The original partial rectangles (instances of {@link RectangleWithTag})
+ * of the room are constructed for {@link IRoom} according the method described
+ * in [1]. This is delegated to {@link OriginalPartialRectanglesFinder}. The set
+ * of potential lamp positions is initialized as the returned set.
+ * <p>
+ * 2.) All pairs of original partial rectangles are intersected. If an overlap
+ * is found, the resulting rectangle is added to the set of potential lamp
+ * positions and the tags of both original rectangles are added to the tags of
+ * the new rectangle
+ * <p>
+ * 3.) The set of potential lamp positions is reduced by only keeping those lamp
+ * positions whose tags are not a subset of the tags of other rectangles in the
+ * set
+ * <p>
+ * 4.) Steps 2.) and 3.) are repeated until the set does not change any more
+ * <p>
+ * 5.) The potential lamp positions are the centers of the remaining tagged
+ * rectangles
+ * <p>
+ * 6.) {@link Lamp} objects are created at these {@ Point}s and the lamps are
+ * tagged with the tags of the corresponding tagged {@link RectangleWithTag},
+ * i.e. the tags of all original partial rectangles of the room that contain the
+ * {@link Lamp} are saved to the {@Lamp}s tags.
+ * <p>
+ * 7.) A {@link List} of all such {@link Lamp}s is returned.
+ * 
+ * <p>
+ * Implemented interfaces and super classes: {@link ICandidateSearcher}
+ * 
+ * <p>
+ * <p>
+ * [1]: Aufgabenstellung zum Grundpraktikum Programmierung im Sommersemester
+ * 2020
+ * 
+ * 
+ * 
+ * @author alex
+ *
+ */
+public class CandidateSearcher3 implements ICandidateSearcher {
+
+	public CandidateSearcher3() {
+	}
+
+	@Override
+	public List<Lamp> searchCandidates(IRoom room, IRuntimeCandidateSearcher runtimeCandidateSearcher)
+			throws CandidateSearcherException, InterruptedException {
+		
+		List<RectangleWithTag> originalPartialRectangles = null;
+		try {
+			originalPartialRectangles = AbstractAlgorithmFactory.getAlgorithmFactory().createOriginalPartialRectanglesFinder().findOriginalPartialRectangles(room,runtimeCandidateSearcher);
+		} catch (OriginalPartialRectanglesFinderException e) {
+			
+		}
+		
+		
+		ArrayList<RectangleWithTag> inPartialRectangles =new ArrayList<RectangleWithTag>(originalPartialRectangles);
+		
+		
+		
+		ArrayList<RectangleWithTag> outPartialRectangles = null;
+		
+		boolean combinationsOccured = true;
+		int n = 0;
+		while (combinationsOccured) {
+			boolean[] nextIt = new boolean[inPartialRectangles.size()];
+			for (int i = 0; i< nextIt.length; i++) {
+				nextIt[i] = true;
+			}
+		
+			System.out.println(n++);
+			
+			combinationsOccured = false;
+			outPartialRectangles =new ArrayList<RectangleWithTag>();
+			
+			for (int i = 0; i < inPartialRectangles.size(); i++) {
+				RectangleWithTag recI = inPartialRectangles.get(i);
+				for (int j = i +1; j < inPartialRectangles.size(); j++) {
+					RectangleWithTag recJ = inPartialRectangles.get(j);
+					
+					Rectangle overLap = recI.overlap(recJ);
+					if (overLap != null) {
+						RectangleWithTag outRec = new RectangleWithTag(overLap, recI.getCopyOfTags());
+						for (Integer tag : recJ.getCopyOfTags()) {
+							outRec.addTag(tag);
+							
+						}
+						nextIt[i] = false; // no need to keep
+						nextIt[j] = false;
+						outPartialRectangles.add(outRec);
+						combinationsOccured = true;
+					}
+				}
+			}
+			for (int i = 0; i< inPartialRectangles.size(); i++) { // not combined > keep
+				if (nextIt[i]) {
+					outPartialRectangles.add(inPartialRectangles.get(i));
+				}
+			}
+			inPartialRectangles = outPartialRectangles;
+		}
+		
+		List<Lamp> lampCandidates = new LinkedList<Lamp>();
+		for (RectangleWithTag rec : outPartialRectangles) {
+			Lamp tmpLamp = new Lamp(rec.getCenter().getX(), rec.getCenter().getY());
+			for (Integer tag : rec.getCopyOfTags()) {
+				tmpLamp.addTag(tag);
+			}
+			lampCandidates.add(tmpLamp);
+			
+		}
+		
+		return lampCandidates;
+	}
+
+}

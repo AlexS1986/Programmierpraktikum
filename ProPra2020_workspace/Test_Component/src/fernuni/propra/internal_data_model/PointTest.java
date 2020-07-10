@@ -12,106 +12,102 @@ import fernuni.propra.internal_data_model.LineSegment;
 import fernuni.propra.internal_data_model.Point;
 
 public class PointTest {
-	Point p1,p2,p3,p4,p5;
-	LineSegment l1,l2,l3,l4,l5;
+	Point p1, p2, p3, p4, p5;
+	LineSegment l1, l2, l3, l4, l5;
 	List<LineSegment> lineSegments;
-
 
 	@Before
 	public void setUp() {
-		p1 = new Point (0,0);
-		p2 = new Point (1,0);
-		p3 = new Point(1,1);
-		p4 = new Point(0,1);
+		p1 = new Point(0, 0);
+		p2 = new Point(1, 0);
+		p3 = new Point(1, 1);
+		p4 = new Point(0, 1);
 		l1 = new LineSegment(p1, p2);
 		l2 = new LineSegment(p2, p3);
-		l3 = new LineSegment(p3,p4);
-		l4 = new LineSegment(p4,p1);
+		l3 = new LineSegment(p3, p4);
+		l4 = new LineSegment(p4, p1);
 		l5 = new LineSegment(p1, p3);
 		lineSegments = new ArrayList<LineSegment>();
-		lineSegments.add(l1);lineSegments.add(l2); 
-		lineSegments.add(l3); lineSegments.add(l4);
+		lineSegments.add(l1);
+		lineSegments.add(l2);
+		lineSegments.add(l3);
+		lineSegments.add(l4);
 	}
-	
+
 	/**
-	 * Checks if test for test whether point is 
-	 * on a line segment works
+	 * Checks if test for test whether point is on a line segment works
 	 */
 	@Test
 	public void testIsOnLineSegmentPointPoint() {
-		//Arrange 
-		Point pt1 = new Point(0,0.01);
-		Point pt2 = new Point(0.001,0.0);
-		Point pt3 = new Point(131221.2,-500.7);
-		Point pt4 = new Point(2.0,0.0);
-		Point pt5 = new Point(4.0,0.0);
-		
-		//Act 
-		boolean test1 = p1.isOnLineSegment(p1,p4);
-		boolean test2 = pt3.isOnLineSegment(p1,pt1);
-		
+		// Arrange
+		Point pt1 = new Point(0, 0.01);
+		Point pt2 = new Point(0.001, 0.0);
+		Point pt3 = new Point(131221.2, -500.7);
+		Point pt4 = new Point(2.0, 0.0);
+		Point pt5 = new Point(4.0, 0.0);
+
+		// Act
+		boolean test1 = p1.isOnLineSegment(p1, p4);
+		boolean test2 = pt3.isOnLineSegment(p1, pt1);
+
 		boolean test3 = false;
 		try {
-			test3 = p1.isOnLineSegment(p2,p4);
-		} catch(IllegalArgumentException e) {
+			test3 = p1.isOnLineSegment(p2, p4);
+		} catch (IllegalArgumentException e) {
 			test3 = true;
 		}
 
 		boolean test4 = p1.isOnLineSegment(pt4, pt5);
-		
+
 		boolean test5 = false;
 		try {
 			pt3.isOnLineSegment(p1, p3);
-		} catch(IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			test5 = true;
 		}
-		
-		//Assert
+
+		// Assert
 		assertTrue(test1);
 		assertTrue(!test2);
 		assertTrue(test3);
 		assertFalse(test4);
 		assertTrue(test5);
-		
+
 	}
 
 	/**
-	 * Checks if test for test whether point is 
-	 * on a line segment works
+	 * Checks if test for test whether point is on a line segment works
 	 */
 	@Test
 	public void testIsOnLineSegmentLineSegment() {
-		//Act 
+		// Act
 		boolean test1 = p1.isOnLineSegment(l1);
 		boolean test2 = p1.isOnLineSegment(l4);
-		
-		
-		
-		//Assert
+
+		// Assert
 		assertTrue(test1);
 		assertTrue(test2);
 
 	}
 
 	/**
-	 * Checks if test for test whether point is 
-	 * insided a polygon works
+	 * Checks if test for test whether point is insided a polygon works
 	 */
 	@Test
 	public void testIsInsidePolygon() {
-		//Arrange
+		// Arrange
 		Point center = new Point(0.5, 0.5);
-		Point onLine = new Point(1.0,0.5);
-		Point onCorner = new Point(1.0,1.0);
+		Point onLine = new Point(1.0, 0.5);
+		Point onCorner = new Point(1.0, 1.0);
 		Point out = new Point(2.0, -10.0);
-		
-		//Act
-		boolean test1= center.isInsidePolygon(lineSegments);
+
+		// Act
+		boolean test1 = center.isInsidePolygon(lineSegments);
 		boolean test2 = onLine.isInsidePolygon(lineSegments);
 		boolean test3 = onCorner.isInsidePolygon(lineSegments);
 		boolean test4 = out.isInsidePolygon(lineSegments);
-		
-		//Assert
+
+		// Assert
 		assertTrue(test1);
 		assertTrue(test2);
 		assertTrue(test3);
@@ -119,25 +115,24 @@ public class PointTest {
 	}
 
 	/**
-	 * Checks if test for test whether point is 
-	 * inside a x-range works
+	 * Checks if test for test whether point is inside a x-range works
 	 */
 	@Test
 	public void testIsInXRange() {
-		
-		//Act
+
+		// Act
 		boolean test1 = p1.isInXRange(0.0, 0.0);
 		boolean test2 = p2.isInXRange(1.0, 2.0);
 		boolean test3 = p3.isInXRange(1.0001, 2.00);
-		
+
 		boolean test4 = false;
 		try {
 			test4 = p4.isInXRange(2, 1.9);
-		} catch(IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			test4 = true;
 		}
-		
-		//Assert
+
+		// Assert
 		assertTrue(test1);
 		assertTrue(test2);
 		assertFalse(test3);
@@ -145,24 +140,23 @@ public class PointTest {
 	}
 
 	/**
-	 * Checks if test for test whether point is 
-	 * inside a y-range works
+	 * Checks if test for test whether point is inside a y-range works
 	 */
 	@Test
 	public void testIsInYRange() {
-		//Act
+		// Act
 		boolean test1 = p1.isInYRange(0.0, 0.0);
 		boolean test2 = p3.isInYRange(1.0, 2.0);
 		boolean test3 = p4.isInYRange(1.0001, 2.00);
-		
+
 		boolean test4 = false;
 		try {
 			test4 = p4.isInYRange(2, 1.9);
-		} catch(IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			test4 = true;
 		}
-		
-		//Assert
+
+		// Assert
 		assertTrue(test1);
 		assertTrue(test2);
 		assertFalse(test3);

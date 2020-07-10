@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="API_Test_Validation" project="Test_Component" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="Algorithm_Component.API_Test_Validation" time="0.132">
+    <testcase name="validateTrueNegative" classname="Algorithm_Component.API_Test_Validation" time="0.118"/>
+    <testcase name="validateFileHasToBeValid" classname="Algorithm_Component.API_Test_Validation" time="0.0"/>
+    <testcase name="validateTruePositive" classname="Algorithm_Component.API_Test_Validation" time="0.014"/>
+  </testsuite>
+</testrun>

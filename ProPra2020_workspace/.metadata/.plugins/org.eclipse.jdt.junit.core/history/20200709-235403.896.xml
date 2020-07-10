@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CandidateSearcherTest" project="Test_Component" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.algorithm.CandidateSearcherTest" time="4.935">
+    <testcase name="testSearchCandidates" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="0.081"/>
+    <testcase name="testReduceRectangles" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="0.0"/>
+    <testcase name="testReduceRectanglesComplicatedRoom" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="4.854"/>
+  </testsuite>
+</testrun>

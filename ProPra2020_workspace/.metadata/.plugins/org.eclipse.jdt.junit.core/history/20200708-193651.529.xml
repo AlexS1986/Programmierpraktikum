@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="SolveKTest" project="Test_Component" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.algorithm.SolveKTest" time="2.094">
+    <testcase name="testRun" classname="fernuni.propra.algorithm.SolveKTest" time="1.08"/>
+    <testcase name="testTestIfComputationFinished" classname="fernuni.propra.algorithm.SolveKTest" time="1.014"/>
+  </testsuite>
+</testrun>

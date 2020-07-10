@@ -1,8 +1,9 @@
 package fernuni.propra.algorithm;
 
 /**
- * Thrown if something went wrong within the Solve use case (optimized {@link Lamp} positions are found for
- * an {@link IRoom})
+ * Thrown if something went wrong within the Solve use case (optimized
+ * {@link Lamp} positions are found for an {@link IRoom})
+ * 
  * @author alex
  *
  */

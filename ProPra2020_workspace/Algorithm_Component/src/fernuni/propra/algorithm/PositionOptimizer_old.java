@@ -10,22 +10,23 @@ import fernuni.propra.algorithm.runtime_information.IRuntimePositionOptimizer;
 import fernuni.propra.internal_data_model.IRoom;
 import fernuni.propra.internal_data_model.Lamp;
 
-public class PositionOptimizer_old implements IPositionOptimizer{
+public class PositionOptimizer_old implements IPositionOptimizer {
 	private static List<Lamp> currentBestSolution;
 	private static int numberIlluminatedLampsBestSolution;
-	private static IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory().createIlluminiationTester();
+	private static IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory()
+			.createIlluminiationTester();
 
 	public PositionOptimizer_old() {
 	}
 
 	@Override
-	public List<Lamp> optimizePositions( List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation) throws InterruptedException{
- 
+	public List<Lamp> optimizePositions(List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation)
+			throws InterruptedException {
+
 		// all lamps are on -> illuminated
 		currentBestSolution = taggedCandidates;
 		numberIlluminatedLampsBestSolution = taggedCandidates.size();
-		
-		
+
 		HashSet<Integer> allTags = new HashSet<Integer>();
 		for (Lamp lamp : taggedCandidates) {
 			lamp.turnOff(); // make sure all lamps are turned off
@@ -33,61 +34,58 @@ public class PositionOptimizer_old implements IPositionOptimizer{
 				allTags.add(tag);
 			}
 		}
-		
-		ArrayList<Lamp> lamps = deepCopyLamps(taggedCandidates);
-		
-		//HashSet<Integer> illuminated = new HashSet<Integer>();
-		
 
-		searchSolution(lamps,0, allTags, 0,runTimeInformation);
-		
+		ArrayList<Lamp> lamps = deepCopyLamps(taggedCandidates);
+
+		// HashSet<Integer> illuminated = new HashSet<Integer>();
+
+		searchSolution(lamps, 0, allTags, 0, runTimeInformation);
+
 		return currentBestSolution;
-		
-		 
-		
+
 	}
-	
-	private void searchSolution(ArrayList<Lamp> lamps, int idx, 
-			HashSet<Integer> allTags, int numberLampsOn, IRuntimePositionOptimizer runTimeInformation) throws InterruptedException {
-		
+
+	private void searchSolution(ArrayList<Lamp> lamps, int idx, HashSet<Integer> allTags, int numberLampsOn,
+			IRuntimePositionOptimizer runTimeInformation) throws InterruptedException {
+
 		if (Thread.currentThread().isInterrupted()) {
 			throw new InterruptedException();
 		}
-		
-		if(illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, runTimeInformation)) { // valid solution found
-			if (numberLampsOn<=numberIlluminatedLampsBestSolution) {
+
+		if (illuminationTester.testIfRoomIsIlluminated(lamps.iterator(), allTags, runTimeInformation)) { // valid
+																											// solution
+																											// found
+			if (numberLampsOn <= numberIlluminatedLampsBestSolution) {
 				System.out.println("Solution found with " + numberLampsOn + " lamps turned on.");
 				currentBestSolution = deepCopyLamps(lamps);
 				numberIlluminatedLampsBestSolution = numberLampsOn;
 			}
-			
-			
+
 		} else { // not a valid solution
 			if (idx < lamps.size()) {
-				if(numberLampsOn<numberIlluminatedLampsBestSolution) {
+				if (numberLampsOn < numberIlluminatedLampsBestSolution) {
 					Lamp lamp = lamps.get(idx);
-					lamp.turnOn();	
-					searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn+1, runTimeInformation);
-					
+					lamp.turnOn();
+					searchSolution(deepCopyLamps(lamps), idx + 1, allTags, numberLampsOn + 1, runTimeInformation);
+
 					lamp.turnOff();
-					searchSolution(deepCopyLamps(lamps), idx+1, allTags, numberLampsOn, runTimeInformation);
-									
+					searchSolution(deepCopyLamps(lamps), idx + 1, allTags, numberLampsOn, runTimeInformation);
+
 				}
 			}
 		}
 	}
-	
-	
+
 	private static ArrayList<Lamp> deepCopyLamps(List<Lamp> lamps) {
 		ArrayList<Lamp> outLamps = new ArrayList<Lamp>(lamps.size());
 		Iterator<Lamp> lampsIterator = lamps.iterator();
-		while(lampsIterator.hasNext()) {
+		while (lampsIterator.hasNext()) {
 			Lamp lamp = lampsIterator.next();
 			outLamps.add(lamp.deepCopy());
 		}
 		return outLamps;
 	}
-	
+
 	private static HashSet<Integer> deepCopyHashSet(HashSet<Integer> hashSet) {
 		HashSet<Integer> outHashSet = new HashSet<Integer>();
 		for (Integer integer : hashSet) {
@@ -104,19 +102,16 @@ public class PositionOptimizer_old implements IPositionOptimizer{
 		}
 		List<Lamp> outLamps = new LinkedList<Lamp>();
 		Iterator<Lamp> lampIterator = currentBestSolution.iterator();
-		while(lampIterator.hasNext()) {
+		while (lampIterator.hasNext()) {
 			outLamps.add(lampIterator.next().deepCopy());
 		}
 		return outLamps;
-		
+
 	}
 
 	@Override
 	public int getNumberOfOnLampsBestSolution() {
 		return numberIlluminatedLampsBestSolution;
 	}
-	
-	
-	
 
 }

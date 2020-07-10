@@ -12,20 +12,20 @@ import org.junit.Test;
 import fernuni.propra.internal_data_model.Point;
 
 public class RectangleWithTagTest {
-	private Point p1,p2,p3,p4;
+	private Point p1, p2, p3, p4;
 	private RectangleWithTag rec1;
 
 	@Before
 	public void setUp() throws Exception {
-		
-		//Arrange
-		p1 = new Point(0,0);
-		p2 = new Point(1,0);
-		p3 = new Point(1,1);
-		p4 = new Point(0,1);
+
+		// Arrange
+		p1 = new Point(0, 0);
+		p2 = new Point(1, 0);
+		p3 = new Point(1, 1);
+		p4 = new Point(0, 1);
 		List<Integer> initTags = new ArrayList<Integer>();
 		initTags.add(1);
-		rec1 = new  RectangleWithTag(p1, p3, initTags);
+		rec1 = new RectangleWithTag(p1, p3, initTags);
 	}
 
 	/**
@@ -33,17 +33,14 @@ public class RectangleWithTagTest {
 	 */
 	@Test
 	public void testContainsTag() {
-		//Act
+		// Act
 		boolean tag1isContained = rec1.containsTag(1);
 		boolean tag2isContained = !rec1.containsTag(2);
-		
-		//Assert
-		assertTrue("Tag 1 should be in tags.", 
-				tag1isContained);
-		assertTrue("Tag 2 should be in tags.",
-				tag2isContained);
-		assertFalse("Tag 3 should not be in tags.",
-				rec1.containsTag(3));
+
+		// Assert
+		assertTrue("Tag 1 should be in tags.", tag1isContained);
+		assertTrue("Tag 2 should be in tags.", tag2isContained);
+		assertFalse("Tag 3 should not be in tags.", rec1.containsTag(3));
 	}
 
 	/**
@@ -51,61 +48,52 @@ public class RectangleWithTagTest {
 	 */
 	@Test
 	public void testAddTag() {
-		//Act
+		// Act
 		rec1.addTag(2);
-		
-		//Assert
-		assertTrue("Tag 2 should have been added",
-				rec1.containsTag(2));
+
+		// Assert
+		assertTrue("Tag 2 should have been added", rec1.containsTag(2));
 	}
 
 	/**
-	 * Checks whether RectangleWirthTag can be used in
-	 * HashSets
+	 * Checks whether RectangleWirthTag can be used in HashSets
 	 */
 	@Test
 	public void testHashSet() {
-		//Arrange
-		List<Integer> initTags2 =
-				new ArrayList<Integer>(); 
+		// Arrange
+		List<Integer> initTags2 = new ArrayList<Integer>();
 		initTags2.add(2);
-		RectangleWithTag newRectangleWithTag =
-				new RectangleWithTag(p1, p3, initTags2 );
-		HashSet<RectangleWithTag> rectanglesWithTags =
-				new HashSet<RectangleWithTag>();
+		RectangleWithTag newRectangleWithTag = new RectangleWithTag(p1, p3, initTags2);
+		HashSet<RectangleWithTag> rectanglesWithTags = new HashSet<RectangleWithTag>();
 		rectanglesWithTags.add(rec1);
-		
-		//Act
+
+		// Act
 		boolean canBeFoundInHashSet = rectanglesWithTags.contains(newRectangleWithTag);
 		boolean rectanglesAreEqual = rec1.equals(newRectangleWithTag);
-		
-		//Assert
-		assertFalse("The rectangle can be found in HashSet",
-				canBeFoundInHashSet);
-		assertFalse("Tags do not agree, should not be equal.",
-				rectanglesAreEqual);
+
+		// Assert
+		assertFalse("The rectangle can be found in HashSet", canBeFoundInHashSet);
+		assertFalse("Tags do not agree, should not be equal.", rectanglesAreEqual);
 	}
-	
+
 	/**
 	 * Checks whether a copy of the tags can be obtained
 	 */
 	@Test
 	public void testGetCopyOfTags() {
-		//Arrange
+		// Arrange
 		rec1.addTag(15);
-		
-		//Act
+
+		// Act
 		HashSet<Integer> hs = rec1.getCopyOfTags();
 		// check that a true copy is returned
 		HashSet<Integer> hs2 = rec1.getCopyOfTags();
 		hs2.remove(15);
-		
-		//Assert
-		assertTrue("The hash set should have 2 entries",
-				hs.size() == 2);
-		assertTrue("Hash set should contain 15.",
-				hs.contains(15));
-		
+
+		// Assert
+		assertTrue("The hash set should have 2 entries", hs.size() == 2);
+		assertTrue("Hash set should contain 15.", hs.contains(15));
+
 	}
-	
+
 }

@@ -1,0 +1,170 @@
+package fernuni.propra.algorithm;
+
+import java.util.List;
+
+import fernuni.propra.algorithm.runtime_information.IRuntimeInformation;
+import fernuni.propra.algorithm.runtime_information.RuntimeExceptionLamps;
+import fernuni.propra.internal_data_model.IRoom;
+import fernuni.propra.internal_data_model.Lamp;
+
+// computes best solution in given time limit and replaces lamps with found best solution in room
+
+/**
+ * A control class that controls the program flow for the solution use case {@link UserSolveAAS}. It computes the
+ * configuration of {@link Lamp}s that has a minimum number of illuminated {@link Lamp}s and still illuminates
+ * a specific {@link IRoom} instance.
+ * <p>
+ * {@link SolveK} forwards certain tasks to instances of other classes.
+ * <p>
+ * The general algorithm works as follows:
+ * <p>
+ * 1.) A number of possible {@link Lamp} candidates is computed
+ *     by forwarding to an instance of {@link ICandidateSearcher} that is obtained from
+ *     the {@link AbstractAlgorithmFactory} singleton.
+ * <p>
+ * 2.) The candidates are then provided to an instance of {@link IPositionOptimizer} that is also
+ *     obtained from the {@link AbstractAlgorithmFactory} singleton. The {@link IPositionOptimizer}
+ *     finds an optimal configuration of lamp positions.
+ * <p>
+ * 3.) The currently available best solution replaces the lamps of the provided {@link IRoom} instance 
+ *     and the number of illuminated {@link Lamp}s in that best solution is stored.
+ * <p>
+ * 4.) The number of illuminated {@link Lamps} in best solution can be obtained.
+ * <p>
+ *{@link SolveK} extends {@link Thread} in order to make it possible to stop the computation externally (e.g. after 
+ * a time limit has passed) by calling the interrupt() method of an instance of {@link SolveK}. This sets the 
+ * interrupted Flag which is checked at several stages in the solve method. If the flag is set, an {@link InterruptedException}
+ * is thrown, which leads to a stop of the algorithm. If a valid solution is available, this solution is stored as noted in 4.)
+ * <p>
+ * The computation must be started by calling the inherited start() method.
+ * <p>
+ * {@link SolveK} also supports the wait-notify mechanism for synchronizing, by allowing to let clients test whether the solution is already
+ * available and waiting until the computation is done. So the algorithm provided can be started externally, and subsequently a client can wait until
+ * the computation is done or interrupt it whenever it wants. This means that a solution might not be available at all (i.e. if a client
+ * prematurely interrupts {@link SolveK}). Therefore, clients should check the return value of
+ * {@link testIfComputationIsFinished} for an exception. Only if this return value is null, no exception has 
+ * occurred and a valid solution has been stored to the {@link IRoom} instance. 
+ * <p>
+ * 
+ * 
+ * <p>
+ * Implemented superclasses : {@link Thread}
+ * @author alex
+ *
+ */
+public class SolveK extends Thread{
+	private IRuntimeInformation runTimeInformation;
+	private IRoom room;
+	private ICandidateSearcher candidateSearcher;
+	private IPositionOptimizer positionOptimizer;
+	private boolean computationFinished;
+	private volatile List<Lamp> bestSolution;
+	private volatile int numberLampsOnBestSolution;
+	private volatile SolveKException exception = null; // to be communicated to main thread
+	
+	/**
+	 * Constructor for {@link SolveK}
+	 * @param room : An {@link IRoom} instance for which an optimal {@link Lamp} configuration has
+	 * 				to be found. The {@link Lamp} configuration is stored to this {@link IRoom} instance
+	 * @param runTimeInformation : An instance of {@link IRuntimeInformation} to which detailed runtime information can be stored.
+	 */
+	public SolveK(IRoom room, IRuntimeInformation runTimeInformation) {
+		this.room = room;
+		this.runTimeInformation = runTimeInformation;
+		this.candidateSearcher = AbstractAlgorithmFactory.getAlgorithmFactory().createCandidateSearcher();
+		this.positionOptimizer = AbstractAlgorithmFactory.getAlgorithmFactory().createPositionOptimizer();
+	}
+	
+	/**
+	 * Provides the steps 1.) and 2.) of the algorithm specified in the documentation of {@link SolveK}
+	 * @param runTimeInformation : An instance of {@link IRuntimeInformation} that can be used to save runtime information
+	 * @throws SolveKException : thrown if an unexpected error is thrown in the solution procedure
+	 * @throws InterruptedException : thrown if the solution procedure is interrupted. This is done intentionally to allow 
+	 *                               interruption by clients and is catched in run().
+	 */
+	private void solve(IRuntimeInformation runTimeInformation) throws SolveKException, InterruptedException{
+		List<Lamp> candidates;
+		try {
+			// 1.) search lamp candidates
+			runTimeInformation.startTimeCandidateSearch();
+			try {
+				candidates = candidateSearcher.searchCandidates(room, 
+						runTimeInformation);
+			} catch(InterruptedException ie) {
+				runTimeInformation.stopTimeCandidateSearch();
+				throw new InterruptedException(ie.getMessage());
+			} 
+			runTimeInformation.stopTimeCandidateSearch();	
+			System.out.println("Number of candidates found: " + candidates.size());
+			
+			// 2.) find optimal configuration of lamps
+			runTimeInformation.startTimeOptimizePositions();
+			try {
+				positionOptimizer.optimizePositions( 
+						candidates, runTimeInformation); 
+			} catch (InterruptedException ie) {
+				runTimeInformation.stopTimeOptimizePositions();
+				throw new InterruptedException(ie.getMessage()); 
+			} 
+			runTimeInformation.stopTimeOptimizePositions();
+				
+		} catch (CandidateSearcherException e) {
+			throw new SolveKException(e); // something went wrong
+		} catch (RuntimeExceptionLamps rte) {
+			throw new SolveKException(rte); // something went wrong
+		}
+	}
+
+	@Override
+	public void run() {
+		try {
+			solve(runTimeInformation);
+		} catch(SolveKException e) {
+			this.exception = e;
+		} catch(InterruptedException ie) {
+		}
+		
+		//write output and set best solution
+		bestSolution = positionOptimizer.getCurrentBestSolution();
+		numberLampsOnBestSolution = positionOptimizer.getNumberOfOnLampsBestSolution();
+		if(bestSolution != null) { // null if interrupted or exception at candidate searcher -> no solution available
+			// optimal configuration is supplied to room
+			room.replaceLamps(bestSolution);
+		} else {
+			exception = new SolveKException("Not enough time to compute a solution!"); // exceptions to be passed to client
+		}
+		setComputationFinished(true);
+	}
+	
+	/**
+	 * Sets switch and also notifies those threads waiting for a result in the waiting queue
+	 * @param computationFinished
+	 */
+	private synchronized void setComputationFinished(boolean computationFinished) {
+		this.computationFinished = computationFinished;
+		notifyAll();
+	}
+	
+	/**
+	 * Allows clients to join the waiting queue and wait for a result
+	 * @return {@link SolveKException} that shows if a solution is available 
+	 * (return value is null) or not
+	 * @throws InterruptedException
+	 */
+	public synchronized SolveKException testIfComputationFinished() throws InterruptedException{
+		while(!computationFinished) {
+			wait();
+		}
+		return exception;
+	}
+	
+	/**
+	 * Clients can obtain the number of lamps that are turned on in the best solution.
+	 * @return Number of lamps that are turned on in best solution.
+	 */
+	public synchronized int getNumberOfOnLampsBestSolution() {
+		return numberLampsOnBestSolution;
+	}
+	
+	
+}

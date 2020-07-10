@@ -6,23 +6,25 @@ import java.util.Iterator;
 import fernuni.propra.internal_data_model.Wall;
 
 /**
- * A specific container that stores south walls. Those {@link Wall}s can be specified by
- * two {@link Point}s in a horizontal-vertical coordinate system. The {@link Wall}s
- * in this container are ordered in descending order with respect to the vertical component 
- * (y-component) of their {@link Point}s.
+ * A specific container that stores south walls. Those {@link Wall}s can be
+ * specified by two {@link Point}s in a horizontal-vertical coordinate system.
+ * The {@link Wall}s in this container are ordered in descending order with
+ * respect to the vertical component (y-component) of their {@link Point}s.
  * <p>
- * The total ordering requested by {@link WallContainerAbstract} is such that walls
+ * The total ordering requested by {@link WallContainerAbstract} is such that
+ * walls
  * <p>
  * Extended classes and implemented interfaces: {@link WallContainerAbstract}.
  * <p>
+ * 
  * @author alex
  *
  */
 public class WallContainerSouth extends WallContainerAbstract {
-	
+
 	@Override
 	protected boolean isValidWall(Wall wall, double limit, double low, double high) {
-		return wall.overlapsXrange(low, high) &&  wall.getP1().getY()<=limit;
+		return wall.overlapsXrange(low, high) && wall.getP1().getY() <= limit;
 	}
 
 	@Override
@@ -32,9 +34,9 @@ public class WallContainerSouth extends WallContainerAbstract {
 			public int compare(Wall o1, Wall o2) {
 				if (o1.getP1().getY() > o2.getP1().getY()) {
 					return -1;
-				} else if (o1.getP1().getY()<o2.getP1().getY()) {
+				} else if (o1.getP1().getY() < o2.getP1().getY()) {
 					return 1;
-				} 
+				}
 				return 0;
 			}
 		};

@@ -21,7 +21,7 @@ public class AlgorithmFactory1 extends AbstractAlgorithmFactory {
 	private AlgorithmFactory1() {
 	};
 
-	static AlgorithmFactory1 getAlgorithmFactory1() {
+	static AlgorithmFactory1 getConcreteAlgorithmFactory() {
 		if (singleton == null) {
 			singleton = new AlgorithmFactory1();
 		}
@@ -30,7 +30,7 @@ public class AlgorithmFactory1 extends AbstractAlgorithmFactory {
 
 	@Override
 	public ICandidateSearcher createCandidateSearcher() {
-		return new CandidateSearcher4();
+		return new CandidateSearcher();
 	}
 
 	@Override

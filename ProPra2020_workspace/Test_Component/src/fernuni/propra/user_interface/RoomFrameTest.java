@@ -149,14 +149,6 @@ public class RoomFrameTest {
 		}
 		mockRoomFrame.dispose();
 		
-		
-		RoomPanel roomPanel1 = new RoomPanel(rooms.get(6));
-		roomPanel1.addRectangle("", Color.BLUE, 120, 30, 40, 100);
-		roomPanel1.addRectangle("", Color.RED, 220, 230, 110, 10);
-		roomPanel1.addRectangle("", Color.GREEN, 250, 290, 50, 50);
-		roomPanel1.addRectangle("", Color.YELLOW, 150, 30, 10, 130);
-		roomPanel1.addRectangle("", Color.GRAY, 220, 200, 70, 40);
-		RoomFrame roomFrame2 = new RoomFrame(roomPanel1);
 
 		// show each room for 3 seconds
 		for (IRoom room : rooms) {

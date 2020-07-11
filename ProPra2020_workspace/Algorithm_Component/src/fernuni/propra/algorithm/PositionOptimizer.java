@@ -72,8 +72,6 @@ public class PositionOptimizer implements IPositionOptimizer {
 	private static IIlluminationTester illuminationTester = AbstractAlgorithmFactory.getAlgorithmFactory()
 			.createIlluminiationTester();
 
-	public PositionOptimizer() {
-	}
 
 	@Override
 	public List<Lamp> optimizePositions(List<Lamp> taggedCandidates, IRuntimePositionOptimizer runTimeInformation)

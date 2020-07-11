@@ -136,7 +136,7 @@ public class PositionOptimizerTest {
 		// Assert
 		// roomSquare
 		assertTrue("A mandatory lamp is not turned on", optimizedLampsRoomSquare.get(0).getOn());
-		assertFalse("This lamps should not have been turned on", optimizedLampsRoomSquare.get(1).getOn());
+		assertTrue("Only one lamp should have been found", optimizedLampsRoomSquare.size()==1);
 
 		// Mock test
 		// all lamps need to be on

@@ -148,7 +148,7 @@ public class CandidateSearcherTest {
 		assertTrue("The candidates for roomHufeisen need to be" + "located at (1.5,0) or (-1.5,0)",
 				candidates2.get(1).equals(new Point(1.5, 0.5)) || candidates2.get(1).equals(new Point(-1.5, 0.5)));
 		assertTrue("The number of candidates for Selbsttest_100b " + "has to be 22!",
-				candidates3 != null && candidates3.size() == 22);
+				candidates3 != null && candidates3.size() == 23);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class CandidateSearcherTest {
 		// Act
 		ArrayList<RectangleWithTag> reducedRectangles = new ArrayList<RectangleWithTag>();
 		try {
-			reducedRectangles = candidateSearcher.reduceRectangles(rectanglesWithTagIn);
+			reducedRectangles =new ArrayList<RectangleWithTag>(candidateSearcher.reduceRectangles(rectanglesWithTagIn));
 		} catch (InterruptedException e) {
 			fail(e.getMessage());
 		}
@@ -207,8 +207,8 @@ public class CandidateSearcherTest {
 		// display a complicated room and check whether original
 		// partial rectangles are correct
 		Color[] colors = { Color.blue, Color.red, Color.green, Color.yellow };
-		IRoom testRoom = rooms.get(5);
-		ArrayList<RectangleWithTag> originalPartialRectangles = new ArrayList<RectangleWithTag>();
+		IRoom testRoom = rooms.get(12);
+		List<RectangleWithTag> originalPartialRectangles = new ArrayList<RectangleWithTag>();
 		// find original partial rectangles
 		try {
 			originalPartialRectangles = (new OriginalPartialRectanglesFinder()).findOriginalPartialRectangles(testRoom,
@@ -220,7 +220,7 @@ public class CandidateSearcherTest {
 		// reduce rectangles
 		List<RectangleWithTag> candidateRectangles = new ArrayList<RectangleWithTag>();
 		try {
-			candidateRectangles = (new CandidateSearcher()).reduceRectangles(originalPartialRectangles);
+			candidateRectangles = new ArrayList<RectangleWithTag>((new CandidateSearcher()).reduceRectangles(originalPartialRectangles));
 		} catch (InterruptedException e) {
 		}
 
@@ -229,17 +229,16 @@ public class CandidateSearcherTest {
 		// display room
 		RoomPanel roomPanel = new RoomPanel(testRoom);
 		RoomFrame roomFrame = new RoomFrame(roomPanel);
-		for (int i = 0; i < originalPartialRectangles.size(); i++) {
-			RectangleWithTag rec = originalPartialRectangles.get(i);
+		for (int i = 0; i < candidateRectangles.size(); i++) {
+			RectangleWithTag rec = candidateRectangles.get(i);
 			double width = rec.getP2().getX() - rec.getP1().getX();
 			double height = rec.getP3().getY() - rec.getP1().getY();
 			roomPanel.addRectangle(String.valueOf(i), colors[i % 3], rec.getP1().getX(), rec.getP1().getY(), width,
 					height);
 			roomPanel.repaint();
-			roomPanel.removeLastRectangle();
 		}
 
-		// show room for 2 seconds and continue subsequently
+		// show room for 4 seconds and continue subsequently
 		try {
 			Thread.currentThread().sleep(4000);
 		} catch (InterruptedException e) {

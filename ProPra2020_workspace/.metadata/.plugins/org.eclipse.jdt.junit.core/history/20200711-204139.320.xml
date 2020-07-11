@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AllTests" project="Test_Component" tests="106" started="106" failures="1" errors="1" ignored="2">
+  <testsuite name="fernuni.propra.main_test.AllTests" incomplete="true">
+    <testsuite name="fernuni.propra.file_processing.FileProcessingTests" incomplete="true">
+      <testsuite name="fernuni.propra.file_processing.FilePersistenceTest" time="1.054">
+        <testcase name="testReadInput" classname="fernuni.propra.file_processing.FilePersistenceTest" time="1.03"/>
+        <testcase name="testWriteOutput" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.023"/>
+        <testcase name="testTestWallAndAddToWalls" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true">
+        <testcase name="testIntersectionWithLinesegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testLineSegmentDoesNotIntersectLineSegments" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testPerpendicularPointPoint" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testGetP1" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testGetP2" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testPerpendicularLineSegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testOverlapsXrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testOverlapsYrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testIsHorizontal" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testIsVertical" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true">
+        <testsuite name="[0]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[0]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+        <testsuite name="[1]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[1]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+        <testsuite name="[2]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[2]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+        <testsuite name="[3]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[3]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.PointTest" incomplete="true">
+        <testcase name="testIsInXRange" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsInYRange" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsOnLineSegmentLineSegment" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsOnLineSegmentPointPoint" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsInsidePolygon" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.algorithm.AlgorithmTests" time="6.636">
+      <testsuite name="fernuni.propra.algorithm.CandidateSearcherTest" time="2.737">
+        <testcase name="testSearchCandidates" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="0.066"/>
+        <testcase name="testReduceRectangles" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="0.0"/>
+        <testcase name="testReduceRectanglesComplicatedRoom" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="2.671"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.IlluminationTesterTest" time="0.02">
+        <testcase name="testTestIfRoomIsIlluminatedIteratorOfLampHashSetOfIntegerIRuntimeIlluminationTester" classname="fernuni.propra.algorithm.IlluminationTesterTest" time="0.001"/>
+        <testcase name="testTestIfRoomIsIlluminatedIRoomIRuntimeIlluminationTester" classname="fernuni.propra.algorithm.IlluminationTesterTest" time="0.019">
+          <failure>java.lang.AssertionError: roomSquare cannot be illuminated with just 1 lamp that is off
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertFalse(Assert.java:64)
+	at fernuni.propra.algorithm.IlluminationTesterTest.testTestIfRoomIsIlluminatedIRoomIRuntimeIlluminationTester(IlluminationTesterTest.java:125)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:764)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.004">
+        <testcase name="testSortWallsToContainers" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.001"/>
+        <testcase name="testGetAllTags" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+        <testcase name="testConstructOriginalPartialRectanglesComplicated" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.003"/>
+        <testcase name="testConstructOriginalPartialRectangles" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.PositionOptimizerTest" time="0.035">
+        <testcase name="testOptimizePositions" classname="fernuni.propra.algorithm.PositionOptimizerTest" time="0.035">
+          <error>java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at java.base/java.util.LinkedList.checkElementIndex(LinkedList.java:559)
+	at java.base/java.util.LinkedList.get(LinkedList.java:480)
+	at fernuni.propra.algorithm.PositionOptimizerTest.testOptimizePositions(PositionOptimizerTest.java:139)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:764)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.UserSolveAASTest" time="0.009">
+        <testcase name="testSolve" classname="fernuni.propra.algorithm.UserSolveAASTest" time="0.009"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.UserValidateAASTest" time="0.004">
+        <testcase name="testValidate" classname="fernuni.propra.algorithm.UserValidateAASTest" time="0.004"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerEastTest" time="0.0">
+        <testcase name="testGetNearestEastWall" classname="fernuni.propra.algorithm.WallContainerEastTest" time="0.0"/>
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerEastTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerNorthTest" time="0.0">
+        <testcase name="testGetNearestNorthWall" classname="fernuni.propra.algorithm.WallContainerNorthTest" time="0.0"/>
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerNorthTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerSouthTest" time="0.001">
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerSouthTest" time="0.001"/>
+        <testcase name="testGetNearestSouthWall" classname="fernuni.propra.algorithm.WallContainerSouthTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerWestTest" time="0.0">
+        <testcase name="testGetNearestWestWall" classname="fernuni.propra.algorithm.WallContainerWestTest" time="0.0"/>
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerWestTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.001">
+        <testcase name="testCreatePositionOptimizer" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testCreateOriginalPartialRectanglesFinder" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testCreateIlluminiationTester" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testGetAlgorithmFactory1" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testCreateCandidateSearcher" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.SolveKTest" time="2.015">
+        <testcase name="testRun" classname="fernuni.propra.algorithm.SolveKTest" time="1.002"/>
+        <testcase name="testTestIfComputationFinished" classname="fernuni.propra.algorithm.SolveKTest" time="1.013"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.ValidateKTest" time="0.833">
+        <testcase name="testValidate" classname="fernuni.propra.algorithm.ValidateKTest" time="0.833"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Algorithm_Component.API_Test_Validation" time="0.023">
+      <testcase name="validateTrueNegative" classname="Algorithm_Component.API_Test_Validation" time="0.012"/>
+      <testcase name="validateFileHasToBeValid" classname="Algorithm_Component.API_Test_Validation" time="0.0"/>
+      <testcase name="validateTruePositive" classname="Algorithm_Component.API_Test_Validation" time="0.011"/>
+    </testsuite>
+    <testsuite name="fernuni.propra.algorithm.util.AlgoithmUtilTests" time="0.001">
+      <testsuite name="fernuni.propra.algorithm.util.RectangleTest" time="0.0">
+        <testcase name="testOverlap" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+        <testcase name="testGetCenter" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+        <testcase name="testEquals" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.001">
+        <testcase name="testContainsTag" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.0"/>
+        <testcase name="testHashSet" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.001"/>
+        <testcase name="testGetCopyOfTags" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.0"/>
+        <testcase name="testAddTag" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.internal_data_model.InternalDataModelTests" time="7.745">
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTest" time="0.004">
+        <testcase name="testIntersectionWithLinesegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testLineSegmentDoesNotIntersectLineSegments" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.001"/>
+        <testcase name="testPerpendicularPointPoint" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testGetP1" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testGetP2" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.001"/>
+        <testcase name="testPerpendicularLineSegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testOverlapsXrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testOverlapsYrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testIsHorizontal" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testIsVertical" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.001">
+        <testsuite name="[0]" time="0.0">
+          <testcase name="testIsHorizontalParametrized[0]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+        <testsuite name="[1]" time="0.0">
+          <testcase name="testIsHorizontalParametrized[1]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+        <testsuite name="[2]" time="0.0">
+          <testcase name="testIsHorizontalParametrized[2]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+        <testsuite name="[3]" time="0.001">
+          <testcase name="testIsHorizontalParametrized[3]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.PointTest" time="1.074">
+        <testcase name="testIsInXRange" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsInYRange" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsOnLineSegmentLineSegment" classname="fernuni.propra.internal_data_model.PointTest" time="0.001"/>
+        <testcase name="testIsOnLineSegmentPointPoint" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsInsidePolygon" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.RoomTest" time="0.002">
+        <testcase name="testGetLamps" classname="fernuni.propra.internal_data_model.RoomTest" time="0.001"/>
+        <testcase name="testGetWalls" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testDimensions" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testPrintLampPostions" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testGetNumberOfLamps" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testGetCorners" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testReplaceLamps" classname="fernuni.propra.internal_data_model.RoomTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.WallTest" time="0.0">
+        <testcase name="testIsWestWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testIsSouthWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testIsNorthWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testGetTag" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testIsEastWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.main.MainTests" time="4.274">
+      <testsuite name="fernuni.propra.main.MainTest" time="4.274">
+        <testcase name="testUseCase_SD" classname="fernuni.propra.main.MainTest" time="3.943"/>
+        <testcase name="testUseCase_VD" classname="fernuni.propra.main.MainTest" time="0.0" ignored="true"/>
+        <testcase name="testUseCase_D" classname="fernuni.propra.main.MainTest" time="0.0" ignored="true"/>
+        <testcase name="testUseCase_V" classname="fernuni.propra.main.MainTest" time="0.331"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.main.ParameterSetTest" time="0.0">
+        <testcase name="testSetTimeLimit" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+        <testcase name="testSetRunParameter" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+        <testcase name="testSetInputFile" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+        <testcase name="testIsValidParameterSet" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.user_interface.RoomFrameTest" time="41.843">
+      <testcase name="testRoomFrame" classname="fernuni.propra.user_interface.RoomFrameTest" time="41.843"/>
+    </testsuite>
+    <testsuite name="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.002">
+      <testcase name="testStartStopGetTimeCandidateSearch" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testToString" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.001"/>
+      <testcase name="testStartStopGetTimeIlluminationTest" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testStartStopGetTimeOptimizePositions" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testStartStopGetTime" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testStopStartGetTimeOriginalPartialRectanglesFind" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.001"/>
+    </testsuite>
+  </testsuite>
+</testrun>

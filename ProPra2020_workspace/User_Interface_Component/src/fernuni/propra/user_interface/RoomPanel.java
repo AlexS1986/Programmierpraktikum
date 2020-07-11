@@ -103,8 +103,9 @@ public class RoomPanel extends RoomPanelAbstract {
 					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
 					PIXEL_LAMP_DIAMETER, PIXEL_LAMP_DIAMETER);
 			
-			g2D.drawString(String.valueOf(n++), (int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
-					(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0));
+			// debug
+			//g2D.drawString(String.valueOf(n++), (int) (pixelOffsetX + lamp.getX() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
+			//		(int) (pixelOffsetY + lamp.getY() * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0));
 		}
 
 	}
@@ -143,8 +144,9 @@ public class RoomPanel extends RoomPanelAbstract {
 					(int) (pixelOffsetY + wall.getP2().getY() * scale));
 			double xCenter = 0.5*(wall.getP1().getX() + wall.getP2().getX());
 			double yCenter = 0.5*(wall.getP1().getY() + wall.getP2().getY());
-			g2D.drawString(String.valueOf(wall.getTag()), (int) (pixelOffsetX + xCenter * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
-					(int) (pixelOffsetY + yCenter * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0));
+			// debug
+			//g2D.drawString(String.valueOf(wall.getTag()), (int) (pixelOffsetX + xCenter * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0),
+			//		(int) (pixelOffsetY + yCenter * scale) - (int) Math.round(PIXEL_LAMP_DIAMETER / 2.0));
 		}
 
 	}

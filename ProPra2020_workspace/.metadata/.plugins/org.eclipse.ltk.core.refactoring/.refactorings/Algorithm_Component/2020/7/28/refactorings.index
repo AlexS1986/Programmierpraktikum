@@ -13,3 +13,22 @@
 1594369885279	Delete element
 1594370912710	Copy compilation unit
 1594371485496	Rename local variable 'outPartialRectangles'
+1594375405584	Extract method 'reducedRectangles'
+1594489876064	Rename local variable 'rec'
+1594491043926	Copy compilation unit
+1594491264561	Extract method 'reduceRectangles'
+1594491636880	Rename local variable 'originalPartialRectangles'
+1594491647975	Rename local variable 'outPartialRectangles2'
+1594491661631	Rename local variable 'outPartialRectangles'
+1594491958660	Rename method 'recOverlap'
+1594492313456	Rename local variable 'keep'
+1594492390190	Rename local variable 'outPartialRectangles'
+1594492402782	Rename local variable 'outPartialRectangles2'
+1594492467555	Extract method 'removeSubsetRectangles'
+1594493623259	Copy compilation unit
+1594494270453	Delete element
+1594494545673	Copy compilation unit
+1594494586217	Rename type 'PositionOptimizer_old'
+1594494764910	Delete element
+1594494915823	Copy compilation unit
+1594495763688	Delete element

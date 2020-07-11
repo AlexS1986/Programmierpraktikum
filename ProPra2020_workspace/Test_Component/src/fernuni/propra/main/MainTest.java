@@ -10,7 +10,6 @@ public class MainTest {
 	public void setUp() throws Exception {
 	}
 
-	@Ignore
 	@Test
 	public void testUseCase_D() {
 		// Arrange
@@ -30,7 +29,7 @@ public class MainTest {
 	public void testUseCase_SD() {
 		// Arrange
 		String[] commandLineParameters = new String[] { "if=instances/validationInstances/Zufallsraum_144_solved.xml", "r=sd",
-				"l=-15" };
+				"l=30" };
 
 		// Act
 		Main.main(commandLineParameters);
@@ -54,7 +53,6 @@ public class MainTest {
 		System.out.println();
 	}
 
-	@Ignore
 	@Test
 	public void testUseCase_VD() {
 		// Arrange

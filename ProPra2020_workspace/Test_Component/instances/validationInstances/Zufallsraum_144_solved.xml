@@ -601,10 +601,6 @@
       <y>492.75</y>
     </Lampe>
     <Lampe>
-      <x>165.0</x>
-      <y>315.9</y>
-    </Lampe>
-    <Lampe>
       <x>368.55</x>
       <y>102.75</y>
     </Lampe>
@@ -635,6 +631,10 @@
     <Lampe>
       <x>390.9</x>
       <y>260.7</y>
+    </Lampe>
+    <Lampe>
+      <x>153.8</x>
+      <y>315.9</y>
     </Lampe>
   </lampen>
 </Raum>

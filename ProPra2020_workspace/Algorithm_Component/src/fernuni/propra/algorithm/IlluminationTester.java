@@ -81,74 +81,9 @@ public class IlluminationTester implements IIlluminationTester {
 			// store all tags
 			HashSet<Integer> allTags = originalRectanglesFinder.getAllTags();
 			
-			//debug
-			HashSet<Integer> testTags = new HashSet<Integer>();
-			for (RectangleWithTag rec : rectanglesWithTag) {
-				testTags.addAll(rec.getCopyOfTags());
-			}
 			
-			/*
-			RectanglesFinder rf = new RectanglesFinder();
-			List<RectangleWithTag> rectanglesWithTag2 = rf.findRectangles(room, new RuntimeInformation());
-			
-			
-			boolean noMatchFound = false;
-			for (RectangleWithTag rec2 : rectanglesWithTag2) {
-				Iterator<Lamp> lampIterator = room.getLamps();
-				boolean lampFound = false;
-				while (lampIterator.hasNext()) {
-					Lamp lamp = lampIterator.next();
-					
-					//if (lamp.isInsidePolygon(ls)) {
-					if (lamp.isInsideRectangle(rec2.getP1(), rec2.getP3())) {
-						lampFound = true;
-					} else {
-						
-					}
-				}
-				
-				if (!lampFound) {
-					System.out.println("hi!");
-					noMatchFound = true;
-				}
-			} */
-			List<RectangleWithTag> list = new ArrayList<RectangleWithTag>();
-			
-
-			// compute set of tags of illuminated lamps
+			// compute tags of illuminated lamps
 			HashSet<Integer> tagsOfAllIlluminatedLamps = new HashSet<Integer>();
-			
-			for (RectangleWithTag rec : rectanglesWithTag) {
-				LineSegment l1 = new LineSegment(rec.getP1(), rec.getP2());
-				LineSegment l2 = new LineSegment(rec.getP2(), rec.getP3());
-				LineSegment l3 = new LineSegment(rec.getP3(), rec.getP4());
-				LineSegment l4 = new LineSegment(rec.getP4(), rec.getP1());
-				ArrayList<LineSegment> ls = new ArrayList<LineSegment>();
-				ls.add(l1); ls.add(l2); ls.add(l3);ls.add(l4);
-				
-				Iterator<Lamp> lampIterator = room.getLamps();
-				boolean lampFound = false;
-				while (lampIterator.hasNext()) {
-					Lamp lamp = lampIterator.next();
-					
-					if (lamp.isInsidePolygon(ls)) {
-					//if (lamp.isInsideRectangle(rec.getP1(), rec.getP3())) {
-						tagsOfAllIlluminatedLamps.addAll(rec.getCopyOfTags());
-						lampFound = true;
-					}
-				}
-				if(!lampFound) {
-					System.out.println("hi");
-					list.add(rec);
-				}
-			} 
-			
-			
-			
-		
-			/*
-			HashSet<Integer> tagsOfAllIlluminatedLamps = new HashSet<Integer>();
-			
 			Iterator<Lamp> lampIterator = room.getLamps();
 			while (lampIterator.hasNext()) {
 				Lamp lamp = lampIterator.next();
@@ -161,7 +96,7 @@ public class IlluminationTester implements IIlluminationTester {
 						}
 					}
 				}
-			} */
+			} 
 			
 			// check if the set of tags of illuminated rectangles contains the tags of all
 			// rectangles

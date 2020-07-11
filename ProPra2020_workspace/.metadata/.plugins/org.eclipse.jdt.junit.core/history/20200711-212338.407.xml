@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AllTests" project="Test_Component" tests="106" started="106" failures="0" errors="0" ignored="0">
+  <testsuite name="fernuni.propra.main_test.AllTests" incomplete="true">
+    <testsuite name="fernuni.propra.file_processing.FileProcessingTests" incomplete="true">
+      <testsuite name="fernuni.propra.file_processing.FilePersistenceTest" time="0.981">
+        <testcase name="testReadInput" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.96"/>
+        <testcase name="testWriteOutput" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.021"/>
+        <testcase name="testTestWallAndAddToWalls" classname="fernuni.propra.file_processing.FilePersistenceTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true">
+        <testcase name="testIntersectionWithLinesegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testLineSegmentDoesNotIntersectLineSegments" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testPerpendicularPointPoint" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testGetP1" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testGetP2" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testPerpendicularLineSegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testOverlapsXrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testOverlapsYrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testIsHorizontal" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+        <testcase name="testIsVertical" classname="fernuni.propra.internal_data_model.LineSegmentTest" incomplete="true"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true">
+        <testsuite name="[0]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[0]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+        <testsuite name="[1]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[1]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+        <testsuite name="[2]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[2]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+        <testsuite name="[3]" incomplete="true">
+          <testcase name="testIsHorizontalParametrized[3]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" incomplete="true"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.PointTest" incomplete="true">
+        <testcase name="testIsInXRange" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsInYRange" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsOnLineSegmentLineSegment" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsOnLineSegmentPointPoint" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+        <testcase name="testIsInsidePolygon" classname="fernuni.propra.internal_data_model.PointTest" incomplete="true"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.algorithm.AlgorithmTests" time="8.54">
+      <testsuite name="fernuni.propra.algorithm.CandidateSearcherTest" time="4.849">
+        <testcase name="testSearchCandidates" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="0.184"/>
+        <testcase name="testReduceRectangles" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="0.0"/>
+        <testcase name="testReduceRectanglesComplicatedRoom" classname="fernuni.propra.algorithm.CandidateSearcherTest" time="4.665"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.IlluminationTesterTest" time="0.976">
+        <testcase name="testTestIfRoomIsIlluminatedIteratorOfLampHashSetOfIntegerIRuntimeIlluminationTester" classname="fernuni.propra.algorithm.IlluminationTesterTest" time="0.001"/>
+        <testcase name="testTestIfRoomIsIlluminatedIRoomIRuntimeIlluminationTester" classname="fernuni.propra.algorithm.IlluminationTesterTest" time="0.975"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.003">
+        <testcase name="testSortWallsToContainers" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+        <testcase name="testGetAllTags" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+        <testcase name="testConstructOriginalPartialRectanglesComplicated" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.003"/>
+        <testcase name="testConstructOriginalPartialRectangles" classname="fernuni.propra.algorithm.OriginalPartialRectanglesFinderTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.PositionOptimizerTest" time="0.014">
+        <testcase name="testOptimizePositions" classname="fernuni.propra.algorithm.PositionOptimizerTest" time="0.014"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.UserSolveAASTest" time="0.006">
+        <testcase name="testSolve" classname="fernuni.propra.algorithm.UserSolveAASTest" time="0.006"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.UserValidateAASTest" time="0.002">
+        <testcase name="testValidate" classname="fernuni.propra.algorithm.UserValidateAASTest" time="0.002"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerEastTest" time="0.001">
+        <testcase name="testGetNearestEastWall" classname="fernuni.propra.algorithm.WallContainerEastTest" time="0.0"/>
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerEastTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerNorthTest" time="0.0">
+        <testcase name="testGetNearestNorthWall" classname="fernuni.propra.algorithm.WallContainerNorthTest" time="0.0"/>
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerNorthTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerSouthTest" time="0.0">
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerSouthTest" time="0.0"/>
+        <testcase name="testGetNearestSouthWall" classname="fernuni.propra.algorithm.WallContainerSouthTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.WallContainerWestTest" time="0.001">
+        <testcase name="testGetNearestWestWall" classname="fernuni.propra.algorithm.WallContainerWestTest" time="0.0"/>
+        <testcase name="testAdd" classname="fernuni.propra.algorithm.WallContainerWestTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0">
+        <testcase name="testCreatePositionOptimizer" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testCreateOriginalPartialRectanglesFinder" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testCreateIlluminiationTester" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testGetAlgorithmFactory1" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+        <testcase name="testCreateCandidateSearcher" classname="fernuni.propra.algorithm.AlgorithmFactory1Test" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.SolveKTest" time="2.009">
+        <testcase name="testRun" classname="fernuni.propra.algorithm.SolveKTest" time="1.005"/>
+        <testcase name="testTestIfComputationFinished" classname="fernuni.propra.algorithm.SolveKTest" time="1.004"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.ValidateKTest" time="0.679">
+        <testcase name="testValidate" classname="fernuni.propra.algorithm.ValidateKTest" time="0.679"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Algorithm_Component.API_Test_Validation" time="0.014">
+      <testcase name="validateTrueNegative" classname="Algorithm_Component.API_Test_Validation" time="0.007"/>
+      <testcase name="validateFileHasToBeValid" classname="Algorithm_Component.API_Test_Validation" time="0.0"/>
+      <testcase name="validateTruePositive" classname="Algorithm_Component.API_Test_Validation" time="0.007"/>
+    </testsuite>
+    <testsuite name="fernuni.propra.algorithm.util.AlgoithmUtilTests" time="0.001">
+      <testsuite name="fernuni.propra.algorithm.util.RectangleTest" time="0.0">
+        <testcase name="testOverlap" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+        <testcase name="testGetCenter" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+        <testcase name="testEquals" classname="fernuni.propra.algorithm.util.RectangleTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.001">
+        <testcase name="testContainsTag" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.0"/>
+        <testcase name="testHashSet" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.0"/>
+        <testcase name="testGetCopyOfTags" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.0"/>
+        <testcase name="testAddTag" classname="fernuni.propra.algorithm.util.RectangleWithTagTest" time="0.001"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.internal_data_model.InternalDataModelTests" time="9.664">
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTest" time="0.003">
+        <testcase name="testIntersectionWithLinesegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testLineSegmentDoesNotIntersectLineSegments" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testPerpendicularPointPoint" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testGetP1" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.001"/>
+        <testcase name="testGetP2" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testPerpendicularLineSegment" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.001"/>
+        <testcase name="testOverlapsXrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testOverlapsYrange" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testIsHorizontal" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+        <testcase name="testIsVertical" classname="fernuni.propra.internal_data_model.LineSegmentTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.001">
+        <testsuite name="[0]" time="0.0">
+          <testcase name="testIsHorizontalParametrized[0]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+        <testsuite name="[1]" time="0.0">
+          <testcase name="testIsHorizontalParametrized[1]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+        <testsuite name="[2]" time="0.0">
+          <testcase name="testIsHorizontalParametrized[2]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.0"/>
+        </testsuite>
+        <testsuite name="[3]" time="0.001">
+          <testcase name="testIsHorizontalParametrized[3]" classname="fernuni.propra.internal_data_model.LineSegmentTestParameterized" time="0.001"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.PointTest" time="1.1">
+        <testcase name="testIsInXRange" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsInYRange" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsOnLineSegmentLineSegment" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsOnLineSegmentPointPoint" classname="fernuni.propra.internal_data_model.PointTest" time="0.0"/>
+        <testcase name="testIsInsidePolygon" classname="fernuni.propra.internal_data_model.PointTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.RoomTest" time="0.001">
+        <testcase name="testGetLamps" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testGetWalls" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testDimensions" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testPrintLampPostions" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testGetNumberOfLamps" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+        <testcase name="testGetCorners" classname="fernuni.propra.internal_data_model.RoomTest" time="0.001"/>
+        <testcase name="testReplaceLamps" classname="fernuni.propra.internal_data_model.RoomTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.internal_data_model.WallTest" time="0.0">
+        <testcase name="testIsWestWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testIsSouthWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testIsNorthWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testGetTag" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+        <testcase name="testIsEastWall" classname="fernuni.propra.internal_data_model.WallTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.main.MainTests" time="39.671">
+      <testsuite name="fernuni.propra.main.MainTest" time="39.67">
+        <testcase name="testUseCase_SD" classname="fernuni.propra.main.MainTest" time="33.356"/>
+        <testcase name="testUseCase_VD" classname="fernuni.propra.main.MainTest" time="3.052"/>
+        <testcase name="testUseCase_D" classname="fernuni.propra.main.MainTest" time="3.049"/>
+        <testcase name="testUseCase_V" classname="fernuni.propra.main.MainTest" time="0.213"/>
+      </testsuite>
+      <testsuite name="fernuni.propra.main.ParameterSetTest" time="0.001">
+        <testcase name="testSetTimeLimit" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+        <testcase name="testSetRunParameter" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+        <testcase name="testSetInputFile" classname="fernuni.propra.main.ParameterSetTest" time="0.001"/>
+        <testcase name="testIsValidParameterSet" classname="fernuni.propra.main.ParameterSetTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="fernuni.propra.user_interface.RoomFrameTest" time="41.769">
+      <testcase name="testRoomFrame" classname="fernuni.propra.user_interface.RoomFrameTest" time="41.769"/>
+    </testsuite>
+    <testsuite name="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.002">
+      <testcase name="testStartStopGetTimeCandidateSearch" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testToString" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testStartStopGetTimeIlluminationTest" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testStartStopGetTimeOptimizePositions" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.001"/>
+      <testcase name="testStartStopGetTime" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.0"/>
+      <testcase name="testStopStartGetTimeOriginalPartialRectanglesFind" classname="fernuni.propra.algorithm.runtime_information.RuntimeInformationTest" time="0.001"/>
+    </testsuite>
+  </testsuite>
+</testrun>

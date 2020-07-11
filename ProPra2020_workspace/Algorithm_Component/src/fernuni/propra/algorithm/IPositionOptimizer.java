@@ -11,7 +11,8 @@ import fernuni.propra.internal_data_model.Point;
  * A provider of an algorithm that finds a minimum set (and number) of tagged
  * {@link Lamp}s that illuminates an {@link IRoom} instance.
  * <p>
- * Implementing classes: {@link PositionOptimizer}
+ * Implementing classes: {@link PositionOptimizer}, 
+ * {@link PositionOptimizer_Aufgabenstellung}
  * 
  * @author alex
  *
